@@ -1,0 +1,17 @@
+﻿Build started 6/13/2017 8:54:11 AM.
+     1>Project "G:\Trainer\Doc\3D\Source\NewTrainingFramework\NewTrainingFramework\NewTrainingFramework.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IG:\Trainer\Doc\3D\Source\NewTrainingFramework\\Include /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\NewTrainingFramework.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt NewTrainingFramework.cpp
+         NewTrainingFramework.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"G:\Trainer\Doc\3D\Source\NewTrainingFramework\\BIN\NewTrainingFramework.exe" /INCREMENTAL /NOLOGO /LIBPATH:G:\Trainer\Doc\3D\Source\NewTrainingFramework\\Lib libEGL.lib libGLESv2.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"G:\Trainer\Doc\3D\Source\NewTrainingFramework\\BIN\NewTrainingFramework.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"G:\Trainer\Doc\3D\Source\NewTrainingFramework\\BIN\NewTrainingFramework.lib" /MACHINE:X86 /SAFESEH Debug\NewTrainingFramework.obj
+         Debug\Shaders.obj
+         Debug\stdafx.obj
+         G:\Trainer\Doc\3D\Source\NewTrainingFramework\Debug\Utilities.lib
+     1>NewTrainingFramework.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
+         NewTrainingFramework.vcxproj -> G:\Trainer\Doc\3D\Source\NewTrainingFramework\\BIN\NewTrainingFramework.exe
+     1>Done Building Project "G:\Trainer\Doc\3D\Source\NewTrainingFramework\NewTrainingFramework\NewTrainingFramework.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.66

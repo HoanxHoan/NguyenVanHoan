@@ -1,0 +1,41 @@
+﻿Build started 6/13/2017 8:52:12 AM.
+     1>Project "G:\Trainer\Doc\3D\Source\NewTrainingFramework\Utilities\Utilities.vcxproj" on node 2 (Rebuild target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IG:\Trainer\Doc\3D\Source\NewTrainingFramework\\Include /ZI /nologo /W3 /WX- /Od /Oy- /D CODE_ANALYSIS /D WIN32 /D _DEBUG /D _LIB /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"stdafx.h" /Fp"Debug\Utilities.pch.codeanalysis" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze /analyze:plugin"C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\\bin\localespc.dll" /errorReport:prompt   /analyze:quiet stdafx.cpp
+         stdafx.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IG:\Trainer\Doc\3D\Source\NewTrainingFramework\\Include /ZI /nologo /W3 /WX- /Od /Oy- /D CODE_ANALYSIS /D WIN32 /D _DEBUG /D _LIB /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\Utilities.pch.codeanalysis" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze /analyze:plugin"C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\\bin\localespc.dll" /errorReport:prompt   /analyze:quiet esShader.cpp esUtil.cpp esUtil_win.cpp Math.cpp MemoryManager.cpp MemoryOperators.cpp TGA.cpp
+         TGA.cpp
+         MemoryOperators.cpp
+         MemoryManager.cpp
+         Math.cpp
+         esUtil_win.cpp
+         esUtil.cpp
+         esShader.cpp
+         Running Code Analysis for C/C++...
+         Generating Code...
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"G:\Trainer\Doc\3D\Source\NewTrainingFramework\Debug\Utilities.lib" /NOLOGO Debug\esShader.obj
+         Debug\esUtil.obj
+         Debug\esUtil_win.obj
+         Debug\Math.obj
+         Debug\MemoryManager.obj
+         Debug\MemoryOperators.obj
+         Debug\stdafx.obj
+         Debug\TGA.obj
+         Utilities.vcxproj -> G:\Trainer\Doc\3D\Source\NewTrainingFramework\Debug\Utilities.lib
+     1>g:\trainer\doc\3d\source\newtrainingframework\utilities\esshader.cpp(28): warning C6387: 'pf' could be '0':  this does not adhere to the specification for the function 'fseek'. 
+     1>g:\trainer\doc\3d\source\newtrainingframework\utilities\esshader.cpp(29): warning C6387: 'pf' could be '0':  this does not adhere to the specification for the function 'ftell'. See line 28 for an earlier location where this can occur
+     1>g:\trainer\doc\3d\source\newtrainingframework\utilities\esshader.cpp(110): warning C6283: 'infoLog' is allocated with array new [], but deleted with scalar delete.
+     1>g:\trainer\doc\3d\source\newtrainingframework\utilities\esutil_win.cpp(24): warning C6011: Dereferencing NULL pointer 'esContext'. 
+     1>g:\trainer\doc\3d\source\newtrainingframework\utilities\esutil_win.cpp(119): warning C28159: Consider using 'GetTickCount64' instead of 'GetTickCount'. Reason: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem
+     1>g:\trainer\doc\3d\source\newtrainingframework\utilities\esutil_win.cpp(124): warning C28159: Consider using 'GetTickCount64' instead of 'GetTickCount'. Reason: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem
+     1>g:\trainer\doc\3d\source\newtrainingframework\utilities\memorymanager.cpp(34): warning C6387: 'temp' could be '0':  this does not adhere to the specification for the function 'memcpy'. 
+     1>g:\trainer\doc\3d\source\newtrainingframework\utilities\tga.cpp(127): warning C6387: 'f' could be '0':  this does not adhere to the specification for the function 'fread'. 
+     1>g:\trainer\doc\3d\source\newtrainingframework\utilities\tga.cpp(130): warning C6387: 'f' could be '0':  this does not adhere to the specification for the function 'ftell'. See line 127 for an earlier location where this can occur
+     1>g:\trainer\doc\3d\source\newtrainingframework\utilities\tga.cpp(129): warning C6387: 'f' could be '0':  this does not adhere to the specification for the function 'fseek'. See line 127 for an earlier location where this can occur
+     1>g:\trainer\doc\3d\source\newtrainingframework\utilities\tga.cpp(148): warning C6387: 'f' could be '0':  this does not adhere to the specification for the function 'fclose'. See line 127 for an earlier location where this can occur
+     1>Done Building Project "G:\Trainer\Doc\3D\Source\NewTrainingFramework\Utilities\Utilities.vcxproj" (Rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:03.66
