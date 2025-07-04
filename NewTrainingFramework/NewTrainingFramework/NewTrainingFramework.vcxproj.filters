@@ -19,6 +19,9 @@
     <Filter Include="Resources\Shaders">
       <UniqueIdentifier>{c2de155c-5795-435c-8d67-15b1d43d5b3a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resources\Textures">
+      <UniqueIdentifier>{ca8ef1a5-2d0e-4b9d-872e-0933f762c2d2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NewTrainingFramework.cpp">
@@ -47,6 +50,9 @@
     <ClInclude Include="Vertex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Resources\Shaders\TriangleShaderFS.fs">
@@ -56,5 +62,18 @@
       <Filter>Resources\Shaders</Filter>
     </None>
     <None Include="..\..\Readme.doc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="NewTrainingFramework.rc">
+      <Filter>Win32Res</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\Downloads\ResourcesPacket\ResourcesPacket\Textures\Woman2.tga">
+      <Filter>Resources\Textures</Filter>
+    </Image>
+    <Image Include="..\..\..\Downloads\ResourcesPacket\ResourcesPacket\Textures\Woman1.tga">
+      <Filter>Resources\Textures</Filter>
+    </Image>
   </ItemGroup>
 </Project>
