@@ -22,6 +22,9 @@
     <Filter Include="Resources\Textures">
       <UniqueIdentifier>{ca8ef1a5-2d0e-4b9d-872e-0933f762c2d2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resources\Models">
+      <UniqueIdentifier>{c9be9877-1f82-4ff6-9d1d-fe75684e56da}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NewTrainingFramework.cpp">
@@ -62,6 +65,12 @@
       <Filter>Resources\Shaders</Filter>
     </None>
     <None Include="..\..\Readme.doc" />
+    <None Include="..\Resources\Models\Woman1.nfg">
+      <Filter>Resources\Models</Filter>
+    </None>
+    <None Include="..\Resources\Models\Woman2.nfg">
+      <Filter>Resources\Models</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="NewTrainingFramework.rc">

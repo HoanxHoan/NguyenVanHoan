@@ -107,6 +107,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Readme.doc" />
+    <None Include="..\Resources\Models\Woman1.nfg" />
+    <None Include="..\Resources\Models\Woman2.nfg" />
     <None Include="..\Resources\Shaders\TriangleShaderFS.fs" />
     <None Include="..\Resources\Shaders\TriangleShaderVS.vs" />
   </ItemGroup>
