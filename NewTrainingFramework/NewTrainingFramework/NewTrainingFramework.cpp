@@ -9,11 +9,39 @@
 #include <conio.h>
 #include <cstdio>   // fopen_s, fscanf, fclose
 #include <iostream>
+#define DEG2RAD 0.0174532925199432957f
 GLuint vboId;
 GLuint iboId;
 GLuint textureID;
 Shaders myShaders;
 int iWidth, bpp, iHeight;
+void LookAt(float out[4][4], Vector3 eye, Vector3 at, Vector3 up)
+{
+	Vector3 zaxis = (at - eye).Normalize();
+	Vector3 xaxis = up.Cross(zaxis).Normalize();
+	Vector3 yaxis = zaxis.Cross(xaxis);
+
+	// Column-major order (OpenGL)
+	out[0][0] = xaxis.x;
+	out[0][1] = yaxis.x;
+	out[0][2] = zaxis.x;
+	out[0][3] = 0;
+
+	out[1][0] = xaxis.y;
+	out[1][1] = yaxis.y;
+	out[1][2] = zaxis.y;
+	out[1][3] = 0;
+
+	out[2][0] = xaxis.z;
+	out[2][1] = yaxis.z;
+	out[2][2] = zaxis.z;
+	out[2][3] = 0;
+
+	out[3][0] = -xaxis.Dot(eye);
+	out[3][1] = -yaxis.Dot(eye);
+	out[3][2] = -zaxis.Dot(eye);
+	out[3][3] = 1;
+}
 
 void LoadNFG(const char* filename, Vertex* verticesData, unsigned int* indices)
 {
@@ -84,6 +112,8 @@ int Init ( ESContext *esContext )
 	LoadNFG("../Resources/Models/Woman1.nfg", verticesData, indices);
 
 
+	
+
 
 	/*verticesData[0].pos.x =  0.0f;  verticesData[0].pos.y =  0.5f;  verticesData[0].pos.z =  0.0f;
 	verticesData[1].pos.x = -0.5f;  verticesData[1].pos.y = -0.5f;  verticesData[1].pos.z =  0.0f;
@@ -116,6 +146,8 @@ int Init ( ESContext *esContext )
 
 	glGenTextures(1, &textureID);
 	glBindTexture(GL_TEXTURE_2D, textureID);
+
+
 	char* imageData = LoadTGA("../Resources/Textures/Woman1.tga", &iWidth, &iHeight, &bpp);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, iWidth, iHeight, 0,GL_RGB, GL_UNSIGNED_BYTE, imageData);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -141,6 +173,32 @@ void Draw ( ESContext *esContext )
 	glBindTexture(GL_TEXTURE_2D, textureID);
 	int iTextureLoc = glGetUniformLocation(myShaders.program, "u_texture");
 	glUniform1i(iTextureLoc, 0);
+
+	Matrix modelMatrix;
+	modelMatrix.SetIdentity();
+
+	Matrix scaleMatrix;
+	scaleMatrix.SetScale(0.5f, 0.5f, 0.5f);
+
+	Matrix rotationMatrix;
+	rotationMatrix.SetRotationY(45.0f * DEG2RAD);
+
+	Matrix translationMatrix;
+	translationMatrix.SetTranslation(0.0f, 1.0f, 7.0f);
+	modelMatrix = scaleMatrix * rotationMatrix * translationMatrix;
+
+	Matrix viewMatrix;
+	Vector3 eye(0.0f, 1.0f, 3.0f);
+	Vector3 at(0.0f, 1.0f, 0.0f);
+	Vector3 up(0.0f, 1.0f, 0.0f);
+	LookAt(viewMatrix.m, eye, at, up);
+
+
+	Matrix projMatrix;
+	projMatrix.SetPerspective(45.0f * DEG2RAD, 4 / 3, 0.1f, 100.0f);
+	Matrix mvpMatrix = modelMatrix * viewMatrix * projMatrix;
+	GLuint mvpLoc = glGetUniformLocation(myShaders.program, "u_mvp");
+	glUniformMatrix4fv(mvpLoc, 1, GL_FALSE, (float*)mvpMatrix.m);
 	
 	glBindBuffer(GL_ARRAY_BUFFER, vboId);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, iboId);
@@ -156,7 +214,7 @@ void Draw ( ESContext *esContext )
 		glEnableVertexAttribArray(3);
 		glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (char*)24 + sizeof(Vector3));
 		glEnableVertexAttribArray(4);
-		glVertexAttribPointer(4, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (char*)48);
+		glVertexAttribPointer(4, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (char*)36 + sizeof(Vector3));
 	}
 
 
@@ -191,7 +249,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
     esInitContext ( &esContext );
 
-	esCreateWindow ( &esContext, "Hello Triangle", Globals::screenWidth, Globals::screenHeight, ES_WINDOW_RGB | ES_WINDOW_DEPTH);
+	esCreateWindow ( &esContext, "Woman1", Globals::screenWidth, Globals::screenHeight, ES_WINDOW_RGB | ES_WINDOW_DEPTH);
 
 	if ( Init ( &esContext ) != 0 )
 		return 0;
