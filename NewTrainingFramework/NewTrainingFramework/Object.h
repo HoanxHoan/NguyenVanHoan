@@ -24,8 +24,6 @@ public:
     // Loaders
     bool LoadModel(const char* filename);
     bool LoadTexture(const char* filename);
-
-    bool Init(const char* modelFile, const char* textureFile);
     void SetMVP();
     void Draw();
     void getViewMatrix(float out[4][4], Vector3 eye, Vector3 at, Vector3 up);

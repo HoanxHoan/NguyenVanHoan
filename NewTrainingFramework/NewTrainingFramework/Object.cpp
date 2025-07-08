@@ -17,6 +17,7 @@ Object::~Object()
 {
     if (objTex) delete objTex;
     if (objModel) delete objModel;
+    if (objShader) delete objShader;
 }
 void Object::getViewMatrix(float out[4][4], Vector3 eye, Vector3 at, Vector3 up)
 {
@@ -43,15 +44,6 @@ void Object::getViewMatrix(float out[4][4], Vector3 eye, Vector3 at, Vector3 up)
     out[3][1] = -yaxis.Dot(eye);
     out[3][2] = -zaxis.Dot(eye);
     out[3][3] = 1;
-}
-bool Object::Init(const char* modelFile, const char* textureFile)
-{
-    if (!LoadModel(modelFile))
-        return false;
-    if (!LoadTexture(textureFile))
-        return false;
-
-    return true;
 }
 bool Object::initShader(char* filename1,char* filename2) {
     return objShader->Init(filename1,filename2);

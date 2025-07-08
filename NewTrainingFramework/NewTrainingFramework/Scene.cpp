@@ -13,8 +13,8 @@ bool Scene::Init(ESContext* esContext)
 {
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
-    obj->LoadModel("../Resources/Models/Woman1.nfg");
-    obj->LoadTexture("../Resources/Textures/Woman1.tga");
+    obj->LoadModel("../Resources/Models/Woman2.nfg");
+    obj->LoadTexture("../Resources/Textures/Woman2.tga");
     return obj->initShader("../Resources/Shaders/TriangleShaderVS.vs", "../Resources/Shaders/TriangleShaderFS.fs");
 }
 
