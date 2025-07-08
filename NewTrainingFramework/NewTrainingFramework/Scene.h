@@ -16,5 +16,5 @@ public:
 private:
 
 	Object* obj;
-	Shaders myShaders;
+	
 };

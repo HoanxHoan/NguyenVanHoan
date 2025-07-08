@@ -14,7 +14,8 @@ public:
     Texture* objTex;
     //Model
     Model* objModel;
-
+    //Shader
+    Shaders* objShader;
     // Matrices
     Matrix modelMatrix;
     Matrix viewMatrix;
@@ -26,7 +27,9 @@ public:
 
     bool Init(const char* modelFile, const char* textureFile);
     void SetMVP();
-    void Draw(GLuint shaderProgram);
+    void Draw();
     void getViewMatrix(float out[4][4], Vector3 eye, Vector3 at, Vector3 up);
+    bool initShader(char* filename1, char* filename2);
+
 };
 #pragma once

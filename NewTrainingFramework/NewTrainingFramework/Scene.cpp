@@ -15,8 +15,7 @@ bool Scene::Init(ESContext* esContext)
 
     obj->LoadModel("../Resources/Models/Woman1.nfg");
     obj->LoadTexture("../Resources/Textures/Woman1.tga");
-
-    return myShaders.Init("../Resources/Shaders/TriangleShaderVS.vs", "../Resources/Shaders/TriangleShaderFS.fs");
+    return obj->initShader("../Resources/Shaders/TriangleShaderVS.vs", "../Resources/Shaders/TriangleShaderFS.fs");
 }
 
 void Scene::Update(ESContext* esContext, float deltaTime)
@@ -30,7 +29,7 @@ void Scene::Draw(ESContext* esContext)
     //MVP
     obj->SetMVP();
     // Draw object
-    obj->Draw(myShaders.program);
+    obj->Draw();
 
     // Swap buffers
     eglSwapBuffers(esContext->eglDisplay, esContext->eglSurface);

@@ -7,6 +7,7 @@ Object::Object()
 {
     objTex = new Texture();
     objModel = new Model();
+    objShader = new Shaders();
     modelMatrix.SetIdentity();
     viewMatrix.SetIdentity();
     projMatrix.SetIdentity();
@@ -52,7 +53,9 @@ bool Object::Init(const char* modelFile, const char* textureFile)
 
     return true;
 }
-
+bool Object::initShader(char* filename1,char* filename2) {
+    return objShader->Init(filename1,filename2);
+}
 bool Object::LoadModel(const char* filename)
 {
     objModel->LoadNFG(filename);
@@ -94,23 +97,23 @@ void Object::SetMVP()
 }
 
 
-void Object::Draw(GLuint shaderProgram)
+void Object::Draw()
 {
-    glUseProgram(shaderProgram);
+    glUseProgram(objShader->program);
 
     // Bind Texture
     objTex->Bind();
-    int iTextureLoc = glGetUniformLocation(shaderProgram, "u_texture");
+    int iTextureLoc = glGetUniformLocation(objShader->program, "u_texture");
     glUniform1i(iTextureLoc, 0);
 
     // Set MVP
-    GLuint mvpLoc = glGetUniformLocation(shaderProgram, "u_mvp");
+    GLuint mvpLoc = glGetUniformLocation(objShader->program, "u_mvp");
     glUniformMatrix4fv(mvpLoc, 1, GL_FALSE, (float*)mvpMatrix.m);
     objModel->SetAttributes();
 
     // Draw
     glDrawElements(GL_TRIANGLES, objModel->indexCount, GL_UNSIGNED_INT, 0);
-
+    objTex->Unbind();
     objModel->unBind();
 
 }
