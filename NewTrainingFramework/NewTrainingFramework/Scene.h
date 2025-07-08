@@ -6,5 +6,7 @@ class Scene
 public:
 	Scene();
 	~Scene();
-
+	Matrix modelMatrix;
+	Matrix viewMatrix;
+	Matrix projMatrix;
 };
