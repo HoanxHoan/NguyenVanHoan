@@ -14,8 +14,7 @@ public:
 	void Update(ESContext* esContext, float deltaTime);
 	void Draw(ESContext* esContext);
 private:
-	void getViewMatrix(float out[4][4], Vector3 eye, Vector3 at, Vector3 up);
 
-	Object obj;
+	Object* obj;
 	Shaders myShaders;
 };

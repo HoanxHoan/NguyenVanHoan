@@ -1,14 +1,14 @@
-
+#pragma once
 #include <GLES3/gl3.h>
-
+#include <cstdio>
+#include <iostream>
 char* LoadTGA(const char* filePath, int* width, int* height, int* bpp);
 
 class Texture
 {
 public:
 
-    GLuint textureID;
-    int width, height, bpp;
+    unsigned int textureID;
 
     // Constructor
     Texture();
@@ -20,7 +20,7 @@ public:
     bool LoadFromFile(const char* filePath);
 
     // Bind texture 
-    void Bind(GLuint unit = 0);
+    void Bind();
 
     // Unbind texture
     void Unbind();

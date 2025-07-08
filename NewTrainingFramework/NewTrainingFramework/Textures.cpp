@@ -2,13 +2,9 @@
 #include "Textures.h"
 
 
-
 Texture::Texture()
 {
     textureID = 0;
-    width = 0;
-    height = 0;
-    bpp = 0;
 }
 
 Texture::~Texture()
@@ -19,9 +15,14 @@ Texture::~Texture()
 
 bool Texture::LoadFromFile(const char* filePath)
 {
+    int width, height, bpp;
     char* imageData = LoadTGA(filePath, &width, &height, &bpp);
+
     if (!imageData)
+    {
+        std::cout << "Failed to load texture.\n";
         return false;
+    }
 
     glGenTextures(1, &textureID);
     glBindTexture(GL_TEXTURE_2D, textureID);
@@ -29,17 +30,17 @@ bool Texture::LoadFromFile(const char* filePath)
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, imageData);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     glGenerateMipmap(GL_TEXTURE_2D);
 
     delete[] imageData;
+    std::cout << "Loaded texture: " << filePath <<"\n";
     return true;
 }
 
-void Texture::Bind(GLuint unit)
+void Texture::Bind()
 {
-    glActiveTexture(GL_TEXTURE0 + unit);
+
     glBindTexture(GL_TEXTURE_2D, textureID);
 }
 
