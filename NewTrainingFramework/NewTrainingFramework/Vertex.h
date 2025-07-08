@@ -1,6 +1,6 @@
 #pragma once
 #include "Math.h"
-
+#include "Shaders.h"
 struct Vertex
 {
 	Vector3 pos;
