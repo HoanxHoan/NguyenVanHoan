@@ -1,36 +1,45 @@
 ﻿#include "stdafx.h"
 #include "Scene.h"
-#include "Math.h"
+
 Scene::Scene()
 {
-    obj = new Object();
+
 }
 
 Scene::~Scene()
 {
+
 }
+
 bool Scene::Init(ESContext* esContext)
 {
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
-    obj->LoadModel("../Resources/Models/Woman2.nfg");
-    obj->LoadTexture("../Resources/Textures/Woman2.tga");
-    return obj->initShader("../Resources/Shaders/TriangleShaderVS.vs", "../Resources/Shaders/TriangleShaderFS.fs");
+    // Load resource files
+    ResourceManager::GetInstance()->LoadFileRM("ResourceManager.txt");
+    Model* objModel = ResourceManager::GetInstance()->GetModel(1);
+    Texture* objTex = ResourceManager::GetInstance()->GetTexture(1);
+    Shaders* objShader = ResourceManager::GetInstance()->GetShader(0);
+     obj = new Object(objModel, objTex, objShader);
+    
+    if (!obj->objModel || !obj->objTex || !obj->objShader)
+    {
+        std::cout << "Resource loading failed!\n";
+        return false;
+    }
+    return true;
 }
 
 void Scene::Update(ESContext* esContext, float deltaTime)
 {
-   
+    // Update logic if needed
 }
 
 void Scene::Draw(ESContext* esContext)
 {
-    glClear(GL_COLOR_BUFFER_BIT);
-    //MVP
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     obj->SetMVP();
-    // Draw object
     obj->Draw();
 
-    // Swap buffers
     eglSwapBuffers(esContext->eglDisplay, esContext->eglSurface);
 }

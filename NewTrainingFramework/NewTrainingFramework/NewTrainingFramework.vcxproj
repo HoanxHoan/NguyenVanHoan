@@ -93,6 +93,7 @@
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="NewTrainingFramework.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Shaders.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -106,6 +107,7 @@
     <ClInclude Include="Model.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Shaders.h" />
     <ClInclude Include="stdafx.h" />
@@ -132,6 +134,9 @@
   <ItemGroup>
     <Image Include="..\..\..\Downloads\ResourcesPacket\ResourcesPacket\Textures\Woman1.tga" />
     <Image Include="..\..\..\Downloads\ResourcesPacket\ResourcesPacket\Textures\Woman2.tga" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\..\Downloads\ResourceManager.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

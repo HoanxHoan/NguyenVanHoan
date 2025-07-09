@@ -17,8 +17,7 @@ public:
     ~Texture();
 
     // Load texture 
-    bool LoadFromFile(const char* filePath);
-
+    bool LoadFromFile(const char* filePath, GLint wrapS, GLint wrapT);
     // Bind texture 
     void Bind();
 

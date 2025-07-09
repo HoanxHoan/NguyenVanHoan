@@ -8,7 +8,7 @@
 class Object
 {
 public:
-    Object();
+    Object(Model* m,Texture* t,Shaders* s);
     ~Object();
     //Texture
     Texture* objTex;

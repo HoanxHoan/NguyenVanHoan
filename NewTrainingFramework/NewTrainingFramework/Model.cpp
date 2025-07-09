@@ -84,10 +84,6 @@ bool Model::LoadNFG(const char* filename)
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexCount * sizeof(unsigned int), indices, GL_STATIC_DRAW);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-    delete[] verticesData;
-    verticesData = nullptr;
-    delete[] indices;
-    indices = nullptr;
 
     std::cout << "Loaded model with " << nrVertices << " vertices and " << indexCount << " indices.\n";
 

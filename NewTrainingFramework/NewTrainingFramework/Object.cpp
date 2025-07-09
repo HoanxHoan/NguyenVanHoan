@@ -3,11 +3,11 @@
 #include <cstdio>
 #include <iostream>
 #define DEG2RAD 0.0174532925199432957f
-Object::Object()
+Object::Object(Model* m, Texture* t, Shaders* s)
 {
-    objTex = new Texture();
-    objModel = new Model();
-    objShader = new Shaders();
+    objModel = m;
+    objTex = t;
+    objShader = s;
     modelMatrix.SetIdentity();
     viewMatrix.SetIdentity();
     projMatrix.SetIdentity();
@@ -15,9 +15,9 @@ Object::Object()
 
 Object::~Object()
 {
-    if (objTex) delete objTex;
-    if (objModel) delete objModel;
-    if (objShader) delete objShader;
+    delete objTex ;
+    delete objModel;
+    delete objShader ;
 }
 void Object::getViewMatrix(float out[4][4], Vector3 eye, Vector3 at, Vector3 up)
 {
@@ -44,20 +44,6 @@ void Object::getViewMatrix(float out[4][4], Vector3 eye, Vector3 at, Vector3 up)
     out[3][1] = -yaxis.Dot(eye);
     out[3][2] = -zaxis.Dot(eye);
     out[3][3] = 1;
-}
-bool Object::initShader(char* filename1,char* filename2) {
-    return objShader->Init(filename1,filename2);
-}
-bool Object::LoadModel(const char* filename)
-{
-    objModel->LoadNFG(filename);
-    return true;
-}
-
-bool Object::LoadTexture(const char* filename)
-{
-    objTex->LoadFromFile(filename);
-    return true;
 }
 
 void Object::SetMVP()
@@ -92,20 +78,17 @@ void Object::SetMVP()
 void Object::Draw()
 {
     glUseProgram(objShader->program);
-
-    // Bind Texture
     objTex->Bind();
     int iTextureLoc = glGetUniformLocation(objShader->program, "u_texture");
     glUniform1i(iTextureLoc, 0);
 
-    // Set MVP
     GLuint mvpLoc = glGetUniformLocation(objShader->program, "u_mvp");
     glUniformMatrix4fv(mvpLoc, 1, GL_FALSE, (float*)mvpMatrix.m);
+
     objModel->SetAttributes();
 
-    // Draw
     glDrawElements(GL_TRIANGLES, objModel->indexCount, GL_UNSIGNED_INT, 0);
+
     objTex->Unbind();
     objModel->unBind();
-
 }
