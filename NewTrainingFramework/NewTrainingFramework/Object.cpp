@@ -81,7 +81,7 @@ void Object::Draw()
     objTex->Bind();
     int iTextureLoc = glGetUniformLocation(objShader->program, "u_texture");
     glUniform1i(iTextureLoc, 0);
-
+    SetMVP();
     GLuint mvpLoc = glGetUniformLocation(objShader->program, "u_mvp");
     glUniformMatrix4fv(mvpLoc, 1, GL_FALSE, (float*)mvpMatrix.m);
 
