@@ -1,4 +1,5 @@
-﻿#include "stdafx.h"
+﻿#include <stdafx.h>
+#include "../stdafx.h"
 #include "Scene.h"
 
 Scene::Scene()
@@ -16,7 +17,7 @@ bool Scene::Init(ESContext* esContext)
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
     // Load resource files
-    ResourceManager::GetInstance()->LoadFileRM("ResourceManager.txt");
+    ResourceManager::GetInstance()->LoadFileRM("GameManager/ResourceManager.txt");
     Model* objModel = ResourceManager::GetInstance()->GetModel(1);
     Texture* objTex = ResourceManager::GetInstance()->GetTexture(1);
     Shaders* objShader = ResourceManager::GetInstance()->GetShader(0);

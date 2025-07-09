@@ -1,8 +1,7 @@
 #pragma once
-#include "Shaders.h"
-#include "Object.h"
-#include "Textures.h"
-#include "Shaders.h"
+#include "../Shaders.h"
+#include "../GameObject/Object.h"
+#include "../GameObject/Textures.h"
 #include <GLES3/gl3.h>
 #include "ResourceManager.h"
 class Scene

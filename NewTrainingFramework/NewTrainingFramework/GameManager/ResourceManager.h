@@ -2,9 +2,9 @@
 
 #include <map>
 #include <string>
-#include "Model.h"
-#include "Textures.h"
-#include "Shaders.h"
+#include "../GameObject/Model.h"
+#include "../GameObject/Textures.h"
+#include "../Shaders.h"
 
 class ResourceManager
 {

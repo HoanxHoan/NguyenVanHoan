@@ -9,8 +9,8 @@
 #include <conio.h>
 #include <cstdio>   // fopen_s, fscanf, fclose
 #include <iostream>
-#include "Textures.h"
-#include "Scene.h"
+#include "GameObject/Textures.h"
+#include "GameManager/Scene.h"
 #define DEG2RAD 0.0174532925199432957f
 
 Scene scene;

@@ -2,8 +2,8 @@
 
 #include <GLES3/gl3.h>
 #include <iostream>
-#include "Vertex.h"
-#include "Shaders.h"
+#include "../Vertex.h"
+#include "../Shaders.h"
 class Model
 {
 public:
