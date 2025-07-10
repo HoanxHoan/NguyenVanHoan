@@ -1,5 +1,4 @@
-#include <stdafx.h>
-#include "../stdafx.h"
+
 #include "ResourceManager.h"
 #include <fstream>
 #include <sstream>
@@ -135,7 +134,7 @@ bool ResourceManager::LoadFileRM(const char* filename)
 Model* ResourceManager::GetModel(int ID)
 {
     if (models.find(ID) != models.end()) {
-        std::cout << 1;
+        std::cout << 1<<"\n";
         return models[ID];
     }
     else
@@ -145,7 +144,7 @@ Model* ResourceManager::GetModel(int ID)
 Texture* ResourceManager::GetTexture(int ID)
 {
     if (textures.find(ID) != textures.end()) {
-        std::cout << 2;
+        std::cout << 2<<"\n";
         return textures[ID];
     }
     else
@@ -157,7 +156,7 @@ Shaders* ResourceManager::GetShader(int ID)
     if (shaders.find(ID) != shaders.end())
     {
         shaders[ID]->Init(shaders[ID]->fileVS, shaders[ID]->fileFS);
-        std::cout << 3;
+        std::cout << 3<<"\n";
         return shaders[ID];
     }
     else

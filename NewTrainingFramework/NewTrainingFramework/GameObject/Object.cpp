@@ -1,24 +1,25 @@
-#include <stdafx.h>
+
 #include "../stdafx.h"
 #include "Object.h"
 #include <cstdio>
 #include <iostream>
 #define DEG2RAD 0.0174532925199432957f
-Object::Object(Model* m, Texture* t, Shaders* s)
+Object::Object(Model* m, Texture* t, Shaders* s, Matrix modelM)
 {
     objModel = m;
     objTex = t;
     objShader = s;
-    modelMatrix.SetIdentity();
-    viewMatrix.SetIdentity();
-    projMatrix.SetIdentity();
+    modelMatrix = modelM;
+    //translationMatrix = translation;
+    //rotationMatrix = rotation;
+    //scaleMatrix = scale;
 }
 
 Object::~Object()
 {
-    delete objTex ;
-    delete objModel;
-    delete objShader ;
+    objModel = nullptr;
+    objTex = nullptr;
+    objShader = nullptr;
 }
 void Object::getViewMatrix(float out[4][4], Vector3 eye, Vector3 at, Vector3 up)
 {
@@ -50,18 +51,14 @@ void Object::getViewMatrix(float out[4][4], Vector3 eye, Vector3 at, Vector3 up)
 void Object::SetMVP()
 {
     // Model matrix
-    modelMatrix.SetIdentity();
+    //scaleMatrix.SetScale(0.5f, 0.5f, 0.5f);
+    //rotationMatrix.SetRotationY(70.0f * DEG2RAD);
+    //translationMatrix.SetTranslation(0.0f, 1.0f, 7.0f);
+    //modelMatrix.SetIdentity();
+    viewMatrix.SetIdentity();
+    projMatrix.SetIdentity();
 
-    Matrix scaleMatrix;
-    scaleMatrix.SetScale(0.5f, 0.5f, 0.5f);
-
-    Matrix rotationMatrix;
-    rotationMatrix.SetRotationY(70.0f * DEG2RAD);
-
-    Matrix translationMatrix;
-    translationMatrix.SetTranslation(0.0f, 1.0f, 7.0f);
-
-    modelMatrix = scaleMatrix * rotationMatrix * translationMatrix;
+    //modelMatrix = scaleMatrix * rotationMatrix * translationMatrix;
 
     // View matrix
     Vector3 eye(0.0f, 1.0f, 3.0f);

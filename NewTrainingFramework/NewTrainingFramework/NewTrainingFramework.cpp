@@ -13,19 +13,18 @@
 #include "GameManager/Scene.h"
 #define DEG2RAD 0.0174532925199432957f
 
-Scene scene;
-
 
 int Init ( ESContext *esContext )
 {
-	return scene.Init(esContext);
+	return Scene::GetInstance()->Init();
 
 }
 
 void Draw ( ESContext *esContext )
 {
-	glClear(GL_COLOR_BUFFER_BIT);
-	scene.Draw(esContext);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	Scene::GetInstance()->Render(1);
+	eglSwapBuffers(esContext->eglDisplay, esContext->eglSurface);
 
 }
 

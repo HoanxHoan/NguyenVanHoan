@@ -8,7 +8,7 @@
 class Object
 {
 public:
-    Object(Model* m,Texture* t,Shaders* s);
+    Object(Model* m,Texture* t,Shaders* s, Matrix modelM);
     ~Object();
     //Texture
     Texture* objTex;
@@ -17,6 +17,9 @@ public:
     //Shader
     Shaders* objShader;
     // Matrices
+    Matrix scaleMatrix;
+    Matrix rotationMatrix;
+    Matrix translationMatrix;
     Matrix modelMatrix;
     Matrix viewMatrix;
     Matrix projMatrix;

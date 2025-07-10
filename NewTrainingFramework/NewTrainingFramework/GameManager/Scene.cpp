@@ -1,45 +1,147 @@
-﻿#include <stdafx.h>
-#include "../stdafx.h"
+﻿#include "../stdafx.h"
 #include "Scene.h"
+#include <fstream>
+#include <sstream>
+#include <iostream>
+#include "ResourceManager.h"
+#define DEG2RAD 0.0174532925199432957f
+Scene* Scene::instance = nullptr;
 
 Scene::Scene()
 {
-
 }
 
 Scene::~Scene()
 {
-
+    Cleanup();
 }
 
-bool Scene::Init(ESContext* esContext)
+Scene* Scene::GetInstance()
+{
+    if (!instance)
+        instance = new Scene();
+    return instance;
+}
+
+void Scene::Destroy()
+{
+    if (instance)
+    {
+        delete instance;
+        instance = nullptr;
+    }
+}
+
+bool Scene::Init()
 {
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-
-    // Load resource files
+    // Load ResourceManager first if needed
     ResourceManager::GetInstance()->LoadFileRM("GameManager/ResourceManager.txt");
-    Model* objModel = ResourceManager::GetInstance()->GetModel(1);
-    Texture* objTex = ResourceManager::GetInstance()->GetTexture(1);
-    Shaders* objShader = ResourceManager::GetInstance()->GetShader(0);
-     obj = new Object(objModel, objTex, objShader);
-    
-    if (!obj->objModel || !obj->objTex || !obj->objShader)
+
+    // Load scene file
+    return LoadFileSM("GameManager/SceneManager.txt");
+}
+
+bool Scene::LoadFileSM(const char* file)
+{
+    std::ifstream fin(file);
+    if (!fin.is_open())
     {
-        std::cout << "Resource loading failed!\n";
+        std::cout << "Failed to open scene file.\n";
         return false;
     }
+
+    std::string line;
+    int objectCount = 0;
+
+    while (getline(fin, line))
+    {
+        if (line.find("#ObjectCount") != std::string::npos)
+        {
+            std::istringstream ss(line);
+            std::string tag;
+            ss >> tag >> objectCount;
+            //fin >> line >> objectCount;
+        }
+        else if (line.find("ID") != std::string::npos)
+        {
+
+            int id, modelID, textureID, shaderID;
+            float px, py, pz, rx, ry, rz, sx, sy, sz;
+
+            // Read current ID line
+            std::istringstream ss(line);
+            std::string temp;
+            ss >> temp >> id;
+
+            // Read MODEL_ID
+            fin >> temp >> modelID;
+            // Read TEXTURE_ID
+            fin >> temp >> textureID;
+            // Read SHADER_ID
+            fin >> temp >> shaderID;
+            // Read POS
+            fin >> temp >> px >> py >> pz;
+            // Read ROTATION
+            fin >> temp >> rx >> ry >> rz;
+            // Read SCALE
+            fin >> temp >> sx >> sy >> sz;
+
+            // Get resources from ResourceManager
+            Model* objModel = ResourceManager::GetInstance()->GetModel(modelID);
+            Texture* objTex = ResourceManager::GetInstance()->GetTexture(textureID);
+            Shaders* objShader = ResourceManager::GetInstance()->GetShader(shaderID);
+
+            // Set transform
+            Matrix translationMatrix;
+            Matrix rotationMatrix;
+            Matrix scaleMatrix;
+            Matrix modelMatrix;
+            modelMatrix.SetIdentity();
+            scaleMatrix.SetScale(sx, sy, sz);
+
+            //rotationMatrix.SetRotationX(rx * DEG2RAD);
+            rotationMatrix.SetRotationY(ry * DEG2RAD);
+            //rotationMatrix.SetRotationZ(rz * DEG2RAD);
+
+            translationMatrix.SetTranslation(px, py, pz);
+
+            modelMatrix = scaleMatrix * rotationMatrix * translationMatrix;
+
+            Object* obj = new Object(objModel, objTex, objShader, modelMatrix);
+
+            m_objects.push_back(obj);
+        }
+    }
+
+    fin.close();
+
+    std::cout << "Loaded " << m_objects.size() << " objects from scene file.\n";
     return true;
 }
 
-void Scene::Update(ESContext* esContext, float deltaTime)
+void Scene::Update(float deltaTime)
 {
-    // Update logic if needed
+    for (auto obj : m_objects)
+    {
+    }
 }
 
-void Scene::Draw(ESContext* esContext)
+void Scene::Render(int id)
 {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    obj->Draw();
+    if (id >= 0 && id < m_objects.size())
+    {
+        m_objects[id]->Draw();
 
-    eglSwapBuffers(esContext->eglDisplay, esContext->eglSurface);
+    }
+
+}
+
+void Scene::Cleanup()
+{
+    for (auto obj : m_objects)
+    {
+        delete obj;
+    }
+    m_objects.clear();
 }
