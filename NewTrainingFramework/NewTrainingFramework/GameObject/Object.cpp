@@ -17,9 +17,10 @@ Object::Object(Model* m, Texture* t, Shaders* s, Matrix modelM)
 
 Object::~Object()
 {
-    objModel = nullptr;
     objTex = nullptr;
+    objModel = nullptr;
     objShader = nullptr;
+
 }
 void Object::getViewMatrix(float out[4][4], Vector3 eye, Vector3 at, Vector3 up)
 {

@@ -18,7 +18,9 @@ Model::~Model()
     if (iboId != 0)
         glDeleteBuffers(1, &iboId);
     delete[] verticesData;
+    verticesData = nullptr;
     delete[] indices;
+    indices = nullptr;
 }
 
 bool Model::LoadNFG(const char* filename)
@@ -84,7 +86,6 @@ bool Model::LoadNFG(const char* filename)
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, iboId);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexCount * sizeof(unsigned int), indices, GL_STATIC_DRAW);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
 
     std::cout << "Loaded model with " << nrVertices << " vertices and " << indexCount << " indices.\n";
 

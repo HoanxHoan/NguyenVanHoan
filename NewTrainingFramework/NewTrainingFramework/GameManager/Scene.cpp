@@ -37,7 +37,6 @@ bool Scene::Init()
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     // Load ResourceManager first if needed
     ResourceManager::GetInstance()->LoadFileRM("GameManager/ResourceManager.txt");
-
     // Load scene file
     return LoadFileSM("GameManager/SceneManager.txt");
 }
@@ -99,11 +98,13 @@ bool Scene::LoadFileSM(const char* file)
             Matrix modelMatrix;
             modelMatrix.SetIdentity();
             scaleMatrix.SetScale(sx, sy, sz);
-
-            //rotationMatrix.SetRotationX(rx * DEG2RAD);
-            rotationMatrix.SetRotationY(ry * DEG2RAD);
-            //rotationMatrix.SetRotationZ(rz * DEG2RAD);
-
+            Matrix RotationXMatrix;
+            Matrix RotationYMatrix;
+            Matrix RotationZMatrix;
+            RotationXMatrix.SetRotationX(rx * DEG2RAD);
+            RotationYMatrix.SetRotationY(ry * DEG2RAD);
+            RotationZMatrix.SetRotationZ(rz * DEG2RAD);
+            rotationMatrix = RotationXMatrix * RotationYMatrix * RotationZMatrix;
             translationMatrix.SetTranslation(px, py, pz);
 
             modelMatrix = scaleMatrix * rotationMatrix * translationMatrix;

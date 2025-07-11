@@ -155,8 +155,7 @@ Shaders* ResourceManager::GetShader(int ID)
 {
     if (shaders.find(ID) != shaders.end())
     {
-        shaders[ID]->Init(shaders[ID]->fileVS, shaders[ID]->fileFS);
-        std::cout << 3<<"\n";
+        std::cout << "3\n";
         return shaders[ID];
     }
     else

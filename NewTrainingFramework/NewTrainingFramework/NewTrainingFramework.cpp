@@ -23,7 +23,7 @@ int Init ( ESContext *esContext )
 void Draw ( ESContext *esContext )
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	Scene::GetInstance()->Render(1);
+	Scene::GetInstance()->Render(0);
 	eglSwapBuffers(esContext->eglDisplay, esContext->eglSurface);
 
 }
@@ -38,10 +38,11 @@ void Key ( ESContext *esContext, unsigned char key, bool bIsPressed)
 
 }
 
-//void CleanUp()
-//{
-//	glDeleteBuffers(1, &vboId);
-//}
+void CleanUp()
+{
+	Scene::Destroy();
+	ResourceManager::Destroy();
+}
 
 int _tmain(int argc, _TCHAR* argv[])
 {
@@ -61,7 +62,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	esMainLoop ( &esContext );
 	printf("GL_VERSION: %s\n", glGetString(GL_VERSION));
 	//releasing OpenGL resources
-	//CleanUp();
+	CleanUp();
 
 	//identifying memory leaks
 	MemoryDump();
