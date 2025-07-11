@@ -72,10 +72,13 @@ void Update ( ESContext *esContext, float deltaTime )
 	{
 		Camera::GetInstance()->MoveRight(deltaTime);
 	}
+	if (keyStates['X'])
+	{
+		Camera::GetInstance()->testRotateY(deltaTime);
+	}
 	if (keyStates['C'])
 	{
-		Camera::GetInstance()->testRotate(deltaTime);
-
+		Camera::GetInstance()->testRotateX(deltaTime);
 	}
 	if (keyStates['R'])
 	{

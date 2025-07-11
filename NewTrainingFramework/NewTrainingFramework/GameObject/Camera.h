@@ -48,7 +48,8 @@ public:
     void RotateAroundX(float angle);
     void Rotateup(float deltaTime);
     void Rotatedown(float deltaTime);
-    void testRotate(float deltaTime);
+    void testRotateY(float deltaTime);
+    void testRotateX(float deltaTime);
     // Setters
     void SetNearFar(float nearP, float farP);
     void SetFOV(float fovDeg);

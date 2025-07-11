@@ -204,18 +204,11 @@ void Camera::RotateAroundY(float angle)
 
     Vector3 viewDir = target - position;
     float distance = viewDir.Length();
-
-  
     viewDir.Normalize();
-
-
     Matrix rotY;
-    //rotY.SetRotationY(angle);
     rotY.SetRotationAngleAxis(angle, up.x, up.y, up.z);
 
     Vector4 localTarget(viewDir.x * distance, viewDir.y * distance, viewDir.z * distance, 0);
-
-    //Vector4 localTarget = Vector4(0, 0, distance, 1);
 
     Vector4 rotatedTarget = localTarget * rotY;
 
@@ -228,50 +221,56 @@ void Camera::RotateAroundX(float angle)
 {
     Vector3 viewDir = target - position;
     float distance = viewDir.Length();
-
-
     viewDir.Normalize();
-
-
     Matrix rotX;
-    //rotX.SetRotationX(angle);
     rotX.SetRotationAngleAxis(angle, 1, 0, 0);
 
     Vector4 localTarget(viewDir.x * distance, viewDir.y * distance, viewDir.z * distance, 0);
-
-    //Vector4 localTarget = Vector4(0, 0, distance, 1);
 
     Vector4 rotatedTarget = localTarget * rotX;
 
     target = position + Vector3(rotatedTarget.x, rotatedTarget.y, rotatedTarget.z);
 
-
     UpdateViewMatrix();
 }
-void Camera::testRotate(float deltaTime)
+void Camera::testRotateY(float deltaTime)
 {
-    float angle = deltaTime * speed;
+    float angle = deltaTime ;
     Vector3 viewDir = target - position;
     float distance = viewDir.Length();
-    Vector4 localTarget(0, 0, -distance, 1);
+    Vector4 localTarget(0, 0, distance, 1);
     Matrix rotY;
-    //rotY.SetRotationY(angle);
     rotY.SetRotationAngleAxis(angle, up.x, up.y, up.z);
   
     Vector4 localNewTarget = localTarget * rotY;
-
  
-    Matrix worldMatrix = GetWorldCameraMatrix();
 
-    Matrix invWorld = worldMatrix.Inverse();
-
-
-    Vector4 worldNewTarget = localNewTarget * worldMatrix;
+    Vector4 worldNewTarget = localNewTarget * viewMatrix.Inverse();
 
   
     target = Vector3(worldNewTarget.x, worldNewTarget.y, worldNewTarget.z);
 
  
+    UpdateViewMatrix();
+}
+void Camera::testRotateX(float deltaTime)
+{
+    float angle = deltaTime;
+    Vector3 viewDir = target - position;
+    float distance = viewDir.Length();
+    Vector4 localTarget(0, 0, distance, 1);
+    Matrix rotX;
+    rotX.SetRotationAngleAxis(angle, 1, 0, 0);
+
+    Vector4 localNewTarget = localTarget * rotX;
+
+
+    Vector4 worldNewTarget = localNewTarget * viewMatrix.Inverse();
+
+
+    target = Vector3(worldNewTarget.x, worldNewTarget.y, worldNewTarget.z);
+
+
     UpdateViewMatrix();
 }
 
