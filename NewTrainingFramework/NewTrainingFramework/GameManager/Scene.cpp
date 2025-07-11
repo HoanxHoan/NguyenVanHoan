@@ -113,6 +113,24 @@ bool Scene::LoadFileSM(const char* file)
 
             m_objects.push_back(obj);
         }
+        else if (line.find("#CAMERA") != std::string::npos)
+        {
+            float nearPlane , farPlane , fov , speed ;
+            // Read NEAR
+            fin >> line >> nearPlane;
+            // Read FAR
+            fin >> line >> farPlane;
+            // Read FOV
+            fin >> line >> fov;
+            // Read SPEED
+            fin >> line >> speed;
+
+            Camera::GetInstance()->SetNearFar(nearPlane, farPlane);
+            Camera::GetInstance()->SetFOV(fov);
+            Camera::GetInstance()->SetSpeed(speed);
+            Camera::GetInstance()->UpdateProjMatrix(4.0f / 3.0f);
+
+        }
     }
 
     fin.close();

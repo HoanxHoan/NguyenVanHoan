@@ -35,13 +35,28 @@ void Update ( ESContext *esContext, float deltaTime )
 
 void Key ( ESContext *esContext, unsigned char key, bool bIsPressed)
 {
-
+	if (bIsPressed)
+	{
+		if (key == 's' || key == 'S')
+			Camera::GetInstance()->MoveDown(0.016f);
+		if (key == 'W' || key == 'w')
+			Camera::GetInstance()->MoveUp(0.016f);
+		if (key == 'd' || key == 'D')
+			Camera::GetInstance()->MoveRight(0.016f);
+		if (key == 'a' || key == 'A')
+			Camera::GetInstance()->MoveLeft(0.016f);
+		if (key == 'q' || key == 'Q')
+			Camera::GetInstance()->MoveForward(0.016f);
+		if (key == 'e' || key == 'E')
+			Camera::GetInstance()->MoveBackward(0.016f);
+	}
 }
 
 void CleanUp()
 {
 	Scene::Destroy();
 	ResourceManager::Destroy();
+	Camera::GetInstance()->Destroy();
 }
 
 int _tmain(int argc, _TCHAR* argv[])

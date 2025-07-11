@@ -5,6 +5,7 @@
 #include <GLES3/gl3.h>
 #include "Textures.h"
 #include "Model.h"
+#include "Camera.h"
 class Object
 {
 public:
@@ -17,9 +18,7 @@ public:
     //Shader
     Shaders* objShader;
     // Matrices
-    Matrix scaleMatrix;
-    Matrix rotationMatrix;
-    Matrix translationMatrix;
+
     Matrix modelMatrix;
     Matrix viewMatrix;
     Matrix projMatrix;
@@ -27,7 +26,6 @@ public:
     // Loaders
     void SetMVP();
     void Draw();
-    void getViewMatrix(float out[4][4], Vector3 eye, Vector3 at, Vector3 up);
 
 };
 #pragma once

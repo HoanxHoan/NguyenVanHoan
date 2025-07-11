@@ -22,53 +22,15 @@ Object::~Object()
     objShader = nullptr;
 
 }
-void Object::getViewMatrix(float out[4][4], Vector3 eye, Vector3 at, Vector3 up)
-{
-    Vector3 zaxis = (at - eye).Normalize();
-    Vector3 xaxis = up.Cross(zaxis).Normalize();
-    Vector3 yaxis = zaxis.Cross(xaxis);
-
-    out[0][0] = xaxis.x;
-    out[0][1] = yaxis.x;
-    out[0][2] = zaxis.x;
-    out[0][3] = 0;
-
-    out[1][0] = xaxis.y;
-    out[1][1] = yaxis.y;
-    out[1][2] = zaxis.y;
-    out[1][3] = 0;
-
-    out[2][0] = xaxis.z;
-    out[2][1] = yaxis.z;
-    out[2][2] = zaxis.z;
-    out[2][3] = 0;
-
-    out[3][0] = -xaxis.Dot(eye);
-    out[3][1] = -yaxis.Dot(eye);
-    out[3][2] = -zaxis.Dot(eye);
-    out[3][3] = 1;
-}
 
 void Object::SetMVP()
 {
-    // Model matrix
-    //scaleMatrix.SetScale(0.5f, 0.5f, 0.5f);
-    //rotationMatrix.SetRotationY(70.0f * DEG2RAD);
-    //translationMatrix.SetTranslation(0.0f, 1.0f, 7.0f);
-    //modelMatrix.SetIdentity();
-    viewMatrix.SetIdentity();
-    projMatrix.SetIdentity();
-
-    //modelMatrix = scaleMatrix * rotationMatrix * translationMatrix;
-
+    //Camera::GetInstance()->UpdateViewMatrix();
     // View matrix
-    Vector3 eye(0.0f, 1.0f, 3.0f);
-    Vector3 at(0.0f, 1.0f, 0.0f);
-    Vector3 up(0.0f, 1.0f, 0.0f);
-    getViewMatrix(viewMatrix.m, eye, at, up);
+    viewMatrix = Camera::GetInstance()->viewMatrix;
 
     // Projection matrix
-    projMatrix.SetPerspective(45.0f * DEG2RAD, 4.0f / 3.0f, 0.1f, 100.0f);
+    projMatrix = Camera::GetInstance()->projMatrix;
     //MVP
     mvpMatrix = modelMatrix * viewMatrix * projMatrix;
 }

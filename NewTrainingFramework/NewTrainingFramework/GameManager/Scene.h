@@ -2,6 +2,7 @@
 #include "../Shaders.h"
 #include "../GameObject/Object.h"
 #include "../GameObject/Textures.h"
+#include "../GameObject/Camera.h"
 #include <GLES3/gl3.h>
 #include "ResourceManager.h"
 #include <vector>

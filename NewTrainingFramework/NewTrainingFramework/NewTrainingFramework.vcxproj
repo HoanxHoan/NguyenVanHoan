@@ -91,6 +91,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="GameManager\ResourceManager.cpp" />
     <ClCompile Include="GameManager\Scene.cpp" />
     <ClCompile Include="GameObject\Model.cpp" />
@@ -106,6 +107,7 @@
   <ItemGroup>
     <ClInclude Include="GameManager\ResourceManager.h" />
     <ClInclude Include="GameManager\Scene.h" />
+    <ClInclude Include="GameObject\Camera.h" />
     <ClInclude Include="GameObject\Model.h" />
     <ClInclude Include="GameObject\Object.h" />
     <ClInclude Include="GameObject\Textures.h" />
