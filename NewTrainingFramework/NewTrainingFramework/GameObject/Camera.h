@@ -28,7 +28,6 @@ public:
     Vector3 position;
     Vector3 target;
     Vector3 up;
-
     // Matrices
     Matrix viewMatrix;
     Matrix projMatrix;
@@ -49,6 +48,7 @@ public:
     void RotateAroundX(float angle);
     void Rotateup(float deltaTime);
     void Rotatedown(float deltaTime);
+    void testRotate(float deltaTime);
     // Setters
     void SetNearFar(float nearP, float farP);
     void SetFOV(float fovDeg);

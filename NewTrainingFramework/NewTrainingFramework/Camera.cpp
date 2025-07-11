@@ -13,6 +13,7 @@ Camera::Camera()
     up = Vector3(0.0f, 1.0f, 0.0f);
     UpdateViewMatrix();
     UpdateProjMatrix(4.0f / 3.0f); 
+
 }
 
 Camera::~Camera()
@@ -245,6 +246,32 @@ void Camera::RotateAroundX(float angle)
     target = position + Vector3(rotatedTarget.x, rotatedTarget.y, rotatedTarget.z);
 
 
+    UpdateViewMatrix();
+}
+void Camera::testRotate(float deltaTime)
+{
+    float angle = deltaTime * speed;
+    Vector3 viewDir = target - position;
+    float distance = viewDir.Length();
+    Vector4 localTarget(0, 0, -distance, 1);
+    Matrix rotY;
+    //rotY.SetRotationY(angle);
+    rotY.SetRotationAngleAxis(angle, up.x, up.y, up.z);
+  
+    Vector4 localNewTarget = localTarget * rotY;
+
+ 
+    Matrix worldMatrix = GetWorldCameraMatrix();
+
+    Matrix invWorld = worldMatrix.Inverse();
+
+
+    Vector4 worldNewTarget = localNewTarget * worldMatrix;
+
+  
+    target = Vector3(worldNewTarget.x, worldNewTarget.y, worldNewTarget.z);
+
+ 
     UpdateViewMatrix();
 }
 

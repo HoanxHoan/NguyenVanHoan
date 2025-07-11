@@ -72,7 +72,22 @@ void Update ( ESContext *esContext, float deltaTime )
 	{
 		Camera::GetInstance()->MoveRight(deltaTime);
 	}
+	if (keyStates['C'])
+	{
+		Camera::GetInstance()->testRotate(deltaTime);
 
+	}
+	if (keyStates['R'])
+	{
+		Camera::GetInstance()->fov += 1;
+		Camera::GetInstance()->UpdateProjMatrix(4/3);
+
+	}
+	if (keyStates['T'])
+	{
+		Camera::GetInstance()->fov -= 1;
+		Camera::GetInstance()->UpdateProjMatrix(4 / 3);
+	}
 	if (keyStates['V'])
 	{
 		Matrix x;
