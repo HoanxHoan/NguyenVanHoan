@@ -107,9 +107,9 @@ bool Scene::LoadFileSM(const char* file)
             rotationMatrix = RotationXMatrix * RotationYMatrix * RotationZMatrix;
             translationMatrix.SetTranslation(px, py, pz);
 
-            modelMatrix = scaleMatrix * rotationMatrix * translationMatrix;
+            //modelMatrix = scaleMatrix * rotationMatrix * translationMatrix;
 
-            Object* obj = new Object(objModel, objTex, objShader, modelMatrix);
+            Object* obj = new Object(objModel, objTex, objShader, modelMatrix, translationMatrix,rotationMatrix, scaleMatrix);
 
             m_objects.push_back(obj);
         }

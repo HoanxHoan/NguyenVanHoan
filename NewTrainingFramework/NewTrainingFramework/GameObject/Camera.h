@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../Utilities/utilities.h" // dùng Matrix, Vector3
-
+#include "../Shaders.h"
 class Camera
 {
 
@@ -43,7 +43,12 @@ public:
     void MoveLeft(float deltaTime);
     void MoveUp(float deltaTime);
     void MoveDown(float deltaTime);
-
+    void RotateLeft(float deltaTime);
+    void RotateRight(float deltaTime);
+    void RotateAroundY(float angle);
+    void RotateAroundX(float angle);
+    void Rotateup(float deltaTime);
+    void Rotatedown(float deltaTime);
     // Setters
     void SetNearFar(float nearP, float farP);
     void SetFOV(float fovDeg);

@@ -11,7 +11,6 @@ Camera::Camera()
     position = Vector3(0.0f, 1.0f, 3.0f);
     target = Vector3(0.0f, 1.0f, 0.0f);
     up = Vector3(0.0f, 1.0f, 0.0f);
-
     UpdateViewMatrix();
     UpdateProjMatrix(4.0f / 3.0f); 
 }
@@ -92,6 +91,7 @@ void Camera::UpdateViewMatrix()
     viewMatrix.m[3][3] = 1;
 }
 
+
 void Camera::UpdateProjMatrix(float aspectRatio)
 {
     projMatrix.SetPerspective(fov * DEG2RAD, aspectRatio, nearPlane, farPlane);
@@ -165,8 +165,8 @@ void Camera::MoveLeft(float deltaTime)
 void Camera::MoveUp(float deltaTime)
 {
     Vector3 deltaMove = up.Normalize() * speed * deltaTime;
-    position += deltaMove;
-    target += deltaMove;
+    position -= deltaMove;
+    target -= deltaMove;
 
     UpdateViewMatrix(); 
 }
@@ -174,9 +174,78 @@ void Camera::MoveUp(float deltaTime)
 void Camera::MoveDown(float deltaTime)
 {
     Vector3 deltaMove = up.Normalize() * speed * deltaTime;
-    position -= deltaMove;
-    target -= deltaMove;
+    position += deltaMove;
+    target += deltaMove;
 
     UpdateViewMatrix(); 
 }
+void Camera::RotateLeft(float deltaTime)
+{
+    RotateAroundY(deltaTime * speed);
+}
+
+void Camera::RotateRight(float deltaTime)
+{
+    RotateAroundY(-deltaTime * speed);
+}
+void Camera::Rotateup(float deltaTime)
+{
+    RotateAroundX(deltaTime * speed);
+}
+
+void Camera::Rotatedown(float deltaTime)
+{
+    RotateAroundX(-deltaTime * speed);
+}
+
+void Camera::RotateAroundY(float angle)
+{
+
+    Vector3 viewDir = target - position;
+    float distance = viewDir.Length();
+
+  
+    viewDir.Normalize();
+
+
+    Matrix rotY;
+    //rotY.SetRotationY(angle);
+    rotY.SetRotationAngleAxis(angle, up.x, up.y, up.z);
+
+    Vector4 localTarget(viewDir.x * distance, viewDir.y * distance, viewDir.z * distance, 0);
+
+    //Vector4 localTarget = Vector4(0, 0, distance, 1);
+
+    Vector4 rotatedTarget = localTarget * rotY;
+
+    target = position + Vector3(rotatedTarget.x, rotatedTarget.y, rotatedTarget.z);
+
+  
+    UpdateViewMatrix();
+}
+void Camera::RotateAroundX(float angle)
+{
+    Vector3 viewDir = target - position;
+    float distance = viewDir.Length();
+
+
+    viewDir.Normalize();
+
+
+    Matrix rotX;
+    //rotX.SetRotationX(angle);
+    rotX.SetRotationAngleAxis(angle, 1, 0, 0);
+
+    Vector4 localTarget(viewDir.x * distance, viewDir.y * distance, viewDir.z * distance, 0);
+
+    //Vector4 localTarget = Vector4(0, 0, distance, 1);
+
+    Vector4 rotatedTarget = localTarget * rotX;
+
+    target = position + Vector3(rotatedTarget.x, rotatedTarget.y, rotatedTarget.z);
+
+
+    UpdateViewMatrix();
+}
+
 

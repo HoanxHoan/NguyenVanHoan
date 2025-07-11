@@ -12,8 +12,8 @@
 #include "GameObject/Textures.h"
 #include "GameManager/Scene.h"
 #define DEG2RAD 0.0174532925199432957f
-
-
+float deltaTime = 0.016f;
+bool keyStates[256];
 int Init ( ESContext *esContext )
 {
 	return Scene::GetInstance()->Init();
@@ -30,26 +30,119 @@ void Draw ( ESContext *esContext )
 
 void Update ( ESContext *esContext, float deltaTime )
 {
-
+	if (keyStates['I'] && keyStates['L'])
+	{
+		Camera::GetInstance()->Rotateup(deltaTime);
+		Camera::GetInstance()->RotateLeft(deltaTime);
+	}
+	if (keyStates['K'] && keyStates['L'])
+	{
+		Camera::GetInstance()->Rotatedown(deltaTime);
+		Camera::GetInstance()->RotateLeft(deltaTime);
+	}
+	if (keyStates['K'] && keyStates['J'])
+	{
+		Camera::GetInstance()->Rotatedown(deltaTime);
+		Camera::GetInstance()->RotateRight(deltaTime);
+	}
+	if (keyStates['I'] && keyStates['J'])
+	{
+		Camera::GetInstance()->Rotateup(deltaTime);
+		Camera::GetInstance()->RotateRight(deltaTime);
+	}
+	if (keyStates['I'] )
+	{
+		Camera::GetInstance()->Rotateup(deltaTime);
+	}
+	if (keyStates['E'])
+	{
+		Camera::GetInstance()->MoveBackward(deltaTime);
+	}
+	if (keyStates['Q'])
+	{
+		Camera::GetInstance()->MoveForward(deltaTime);
+	}
+	if (keyStates['K'])
+	{
+		Camera::GetInstance()->Rotatedown(deltaTime);
+	}
+	if (keyStates['J'])
+	{
+		Camera::GetInstance()->RotateRight(deltaTime);
+	}
+	if (keyStates['L'])
+	{
+		Camera::GetInstance()->RotateLeft(deltaTime);
+	}
+	if (keyStates['W'])
+	{
+		Camera::GetInstance()->MoveUp(deltaTime);
+	}
+	if (keyStates['S'])
+	{
+		Camera::GetInstance()->MoveDown(deltaTime);
+	}
+	if (keyStates['A'])
+	{
+		Camera::GetInstance()->MoveLeft(deltaTime);
+	}
+	if (keyStates['D'])
+	{
+		Camera::GetInstance()->MoveRight(deltaTime);
+	}
+	if (keyStates['W'] && keyStates['A'])
+	{
+		Camera::GetInstance()->MoveUp(deltaTime);
+		Camera::GetInstance()->MoveLeft(deltaTime);
+	}
+	if (keyStates['W'] && keyStates['D'])
+	{
+		Camera::GetInstance()->MoveUp(deltaTime);
+		Camera::GetInstance()->MoveRight(deltaTime);
+	}
+	if (keyStates['S'] && keyStates['D'])
+	{
+		Camera::GetInstance()->MoveDown(deltaTime);
+		Camera::GetInstance()->MoveRight(deltaTime);
+	}
+	if (keyStates['S'] && keyStates['A'])
+	{
+		Camera::GetInstance()->MoveDown(deltaTime);
+		Camera::GetInstance()->MoveLeft(deltaTime);
+	}
 }
 
 void Key ( ESContext *esContext, unsigned char key, bool bIsPressed)
 {
-	if (bIsPressed)
+	keyStates[key] = bIsPressed;
+	/*if (bIsPressed)
 	{
-		if (key == 's' || key == 'S')
-			Camera::GetInstance()->MoveDown(0.016f);
-		if (key == 'W' || key == 'w')
-			Camera::GetInstance()->MoveUp(0.016f);
-		if (key == 'd' || key == 'D')
-			Camera::GetInstance()->MoveRight(0.016f);
-		if (key == 'a' || key == 'A')
-			Camera::GetInstance()->MoveLeft(0.016f);
-		if (key == 'q' || key == 'Q')
-			Camera::GetInstance()->MoveForward(0.016f);
-		if (key == 'e' || key == 'E')
-			Camera::GetInstance()->MoveBackward(0.016f);
-	}
+		if ( key == 'S')
+			Camera::GetInstance()->MoveDown(deltaTime);
+		if (key == 'I' && key == 'L') {
+			Camera::GetInstance()->Rotateup(deltaTime);
+			Camera::GetInstance()->RotateLeft(deltaTime);
+		}
+		if ( key == 'w')
+			Camera::GetInstance()->MoveUp(deltaTime);
+		if (key == 'D')
+			Camera::GetInstance()->MoveRight(deltaTime);
+		if (key == 'A')
+			Camera::GetInstance()->MoveLeft(deltaTime);
+		if ( key == 'Q')
+			Camera::GetInstance()->MoveForward(deltaTime);
+		if (key == 'E')
+			Camera::GetInstance()->MoveBackward(deltaTime);
+		if (key == 'L')
+			Camera::GetInstance()->RotateLeft(deltaTime);
+		if (key == 'J')
+			Camera::GetInstance()->RotateRight(deltaTime);
+		if (key == 'I') {
+			Camera::GetInstance()->Rotateup(deltaTime);
+		}
+		if ( key == 'K')
+			Camera::GetInstance()->Rotatedown(deltaTime);
+	}*/
 }
 
 void CleanUp()

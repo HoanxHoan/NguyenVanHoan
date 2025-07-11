@@ -4,15 +4,15 @@
 #include <cstdio>
 #include <iostream>
 #define DEG2RAD 0.0174532925199432957f
-Object::Object(Model* m, Texture* t, Shaders* s, Matrix modelM)
+Object::Object(Model* m, Texture* t, Shaders* s, Matrix modelM, Matrix translationM, Matrix rotationM, Matrix scaleM)
 {
     objModel = m;
     objTex = t;
     objShader = s;
     modelMatrix = modelM;
-    //translationMatrix = translation;
-    //rotationMatrix = rotation;
-    //scaleMatrix = scale;
+    translationMatrix = translationM;
+    rotationMatrix = rotationM;
+    scaleMatrix = scaleM;
 }
 
 Object::~Object()
@@ -26,6 +26,7 @@ Object::~Object()
 void Object::SetMVP()
 {
     //Camera::GetInstance()->UpdateViewMatrix();
+    modelMatrix = scaleMatrix * rotationMatrix * translationMatrix ;
     // View matrix
     viewMatrix = Camera::GetInstance()->viewMatrix;
 

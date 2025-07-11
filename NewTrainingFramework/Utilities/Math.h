@@ -151,6 +151,7 @@ public:
 	Matrix & SetPerspective(GLfloat fovY, GLfloat aspect, GLfloat nearPlane, GLfloat farPlane);
 
 	Matrix Transpose();
+	Matrix Inverse();
 
 	Matrix operator + (Matrix & mat);
 	Matrix & operator += (Matrix & mat);
