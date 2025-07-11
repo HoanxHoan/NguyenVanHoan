@@ -26,6 +26,7 @@ public:
     Matrix projMatrix;
     Matrix mvpMatrix;
     // Loaders
+    void updateRotation(Matrix m);
     void SetMVP();
     void Draw();
 

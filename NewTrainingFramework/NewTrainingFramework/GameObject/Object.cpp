@@ -22,7 +22,9 @@ Object::~Object()
     objShader = nullptr;
 
 }
-
+void Object::updateRotation(Matrix m) {
+    rotationMatrix = rotationMatrix * m;
+}
 void Object::SetMVP()
 {
     //Camera::GetInstance()->UpdateViewMatrix();

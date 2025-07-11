@@ -14,6 +14,7 @@
 #define DEG2RAD 0.0174532925199432957f
 float deltaTime = 0.016f;
 bool keyStates[256];
+int id = 1;
 int Init ( ESContext *esContext )
 {
 	return Scene::GetInstance()->Init();
@@ -23,33 +24,14 @@ int Init ( ESContext *esContext )
 void Draw ( ESContext *esContext )
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	Scene::GetInstance()->Render(0);
+	Scene::GetInstance()->Render(id);
 	eglSwapBuffers(esContext->eglDisplay, esContext->eglSurface);
 
 }
 
 void Update ( ESContext *esContext, float deltaTime )
 {
-	if (keyStates['I'] && keyStates['L'])
-	{
-		Camera::GetInstance()->Rotateup(deltaTime);
-		Camera::GetInstance()->RotateLeft(deltaTime);
-	}
-	if (keyStates['K'] && keyStates['L'])
-	{
-		Camera::GetInstance()->Rotatedown(deltaTime);
-		Camera::GetInstance()->RotateLeft(deltaTime);
-	}
-	if (keyStates['K'] && keyStates['J'])
-	{
-		Camera::GetInstance()->Rotatedown(deltaTime);
-		Camera::GetInstance()->RotateRight(deltaTime);
-	}
-	if (keyStates['I'] && keyStates['J'])
-	{
-		Camera::GetInstance()->Rotateup(deltaTime);
-		Camera::GetInstance()->RotateRight(deltaTime);
-	}
+
 	if (keyStates['I'] )
 	{
 		Camera::GetInstance()->Rotateup(deltaTime);
@@ -90,26 +72,32 @@ void Update ( ESContext *esContext, float deltaTime )
 	{
 		Camera::GetInstance()->MoveRight(deltaTime);
 	}
-	if (keyStates['W'] && keyStates['A'])
+
+	if (keyStates['V'])
 	{
-		Camera::GetInstance()->MoveUp(deltaTime);
-		Camera::GetInstance()->MoveLeft(deltaTime);
+		Matrix x;
+		x.SetRotationY(deltaTime);
+		Scene::GetInstance()->GetObjects()[id]->updateRotation(x);
 	}
-	if (keyStates['W'] && keyStates['D'])
+	if (keyStates['N'])
 	{
-		Camera::GetInstance()->MoveUp(deltaTime);
-		Camera::GetInstance()->MoveRight(deltaTime);
+		Matrix x;
+		x.SetRotationY(-deltaTime);
+		Scene::GetInstance()->GetObjects()[id]->updateRotation(x);
 	}
-	if (keyStates['S'] && keyStates['D'])
+	if (keyStates['G'])
 	{
-		Camera::GetInstance()->MoveDown(deltaTime);
-		Camera::GetInstance()->MoveRight(deltaTime);
+		Matrix x;
+		x.SetRotationX(deltaTime);
+		Scene::GetInstance()->GetObjects()[id]->updateRotation(x);
 	}
-	if (keyStates['S'] && keyStates['A'])
+	if (keyStates['B'])
 	{
-		Camera::GetInstance()->MoveDown(deltaTime);
-		Camera::GetInstance()->MoveLeft(deltaTime);
+		Matrix x;
+		x.SetRotationX(-deltaTime);
+		Scene::GetInstance()->GetObjects()[id]->updateRotation(x);
 	}
+	
 }
 
 void Key ( ESContext *esContext, unsigned char key, bool bIsPressed)
