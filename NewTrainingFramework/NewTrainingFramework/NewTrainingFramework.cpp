@@ -50,11 +50,11 @@ void Update ( ESContext *esContext, float deltaTime )
 	}
 	if (keyStates['J'])
 	{
-		Camera::GetInstance()->RotateRight(deltaTime);
+		Camera::GetInstance()->RotateLeft(deltaTime);
 	}
 	if (keyStates['L'])
 	{
-		Camera::GetInstance()->RotateLeft(deltaTime);
+		Camera::GetInstance()->RotateRight(deltaTime);
 	}
 	if (keyStates['W'])
 	{
@@ -88,13 +88,13 @@ void Update ( ESContext *esContext, float deltaTime )
 	if (keyStates['G'])
 	{
 		Matrix x;
-		x.SetRotationX(deltaTime);
+		x.SetRotationX(-deltaTime);
 		Scene::GetInstance()->GetObjects()[id]->updateRotation(x);
 	}
 	if (keyStates['B'])
 	{
 		Matrix x;
-		x.SetRotationX(-deltaTime);
+		x.SetRotationX(deltaTime);
 		Scene::GetInstance()->GetObjects()[id]->updateRotation(x);
 	}
 	

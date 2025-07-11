@@ -148,8 +148,8 @@ void Camera::MoveRight(float deltaTime)
     Vector3 viewDir = (target - position).Normalize();
     Vector3 right = viewDir.Cross(up).Normalize();
     Vector3 deltaMove = right * speed * deltaTime;
-    position += deltaMove;
-    target += deltaMove;
+    position -= deltaMove;
+    target -= deltaMove;
     UpdateViewMatrix();
 }
 
@@ -158,15 +158,15 @@ void Camera::MoveLeft(float deltaTime)
     Vector3 viewDir = (target - position).Normalize();
     Vector3 right = viewDir.Cross(up).Normalize();
     Vector3 deltaMove = right * speed * deltaTime;
-    position -= deltaMove;
-    target -= deltaMove;
+    position += deltaMove;
+    target += deltaMove;
     UpdateViewMatrix();
 }
 void Camera::MoveUp(float deltaTime)
 {
     Vector3 deltaMove = up.Normalize() * speed * deltaTime;
-    position -= deltaMove;
-    target -= deltaMove;
+    position += deltaMove;
+    target += deltaMove;
 
     UpdateViewMatrix(); 
 }
@@ -174,8 +174,8 @@ void Camera::MoveUp(float deltaTime)
 void Camera::MoveDown(float deltaTime)
 {
     Vector3 deltaMove = up.Normalize() * speed * deltaTime;
-    position += deltaMove;
-    target += deltaMove;
+    position -= deltaMove;
+    target -= deltaMove;
 
     UpdateViewMatrix(); 
 }
@@ -190,12 +190,12 @@ void Camera::RotateRight(float deltaTime)
 }
 void Camera::Rotateup(float deltaTime)
 {
-    RotateAroundX(deltaTime * speed);
+    RotateAroundX(-deltaTime * speed);
 }
 
 void Camera::Rotatedown(float deltaTime)
 {
-    RotateAroundX(-deltaTime * speed);
+    RotateAroundX(+deltaTime * speed);
 }
 
 void Camera::RotateAroundY(float angle)
