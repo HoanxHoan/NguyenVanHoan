@@ -144,7 +144,7 @@ Model* ResourceManager::GetModel(int ID)
 Texture* ResourceManager::GetTexture(int ID)
 {
     if (textures.find(ID) != textures.end()) {
-        std::cout << 2<<"\n";
+        std::cout << 2<<ID<<"\n";
         return textures[ID];
     }
     else

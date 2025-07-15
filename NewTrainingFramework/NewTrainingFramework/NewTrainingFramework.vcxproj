@@ -120,6 +120,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Readme.doc" />
+    <None Include="..\Resources\Models\Sprite2D.nfg" />
     <None Include="..\Resources\Models\Woman1.nfg" />
     <None Include="..\Resources\Models\Woman2.nfg" />
     <None Include="..\Resources\Shaders\TriangleShaderFS.fs" />
@@ -137,6 +138,11 @@
   <ItemGroup>
     <Image Include="..\..\..\Downloads\ResourcesPacket\ResourcesPacket\Textures\Woman1.tga" />
     <Image Include="..\..\..\Downloads\ResourcesPacket\ResourcesPacket\Textures\Woman2.tga" />
+    <Image Include="..\Resources\Textures\bg_play1.tga" />
+    <Image Include="..\Resources\Textures\btn_close.tga" />
+    <Image Include="..\Resources\Textures\btn_help.tga" />
+    <Image Include="..\Resources\Textures\btn_menu.tga" />
+    <Image Include="..\Resources\Textures\btn_play.tga" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="GameManager\ResourceManager.txt" />

@@ -147,12 +147,11 @@ public:
 	Matrix & SetTranslation(GLfloat x, GLfloat y, GLfloat z);
 	Matrix & SetTranslation(GLfloat *pTrans);
 	Matrix & SetTranslation(Vector3 &vec);
-
+	Matrix & SetOrthographic(float left, float right, float bottom, float top, float nearPlane, float farPlane);
 	Matrix & SetPerspective(GLfloat fovY, GLfloat aspect, GLfloat nearPlane, GLfloat farPlane);
 
 	Matrix Transpose();
 	Matrix Inverse();
-
 	Matrix operator + (Matrix & mat);
 	Matrix & operator += (Matrix & mat);
 	Matrix operator - (Matrix & mat);

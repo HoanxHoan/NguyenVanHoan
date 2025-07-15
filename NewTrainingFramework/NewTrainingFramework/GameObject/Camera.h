@@ -2,6 +2,7 @@
 
 #include "../Utilities/utilities.h" // dùng Matrix, Vector3
 #include "../Shaders.h"
+#include <iostream>
 class Camera
 {
 
@@ -23,7 +24,7 @@ public:
     float farPlane;
     float fov;      
     float speed;
-
+    
     // Camera position and orientation
     Vector3 position;
     Vector3 target;
@@ -31,10 +32,10 @@ public:
     // Matrices
     Matrix viewMatrix;
     Matrix projMatrix;
-
     // Functions
     void UpdateViewMatrix();
     void UpdateProjMatrix(float aspectRatio);
+    void UpdateOrthographic(float left, float right, float bottom, float top);
     Matrix GetWorldCameraMatrix();
     void MoveForward(float deltaTime);
     void MoveBackward(float deltaTime);
@@ -50,6 +51,7 @@ public:
     void Rotatedown(float deltaTime);
     void testRotateY(float deltaTime);
     void testRotateX(float deltaTime);
+    void RotateAroundTarget(float deltaAngle);
     // Setters
     void SetNearFar(float nearP, float farP);
     void SetFOV(float fovDeg);

@@ -9,7 +9,7 @@ class Texture
 public:
 
     unsigned int textureID;
-
+    char* imageData;
     // Constructor
     Texture();
 

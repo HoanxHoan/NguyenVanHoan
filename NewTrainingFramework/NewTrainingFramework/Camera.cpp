@@ -8,11 +8,12 @@ Camera::Camera()
     farPlane = 100.0f;
     fov = 45.0f;
     speed = 0.3f;
-    position = Vector3(0.0f, 1.0f, 3.0f);
-    target = Vector3(0.0f, 1.0f, 0.0f);
+    target = Vector3(0.0f, 0.0f, 0.0f);
+    position = Vector3(0.0f, 0.0f, 1.0f);
     up = Vector3(0.0f, 1.0f, 0.0f);
     UpdateViewMatrix();
-    UpdateProjMatrix(4.0f / 3.0f); 
+    //UpdateProjMatrix(4.0f / 3.0f); 
+    UpdateOrthographic(-5.0f, 5.0f, 5.0f, -5.0f);
 
 }
 
@@ -65,7 +66,7 @@ Matrix Camera::GetWorldCameraMatrix()
 }
 void Camera::UpdateViewMatrix()
 {
-    Vector3 zaxis = (target - position).Normalize();
+    Vector3 zaxis = (position - target).Normalize();
     Vector3 xaxis = up.Cross(zaxis).Normalize();
     Vector3 yaxis = zaxis.Cross(xaxis);
 
@@ -96,6 +97,10 @@ void Camera::UpdateViewMatrix()
 void Camera::UpdateProjMatrix(float aspectRatio)
 {
     projMatrix.SetPerspective(fov * DEG2RAD, aspectRatio, nearPlane, farPlane);
+}
+void Camera::UpdateOrthographic(float left, float right, float bottom, float top)
+{
+    projMatrix.SetOrthographic(left, right, bottom, top, nearPlane, farPlane);
 }
 void Camera::SetNearFar(float nearP, float farP)
 {
@@ -273,5 +278,28 @@ void Camera::testRotateX(float deltaTime)
 
     UpdateViewMatrix();
 }
+void Camera::RotateAroundTarget(float deltaAngle)
+{
+   
+    Vector3 offset = position - target; 
+    float radius = offset.Length();
+
+    float currentAngle = atan2(offset.z, offset.x);
+  
+    float newAngle = currentAngle + deltaAngle;
+
+    //float r = 2 * radius * sin(newAngle);
+ 
+    position.x = target.x + radius * cos(newAngle);
+    position.z = target.z + radius * sin(newAngle);
+
+
+    UpdateViewMatrix();
+
+ 
+    //printf("Camera pos: (%f, %f, %f)\n", position.x, position.y, position.z);
+    //printf("Target: (%f, %f, %f)\n", target.x, target.y, target.z);
+}
+
 
 

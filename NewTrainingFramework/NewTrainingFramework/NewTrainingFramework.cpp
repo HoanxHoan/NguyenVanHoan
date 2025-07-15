@@ -14,17 +14,21 @@
 #define DEG2RAD 0.0174532925199432957f
 float deltaTime = 0.016f;
 bool keyStates[256];
-int id = 1;
+int id = 6;
+Scene* scene = nullptr;
 int Init ( ESContext *esContext )
 {
-	return Scene::GetInstance()->Init();
+	scene = new Scene();
+	return scene->Init();
 
 }
 
 void Draw ( ESContext *esContext )
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	Scene::GetInstance()->Render(id);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	scene->Render(id);
 	eglSwapBuffers(esContext->eglDisplay, esContext->eglSurface);
 
 }
@@ -80,42 +84,22 @@ void Update ( ESContext *esContext, float deltaTime )
 	{
 		Camera::GetInstance()->testRotateX(deltaTime);
 	}
-	if (keyStates['R'])
+	if (keyStates['R'] && Camera::GetInstance()->fov <= 179)
 	{
 		Camera::GetInstance()->fov += 1;
 		Camera::GetInstance()->UpdateProjMatrix(4/3);
 
 	}
-	if (keyStates['T'])
+	if (keyStates['T'] && Camera::GetInstance()->fov >=1)
 	{
 		Camera::GetInstance()->fov -= 1;
 		Camera::GetInstance()->UpdateProjMatrix(4 / 3);
 	}
-	if (keyStates['V'])
+	if (keyStates['Z'])
 	{
-		Matrix x;
-		x.SetRotationY(deltaTime);
-		Scene::GetInstance()->GetObjects()[id]->updateRotation(x);
+		Camera::GetInstance()->RotateAroundTarget(deltaTime*2);
+		//Camera::GetInstance()->MoveLeft(deltaTime);
 	}
-	if (keyStates['N'])
-	{
-		Matrix x;
-		x.SetRotationY(-deltaTime);
-		Scene::GetInstance()->GetObjects()[id]->updateRotation(x);
-	}
-	if (keyStates['G'])
-	{
-		Matrix x;
-		x.SetRotationX(-deltaTime);
-		Scene::GetInstance()->GetObjects()[id]->updateRotation(x);
-	}
-	if (keyStates['B'])
-	{
-		Matrix x;
-		x.SetRotationX(deltaTime);
-		Scene::GetInstance()->GetObjects()[id]->updateRotation(x);
-	}
-	
 }
 
 void Key ( ESContext *esContext, unsigned char key, bool bIsPressed)
@@ -153,7 +137,11 @@ void Key ( ESContext *esContext, unsigned char key, bool bIsPressed)
 
 void CleanUp()
 {
-	Scene::Destroy();
+	if (scene)
+	{
+		delete scene;
+		scene = nullptr;
+	}
 	ResourceManager::Destroy();
 	Camera::GetInstance()->Destroy();
 }

@@ -29,6 +29,6 @@ public:
     void updateRotation(Matrix m);
     void SetMVP();
     void Draw();
-
+   
 };
 #pragma once

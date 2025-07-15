@@ -781,3 +781,17 @@ Matrix & Matrix::operator = (Matrix & mat)
 
 	return *this;
 }
+Matrix& Matrix::SetOrthographic(float left, float right, float bottom, float top, float nearPlane, float farPlane)
+{
+	SetIdentity();
+
+	m[0][0] = 2.0f / (right - left);
+	m[1][1] = 2.0f / (top - bottom);
+	m[2][2] = -2.0f / (farPlane - nearPlane);
+	m[3][0] = -(right + left) / (right - left);
+	m[3][1] = -(top + bottom) / (top - bottom);
+	m[3][2] = -(farPlane + nearPlane) / (farPlane - nearPlane);
+	m[3][3] = 1.0f;
+
+	return *this;
+}

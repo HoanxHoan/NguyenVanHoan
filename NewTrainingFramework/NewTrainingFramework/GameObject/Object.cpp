@@ -38,11 +38,9 @@ void Object::SetMVP()
     mvpMatrix = modelMatrix * viewMatrix * projMatrix;
 }
 
-
 void Object::Draw()
 {
     glUseProgram(objShader->program);
-    glEnable(GL_DEPTH_TEST);
     objTex->Bind();
     int iTextureLoc = glGetUniformLocation(objShader->program, "u_texture");
     glUniform1i(iTextureLoc, 0);
