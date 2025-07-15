@@ -92,6 +92,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="GameManager\GameStateMachine.cpp" />
+    <ClCompile Include="GameManager\GSMenu.cpp" />
+    <ClCompile Include="GameManager\GSPlay.cpp" />
     <ClCompile Include="GameManager\ResourceManager.cpp" />
     <ClCompile Include="GameManager\Scene.cpp" />
     <ClCompile Include="GameObject\Model.cpp" />
@@ -105,6 +108,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameManager\GameStateBase.h" />
+    <ClInclude Include="GameManager\GameStateMachine.h" />
+    <ClInclude Include="GameManager\GSMenu.h" />
+    <ClInclude Include="GameManager\GSPlay.h" />
     <ClInclude Include="GameManager\ResourceManager.h" />
     <ClInclude Include="GameManager\Scene.h" />
     <ClInclude Include="GameObject\Camera.h" />

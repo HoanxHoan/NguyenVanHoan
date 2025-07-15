@@ -60,6 +60,15 @@
     <ClCompile Include="GameObject\Object.cpp">
       <Filter>Source Files\GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="GameManager\GameStateMachine.cpp">
+      <Filter>Source Files\GameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager\GSMenu.cpp">
+      <Filter>Source Files\GameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager\GSPlay.cpp">
+      <Filter>Source Files\GameManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h">
@@ -97,6 +106,18 @@
     </ClInclude>
     <ClInclude Include="GameObject\Camera.h">
       <Filter>Resources\Shaders\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager\GameStateBase.h">
+      <Filter>Resources\Shaders\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager\GameStateMachine.h">
+      <Filter>Source Files\GameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager\GSMenu.h">
+      <Filter>Source Files\GameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager\GSPlay.h">
+      <Filter>Source Files\GameManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
