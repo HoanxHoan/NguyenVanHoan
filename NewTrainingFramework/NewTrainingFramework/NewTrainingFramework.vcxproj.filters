@@ -66,7 +66,13 @@
     <ClCompile Include="GameManager\GSMenu.cpp">
       <Filter>Source Files\GameManager</Filter>
     </ClCompile>
+    <ClCompile Include="GameManager\GSPause.cpp">
+      <Filter>Source Files\GameManager</Filter>
+    </ClCompile>
     <ClCompile Include="GameManager\GSPlay.cpp">
+      <Filter>Source Files\GameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager\GSIntro.cpp">
       <Filter>Source Files\GameManager</Filter>
     </ClCompile>
   </ItemGroup>
@@ -117,6 +123,12 @@
       <Filter>Source Files\GameManager</Filter>
     </ClInclude>
     <ClInclude Include="GameManager\GSPlay.h">
+      <Filter>Source Files\GameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager\GSPause.h">
+      <Filter>Source Files\GameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager\GSIntro.h">
       <Filter>Source Files\GameManager</Filter>
     </ClInclude>
   </ItemGroup>

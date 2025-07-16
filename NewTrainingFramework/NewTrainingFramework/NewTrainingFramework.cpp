@@ -12,7 +12,7 @@
 #include "GameObject/Textures.h"
 #include "GameManager/Scene.h"
 #include "GameManager/GameStateMachine.h"
-#include "GameManager/GSMenu.h"
+#include "GameManager/GSIntro.h"
 #define DEG2RAD 0.0174532925199432957f
 float deltaTime = 0.016f;
 bool keyStates[256];
@@ -21,7 +21,7 @@ int id = 6;
 int Init ( ESContext *esContext )
 {
 	Scene::GetInstance()->Init();
-	GameStateMachine::GetInstance()->ChangeState(new GSMenu());
+	GameStateMachine::GetInstance()->ChangeState(new GSIntro());
 	return 0;
 
 }
@@ -38,7 +38,7 @@ void Draw ( ESContext *esContext )
 
 void Update ( ESContext *esContext, float deltaTime )
 {
-
+	
 	//if (keyStates['I'] )
 	//{
 	//	Camera::GetInstance()->Rotateup(deltaTime);

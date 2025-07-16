@@ -14,7 +14,10 @@ void GSPlay::HandleInput(unsigned char key, bool isPressed)
     {
         if (key == 'R')
         {
-            GameStateMachine::GetInstance()->ChangeState(new GSMenu());
+            GameStateMachine::GetInstance()->PopState();
+        }else if (key == 'P')
+        {
+            GameStateMachine::GetInstance()->PushState(new GSPause());
         }
         else if (key == 27)
         {
@@ -52,8 +55,6 @@ void GSPlay::Draw()
     if (Scene::GetInstance())
     {
         Scene::GetInstance()->Render(2);
-        Scene::GetInstance()->Render(4);
-        Scene::GetInstance()->Render(3);
-        Scene::GetInstance()->Render(6);
+        Scene::GetInstance()->Render(5);
     }
 }

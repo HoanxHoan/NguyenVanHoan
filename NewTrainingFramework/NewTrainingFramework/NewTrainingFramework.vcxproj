@@ -93,7 +93,9 @@
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="GameManager\GameStateMachine.cpp" />
+    <ClCompile Include="GameManager\GSIntro.cpp" />
     <ClCompile Include="GameManager\GSMenu.cpp" />
+    <ClCompile Include="GameManager\GSPause.cpp" />
     <ClCompile Include="GameManager\GSPlay.cpp" />
     <ClCompile Include="GameManager\ResourceManager.cpp" />
     <ClCompile Include="GameManager\Scene.cpp" />
@@ -110,7 +112,9 @@
   <ItemGroup>
     <ClInclude Include="GameManager\GameStateBase.h" />
     <ClInclude Include="GameManager\GameStateMachine.h" />
+    <ClInclude Include="GameManager\GSIntro.h" />
     <ClInclude Include="GameManager\GSMenu.h" />
+    <ClInclude Include="GameManager\GSPause.h" />
     <ClInclude Include="GameManager\GSPlay.h" />
     <ClInclude Include="GameManager\ResourceManager.h" />
     <ClInclude Include="GameManager\Scene.h" />

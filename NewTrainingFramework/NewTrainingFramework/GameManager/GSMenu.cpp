@@ -12,9 +12,13 @@ void GSMenu::HandleInput(unsigned char key, bool isPressed)
 {
     if (isPressed)
     {
-        if (key == 'P')
+        if (key == 'S')
         {
-            GameStateMachine::GetInstance()->ChangeState(new GSPlay());
+            GameStateMachine::GetInstance()->PushState(new GSPlay());
+        }
+        else if (key == 'P')
+        {
+            GameStateMachine::GetInstance()->PushState(new GSPause());
         }
         else if (key == 27) 
         {
@@ -30,6 +34,7 @@ bool GSMenu::Init()
 
 void GSMenu::Exit()
 {
+    exit(0);
     std::cout << "Menu State Exit\n";
 }
 
@@ -53,6 +58,8 @@ void GSMenu::Draw()
     if (Scene::GetInstance())
     {
         Scene::GetInstance()->Render(2);
-        Scene::GetInstance()->Render(5);
+        Scene::GetInstance()->Render(4);
+        Scene::GetInstance()->Render(3);
+        Scene::GetInstance()->Render(6);
     }
 }

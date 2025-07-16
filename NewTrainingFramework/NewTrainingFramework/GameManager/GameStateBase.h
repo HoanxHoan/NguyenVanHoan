@@ -6,6 +6,7 @@ enum class StateType
     MENU,
     PLAY,
     PAUSE,
+    INTRO,
 };
 
 class GameStateBase
