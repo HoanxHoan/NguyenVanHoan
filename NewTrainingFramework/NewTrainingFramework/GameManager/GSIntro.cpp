@@ -56,10 +56,12 @@ void GSIntro::Resume() {}
 
 void GSIntro::Update(float deltaTime)
 {
-
-    if (Scene::GetInstance()->Init())
-    {
-        GameStateMachine::GetInstance()->ChangeState(new GSMenu());
+    elapsedTime += deltaTime;
+    if (elapsedTime >= 3) {
+        if (Scene::GetInstance()->Init())
+        {
+            GameStateMachine::GetInstance()->ChangeState(new GSMenu());
+        }
     }
 }
 
@@ -70,7 +72,7 @@ void GSIntro::Draw()
         obj->Draw();
     }
     std::cout << "Loading..." << "\n";
-    Update(0.001);
+    Update(0.05);
 }
 
 void GSIntro::HandleInput(unsigned char key, bool isPressed)
