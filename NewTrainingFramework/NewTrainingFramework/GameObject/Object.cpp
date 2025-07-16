@@ -4,15 +4,15 @@
 #include <cstdio>
 #include <iostream>
 #define DEG2RAD 0.0174532925199432957f
-Object::Object(Model* m, Texture* t, Shaders* s, Matrix modelM, Matrix translationM, Matrix rotationM, Matrix scaleM)
+Object::Object(Model* m, Texture* t, Shaders* s)
 {
     objModel = m;
     objTex = t;
     objShader = s;
-    modelMatrix = modelM;
-    translationMatrix = translationM;
-    rotationMatrix = rotationM;
-    scaleMatrix = scaleM;
+    modelMatrix.SetIdentity();
+    translationMatrix.SetIdentity();
+    rotationMatrix.SetIdentity();
+    scaleMatrix.SetIdentity();
 }
 
 Object::~Object()
@@ -27,6 +27,7 @@ void Object::updateRotation(Matrix m) {
 }
 void Object::SetMVP()
 {
+
     //Camera::GetInstance()->UpdateViewMatrix();
     modelMatrix = scaleMatrix * rotationMatrix * translationMatrix ;
     // View matrix
@@ -37,7 +38,6 @@ void Object::SetMVP()
     //MVP
     mvpMatrix = modelMatrix * viewMatrix * projMatrix;
 }
-
 void Object::Draw()
 {
     glUseProgram(objShader->program);

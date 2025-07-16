@@ -9,7 +9,7 @@
 class Object
 {
 public:
-    Object(Model* m,Texture* t,Shaders* s, Matrix modelM, Matrix translationM,Matrix rotationM,Matrix scaleM);
+    Object(Model* m,Texture* t,Shaders* s);
     ~Object();
     //Texture
     Texture* objTex;
@@ -28,6 +28,9 @@ public:
     // Loaders
     void updateRotation(Matrix m);
     void SetMVP();
+    //void SetTranslationMatrix();
+    //void SetRotationMatrix();
+    //void SetScaleMatrix();
     void Draw();
    
 };

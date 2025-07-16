@@ -92,25 +92,17 @@ bool Scene::LoadFileSM(const char* file)
             Shaders* objShader = ResourceManager::GetInstance()->GetShader(shaderID);
 
             // Set transform
-            Matrix translationMatrix;
-            Matrix rotationMatrix;
-            Matrix scaleMatrix;
-            Matrix modelMatrix;
-            modelMatrix.SetIdentity();
-            scaleMatrix.SetScale(sx, sy, sz);
             Matrix RotationXMatrix;
             Matrix RotationYMatrix;
             Matrix RotationZMatrix;
             RotationXMatrix.SetRotationX(rx * DEG2RAD);
             RotationYMatrix.SetRotationY(ry * DEG2RAD);
             RotationZMatrix.SetRotationZ(rz * DEG2RAD);
-            rotationMatrix = RotationXMatrix * RotationYMatrix * RotationZMatrix;
-            translationMatrix.SetTranslation(px, py, pz);
-
             //modelMatrix = scaleMatrix * rotationMatrix * translationMatrix;
-
-            Object* obj = new Object(objModel, objTex, objShader, modelMatrix, translationMatrix, rotationMatrix, scaleMatrix);
-
+            Object* obj = new Object(objModel, objTex, objShader);
+            obj->translationMatrix.SetTranslation(px, py, pz);
+            obj->rotationMatrix = RotationXMatrix * RotationYMatrix * RotationZMatrix;
+            obj->scaleMatrix.SetScale(sx, sy, sz);
             m_objects.push_back(obj);
         }
         else if (line.find("#CAMERA") != std::string::npos)

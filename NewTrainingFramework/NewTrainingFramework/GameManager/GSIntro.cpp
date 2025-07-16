@@ -23,24 +23,19 @@ bool GSIntro::Init()
     Shaders* shader = new Shaders();
     shader->Init("../Resources/Shaders/TriangleShaderVS.vs", "../Resources/Shaders/TriangleShaderFS.fs");
     float px=0, py=0, pz=0, rx=0, ry=0, rz=0, sx=2, sy=2, sz=2;
-    Matrix translationMatrix;
-    Matrix rotationMatrix;
-    Matrix scaleMatrix;
-    Matrix modelMatrix;
-    modelMatrix.SetIdentity();
-    scaleMatrix.SetScale(sx, sy, sz);
     Matrix RotationXMatrix;
     Matrix RotationYMatrix;
     Matrix RotationZMatrix;
     RotationXMatrix.SetRotationX(rx * DEG2RAD);
     RotationYMatrix.SetRotationY(ry * DEG2RAD);
     RotationZMatrix.SetRotationZ(rz * DEG2RAD);
-    rotationMatrix = RotationXMatrix * RotationYMatrix * RotationZMatrix;
-    translationMatrix.SetTranslation(px, py, pz);
-    obj = new Object(model, tex,shader, modelMatrix, translationMatrix, rotationMatrix, scaleMatrix);
-    float nearPlane=-1, farPlane=1, fov=30, speed=1.5;
+    //modelMatrix = scaleMatrix * rotationMatrix * translationMatrix;
+    obj = new Object(model, tex, shader);
+    obj->translationMatrix.SetTranslation(px, py, pz);
+    obj->rotationMatrix = RotationXMatrix * RotationYMatrix * RotationZMatrix;
+    obj->scaleMatrix.SetScale(sx, sy, sz);
+    float nearPlane=-1, farPlane=1, speed=1.5;
     Camera::GetInstance()->SetNearFar(nearPlane, farPlane);
-    Camera::GetInstance()->SetFOV(fov);
     Camera::GetInstance()->SetSpeed(speed);
     std::cout << "Intro Init\n";
     return true;
@@ -57,7 +52,7 @@ void GSIntro::Resume() {}
 void GSIntro::Update(float deltaTime)
 {
     elapsedTime += deltaTime;
-    if (elapsedTime >= 3) {
+    if (elapsedTime >= 2) {
         if (Scene::GetInstance()->Init())
         {
             GameStateMachine::GetInstance()->ChangeState(new GSMenu());

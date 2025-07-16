@@ -108,8 +108,11 @@ void Update ( ESContext *esContext, float deltaTime )
 void Key ( ESContext *esContext, unsigned char key, bool bIsPressed)
 {
 	if (GameStateMachine::GetInstance()->CurrentState())
+	{
 		GameStateMachine::GetInstance()->CurrentState()->HandleInput(key, bIsPressed);
+	}
 
+	keyStates[key] = bIsPressed;
 }
 
 void CleanUp()
