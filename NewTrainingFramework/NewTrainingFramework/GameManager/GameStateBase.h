@@ -1,5 +1,5 @@
 #pragma once
-
+#include <GLES3/gl3.h>
 enum class StateType
 {
     NONE,
@@ -24,5 +24,6 @@ public:
     virtual void Update(float deltaTime) = 0;
     virtual void Draw() = 0;
     virtual void HandleInput(unsigned char key, bool isPressed) = 0;
+    virtual void HandleMouseClick(GLint x, GLint y, bool isClick) = 0;
     virtual StateType GetStateType() const = 0;
 };

@@ -13,7 +13,7 @@ Camera::Camera()
     up = Vector3(0.0f, 1.0f, 0.0f);
     UpdateViewMatrix();
     //UpdateProjMatrix(4.0f / 3.0f); 
-    UpdateOrthographic(-5.0f, 5.0f, 5.0f, -5.0f);
+    UpdateOrthographic(0.0f, Globals::screenWidth, Globals::screenHeight, 0.0f);
 
 }
 

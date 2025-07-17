@@ -114,7 +114,20 @@ void Key ( ESContext *esContext, unsigned char key, bool bIsPressed)
 
 	keyStates[key] = bIsPressed;
 }
-
+void MouseClick(ESContext* esContext, GLint x,GLint y, bool isClick)
+{
+	if (GameStateMachine::GetInstance()->CurrentState())
+	{
+		GameStateMachine::GetInstance()->CurrentState()->HandleMouseClick(x, y, isClick);
+	}
+	if (isClick) {
+		printf("x:%d,y:%d\n", x, y);
+	}
+}
+void OnMouseMove(ESContext* esContext, GLint x, GLint y)
+{
+	
+}
 void CleanUp()
 {
 	Scene::Destroy();
@@ -137,7 +150,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	esRegisterDrawFunc ( &esContext, Draw );
 	esRegisterUpdateFunc ( &esContext, Update );
 	esRegisterKeyFunc ( &esContext, Key);
-
+	esRegisterMouseFunc(&esContext, MouseClick);
+	esRegisterMouseMoveFunc(&esContext, OnMouseMove);
 	esMainLoop ( &esContext );
 	printf("GL_VERSION: %s\n", glGetString(GL_VERSION));
 	//releasing OpenGL resources

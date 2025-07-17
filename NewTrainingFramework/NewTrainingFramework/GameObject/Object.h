@@ -9,7 +9,9 @@
 class Object
 {
 public:
+    Object();
     Object(Model* m,Texture* t,Shaders* s);
+    Object(std::shared_ptr<Model> model, std::shared_ptr<Texture> texture, std::shared_ptr<Shaders> shader);
     ~Object();
     //Texture
     Texture* objTex;
@@ -27,6 +29,8 @@ public:
     Matrix mvpMatrix;
     // Loaders
     void updateRotation(Matrix m);
+    void set2Dposition(float x,float y);
+    void setSize(GLint w, GLint h);
     void SetMVP();
     //void SetTranslationMatrix();
     //void SetRotationMatrix();
@@ -34,4 +38,4 @@ public:
     void Draw();
    
 };
-#pragma once
+

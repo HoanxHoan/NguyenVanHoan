@@ -3,6 +3,7 @@
 #include "../Utilities/utilities.h" // dùng Matrix, Vector3
 #include "../Shaders.h"
 #include <iostream>
+#include "../Globals.h"
 class Camera
 {
 

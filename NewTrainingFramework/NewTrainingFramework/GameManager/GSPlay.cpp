@@ -1,9 +1,9 @@
 #include "../stdafx.h" 
 #include "GSPlay.h"
 #include <iostream>
-
+std::shared_ptr<GameButton> button_play;
 GSPlay::GSPlay() {
-
+    Init();
 }
 GSPlay::~GSPlay() {
 
@@ -25,9 +25,27 @@ void GSPlay::HandleInput(unsigned char key, bool isPressed)
         }
     }
 }
+void GSPlay::HandleMouseClick(GLint x, GLint y, bool isClick)
+{
+    if (button_play)
+    {
+        button_play->HandleTouchEvents(x, y, isClick);
+    }
+}
 bool GSPlay::Init()
 {
-    return 0;
+    Model* btnModel = ResourceManager::GetInstance()->GetModel(2);
+    Texture* btnTexture = ResourceManager::GetInstance()->GetTexture(3);
+    Shaders* btnShader = ResourceManager::GetInstance()->GetShader(0);
+    button_play = std::make_shared<GameButton>(btnModel, btnTexture, btnShader);
+    button_play->set2Dposition(850, 70);
+    button_play->SetPosition(850, 70);
+    button_play->setSize(100, 100);
+    button_play->SetSize(100, 100);
+    button_play->SetOnClick([]() {
+        GameStateMachine::GetInstance()->PopState();
+        });
+    return true;
 }
 
 void GSPlay::Exit()
@@ -55,6 +73,9 @@ void GSPlay::Draw()
     if (Scene::GetInstance())
     {
         Scene::GetInstance()->Render(2);
-        Scene::GetInstance()->Render(5);
+    }
+    if (button_play)
+    {
+        button_play->Draw();
     }
 }

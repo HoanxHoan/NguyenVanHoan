@@ -18,7 +18,7 @@ public:
     void Update(float deltaTime) override;
     void Draw() override;
     void HandleInput(unsigned char key, bool isPressed) override;
+    void HandleMouseClick(GLint x, GLint y, bool isClick) override;
     StateType GetStateType() const override { return StateType::PAUSE; }
-
 
 };

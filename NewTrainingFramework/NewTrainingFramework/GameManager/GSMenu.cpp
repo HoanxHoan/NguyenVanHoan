@@ -1,8 +1,9 @@
 #include "../stdafx.h" 
 #include "GSMenu.h"
 #include <iostream>
-
+std::shared_ptr<GameButton> button;
 GSMenu::GSMenu() {
+    Init();
 }
 
 GSMenu::~GSMenu() {
@@ -26,10 +27,28 @@ void GSMenu::HandleInput(unsigned char key, bool isPressed)
         }
     }
 }
+void GSMenu::HandleMouseClick(GLint x, GLint y, bool isClick)
+{
+    if (button)
+    {
+        button->HandleTouchEvents(x, y, isClick);
+    }
+}
 
 bool GSMenu::Init()
 {
-    return 0;
+    Model* btnModel = ResourceManager::GetInstance()->GetModel(2);
+    Texture* btnTexture = ResourceManager::GetInstance()->GetTexture(6);
+    Shaders* btnShader = ResourceManager::GetInstance()->GetShader(0);
+    button = std::make_shared<GameButton>(btnModel, btnTexture, btnShader);
+    button->set2Dposition(480,360);
+    button->SetPosition(480, 360);
+    button->setSize(200, 200);
+    button->SetSize(200, 200);
+    button->SetOnClick([]() {
+        GameStateMachine::GetInstance()->PushState(new GSPlay());
+        });
+    return true;
 }
 
 void GSMenu::Exit()
@@ -58,8 +77,9 @@ void GSMenu::Draw()
     if (Scene::GetInstance())
     {
         Scene::GetInstance()->Render(2);
-        Scene::GetInstance()->Render(4);
-        Scene::GetInstance()->Render(3);
-        Scene::GetInstance()->Render(6);
+    }
+    if (button)
+    {
+        button->Draw();
     }
 }
