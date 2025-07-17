@@ -2,6 +2,7 @@
 #include "GSPlay.h"
 #include <iostream>
 std::shared_ptr<GameButton> button_play;
+std::shared_ptr<GameButton> button_play2;
 bool keyState[256];
 int x, y;
 Object* P1;
@@ -20,14 +21,7 @@ void GSPlay::HandleInput(unsigned char key, bool isPressed)
             {
                 Exit();
             }
-            if (key == 'R')
-            {
-                GameStateMachine::GetInstance()->PopState();
-            }
-            if (key == 'P')
-            {
-                GameStateMachine::GetInstance()->PushState(new GSPause());
-            }
+
         }
         else {
             P1->objTex = ResourceManager::GetInstance()->GetTexture(7);
@@ -51,6 +45,10 @@ void GSPlay::HandleMouseClick(GLint x, GLint y, bool isClick)
     {
         button_play->HandleTouchEvents(x, y, isClick);
     }
+    if (button_play2)
+    {
+        button_play2->HandleTouchEvents(x, y, isClick);
+    }
 }
 bool GSPlay::Init()
 {
@@ -64,6 +62,17 @@ bool GSPlay::Init()
     button_play->SetSize(100, 100);
     button_play->SetOnClick([]() {
         GameStateMachine::GetInstance()->PopState();
+        });
+    Model* btnModel2 = ResourceManager::GetInstance()->GetModel(2);
+    Texture* btnTexture2 = ResourceManager::GetInstance()->GetTexture(6);
+    Shaders* btnShader2 = ResourceManager::GetInstance()->GetShader(0);
+    button_play2 = std::make_shared<GameButton>(btnModel2, btnTexture2, btnShader2);
+    button_play2->set2Dposition(700, 70);
+    button_play2->SetPosition(700, 70);
+    button_play2->setSize(100, 100);
+    button_play2->SetSize(100, 100);
+    button_play2->SetOnClick([]() {
+        GameStateMachine::GetInstance()->PushState(new GSPause());
         });
     Model* P1Model = ResourceManager::GetInstance()->GetModel(2);
     Texture* P1Texture = ResourceManager::GetInstance()->GetTexture(7);
@@ -143,6 +152,10 @@ void GSPlay::Draw()
     if (button_play)
     {
         button_play->Draw();
+    }    
+    if (button_play2)
+    {
+        button_play2->Draw();
     }
     if (P1)
     {

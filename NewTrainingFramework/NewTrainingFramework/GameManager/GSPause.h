@@ -3,6 +3,7 @@
 #include "Scene.h"
 #include "GameStateMachine.h"
 #include "GSPause.h"
+#include "../GameObject/GameButton.h"
 class GSPause : public GameStateBase
 {
 public:
