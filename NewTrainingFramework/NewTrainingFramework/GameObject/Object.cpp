@@ -45,7 +45,9 @@ void Object::setSize(GLint w, GLint h) {
     scaleMatrix.SetScale((GLfloat)w, (GLfloat)h, 1.0f);
 }
 void Object::set2Dposition(float x, float y) {
-    translationMatrix.SetTranslation(x, y, 0.0f);
+
+        translationMatrix.SetTranslation(x, y, 0.0f);
+    
 }
 void Object::updateRotation(Matrix m) {
     rotationMatrix = rotationMatrix * m;
@@ -66,6 +68,8 @@ void Object::SetMVP()
 void Object::Draw()
 {
     glUseProgram(objShader->program);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     objTex->Bind();
     int iTextureLoc = glGetUniformLocation(objShader->program, "u_texture");
     glUniform1i(iTextureLoc, 0);

@@ -22,7 +22,10 @@ void GSPause::HandleInput(unsigned char key, bool isPressed)
         }
     }
 }
+void GSPause::HandleMouseClick(GLint x, GLint y, bool isClick)
+{
 
+}
 bool GSPause::Init()
 {
     return 0;
@@ -53,6 +56,5 @@ void GSPause::Draw()
     if (Scene::GetInstance())
     {
         Scene::GetInstance()->Render(2);
-        Scene::GetInstance()->Render(7);
     }
 }

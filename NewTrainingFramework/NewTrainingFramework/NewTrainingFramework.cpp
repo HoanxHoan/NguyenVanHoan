@@ -29,8 +29,6 @@ int Init ( ESContext *esContext )
 void Draw ( ESContext *esContext )
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	GameStateMachine::GetInstance()->Draw();
 	eglSwapBuffers(esContext->eglDisplay, esContext->eglSurface);
 
@@ -38,7 +36,7 @@ void Draw ( ESContext *esContext )
 
 void Update ( ESContext *esContext, float deltaTime )
 {
-	
+	GameStateMachine::GetInstance()->CurrentState()->Update(deltaTime);
 	//if (keyStates['I'] )
 	//{
 	//	Camera::GetInstance()->Rotateup(deltaTime);
@@ -112,7 +110,7 @@ void Key ( ESContext *esContext, unsigned char key, bool bIsPressed)
 		GameStateMachine::GetInstance()->CurrentState()->HandleInput(key, bIsPressed);
 	}
 
-	keyStates[key] = bIsPressed;
+	//keyStates[key] = bIsPressed;
 }
 void MouseClick(ESContext* esContext, GLint x,GLint y, bool isClick)
 {

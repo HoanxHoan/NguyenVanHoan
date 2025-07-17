@@ -13,15 +13,7 @@ void GSMenu::HandleInput(unsigned char key, bool isPressed)
 {
     if (isPressed)
     {
-        if (key == 'S')
-        {
-            GameStateMachine::GetInstance()->PushState(new GSPlay());
-        }
-        else if (key == 'P')
-        {
-            GameStateMachine::GetInstance()->PushState(new GSPause());
-        }
-        else if (key == 27) 
+        if (key == 27) 
         {
             Exit();
         }

@@ -36,6 +36,6 @@ public:
     //void SetRotationMatrix();
     //void SetScaleMatrix();
     void Draw();
-   
+    float x, y;
 };
 
