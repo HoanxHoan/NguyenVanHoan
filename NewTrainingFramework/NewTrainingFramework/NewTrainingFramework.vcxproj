@@ -63,7 +63,7 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>libEGL.lib;libGLESv2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libEGL.lib;libGLESv2.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
@@ -102,6 +102,7 @@
     <ClCompile Include="GameObject\GameButton.cpp" />
     <ClCompile Include="GameObject\Model.cpp" />
     <ClCompile Include="GameObject\Object.cpp" />
+    <ClCompile Include="GameObject\TextRenderer.cpp" />
     <ClCompile Include="GameObject\Textures.cpp" />
     <ClCompile Include="NewTrainingFramework.cpp" />
     <ClCompile Include="Shaders.cpp" />
@@ -123,6 +124,7 @@
     <ClInclude Include="GameObject\GameButton.h" />
     <ClInclude Include="GameObject\Model.h" />
     <ClInclude Include="GameObject\Object.h" />
+    <ClInclude Include="GameObject\TextRenderer.h" />
     <ClInclude Include="GameObject\Textures.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="resource.h" />
@@ -136,6 +138,8 @@
     <None Include="..\Resources\Models\Sprite2D.nfg" />
     <None Include="..\Resources\Models\Woman1.nfg" />
     <None Include="..\Resources\Models\Woman2.nfg" />
+    <None Include="..\Resources\Shaders\Shadertext.fs" />
+    <None Include="..\Resources\Shaders\Shadertext.vs" />
     <None Include="..\Resources\Shaders\TriangleShaderFS.fs" />
     <None Include="..\Resources\Shaders\TriangleShaderVS.vs" />
   </ItemGroup>
@@ -159,6 +163,9 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="GameManager\ResourceManager.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="..\..\..\Downloads\arial-font\arial.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

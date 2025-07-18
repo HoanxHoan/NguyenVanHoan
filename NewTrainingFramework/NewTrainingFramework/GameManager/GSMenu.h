@@ -5,6 +5,7 @@
 #include "GameStateMachine.h"
 #include "GSPlay.h"
 #include "../GameObject/GameButton.h"
+#include "../GameObject/TextRenderer.h"
 class GSMenu : public GameStateBase
 {
 public:

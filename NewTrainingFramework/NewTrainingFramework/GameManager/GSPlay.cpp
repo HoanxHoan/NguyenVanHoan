@@ -4,8 +4,8 @@
 std::shared_ptr<GameButton> button_play;
 std::shared_ptr<GameButton> button_play2;
 bool keyState[256];
-int x, y,count;
-float dltime = 0.0f,pdltime=0.0f;
+int x, y, count;
+float dltime = 0.0f, pdltime = 0.0f;
 Object* P1;
 GSPlay::GSPlay() {
     count = 0;
@@ -14,13 +14,19 @@ GSPlay::GSPlay() {
     Init();
 }
 GSPlay::~GSPlay() {
-
+    if (P1) {
+        delete P1;
+        P1 = nullptr;
+    }
+    button_play = nullptr;
+    button_play2 = nullptr;
 }
 void GSPlay::HandleInput(unsigned char key, bool isPressed)
 {
         keyState[key] = isPressed;
         if (isPressed)
         {
+            count = 0;
             if (key == 27)
             {
                 Exit();
@@ -28,7 +34,8 @@ void GSPlay::HandleInput(unsigned char key, bool isPressed)
 
         }
         else {
-            P1->objTex = ResourceManager::GetInstance()->GetTexture(16); 
+            count = 1;
+            //P1->objTex = ResourceManager::GetInstance()->GetTexture(16); 
             if (y == 1) {
                 x++;
                 y = 0;
@@ -107,6 +114,21 @@ void GSPlay::Resume()
 void GSPlay::Update(float deltaTime)
 {
     pdltime += deltaTime;
+    if (count == 1 && pdltime > 0.3) {
+        P1->objTex = ResourceManager::GetInstance()->GetTexture(16);
+        count = 2;
+        pdltime = 0;
+    }
+    if (count == 2 && pdltime > 0.3) {
+        P1->objTex = ResourceManager::GetInstance()->GetTexture(15);
+        count = 3;
+        pdltime = 0;
+    }
+    if (count == 3 && pdltime > 0.3) {
+        P1->objTex = ResourceManager::GetInstance()->GetTexture(7);
+        count = 1;
+        pdltime = 0;
+    }
     if (keyState['W'] )
     {
         if (P1->y >= 20) { P1->y -= 10; }

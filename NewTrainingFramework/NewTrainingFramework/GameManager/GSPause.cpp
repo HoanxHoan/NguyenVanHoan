@@ -7,6 +7,7 @@ GSPause::GSPause() {
 }
 
 GSPause::~GSPause() {
+    button_pause = nullptr;
 }
 
 void GSPause::HandleInput(unsigned char key, bool isPressed)

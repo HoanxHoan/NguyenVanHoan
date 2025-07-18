@@ -22,5 +22,6 @@ public:
     void HandleInput(unsigned char key, bool isPressed) override;
     void HandleMouseClick(GLint x, GLint y, bool isClick) override;
     StateType GetStateType() const override { return StateType::PLAY; }
+
 };
 

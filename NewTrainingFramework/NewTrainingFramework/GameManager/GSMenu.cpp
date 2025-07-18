@@ -2,11 +2,18 @@
 #include "GSMenu.h"
 #include <iostream>
 std::shared_ptr<GameButton> button;
+TextRenderer* textRenderer = new TextRenderer();
 GSMenu::GSMenu() {
+  
     Init();
 }
 
 GSMenu::~GSMenu() {
+    button = nullptr;
+    if (textRenderer) {
+        delete textRenderer;
+        textRenderer = nullptr;
+    }
 }
 
 void GSMenu::HandleInput(unsigned char key, bool isPressed)
@@ -29,6 +36,9 @@ void GSMenu::HandleMouseClick(GLint x, GLint y, bool isClick)
 
 bool GSMenu::Init()
 {
+    
+    textRenderer->Init("../Resources/Fonts/arial.ttf", 48);
+
     Model* btnModel = ResourceManager::GetInstance()->GetModel(2);
     Texture* btnTexture = ResourceManager::GetInstance()->GetTexture(6);
     Shaders* btnShader = ResourceManager::GetInstance()->GetShader(0);
@@ -45,7 +55,7 @@ bool GSMenu::Init()
 
 void GSMenu::Exit()
 {
-    exit(0);
+    //exit(0);
     std::cout << "Menu State Exit\n";
 }
 
@@ -73,5 +83,9 @@ void GSMenu::Draw()
     if (button)
     {
         button->Draw();
+    }
+    if (textRenderer)
+    {
+        textRenderer->RenderText("Hoan", 100.0f, 50.0f, 0.5f, Vector3(0.3f, 0.7f, 0.9f));
     }
 }

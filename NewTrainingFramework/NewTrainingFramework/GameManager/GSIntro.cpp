@@ -12,7 +12,10 @@ GSIntro::GSIntro()
     Init();
 }
 
-GSIntro::~GSIntro() {}
+GSIntro::~GSIntro() {
+    delete obj;
+    obj = nullptr;
+}
 
 bool GSIntro::Init()
 {
@@ -37,6 +40,12 @@ bool GSIntro::Init()
     float nearPlane=-1, farPlane=1;
     Camera::GetInstance()->SetNearFar(nearPlane, farPlane);
     std::cout << "Intro Init\n";
+    delete model;
+    model = nullptr;
+    delete tex;
+    tex = nullptr;
+    delete shader;
+    shader = nullptr;
     return true;
 }
 void GSIntro::HandleMouseClick(GLint x, GLint y, bool isClick)
@@ -53,13 +62,11 @@ void GSIntro::Resume() {}
 
 void GSIntro::Update(float deltaTime)
 {
-    elapsedTime += deltaTime;
-    if (elapsedTime >= 2) {
         if (Scene::GetInstance()->Init())
         {
             GameStateMachine::GetInstance()->ChangeState(new GSMenu());
         }
-    }
+    
 }
 
 void GSIntro::Draw()
