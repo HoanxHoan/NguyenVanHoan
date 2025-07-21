@@ -22,6 +22,12 @@ public:
     void HandleInput(unsigned char key, bool isPressed) override;
     void HandleMouseClick(GLint x, GLint y, bool isClick) override;
     StateType GetStateType() const override { return StateType::PLAY; }
-
+    std::shared_ptr<GameButton> button_play;
+    std::shared_ptr<GameButton> button_play2;
+    bool keyState[256] = { false };
+    int x, y, count;
+    float dltime = 0.0f, pdltime = 0.0f;
+    Object* P1;
+    int check;
 };
 

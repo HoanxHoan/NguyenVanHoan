@@ -4,7 +4,7 @@
 #include "GSMenu.h"
 #include <iostream>
 #define DEG2RAD 0.0174532925199432957f
-Object* obj;
+
 GSIntro::GSIntro()
 {
     introTime = 3.0f; 

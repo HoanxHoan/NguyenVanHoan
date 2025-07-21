@@ -20,8 +20,7 @@ int id = 6;
 //Scene* scene = nullptr;
 int Init ( ESContext *esContext )
 {
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 	GameStateMachine::GetInstance()->ChangeState(new GSIntro());
 	return 0;
 
@@ -38,70 +37,6 @@ void Draw ( ESContext *esContext )
 void Update ( ESContext *esContext, float deltaTime )
 {
 	GameStateMachine::GetInstance()->CurrentState()->Update(deltaTime);
-	//if (keyStates['I'] )
-	//{
-	//	Camera::GetInstance()->Rotateup(deltaTime);
-	//}
-	//if (keyStates['E'])
-	//{
-	//	Camera::GetInstance()->MoveBackward(deltaTime);
-	//}
-	//if (keyStates['Q'])
-	//{
-	//	Camera::GetInstance()->MoveForward(deltaTime);
-	//}
-	//if (keyStates['K'])
-	//{
-	//	Camera::GetInstance()->Rotatedown(deltaTime);
-	//}
-	//if (keyStates['J'])
-	//{
-	//	Camera::GetInstance()->RotateLeft(deltaTime);
-	//}
-	//if (keyStates['L'])
-	//{
-	//	Camera::GetInstance()->RotateRight(deltaTime);
-	//}
-	//if (keyStates['W'])
-	//{
-	//	Camera::GetInstance()->MoveUp(deltaTime);
-	//}
-	//if (keyStates['S'])
-	//{
-	//	Camera::GetInstance()->MoveDown(deltaTime);
-	//}
-	//if (keyStates['A'])
-	//{
-	//	Camera::GetInstance()->MoveLeft(deltaTime);
-	//}
-	//if (keyStates['D'])
-	//{
-	//	Camera::GetInstance()->MoveRight(deltaTime);
-	//}
-	//if (keyStates['X'])
-	//{
-	//	Camera::GetInstance()->testRotateY(deltaTime);
-	//}
-	//if (keyStates['C'])
-	//{
-	//	Camera::GetInstance()->testRotateX(deltaTime);
-	//}
-	//if (keyStates['R'] && Camera::GetInstance()->fov <= 179)
-	//{
-	//	Camera::GetInstance()->fov += 1;
-	//	Camera::GetInstance()->UpdateProjMatrix(4/3);
-
-	//}
-	//if (keyStates['T'] && Camera::GetInstance()->fov >=1)
-	//{
-	//	Camera::GetInstance()->fov -= 1;
-	//	Camera::GetInstance()->UpdateProjMatrix(4 / 3);
-	//}
-	//if (keyStates['Z'])
-	//{
-	//	Camera::GetInstance()->RotateAroundTarget(deltaTime*2);
-	//	//Camera::GetInstance()->MoveLeft(deltaTime);
-	//}
 }
 
 void Key ( ESContext *esContext, unsigned char key, bool bIsPressed)

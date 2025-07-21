@@ -1,8 +1,9 @@
 #include "../stdafx.h" 
 #include "GSPause.h"
 #include <iostream>
-std::shared_ptr<GameButton> button_pause;
+
 GSPause::GSPause() {
+    button_pause = nullptr;
     Init();
 }
 

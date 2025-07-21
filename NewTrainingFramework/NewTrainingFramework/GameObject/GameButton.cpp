@@ -2,7 +2,7 @@
 #include "GameButton.h"
 
 GameButton::GameButton(Model* model, Texture* texture, Shaders* shader)
-    : Object(model, texture, shader), m_pBtClick(nullptr), m_isHolding(false)
+    : Object(model, texture, shader), m_isHolding(false), m_pBtClick(nullptr)
 {
 }
 

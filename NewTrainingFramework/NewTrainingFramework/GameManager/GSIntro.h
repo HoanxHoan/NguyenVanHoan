@@ -1,6 +1,7 @@
 #pragma once
 #include "GameStateBase.h"
 
+class Object;
 class GSIntro : public GameStateBase
 {
 public:
@@ -19,5 +20,6 @@ public:
 private:
     float introTime; 
     float elapsedTime; 
+    Object* obj;
 };
-#pragma once
+

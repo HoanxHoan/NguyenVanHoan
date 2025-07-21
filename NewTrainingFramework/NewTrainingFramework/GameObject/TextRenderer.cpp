@@ -45,11 +45,11 @@ bool TextRenderer::Init(const char* fontPath, int fontSize) {
         glTexImage2D(
             GL_TEXTURE_2D,
             0,
-            GL_ALPHA,
+            GL_RED,
             face->glyph->bitmap.width,
             face->glyph->bitmap.rows,
             0,
-            GL_ALPHA,
+            GL_RED,
             GL_UNSIGNED_BYTE,
             face->glyph->bitmap.buffer
         );
@@ -64,7 +64,7 @@ bool TextRenderer::Init(const char* fontPath, int fontSize) {
             texture,
             Vector2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
             Vector2(face->glyph->bitmap_left, face->glyph->bitmap_top),
-            static_cast<unsigned int>(face->glyph->advance.x)
+            (GLuint)face->glyph->advance.x
         };
         Characters[c] = character;
         //Characters.insert(std::pair<char, Character>(c, character));
@@ -96,16 +96,20 @@ bool TextRenderer::Init(const char* fontPath, int fontSize) {
 
     // Set projection matrix
     Matrix ortho;
-    ortho.SetOrthographic(0.0f, 800, 600, 0.0f, -1.0f, 1.0f);
+    ortho.SetOrthographic(0.0f, Globals::screenWidth,0.0f , Globals::screenHeight, -1.0f, 1.0f);
     glUseProgram(textShader->program);
     GLuint projLoc = glGetUniformLocation(textShader->program, "projection");
     glUniformMatrix4fv(projLoc, 1, GL_FALSE, (float*)ortho.m);
+    //    
+    GLuint textLoc = glGetUniformLocation(textShader->program, "text");
+    glUniform1i(textLoc, 0);
     return true;
 }
 
 void TextRenderer::RenderText(std::string text, float x, float y, float scale, Vector3 color) {
     if (!textShader) return;
-
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glUseProgram(textShader->program);
     glUniform3f(glGetUniformLocation(textShader->program, "textColor"), color.x, color.y, color.z);
     glActiveTexture(GL_TEXTURE0);
@@ -134,6 +138,7 @@ void TextRenderer::RenderText(std::string text, float x, float y, float scale, V
         glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glDrawArrays(GL_TRIANGLES, 0, 6);
+        
         x += (ch.Advance >> 6) * scale;
     }
 

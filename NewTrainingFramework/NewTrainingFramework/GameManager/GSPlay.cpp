@@ -1,16 +1,13 @@
 #include "../stdafx.h" 
 #include "GSPlay.h"
 #include <iostream>
-std::shared_ptr<GameButton> button_play;
-std::shared_ptr<GameButton> button_play2;
-bool keyState[256];
-int x, y, count;
-float dltime = 0.0f, pdltime = 0.0f;
-Object* P1;
+
 GSPlay::GSPlay() {
-    count = 0;
-    x = 0;
-    y = 0;
+    x = 0; y = 0; count = 0;
+    dltime = 0.0f;
+    pdltime = 0.0f;
+    button_play = nullptr;
+    button_play2 = nullptr;
     Init();
 }
 GSPlay::~GSPlay() {
@@ -18,9 +15,11 @@ GSPlay::~GSPlay() {
         delete P1;
         P1 = nullptr;
     }
-    button_play = nullptr;
-    button_play2 = nullptr;
 }
+void OnPlayButtonClick() {
+    GameStateMachine::GetInstance()->PopState();
+}
+
 void GSPlay::HandleInput(unsigned char key, bool isPressed)
 {
         keyState[key] = isPressed;
@@ -52,15 +51,16 @@ void GSPlay::HandleInput(unsigned char key, bool isPressed)
 }
 void GSPlay::HandleMouseClick(GLint x, GLint y, bool isClick)
 {
-    if (button_play)
-    {
-        button_play->HandleTouchEvents(x, y, isClick);
+    bool deleted = false;
+    if (button_play->HandleTouchEvents(x, y, isClick)) {
+        deleted = true;    
     }
-    if (button_play2)
-    {
+    if (!deleted) {
         button_play2->HandleTouchEvents(x, y, isClick);
     }
 }
+
+
 bool GSPlay::Init()
 {
     Model* btnModel = ResourceManager::GetInstance()->GetModel(2);
@@ -71,7 +71,7 @@ bool GSPlay::Init()
     button_play->SetPosition(850, 70);
     button_play->setSize(100, 100);
     button_play->SetSize(100, 100);
-    button_play->SetOnClick([]() {
+    button_play2->SetOnClick([]() {
         GameStateMachine::GetInstance()->PopState();
         });
     Model* btnModel2 = ResourceManager::GetInstance()->GetModel(2);

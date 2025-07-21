@@ -4,7 +4,7 @@
 class GameButton : public Object
 {
 public:
-    GameButton() : Object(), m_pBtClick(nullptr), m_isHolding(false){}
+    GameButton() : Object(), m_isHolding(false), m_pBtClick(nullptr) {}
     GameButton(Model* model, Texture* texture, Shaders* shade);
     ~GameButton();
 

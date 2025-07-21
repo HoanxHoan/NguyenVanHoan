@@ -1,10 +1,10 @@
 #include "../stdafx.h" 
 #include "GSMenu.h"
 #include <iostream>
-std::shared_ptr<GameButton> button;
-TextRenderer* textRenderer = new TextRenderer();
+
+
 GSMenu::GSMenu() {
-  
+    button = nullptr;
     Init();
 }
 
@@ -36,7 +36,7 @@ void GSMenu::HandleMouseClick(GLint x, GLint y, bool isClick)
 
 bool GSMenu::Init()
 {
-    
+    textRenderer = new TextRenderer();
     textRenderer->Init("../Resources/Fonts/arial.ttf", 48);
 
     Model* btnModel = ResourceManager::GetInstance()->GetModel(2);
@@ -86,6 +86,6 @@ void GSMenu::Draw()
     }
     if (textRenderer)
     {
-        textRenderer->RenderText("Hoan", 100.0f, 50.0f, 0.5f, Vector3(0.3f, 0.7f, 0.9f));
+        textRenderer->RenderText("Hoan", 25.0f, 25.0f, 1.0f, Vector3(0.3f, 0.7f, 0.9f));
     }
 }

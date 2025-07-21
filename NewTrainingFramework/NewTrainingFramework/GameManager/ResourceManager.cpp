@@ -134,7 +134,7 @@ bool ResourceManager::LoadFileRM(const char* filename)
 Model* ResourceManager::GetModel(int ID)
 {
     if (models.find(ID) != models.end()) {
-        std::cout << 1<<"\n";
+       // std::cout << 1<<"\n";
         return models[ID];
     }
     else
@@ -144,7 +144,7 @@ Model* ResourceManager::GetModel(int ID)
 Texture* ResourceManager::GetTexture(int ID)
 {
     if (textures.find(ID) != textures.end()) {
-        std::cout << 2<<ID<<"\n";
+       // std::cout << 2<<ID<<"\n";
         return textures[ID];
     }
     else
@@ -155,7 +155,7 @@ Shaders* ResourceManager::GetShader(int ID)
 {
     if (shaders.find(ID) != shaders.end())
     {
-        std::cout << "3\n";
+        //std::cout << "3\n";
         return shaders[ID];
     }
     else
