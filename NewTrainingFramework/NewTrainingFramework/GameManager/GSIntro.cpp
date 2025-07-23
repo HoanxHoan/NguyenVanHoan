@@ -7,7 +7,7 @@
 
 GSIntro::GSIntro()
 {
-    introTime = 3.0f; 
+    introTime = 3.0f;
     elapsedTime = 0.0f;
     Init();
 }
@@ -25,7 +25,7 @@ bool GSIntro::Init()
     tex->LoadFromFile("../Resources/Textures/load.tga", GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
     Shaders* shader = new Shaders();
     shader->Init("../Resources/Shaders/TriangleShaderVS.vs", "../Resources/Shaders/TriangleShaderFS.fs");
-    float px=480, py=360, pz=0, rx=0, ry=0, rz=0, sx=200, sy=200, sz=0;
+    float px = 480, py = 360, pz = 0, rx = 0, ry = 0, rz = 0, sx = 200, sy = 200, sz = 0;
     Matrix RotationXMatrix;
     Matrix RotationYMatrix;
     Matrix RotationZMatrix;
@@ -37,7 +37,7 @@ bool GSIntro::Init()
     obj->translationMatrix.SetTranslation(px, py, pz);
     obj->rotationMatrix = RotationXMatrix * RotationYMatrix * RotationZMatrix;
     obj->scaleMatrix.SetScale(sx, sy, sz);
-    float nearPlane=-1, farPlane=1;
+    float nearPlane = -1, farPlane = 1;
     Camera::GetInstance()->SetNearFar(nearPlane, farPlane);
     std::cout << "Intro Init\n";
     delete model;
@@ -48,10 +48,11 @@ bool GSIntro::Init()
     shader = nullptr;
     return true;
 }
+
 void GSIntro::HandleMouseClick(GLint x, GLint y, bool isClick)
 {
-
 }
+
 void GSIntro::Exit()
 {
     std::cout << "Intro Exit\n";
@@ -62,16 +63,15 @@ void GSIntro::Resume() {}
 
 void GSIntro::Update(float deltaTime)
 {
-        if (Scene::GetInstance()->Init())
-        {
-            GameStateMachine::GetInstance()->ChangeState(new GSMenu());
-        }
-    
+    if (Scene::GetInstance()->Init())
+    {
+        GameStateMachine::GetInstance()->ChangeState(std::make_unique<GSMenu>()); 
+    }
 }
 
 void GSIntro::Draw()
 {
-    if (Scene::GetInstance())
+    if (Scene::GetInstance() && obj)
     {
         obj->Draw();
     }
@@ -83,6 +83,6 @@ void GSIntro::HandleInput(unsigned char key, bool isPressed)
 {
     if (isPressed)
     {
-        GameStateMachine::GetInstance()->ChangeState(new GSMenu());
+        GameStateMachine::GetInstance()->ChangeState(std::make_unique<GSMenu>());
     }
 }

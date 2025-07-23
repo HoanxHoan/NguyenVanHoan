@@ -102,6 +102,7 @@
     <ClCompile Include="GameObject\GameButton.cpp" />
     <ClCompile Include="GameObject\Model.cpp" />
     <ClCompile Include="GameObject\Object.cpp" />
+    <ClCompile Include="GameObject\SpriteAnimation.cpp" />
     <ClCompile Include="GameObject\TextRenderer.cpp" />
     <ClCompile Include="GameObject\Textures.cpp" />
     <ClCompile Include="NewTrainingFramework.cpp" />
@@ -124,6 +125,7 @@
     <ClInclude Include="GameObject\GameButton.h" />
     <ClInclude Include="GameObject\Model.h" />
     <ClInclude Include="GameObject\Object.h" />
+    <ClInclude Include="GameObject\SpriteAnimation.h" />
     <ClInclude Include="GameObject\TextRenderer.h" />
     <ClInclude Include="GameObject\Textures.h" />
     <ClInclude Include="Globals.h" />
@@ -138,6 +140,8 @@
     <None Include="..\Resources\Models\Sprite2D.nfg" />
     <None Include="..\Resources\Models\Woman1.nfg" />
     <None Include="..\Resources\Models\Woman2.nfg" />
+    <None Include="..\Resources\Shaders\AnimationShaderFS.fs" />
+    <None Include="..\Resources\Shaders\AnimationShaderVS.vs" />
     <None Include="..\Resources\Shaders\Shadertext.fs" />
     <None Include="..\Resources\Shaders\Shadertext.vs" />
     <None Include="..\Resources\Shaders\TriangleShaderFS.fs" />

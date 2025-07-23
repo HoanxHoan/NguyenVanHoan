@@ -5,7 +5,7 @@
  FILE ../Resources/Models/Woman2.nfg
  ID 2
  FILE ../Resources/Models/Sprite2D.nfg
- #2DTexture 17
+ #2DTexture 19
  ID 0
  FILE ../Resources/Textures/Woman1.tga
  TILING GL_REPEAT
@@ -57,7 +57,16 @@
  ID 16
  FILE ../Resources/Textures/Goku_black_3.tga
  TILING GL_CLAMP_TO_EDGE
- #Shader 1
+ ID 17
+ FILE ../Resources/Textures/Goku_Action1.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 18
+ FILE ../Resources/Textures/Boy.tga
+ TILING GL_CLAMP_TO_EDGE
+ #Shader 2
  ID 0
  VS ../Resources/Shaders/TriangleShaderVS.vs
  FS ../Resources/Shaders/TriangleShaderFS.fs
+ ID 1
+ VS ../Resources/Shaders/AnimationShaderVS.vs
+ FS ../Resources/Shaders/AnimationShaderFS.fs

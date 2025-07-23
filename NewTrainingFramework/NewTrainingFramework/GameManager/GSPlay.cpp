@@ -6,8 +6,6 @@ GSPlay::GSPlay() {
     x = 0; y = 0; count = 0;
     dltime = 0.0f;
     pdltime = 0.0f;
-    button_play = nullptr;
-    button_play2 = nullptr;
     Init();
 }
 GSPlay::~GSPlay() {
@@ -15,9 +13,6 @@ GSPlay::~GSPlay() {
         delete P1;
         P1 = nullptr;
     }
-}
-void OnPlayButtonClick() {
-    GameStateMachine::GetInstance()->PopState();
 }
 
 void GSPlay::HandleInput(unsigned char key, bool isPressed)
@@ -34,6 +29,9 @@ void GSPlay::HandleInput(unsigned char key, bool isPressed)
         }
         else {
             count = 1;
+            if (spriteAnim->GetCurrentFrame() == 4) {
+                spriteAnim->SetFrameTime(0.7);
+            }
             //P1->objTex = ResourceManager::GetInstance()->GetTexture(16); 
             if (y == 1) {
                 x++;
@@ -51,12 +49,11 @@ void GSPlay::HandleInput(unsigned char key, bool isPressed)
 }
 void GSPlay::HandleMouseClick(GLint x, GLint y, bool isClick)
 {
-    bool deleted = false;
-    if (button_play->HandleTouchEvents(x, y, isClick)) {
-        deleted = true;    
+    if (button_play && button_play->HandleTouchEvents(x, y, isClick)) {
+        return; 
     }
-    if (!deleted) {
-        button_play2->HandleTouchEvents(x, y, isClick);
+    if (button_play2 && button_play2->HandleTouchEvents(x, y, isClick)) {
+        return;
     }
 }
 
@@ -71,7 +68,7 @@ bool GSPlay::Init()
     button_play->SetPosition(850, 70);
     button_play->setSize(100, 100);
     button_play->SetSize(100, 100);
-    button_play2->SetOnClick([]() {
+    button_play->SetOnClick([]() {
         GameStateMachine::GetInstance()->PopState();
         });
     Model* btnModel2 = ResourceManager::GetInstance()->GetModel(2);
@@ -83,16 +80,31 @@ bool GSPlay::Init()
     button_play2->setSize(100, 100);
     button_play2->SetSize(100, 100);
     button_play2->SetOnClick([]() {
-        GameStateMachine::GetInstance()->PushState(new GSPause());
+        GameStateMachine::GetInstance()->PushState(std::make_unique<GSPause>());
         });
     Model* P1Model = ResourceManager::GetInstance()->GetModel(2);
     Texture* P1Texture = ResourceManager::GetInstance()->GetTexture(7);
     Shaders* P1Shader = ResourceManager::GetInstance()->GetShader(0);
+
     P1 = new Object(P1Model, P1Texture, P1Shader);
     P1->x = 300;
     P1->y = 200;
     P1->set2Dposition(P1->x, P1->y);
     P1->setSize(100, 100);
+    Model* model = ResourceManager::GetInstance()->GetModel(2);
+    Shaders* shader = ResourceManager::GetInstance()->GetShader(1);
+    Texture* texture = ResourceManager::GetInstance()->GetTexture(17);
+
+    spriteAnim = std::make_shared<SpriteAnimation>(model, shader, texture,
+        7, // numFrames
+        0, // currentFrame
+        8, // numActions
+        0, // currentAction
+        999.0f); // frameTime
+
+    spriteAnim->SetPosition(Vector3(400, 300, 0));
+    spriteAnim->SetScale(Vector3(100, 100, 1));
+
     return true;
 }
 
@@ -113,6 +125,10 @@ void GSPlay::Resume()
 
 void GSPlay::Update(float deltaTime)
 {
+    if (spriteAnim->GetCurrentFrame() == 0 ) {
+        spriteAnim->SetFrameTime(999.0);
+    }
+    spriteAnim->Update(deltaTime);
     pdltime += deltaTime;
     if (count == 1 && pdltime > 0.3) {
         P1->objTex = ResourceManager::GetInstance()->GetTexture(16);
@@ -151,6 +167,17 @@ void GSPlay::Update(float deltaTime)
         if (P1->y <= 650) { P1->y += 10; }
         P1->objTex = ResourceManager::GetInstance()->GetTexture(8);
         P1->set2Dposition(P1->x, P1->y);
+    }
+    if (keyState['F'])
+    {
+        if (spriteAnim->x <= 900 ) 
+        { 
+            spriteAnim->x += 10;     
+            
+        }
+        if (spriteAnim->GetCurrentFrame()!=4) {
+            spriteAnim->SetCurrentFrame(4);
+        }
     }
     if (keyState['K'])
     {
@@ -202,4 +229,9 @@ void GSPlay::Draw()
     {
         P1->Draw();
     }
+    if (spriteAnim)
+    {
+        spriteAnim->Draw();
+    }
+
 }

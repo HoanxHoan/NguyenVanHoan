@@ -6,6 +6,7 @@
 #include "GSPlay.h"
 #include "../GameObject/GameButton.h"
 #include "../GameObject/TextRenderer.h"
+#include <memory>
 
 class GSMenu : public GameStateBase
 {
@@ -24,6 +25,7 @@ public:
     void HandleInput(unsigned char key, bool isPressed) override;
     void HandleMouseClick(GLint x, GLint y, bool isClick) override;
     StateType GetStateType() const override { return StateType::MENU; }
+
 private:
     TextRenderer* textRenderer;
     std::shared_ptr<GameButton> button;

@@ -2,9 +2,7 @@
 #include "GSMenu.h"
 #include <iostream>
 
-
 GSMenu::GSMenu() {
-    button = nullptr;
     Init();
 }
 
@@ -20,12 +18,13 @@ void GSMenu::HandleInput(unsigned char key, bool isPressed)
 {
     if (isPressed)
     {
-        if (key == 27) 
+        if (key == 27)
         {
             Exit();
         }
     }
 }
+
 void GSMenu::HandleMouseClick(GLint x, GLint y, bool isClick)
 {
     if (button)
@@ -42,20 +41,22 @@ bool GSMenu::Init()
     Model* btnModel = ResourceManager::GetInstance()->GetModel(2);
     Texture* btnTexture = ResourceManager::GetInstance()->GetTexture(6);
     Shaders* btnShader = ResourceManager::GetInstance()->GetShader(0);
+
     button = std::make_shared<GameButton>(btnModel, btnTexture, btnShader);
-    button->set2Dposition(480,360);
+    button->set2Dposition(480, 360);
     button->SetPosition(480, 360);
     button->setSize(200, 200);
     button->SetSize(200, 200);
+
     button->SetOnClick([]() {
-        GameStateMachine::GetInstance()->PushState(new GSPlay());
+        GameStateMachine::GetInstance()->PushState(std::make_unique<GSPlay>()); 
         });
+
     return true;
 }
 
 void GSMenu::Exit()
 {
-    //exit(0);
     std::cout << "Menu State Exit\n";
 }
 
@@ -71,7 +72,7 @@ void GSMenu::Resume()
 
 void GSMenu::Update(float deltaTime)
 {
-  
+
 }
 
 void GSMenu::Draw()

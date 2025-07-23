@@ -3,12 +3,11 @@
 #include <iostream>
 
 GSPause::GSPause() {
-    button_pause = nullptr;
     Init();
 }
 
 GSPause::~GSPause() {
-    button_pause = nullptr;
+    
 }
 
 void GSPause::HandleInput(unsigned char key, bool isPressed)

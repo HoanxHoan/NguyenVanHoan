@@ -20,8 +20,7 @@ int id = 6;
 //Scene* scene = nullptr;
 int Init ( ESContext *esContext )
 {
-
-	GameStateMachine::GetInstance()->ChangeState(new GSIntro());
+	GameStateMachine::GetInstance()->ChangeState(std::make_unique<GSIntro>());
 	return 0;
 
 }

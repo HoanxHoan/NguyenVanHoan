@@ -1,26 +1,24 @@
 #pragma once
 #include "GameStateBase.h"
 #include <stack>
+#include <memory>
 
 class GameStateMachine
 {
-private:
-    static GameStateMachine* instance;
-    std::stack<GameStateBase*> m_StateStack;
-
-    GameStateMachine(); // private constructor
-
 public:
     ~GameStateMachine();
 
     static GameStateMachine* GetInstance();
     static void Destroy();
 
-    void ChangeState(GameStateBase* state);
-    void PushState(GameStateBase* state);
+    void ChangeState(std::unique_ptr<GameStateBase> state);
+    void PushState(std::unique_ptr<GameStateBase> state);
     void PopState();
     GameStateBase* CurrentState();
 
     void Update(float deltaTime);
     void Draw();
+    GameStateMachine();
+    static std::unique_ptr<GameStateMachine> instance;
+    std::stack<std::unique_ptr<GameStateBase>> m_StateStack;
 };

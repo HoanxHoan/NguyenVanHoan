@@ -2,7 +2,7 @@
 #include "GameStateMachine.h"
 #include <iostream>
 
-GameStateMachine* GameStateMachine::instance = nullptr;
+std::unique_ptr<GameStateMachine> GameStateMachine::instance = nullptr;
 
 GameStateMachine::GameStateMachine()
 {
@@ -13,45 +13,41 @@ GameStateMachine::~GameStateMachine()
     while (!m_StateStack.empty())
     {
         m_StateStack.top()->Exit();
-        delete m_StateStack.top();
-        m_StateStack.pop();
+        m_StateStack.pop(); 
     }
 }
 
 GameStateMachine* GameStateMachine::GetInstance()
 {
     if (!instance)
-        instance = new GameStateMachine();
-    return instance;
+        instance = std::make_unique<GameStateMachine>();
+    return instance.get();
 }
 
 void GameStateMachine::Destroy()
 {
     if (instance)
     {
-        delete instance;
-        instance = nullptr;
+        instance.reset(); 
     }
 }
 
-void GameStateMachine::ChangeState(GameStateBase* state)
+void GameStateMachine::ChangeState(std::unique_ptr<GameStateBase> state)
 {
     if (!m_StateStack.empty())
     {
         m_StateStack.top()->Exit();
-        delete m_StateStack.top();
         m_StateStack.pop();
     }
-    m_StateStack.push(state);
+    m_StateStack.push(std::move(state));
 }
 
-void GameStateMachine::PushState(GameStateBase* state)
+void GameStateMachine::PushState(std::unique_ptr<GameStateBase> state)
 {
     if (!m_StateStack.empty())
         m_StateStack.top()->Pause();
 
-    m_StateStack.push(state);
-
+    m_StateStack.push(std::move(state));
 }
 
 void GameStateMachine::PopState()
@@ -59,7 +55,6 @@ void GameStateMachine::PopState()
     if (!m_StateStack.empty())
     {
         m_StateStack.top()->Exit();
-        delete m_StateStack.top();
         m_StateStack.pop();
     }
 
@@ -70,7 +65,7 @@ void GameStateMachine::PopState()
 GameStateBase* GameStateMachine::CurrentState()
 {
     if (!m_StateStack.empty())
-        return m_StateStack.top();
+        return m_StateStack.top().get();
     return nullptr;
 }
 

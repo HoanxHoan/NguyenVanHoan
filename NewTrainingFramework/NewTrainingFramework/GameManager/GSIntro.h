@@ -1,7 +1,9 @@
 #pragma once
 #include "GameStateBase.h"
+#include <memory>
 
 class Object;
+
 class GSIntro : public GameStateBase
 {
 public:
@@ -17,9 +19,9 @@ public:
     void HandleInput(unsigned char key, bool isPressed) override;
     void HandleMouseClick(GLint x, GLint y, bool isClick) override;
     StateType GetStateType() const override { return StateType::INTRO; }
+
 private:
-    float introTime; 
-    float elapsedTime; 
+    float introTime;
+    float elapsedTime;
     Object* obj;
 };
-
