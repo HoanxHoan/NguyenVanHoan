@@ -42,32 +42,30 @@ void MemoryManager::Free(void * pAddress)
 	//memory overrun checking
 		SanityCheck();
 	// deletion of Null pointer
-		if(pAddress == NULL)
+		if (pAddress == NULL)
 		{
-			Error("Null pointer deletion\n");
+			esLogMessage("Warning: delete NULL pointer\n");
 			return;
 		}
-	#endif
+#endif
 
-	for(unsigned int i = 0; i < m_noBuffers; i++)
-	{
-		if (m_dataBuffers[i].pAddress == pAddress)
+		for (unsigned int i = 0; i < m_noBuffers; i++)
 		{
-			free(pAddress);
-			if (i != m_noBuffers - 1)
+			if (m_dataBuffers[i].pAddress == pAddress)
 			{
-				memcpy(m_dataBuffers + i, m_dataBuffers + m_noBuffers - 1, sizeof(AllocBuffers));
+				free(pAddress);
+				if (i != m_noBuffers - 1)
+				{
+					memcpy(m_dataBuffers + i, m_dataBuffers + m_noBuffers - 1, sizeof(AllocBuffers));
+				}
+				m_noBuffers--;
+				return;
 			}
-			m_noBuffers--;
-			return;
 		}
-	}
 
-	// bad pointer (already deleted) deletion
-
-	#ifdef _DEBUG
+#ifdef _DEBUG
 		Error("Bad pointer deletion\n");
-	#endif
+#endif
 }
 
 void MemoryManager::Dump()

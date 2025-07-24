@@ -76,7 +76,6 @@ void GSIntro::Draw()
         obj->Draw();
     }
     std::cout << "Loading..." << "\n";
-    Update(0.05);
 }
 
 void GSIntro::HandleInput(unsigned char key, bool isPressed)

@@ -20,6 +20,7 @@ int id = 6;
 //Scene* scene = nullptr;
 int Init ( ESContext *esContext )
 {
+
 	GameStateMachine::GetInstance()->ChangeState(std::make_unique<GSIntro>());
 	return 0;
 
@@ -66,7 +67,8 @@ void CleanUp()
 	Scene::Destroy();
 	GameStateMachine::Destroy();
 	ResourceManager::Destroy();
-	Camera::GetInstance()->Destroy();
+	Camera::Destroy();
+	SoundManager::Destroy();
 }
 
 int _tmain(int argc, _TCHAR* argv[])

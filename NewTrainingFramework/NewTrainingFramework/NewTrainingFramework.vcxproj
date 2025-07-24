@@ -54,7 +54,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>$(SolutionDir)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;WITH_WINMM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -102,6 +102,77 @@
     <ClCompile Include="GameObject\GameButton.cpp" />
     <ClCompile Include="GameObject\Model.cpp" />
     <ClCompile Include="GameObject\Object.cpp" />
+    <ClCompile Include="GameObject\Soloud\audiosource\monotone\soloud_monotone.cpp" />
+    <ClCompile Include="GameObject\Soloud\audiosource\noise\soloud_noise.cpp" />
+    <ClCompile Include="GameObject\Soloud\audiosource\openmpt\soloud_openmpt.cpp" />
+    <ClCompile Include="GameObject\Soloud\audiosource\openmpt\soloud_openmpt_dll.c" />
+    <ClCompile Include="GameObject\Soloud\audiosource\sfxr\soloud_sfxr.cpp" />
+    <ClCompile Include="GameObject\Soloud\audiosource\speech\darray.cpp" />
+    <ClCompile Include="GameObject\Soloud\audiosource\speech\klatt.cpp" />
+    <ClCompile Include="GameObject\Soloud\audiosource\speech\resonator.cpp" />
+    <ClCompile Include="GameObject\Soloud\audiosource\speech\soloud_speech.cpp" />
+    <ClCompile Include="GameObject\Soloud\audiosource\speech\tts.cpp" />
+    <ClCompile Include="GameObject\Soloud\audiosource\tedsid\sid.cpp" />
+    <ClCompile Include="GameObject\Soloud\audiosource\tedsid\soloud_tedsid.cpp" />
+    <ClCompile Include="GameObject\Soloud\audiosource\tedsid\ted.cpp" />
+    <ClCompile Include="GameObject\Soloud\audiosource\vic\soloud_vic.cpp" />
+    <ClCompile Include="GameObject\Soloud\audiosource\vizsn\soloud_vizsn.cpp" />
+    <ClCompile Include="GameObject\Soloud\audiosource\wav\dr_impl.cpp" />
+    <ClCompile Include="GameObject\Soloud\audiosource\wav\soloud_wav.cpp" />
+    <ClCompile Include="GameObject\Soloud\audiosource\wav\soloud_wavstream.cpp" />
+    <ClCompile Include="GameObject\Soloud\audiosource\wav\stb_vorbis.c" />
+    <ClCompile Include="GameObject\Soloud\backend\alsa\soloud_alsa.cpp" />
+    <ClCompile Include="GameObject\Soloud\backend\coreaudio\soloud_coreaudio.cpp" />
+    <ClCompile Include="GameObject\Soloud\backend\jack\soloud_jack.cpp" />
+    <ClCompile Include="GameObject\Soloud\backend\miniaudio\soloud_miniaudio.cpp" />
+    <ClCompile Include="GameObject\Soloud\backend\nosound\soloud_nosound.cpp" />
+    <ClCompile Include="GameObject\Soloud\backend\null\soloud_null.cpp" />
+    <ClCompile Include="GameObject\Soloud\backend\openal\soloud_openal.cpp" />
+    <ClCompile Include="GameObject\Soloud\backend\openal\soloud_openal_dll.c" />
+    <ClCompile Include="GameObject\Soloud\backend\opensles\soloud_opensles.cpp" />
+    <ClCompile Include="GameObject\Soloud\backend\oss\soloud_oss.cpp" />
+    <ClCompile Include="GameObject\Soloud\backend\portaudio\soloud_portaudio.cpp" />
+    <ClCompile Include="GameObject\Soloud\backend\portaudio\soloud_portaudio_dll.c" />
+    <ClCompile Include="GameObject\Soloud\backend\sdl2_static\soloud_sdl2_static.cpp" />
+    <ClCompile Include="GameObject\Soloud\backend\sdl\soloud_sdl1.cpp" />
+    <ClCompile Include="GameObject\Soloud\backend\sdl\soloud_sdl1_dll.c" />
+    <ClCompile Include="GameObject\Soloud\backend\sdl\soloud_sdl2.cpp" />
+    <ClCompile Include="GameObject\Soloud\backend\sdl\soloud_sdl2_dll.c" />
+    <ClCompile Include="GameObject\Soloud\backend\sdl_static\soloud_sdl_static.cpp" />
+    <ClCompile Include="GameObject\Soloud\backend\vita_homebrew\soloud_vita_homebrew.cpp" />
+    <ClCompile Include="GameObject\Soloud\backend\wasapi\soloud_wasapi.cpp" />
+    <ClCompile Include="GameObject\Soloud\backend\winmm\soloud_winmm.cpp" />
+    <ClCompile Include="GameObject\Soloud\backend\xaudio2\soloud_xaudio2.cpp" />
+    <ClCompile Include="GameObject\Soloud\core\soloud.cpp" />
+    <ClCompile Include="GameObject\Soloud\core\soloud_audiosource.cpp" />
+    <ClCompile Include="GameObject\Soloud\core\soloud_bus.cpp" />
+    <ClCompile Include="GameObject\Soloud\core\soloud_core_3d.cpp" />
+    <ClCompile Include="GameObject\Soloud\core\soloud_core_basicops.cpp" />
+    <ClCompile Include="GameObject\Soloud\core\soloud_core_faderops.cpp" />
+    <ClCompile Include="GameObject\Soloud\core\soloud_core_filterops.cpp" />
+    <ClCompile Include="GameObject\Soloud\core\soloud_core_getters.cpp" />
+    <ClCompile Include="GameObject\Soloud\core\soloud_core_setters.cpp" />
+    <ClCompile Include="GameObject\Soloud\core\soloud_core_voicegroup.cpp" />
+    <ClCompile Include="GameObject\Soloud\core\soloud_core_voiceops.cpp" />
+    <ClCompile Include="GameObject\Soloud\core\soloud_fader.cpp" />
+    <ClCompile Include="GameObject\Soloud\core\soloud_fft.cpp" />
+    <ClCompile Include="GameObject\Soloud\core\soloud_fft_lut.cpp" />
+    <ClCompile Include="GameObject\Soloud\core\soloud_file.cpp" />
+    <ClCompile Include="GameObject\Soloud\core\soloud_filter.cpp" />
+    <ClCompile Include="GameObject\Soloud\core\soloud_misc.cpp" />
+    <ClCompile Include="GameObject\Soloud\core\soloud_queue.cpp" />
+    <ClCompile Include="GameObject\Soloud\core\soloud_thread.cpp" />
+    <ClCompile Include="GameObject\Soloud\filter\soloud_bassboostfilter.cpp" />
+    <ClCompile Include="GameObject\Soloud\filter\soloud_biquadresonantfilter.cpp" />
+    <ClCompile Include="GameObject\Soloud\filter\soloud_dcremovalfilter.cpp" />
+    <ClCompile Include="GameObject\Soloud\filter\soloud_echofilter.cpp" />
+    <ClCompile Include="GameObject\Soloud\filter\soloud_fftfilter.cpp" />
+    <ClCompile Include="GameObject\Soloud\filter\soloud_flangerfilter.cpp" />
+    <ClCompile Include="GameObject\Soloud\filter\soloud_freeverbfilter.cpp" />
+    <ClCompile Include="GameObject\Soloud\filter\soloud_lofifilter.cpp" />
+    <ClCompile Include="GameObject\Soloud\filter\soloud_robotizefilter.cpp" />
+    <ClCompile Include="GameObject\Soloud\filter\soloud_waveshaperfilter.cpp" />
+    <ClCompile Include="GameObject\Soloud\SoundManager.cpp" />
     <ClCompile Include="GameObject\SpriteAnimation.cpp" />
     <ClCompile Include="GameObject\TextRenderer.cpp" />
     <ClCompile Include="GameObject\Textures.cpp" />
@@ -125,6 +196,18 @@
     <ClInclude Include="GameObject\GameButton.h" />
     <ClInclude Include="GameObject\Model.h" />
     <ClInclude Include="GameObject\Object.h" />
+    <ClInclude Include="GameObject\Soloud\audiosource\speech\darray.h" />
+    <ClInclude Include="GameObject\Soloud\audiosource\speech\klatt.h" />
+    <ClInclude Include="GameObject\Soloud\audiosource\speech\resonator.h" />
+    <ClInclude Include="GameObject\Soloud\audiosource\speech\tts.h" />
+    <ClInclude Include="GameObject\Soloud\audiosource\tedsid\sid.h" />
+    <ClInclude Include="GameObject\Soloud\audiosource\tedsid\ted.h" />
+    <ClInclude Include="GameObject\Soloud\audiosource\wav\dr_flac.h" />
+    <ClInclude Include="GameObject\Soloud\audiosource\wav\dr_mp3.h" />
+    <ClInclude Include="GameObject\Soloud\audiosource\wav\dr_wav.h" />
+    <ClInclude Include="GameObject\Soloud\audiosource\wav\stb_vorbis.h" />
+    <ClInclude Include="GameObject\Soloud\backend\miniaudio\miniaudio.h" />
+    <ClInclude Include="GameObject\Soloud\SoundManager.h" />
     <ClInclude Include="GameObject\SpriteAnimation.h" />
     <ClInclude Include="GameObject\TextRenderer.h" />
     <ClInclude Include="GameObject\Textures.h" />
@@ -146,6 +229,8 @@
     <None Include="..\Resources\Shaders\Shadertext.vs" />
     <None Include="..\Resources\Shaders\TriangleShaderFS.fs" />
     <None Include="..\Resources\Shaders\TriangleShaderVS.vs" />
+    <None Include="..\Resources\Sound\war_loop.ogg" />
+    <None Include="GameObject\Soloud\audiosource\speech\Elements.def" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Utilities\Utilities.vcxproj">
@@ -167,9 +252,13 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="GameManager\ResourceManager.txt" />
+    <Text Include="GameObject\Soloud\audiosource\speech\legal_readme.txt" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="..\..\..\Downloads\arial-font\arial.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="..\Resources\Sound\AKWF_c604_0024.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

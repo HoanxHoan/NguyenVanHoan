@@ -12,6 +12,7 @@ GSMenu::~GSMenu() {
         delete textRenderer;
         textRenderer = nullptr;
     }
+    
 }
 
 void GSMenu::HandleInput(unsigned char key, bool isPressed)
@@ -35,6 +36,9 @@ void GSMenu::HandleMouseClick(GLint x, GLint y, bool isClick)
 
 bool GSMenu::Init()
 {
+    SoundManager::GetInstance()->Init();
+    SoundManager::GetInstance()->LoadSound("bgm", "../Resources/Sound/AKWF_c604_0024.wav");
+    SoundManager::GetInstance()->PlaySound("bgm");
     textRenderer = new TextRenderer();
     textRenderer->Init("../Resources/Fonts/arial.ttf", 48);
 

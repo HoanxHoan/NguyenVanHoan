@@ -1,5 +1,7 @@
 #pragma once
 #include <GLES3/gl3.h>
+#include "../../../Utilities/MemoryOperators.h"
+#include "../GameObject/Soloud/SoundManager.h"
 enum class StateType
 {
     NONE,
