@@ -42,15 +42,26 @@ Object::~Object()
 
 }
 void Object::setSize(GLint w, GLint h) {
+    width = w*2/3;
+    height = h*2/3;
     scaleMatrix.SetScale((GLfloat)w, (GLfloat)h, 1.0f);
+
 }
 void Object::set2Dposition(float x, float y) {
-
-        translationMatrix.SetTranslation(x, y, 0.0f);
+    this->x = x;
+    this->y = y;
+    translationMatrix.SetTranslation(x, y, 0.0f);
     
 }
 void Object::updateRotation(Matrix m) {
     rotationMatrix = rotationMatrix * m;
+}
+bool Object::CheckCollision(Object* other)
+{
+    return !(x + width / 2 < other->x - other->width / 2 ||
+        x - width / 2 > other->x + other->width / 2 ||
+        y + height / 2 < other->y - other->height / 2 ||
+        y - height / 2 > other->y + other->height / 2);
 }
 void Object::SetMVP()
 {

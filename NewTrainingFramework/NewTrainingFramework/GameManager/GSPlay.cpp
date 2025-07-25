@@ -13,6 +13,10 @@ GSPlay::~GSPlay() {
         delete P1;
         P1 = nullptr;
     }
+    if (P2) {
+        delete P2;
+        P2 = nullptr;
+    }
 }
 
 void GSPlay::HandleInput(unsigned char key, bool isPressed)
@@ -106,7 +110,11 @@ bool GSPlay::Init()
 
     spriteAnim->SetPosition(Vector3(400, 300, 0));
     spriteAnim->SetScale(Vector3(150, 200, 1));
-
+    P2 = new Object(P1Model, P1Texture, P1Shader);
+    P2->x = 500;
+    P2->y = 500;
+    P2->set2Dposition(P2->x, P2->y);
+    P2->setSize(150, 200);
     return true;
 }
 
@@ -127,6 +135,7 @@ void GSPlay::Resume()
 
 void GSPlay::Update(float deltaTime)
 {
+
     if (spriteAnim->GetCurrentFrame() == 0 ) {
         spriteAnim->SetTexture(ResourceManager::GetInstance()->GetTexture(18));
         spriteAnim->SetNumFrames(3);
@@ -151,23 +160,27 @@ void GSPlay::Update(float deltaTime)
     if (keyState['W'] )
     {
         if (P1->y >= 20) { P1->y -= 10; }
+        if (P1->CheckCollision(P2)){ P1->y += 10; }
         P1->set2Dposition(P1->x, P1->y);
     }
     if (keyState['D'])
     {
-        if(P1->x <= 900){ P1->x += 10;}
+        if(P1->x <= 900&&!P1->CheckCollision(P2)){ P1->x += 10;}
+        if (P1->CheckCollision(P2)) { P1->x -= 10; }
         P1->objTex = ResourceManager::GetInstance()->GetTexture(8);
         P1->set2Dposition(P1->x, P1->y);
     }
     if (keyState['A'])
     {
-        if (P1->x >= 20) { P1->x -= 10; }
+        if (P1->x >= 20&& !P1->CheckCollision(P2)) { P1->x -= 10; }
+        if (P1->CheckCollision(P2)) { P1->x += 10; }
         P1->objTex = ResourceManager::GetInstance()->GetTexture(9);
         P1->set2Dposition(P1->x, P1->y);
     }
     if (keyState['S'] )
     {
-        if (P1->y <= 650) { P1->y += 10; }
+        if (P1->y <= 650&& !P1->CheckCollision(P2)) { P1->y += 10; }
+        if (P1->CheckCollision(P2)) { P1->y -= 10; }
         P1->objTex = ResourceManager::GetInstance()->GetTexture(8);
         P1->set2Dposition(P1->x, P1->y);
     }
@@ -225,10 +238,10 @@ void GSPlay::Draw()
     {
         button_play2->Draw();
     }
-    if (P1 && spriteAnim)
+    if (P1 && P2)
     {
         P1->Draw();
-        spriteAnim->Draw();
+        P2->Draw();
     }
     //if (spriteAnim)
     //{

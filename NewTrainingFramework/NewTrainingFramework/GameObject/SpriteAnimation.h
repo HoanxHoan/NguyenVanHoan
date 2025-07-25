@@ -5,7 +5,8 @@
 #include "Textures.h"
 #include "../Utilities/utilities.h"
 #include "Camera.h" 
-class SpriteAnimation
+#include "Object.h"
+class SpriteAnimation 
 {
 public:
     SpriteAnimation(Model* model, Shaders* shader, Texture* texture,

@@ -31,6 +31,6 @@ public:
     int x, y, count;
     float dltime = 0.0f, pdltime = 0.0f;
     Object* P1;
-
+    Object* P2;
 };
 

@@ -36,7 +36,11 @@ public:
     //void SetRotationMatrix();
     //void SetScaleMatrix();
     void Draw();
+
     float x, y;
+    float width, height;
+    bool CheckCollision(Object* other);
+
     bool visible = true;
     void SetVisible(bool v) { visible = v; }
     bool IsVisible() const { return visible; }
