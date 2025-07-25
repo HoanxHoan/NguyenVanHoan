@@ -28,6 +28,7 @@ void GSPlay::HandleInput(unsigned char key, bool isPressed)
 
         }
         else {
+             P1->SetVisible(true);
             count = 1;
             if (spriteAnim->GetCurrentFrame() == 4) {
                 spriteAnim->SetFrameTime(0.7);
@@ -81,6 +82,7 @@ bool GSPlay::Init()
     button_play2->SetSize(100, 100);
     button_play2->SetOnClick([]() {
         GameStateMachine::GetInstance()->PushState(std::make_unique<GSPause>());
+        
         });
     Model* P1Model = ResourceManager::GetInstance()->GetModel(2);
     Texture* P1Texture = ResourceManager::GetInstance()->GetTexture(7);
@@ -128,7 +130,6 @@ void GSPlay::Update(float deltaTime)
     if (spriteAnim->GetCurrentFrame() == 0 ) {
         spriteAnim->SetTexture(ResourceManager::GetInstance()->GetTexture(18));
         spriteAnim->SetNumFrames(3);
-        spriteAnim->SetFrameTime(0.1);
     }
     spriteAnim->Update(deltaTime);
     pdltime += deltaTime;
@@ -175,8 +176,9 @@ void GSPlay::Update(float deltaTime)
 
     spriteAnim->SetTexture(ResourceManager::GetInstance()->GetTexture(19));
     spriteAnim->SetNumFrames(11);
-        
+    P1->SetVisible(false);
     }
+
     if (keyState['K'])
     {
         dltime += deltaTime;

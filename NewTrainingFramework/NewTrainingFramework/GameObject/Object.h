@@ -37,5 +37,8 @@ public:
     //void SetScaleMatrix();
     void Draw();
     float x, y;
+    bool visible = true;
+    void SetVisible(bool v) { visible = v; }
+    bool IsVisible() const { return visible; }
 };
 

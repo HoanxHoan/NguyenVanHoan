@@ -67,6 +67,7 @@ void Object::SetMVP()
 }
 void Object::Draw()
 {
+    if (!visible) return;
     glUseProgram(objShader->program);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

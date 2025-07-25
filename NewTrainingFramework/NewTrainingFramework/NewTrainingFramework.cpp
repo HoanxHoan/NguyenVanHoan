@@ -55,6 +55,7 @@ void MouseClick(ESContext* esContext, GLint x,GLint y, bool isClick)
 		GameStateMachine::GetInstance()->CurrentState()->HandleMouseClick(x, y, isClick);
 	}
 	if (isClick) {
+
 		printf("x:%d,y:%d\n", x, y);
 	}
 }

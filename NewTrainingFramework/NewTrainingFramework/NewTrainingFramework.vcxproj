@@ -258,7 +258,7 @@
     <Font Include="..\..\..\Downloads\arial-font\arial.ttf" />
   </ItemGroup>
   <ItemGroup>
-    <Media Include="..\Resources\Sound\AKWF_c604_0024.wav" />
+    <Media Include="..\Resources\Sound\sound_1.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

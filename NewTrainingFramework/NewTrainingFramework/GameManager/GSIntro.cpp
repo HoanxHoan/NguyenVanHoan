@@ -41,11 +41,9 @@ bool GSIntro::Init()
     Camera::GetInstance()->SetNearFar(nearPlane, farPlane);
     std::cout << "Intro Init\n";
     delete model;
-    model = nullptr;
     delete tex;
-    tex = nullptr;
     delete shader;
-    shader = nullptr;
+
     return true;
 }
 

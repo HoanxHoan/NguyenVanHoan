@@ -73,9 +73,6 @@
     <Filter Include="Source Files\GameObject\Soloud\audiosource\vizsn">
       <UniqueIdentifier>{e72b96e3-17bf-4fb0-8f07-42b4890affd1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\GameObject\Soloud\audiosource\wav">
-      <UniqueIdentifier>{8c6d0b81-5464-436b-9d42-523715f6e505}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\GameObject\Soloud\backend\alsa">
       <UniqueIdentifier>{8f007935-20ff-4cf5-873a-b12d41ba80a1}</UniqueIdentifier>
     </Filter>
@@ -129,6 +126,9 @@
     </Filter>
     <Filter Include="Resources\Sound">
       <UniqueIdentifier>{cbef5e50-0756-4351-b6b0-d067d16e2a0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObject\Soloud\audiosource\wav">
+      <UniqueIdentifier>{8c6d0b81-5464-436b-9d42-523715f6e505}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -576,7 +576,7 @@
     </Font>
   </ItemGroup>
   <ItemGroup>
-    <Media Include="..\Resources\Sound\AKWF_c604_0024.wav">
+    <Media Include="..\Resources\Sound\sound_1.wav">
       <Filter>Resources\Sound</Filter>
     </Media>
   </ItemGroup>

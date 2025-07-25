@@ -11,7 +11,6 @@ private:
     static SoundManager* instance;
     SoLoud::Soloud soloud;
     std::map<std::string, SoLoud::Wav*> sounds;
-
     SoundManager() {}
 public:
     ~SoundManager();
@@ -22,5 +21,9 @@ public:
     void LoadSound(const std::string& key, const char* filePath);
     void PlaySound(const std::string& key);
     void CleanUp();
+    void SetVolume(float volume);
+    void IncreaseVolume(float delta);
+    void DecreaseVolume(float delta);
+    float currentVolume = 1.0f;
 };
 

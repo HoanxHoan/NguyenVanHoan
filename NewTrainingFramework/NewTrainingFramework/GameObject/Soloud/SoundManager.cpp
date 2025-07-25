@@ -55,7 +55,10 @@ void SoundManager::PlaySound(const std::string& key)
         soloud.setLooping(handle, true); 
     }
 }
-
+void SoundManager::SetVolume(float volume)
+{
+    soloud.setGlobalVolume(volume);
+}
 void SoundManager::CleanUp()
 {
     soloud.stopAll(); 
@@ -63,4 +66,22 @@ void SoundManager::CleanUp()
         delete s.second;
     sounds.clear();
     soloud.deinit();
+}
+void SoundManager::IncreaseVolume(float delta)
+{
+    currentVolume += delta;
+    if (currentVolume > 2.0f) 
+        currentVolume = 2.0f;
+
+    soloud.setGlobalVolume(currentVolume);
+    std::cout << "Volume increased to: " << currentVolume << std::endl;
+}
+void SoundManager::DecreaseVolume(float delta)
+{
+    currentVolume -= delta;
+    if (currentVolume < 0.0f)
+        currentVolume = 0.0f;
+
+    soloud.setGlobalVolume(currentVolume);
+    std::cout << "Volume decreased to: " << currentVolume << std::endl;
 }

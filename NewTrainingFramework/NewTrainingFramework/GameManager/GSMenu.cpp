@@ -23,6 +23,14 @@ void GSMenu::HandleInput(unsigned char key, bool isPressed)
         {
             Exit();
         }
+        if (key == 'V')
+        {
+            SoundManager::GetInstance()->IncreaseVolume(0.1f);
+        }
+        if (key == 'C')
+        {
+            SoundManager::GetInstance()->DecreaseVolume(0.1f);
+        }
     }
 }
 
@@ -39,6 +47,7 @@ bool GSMenu::Init()
     SoundManager::GetInstance()->Init();
     SoundManager::GetInstance()->LoadSound("bgm", "../Resources/Sound/sound_1.wav");
     SoundManager::GetInstance()->PlaySound("bgm");
+    SoundManager::GetInstance()->SetVolume(SoundManager::GetInstance()->currentVolume);
     textRenderer = new TextRenderer();
     textRenderer->Init("../Resources/Fonts/arial.ttf", 48);
 
@@ -76,7 +85,7 @@ void GSMenu::Resume()
 
 void GSMenu::Update(float deltaTime)
 {
-    
+  
 }
 
 void GSMenu::Draw()
