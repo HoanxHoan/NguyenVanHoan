@@ -93,17 +93,17 @@ bool GSPlay::Init()
     P1->setSize(100, 100);
     Model* model = ResourceManager::GetInstance()->GetModel(2);
     Shaders* shader = ResourceManager::GetInstance()->GetShader(1);
-    Texture* texture = ResourceManager::GetInstance()->GetTexture(17);
+    Texture* texture = ResourceManager::GetInstance()->GetTexture(18);
 
     spriteAnim = std::make_shared<SpriteAnimation>(model, shader, texture,
-        7, // numFrames
+        3, // numFrames
         0, // currentFrame
-        8, // numActions
+        1, // numActions
         0, // currentAction
-        999.0f); // frameTime
+        0.15f); // frameTime
 
     spriteAnim->SetPosition(Vector3(400, 300, 0));
-    spriteAnim->SetScale(Vector3(100, 100, 1));
+    spriteAnim->SetScale(Vector3(150, 200, 1));
 
     return true;
 }
@@ -126,7 +126,9 @@ void GSPlay::Resume()
 void GSPlay::Update(float deltaTime)
 {
     if (spriteAnim->GetCurrentFrame() == 0 ) {
-        spriteAnim->SetFrameTime(999.0);
+        spriteAnim->SetTexture(ResourceManager::GetInstance()->GetTexture(18));
+        spriteAnim->SetNumFrames(3);
+        spriteAnim->SetFrameTime(0.1);
     }
     spriteAnim->Update(deltaTime);
     pdltime += deltaTime;
@@ -170,14 +172,10 @@ void GSPlay::Update(float deltaTime)
     }
     if (keyState['F'])
     {
-        if (spriteAnim->x <= 900 ) 
-        { 
-            spriteAnim->x += 10;     
-            
-        }
-        if (spriteAnim->GetCurrentFrame()!=4) {
-            spriteAnim->SetCurrentFrame(4);
-        }
+
+    spriteAnim->SetTexture(ResourceManager::GetInstance()->GetTexture(19));
+    spriteAnim->SetNumFrames(11);
+        
     }
     if (keyState['K'])
     {
@@ -225,13 +223,14 @@ void GSPlay::Draw()
     {
         button_play2->Draw();
     }
-    if (P1)
+    if (P1 && spriteAnim)
     {
         P1->Draw();
-    }
-    if (spriteAnim)
-    {
         spriteAnim->Draw();
     }
+    //if (spriteAnim)
+    //{
+    //    spriteAnim->Draw();
+    //}
 
 }

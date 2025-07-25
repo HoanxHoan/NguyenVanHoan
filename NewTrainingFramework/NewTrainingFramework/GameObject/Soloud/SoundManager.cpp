@@ -50,9 +50,10 @@ void SoundManager::PlaySound(const std::string& key)
 {
     auto it = sounds.find(key);
     if (it != sounds.end())
-        soloud.play(*it->second);
-    else
-        std::cout << "Sound not found: " << key << std::endl;
+    {
+        int handle = soloud.play(*it->second);
+        soloud.setLooping(handle, true); 
+    }
 }
 
 void SoundManager::CleanUp()

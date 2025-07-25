@@ -86,6 +86,7 @@ namespace SoLoud
 	Wav::~Wav()
 	{
 		stop();
+		if(mData)
 		delete[] mData;
 	}
 
@@ -347,6 +348,7 @@ namespace SoLoud
 		if (aMem == 0 || aLength == 0 || aSamplerate <= 0 || aChannels < 1)
 			return INVALID_PARAMETER;
 		stop();
+		if(mData)
 		delete[] mData;
 		mData = new float[aLength];	
 		mSampleCount = aLength / aChannels;
@@ -363,6 +365,7 @@ namespace SoLoud
 		if (aMem == 0 || aLength == 0 || aSamplerate <= 0 || aChannels < 1)
 			return INVALID_PARAMETER;
 		stop();
+		if(mData)
 		delete[] mData;
 		mData = new float[aLength];
 		mSampleCount = aLength / aChannels;
@@ -379,6 +382,7 @@ namespace SoLoud
 		if (aMem == 0 || aLength == 0 || aSamplerate <= 0 || aChannels < 1)
 			return INVALID_PARAMETER;
 		stop();
+		if(mData)
 		delete[] mData;
 		if (aCopy == true || aTakeOwndership == false)
 		{

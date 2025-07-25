@@ -37,7 +37,7 @@ void GSMenu::HandleMouseClick(GLint x, GLint y, bool isClick)
 bool GSMenu::Init()
 {
     SoundManager::GetInstance()->Init();
-    SoundManager::GetInstance()->LoadSound("bgm", "../Resources/Sound/AKWF_c604_0024.wav");
+    SoundManager::GetInstance()->LoadSound("bgm", "../Resources/Sound/sound_1.wav");
     SoundManager::GetInstance()->PlaySound("bgm");
     textRenderer = new TextRenderer();
     textRenderer->Init("../Resources/Fonts/arial.ttf", 48);
@@ -76,7 +76,7 @@ void GSMenu::Resume()
 
 void GSMenu::Update(float deltaTime)
 {
-
+    
 }
 
 void GSMenu::Draw()
