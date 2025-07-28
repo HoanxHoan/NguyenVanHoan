@@ -1,0 +1,171 @@
+﻿  stdafx.cpp
+  Camera.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\Camera.cpp(306,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  GameStateMachine.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\GameStateMachine.cpp(83,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  GSIntro.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\GSIntro.cpp(86,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  GSMenu.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\GSMenu.cpp(106,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  GSPause.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\GSPause.cpp(77,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  GSPlay.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\GSPlay.cpp(252,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  ResourceManager.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\ResourceManager.cpp(164,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  Scene.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\Scene.cpp(159,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  GameButton.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\GameButton.cpp(58,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  Model.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Model.cpp(119,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  Object.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Object.cpp(99,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_monotone.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\audiosource\monotone\soloud_monotone.cpp(434,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_noise.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\audiosource\noise\soloud_noise.cpp(134,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_openmpt.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\audiosource\openmpt\soloud_openmpt.cpp(156,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_sfxr.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\audiosource\sfxr\soloud_sfxr.cpp(604,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  darray.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\audiosource\speech\darray.cpp(71,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  klatt.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\audiosource\speech\klatt.cpp(1075,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  resonator.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\audiosource\speech\resonator.cpp(75,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_speech.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\audiosource\speech\soloud_speech.cpp(149,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  tts.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\audiosource\speech\tts.cpp(1426,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  Compiling...
+  sid.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\audiosource\tedsid\sid.cpp(624,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_tedsid.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\audiosource\tedsid\soloud_tedsid.cpp(258,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  ted.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\audiosource\tedsid\ted.cpp(237,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_vic.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\audiosource\vic\soloud_vic.cpp(169,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_vizsn.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\audiosource\vizsn\soloud_vizsn.cpp(534,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  dr_impl.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\audiosource\wav\dr_impl.cpp(14,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_wav.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\audiosource\wav\soloud_wav.cpp(402,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_wavstream.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\audiosource\wav\soloud_wavstream.cpp(663,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_alsa.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\backend\alsa\soloud_alsa.cpp(169,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_coreaudio.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\backend\coreaudio\soloud_coreaudio.cpp(128,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_jack.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\backend\jack\soloud_jack.cpp(110,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_miniaudio.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\backend\miniaudio\soloud_miniaudio.cpp(86,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_nosound.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\backend\nosound\soloud_nosound.cpp(120,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_null.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\backend\null\soloud_null.cpp(58,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_openal.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\backend\openal\soloud_openal.cpp(196,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_opensles.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\backend\opensles\soloud_opensles.cpp(302,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_oss.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\backend\oss\soloud_oss.cpp(180,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_portaudio.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\backend\portaudio\soloud_portaudio.cpp(125,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_sdl2_static.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\backend\sdl2_static\soloud_sdl2_static.cpp(108,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_sdl1.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\backend\sdl\soloud_sdl1.cpp(99,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  Compiling...
+  soloud_sdl2.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\backend\sdl\soloud_sdl2.cpp(129,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_sdl_static.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\backend\sdl_static\soloud_sdl_static.cpp(86,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_vita_homebrew.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\backend\vita_homebrew\soloud_vita_homebrew.cpp(120,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_wasapi.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\backend\wasapi\soloud_wasapi.cpp(376,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_winmm.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\backend\winmm\soloud_winmm.cpp(210,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_xaudio2.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\backend\xaudio2\soloud_xaudio2.cpp(248,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\core\soloud.cpp(2210,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_audiosource.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\core\soloud_audiosource.cpp(338,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_bus.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\core\soloud_bus.cpp(349,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_core_3d.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\core\soloud_core_3d.cpp(635,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_core_basicops.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\core\soloud_core_basicops.cpp(210,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_core_faderops.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\core\soloud_core_faderops.cpp(157,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_core_filterops.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\core\soloud_core_filterops.cpp(157,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_core_getters.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\core\soloud_core_getters.cpp(377,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_core_setters.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\core\soloud_core_setters.cpp(224,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_core_voicegroup.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\core\soloud_core_voicegroup.cpp(263,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_core_voiceops.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\core\soloud_core_voiceops.cpp(163,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_fader.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\core\soloud_fader.cpp(95,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_fft.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\core\soloud_fft.cpp(2475,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_fft_lut.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\core\soloud_fft_lut.cpp(340,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  Compiling...
+  soloud_file.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\core\soloud_file.cpp(312,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_filter.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\core\soloud_filter.cpp(168,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_misc.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\core\soloud_misc.cpp(112,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_queue.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\core\soloud_queue.cpp(181,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_thread.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\core\soloud_thread.cpp(331,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_bassboostfilter.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\filter\soloud_bassboostfilter.cpp(95,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_biquadresonantfilter.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\filter\soloud_biquadresonantfilter.cpp(227,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_dcremovalfilter.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\filter\soloud_dcremovalfilter.cpp(111,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_echofilter.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\filter\soloud_echofilter.cpp(148,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_fftfilter.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\filter\soloud_fftfilter.cpp(144,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_flangerfilter.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\filter\soloud_flangerfilter.cpp(148,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_freeverbfilter.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\filter\soloud_freeverbfilter.cpp(561,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_lofifilter.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\filter\soloud_lofifilter.cpp(137,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_robotizefilter.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\filter\soloud_robotizefilter.cpp(111,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  soloud_waveshaperfilter.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\filter\soloud_waveshaperfilter.cpp(114,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  SoundManager.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\SoundManager.cpp(88,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  SpriteAnimation.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\SpriteAnimation.cpp(74,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  TextRenderer.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\TextRenderer.cpp(148,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  Textures.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Textures.cpp(53,1): error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "stdafx.h"' to your source?
+  NewTrainingFramework.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\Utilities\esUtil.h(2,10): error C1083: Cannot open include file: 'GLES3/gl3.h': No such file or directory
+  (compiling source file '/NewTrainingFramework.cpp')
+  
+  Compiling...
+  Shaders.cpp
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\Utilities\esUtil.h(2,10): error C1083: Cannot open include file: 'GLES3/gl3.h': No such file or directory
+  (compiling source file '/Shaders.cpp')
+  

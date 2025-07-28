@@ -13,7 +13,8 @@ Camera::Camera()
     up = Vector3(0.0f, 1.0f, 0.0f);
     UpdateViewMatrix();
     //UpdateProjMatrix(4.0f / 3.0f); 
-    UpdateOrthographic(0.0f, Globals::screenWidth, Globals::screenHeight, 0.0f);
+    //UpdateOrthographic(0.0f, Globals::screenWidth, Globals::screenHeight, 0.0f);
+    UpdateOrthographic(0.0f,100, 100, 0.0f);
 
 }
 
@@ -131,6 +132,12 @@ void Camera::SetUp(Vector3& u)
 {
     up = u;
 }
+void Camera::Follow(float x, float y) {
+    position = Vector3 (x-50, y-50, 1.0f);
+    target = Vector3 (x-50, y-50, 0.0f);
+    UpdateViewMatrix();
+}
+
 void Camera::MoveForward(float deltaTime)
 {
     Vector3 viewDir = (target - position).Normalize();

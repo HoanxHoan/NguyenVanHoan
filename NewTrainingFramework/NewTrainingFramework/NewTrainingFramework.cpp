@@ -37,6 +37,7 @@ void Draw ( ESContext *esContext )
 void Update ( ESContext *esContext, float deltaTime )
 {
 	GameStateMachine::GetInstance()->CurrentState()->Update(deltaTime);
+	
 }
 
 void Key ( ESContext *esContext, unsigned char key, bool bIsPressed)

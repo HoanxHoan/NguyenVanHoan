@@ -39,6 +39,7 @@ void GSMenu::HandleMouseClick(GLint x, GLint y, bool isClick)
     if (button)
     {
         button->HandleTouchEvents(x, y, isClick);
+       
     }
 }
 
@@ -58,8 +59,8 @@ bool GSMenu::Init()
     button = std::make_shared<GameButton>(btnModel, btnTexture, btnShader);
     button->set2Dposition(480, 360);
     button->SetPosition(480, 360);
-    button->setSize(200, 200);
-    button->SetSize(200, 200);
+    button->setSize(20, 20);
+    button->SetSize(20, 20);
 
     button->SetOnClick([]() {
         GameStateMachine::GetInstance()->PushState(std::make_unique<GSPlay>()); 
@@ -85,7 +86,7 @@ void GSMenu::Resume()
 
 void GSMenu::Update(float deltaTime)
 {
-  
+    Camera::GetInstance()->Follow(480,360);
 }
 
 void GSMenu::Draw()

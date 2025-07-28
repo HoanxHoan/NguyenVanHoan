@@ -71,8 +71,8 @@ bool GSPlay::Init()
     button_play = std::make_shared<GameButton>(btnModel, btnTexture, btnShader);
     button_play->set2Dposition(850, 70);
     button_play->SetPosition(850, 70);
-    button_play->setSize(100, 100);
-    button_play->SetSize(100, 100);
+    button_play->setSize(10, 10);
+    button_play->SetSize(10, 10);
     button_play->SetOnClick([]() {
         GameStateMachine::GetInstance()->PopState();
         });
@@ -82,8 +82,8 @@ bool GSPlay::Init()
     button_play2 = std::make_shared<GameButton>(btnModel2, btnTexture2, btnShader2);
     button_play2->set2Dposition(700, 70);
     button_play2->SetPosition(700, 70);
-    button_play2->setSize(100, 100);
-    button_play2->SetSize(100, 100);
+    button_play2->setSize(10, 10);
+    button_play2->SetSize(10, 10);
     button_play2->SetOnClick([]() {
         GameStateMachine::GetInstance()->PushState(std::make_unique<GSPause>());
         
@@ -93,10 +93,10 @@ bool GSPlay::Init()
     Shaders* P1Shader = ResourceManager::GetInstance()->GetShader(0);
 
     P1 = new Object(P1Model, P1Texture, P1Shader);
-    P1->x = 300;
-    P1->y = 200;
+    P1->x = 480;
+    P1->y = 360;
     P1->set2Dposition(P1->x, P1->y);
-    P1->setSize(100, 100);
+    P1->setSize(10, 10);
     Model* model = ResourceManager::GetInstance()->GetModel(2);
     Shaders* shader = ResourceManager::GetInstance()->GetShader(1);
     Texture* texture = ResourceManager::GetInstance()->GetTexture(18);
@@ -109,12 +109,12 @@ bool GSPlay::Init()
         0.15f); // frameTime
 
     spriteAnim->SetPosition(Vector3(400, 300, 0));
-    spriteAnim->SetScale(Vector3(150, 200, 1));
+    spriteAnim->SetScale(Vector3(15, 20, 1));
     P2 = new Object(P1Model, P1Texture, P1Shader);
     P2->x = 500;
     P2->y = 500;
     P2->set2Dposition(P2->x, P2->y);
-    P2->setSize(150, 200);
+    P2->setSize(15, 20);
     return true;
 }
 
@@ -135,7 +135,7 @@ void GSPlay::Resume()
 
 void GSPlay::Update(float deltaTime)
 {
-
+    Camera::GetInstance()->Follow(P1->x, P1->y);
     if (spriteAnim->GetCurrentFrame() == 0 ) {
         spriteAnim->SetTexture(ResourceManager::GetInstance()->GetTexture(18));
         spriteAnim->SetNumFrames(3);

@@ -34,6 +34,7 @@ public:
     Matrix viewMatrix;
     Matrix projMatrix;
     // Functions
+    void Follow(float x, float y);
     void UpdateViewMatrix();
     void UpdateProjMatrix(float aspectRatio);
     void UpdateOrthographic(float left, float right, float bottom, float top);

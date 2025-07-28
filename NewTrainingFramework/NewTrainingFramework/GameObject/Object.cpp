@@ -43,7 +43,7 @@ Object::~Object()
 }
 void Object::setSize(GLint w, GLint h) {
     width = w*2/3;
-    height = h*2/3;
+    height = h*3/4;
     scaleMatrix.SetScale((GLfloat)w, (GLfloat)h, 1.0f);
 
 }
@@ -67,6 +67,7 @@ void Object::SetMVP()
 {
 
     //Camera::GetInstance()->UpdateViewMatrix();
+    //rotationMatrix.SetRotationY(180 * DEG2RAD);
     modelMatrix = scaleMatrix * rotationMatrix * translationMatrix ;
     // View matrix
     viewMatrix = Camera::GetInstance()->viewMatrix;
