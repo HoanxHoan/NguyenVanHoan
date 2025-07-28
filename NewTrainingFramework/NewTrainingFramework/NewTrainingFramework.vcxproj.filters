@@ -27,10 +27,6 @@
     <Filter Include="Source Files\GameManager">
       <UniqueIdentifier>{1087d97c-08f2-4b86-a5e0-2d11873ab0ad}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resources\Shaders\Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
     <Filter Include="Resources\Fonts">
       <UniqueIdentifier>{830cb43d-b007-4c51-a2da-ddc8929d846b}</UniqueIdentifier>
     </Filter>
@@ -129,6 +125,10 @@
     </Filter>
     <Filter Include="Source Files\GameObject\Soloud\audiosource\wav">
       <UniqueIdentifier>{8c6d0b81-5464-436b-9d42-523715f6e505}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -396,46 +396,49 @@
     <ClCompile Include="GameObject\Soloud\SoundManager.cpp">
       <Filter>Source Files\GameObject\Soloud</Filter>
     </ClCompile>
+    <ClCompile Include="GameObject\Overlay.cpp">
+      <Filter>Source Files\GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h">
-      <Filter>Resources\Shaders\Header Files</Filter>
+      <Filter>Resources\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="stdafx.h">
-      <Filter>Resources\Shaders\Header Files</Filter>
+      <Filter>Resources\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="targetver.h">
-      <Filter>Resources\Shaders\Header Files</Filter>
+      <Filter>Resources\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Vertex.h">
-      <Filter>Resources\Shaders\Header Files</Filter>
+      <Filter>Resources\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
-      <Filter>Resources\Shaders\Header Files</Filter>
+      <Filter>Resources\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameObject\Model.h">
-      <Filter>Resources\Shaders\Header Files</Filter>
+      <Filter>Resources\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameObject\Object.h">
-      <Filter>Resources\Shaders\Header Files</Filter>
+      <Filter>Resources\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameObject\Textures.h">
-      <Filter>Resources\Shaders\Header Files</Filter>
+      <Filter>Resources\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameManager\Scene.h">
-      <Filter>Resources\Shaders\Header Files</Filter>
+      <Filter>Resources\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameManager\ResourceManager.h">
-      <Filter>Resources\Shaders\Header Files</Filter>
+      <Filter>Resources\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Shaders.h">
-      <Filter>Resources\Shaders\Header Files</Filter>
+      <Filter>Resources\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameObject\Camera.h">
-      <Filter>Resources\Shaders\Header Files</Filter>
+      <Filter>Resources\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameManager\GameStateBase.h">
-      <Filter>Resources\Shaders\Header Files</Filter>
+      <Filter>Resources\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameManager\GameStateMachine.h">
       <Filter>Source Files\GameManager</Filter>
@@ -496,6 +499,9 @@
     </ClInclude>
     <ClInclude Include="GameObject\Soloud\SoundManager.h">
       <Filter>Source Files\GameObject\Soloud</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Overlay.h">
+      <Filter>Source Files\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

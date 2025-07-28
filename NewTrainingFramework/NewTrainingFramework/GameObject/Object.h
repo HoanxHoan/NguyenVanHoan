@@ -36,7 +36,6 @@ public:
     //void SetRotationMatrix();
     //void SetScaleMatrix();
     void Draw();
-
     float x, y;
     float width, height;
     bool CheckCollision(Object* other);

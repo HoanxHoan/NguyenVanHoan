@@ -18,6 +18,7 @@ float deltaTime = 0.016f;
 bool keyStates[256];
 int id = 6;
 //Scene* scene = nullptr;
+
 int Init ( ESContext *esContext )
 {
 

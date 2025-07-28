@@ -1,6 +1,7 @@
 #include "../stdafx.h" 
 #include "GSPlay.h"
 #include <iostream>
+#include <algorithm>
 
 GSPlay::GSPlay() {
     x = 0; y = 0; count = 0;
@@ -62,9 +63,9 @@ void GSPlay::HandleMouseClick(GLint x, GLint y, bool isClick)
     }
 }
 
-
 bool GSPlay::Init()
-{
+{      
+
     Model* btnModel = ResourceManager::GetInstance()->GetModel(2);
     Texture* btnTexture = ResourceManager::GetInstance()->GetTexture(3);
     Shaders* btnShader = ResourceManager::GetInstance()->GetShader(0);
@@ -76,6 +77,7 @@ bool GSPlay::Init()
     button_play->SetOnClick([]() {
         GameStateMachine::GetInstance()->PopState();
         });
+    i_objects.push_back(button_play.get());
     Model* btnModel2 = ResourceManager::GetInstance()->GetModel(2);
     Texture* btnTexture2 = ResourceManager::GetInstance()->GetTexture(6);
     Shaders* btnShader2 = ResourceManager::GetInstance()->GetShader(0);
@@ -88,6 +90,7 @@ bool GSPlay::Init()
         GameStateMachine::GetInstance()->PushState(std::make_unique<GSPause>());
         
         });
+    i_objects.push_back(button_play2.get());
     Model* P1Model = ResourceManager::GetInstance()->GetModel(2);
     Texture* P1Texture = ResourceManager::GetInstance()->GetTexture(7);
     Shaders* P1Shader = ResourceManager::GetInstance()->GetShader(0);
@@ -115,6 +118,8 @@ bool GSPlay::Init()
     P2->y = 500;
     P2->set2Dposition(P2->x, P2->y);
     P2->setSize(15, 20);
+    i_objects.push_back(P1); 
+    i_objects.push_back(P2);
     return true;
 }
 
@@ -135,6 +140,9 @@ void GSPlay::Resume()
 
 void GSPlay::Update(float deltaTime)
 {
+    std::sort(i_objects.begin(), i_objects.end(), [](Object* a, Object* b) {
+        return a->y < b->y;
+        });
     Camera::GetInstance()->Follow(P1->x, P1->y);
     if (spriteAnim->GetCurrentFrame() == 0 ) {
         spriteAnim->SetTexture(ResourceManager::GetInstance()->GetTexture(18));
@@ -159,28 +167,28 @@ void GSPlay::Update(float deltaTime)
     }
     if (keyState['W'] )
     {
-        if (P1->y >= 20) { P1->y -= 10; }
-        if (P1->CheckCollision(P2)){ P1->y += 10; }
+        if (P1->y >= -1000) { P1->y -= 1; }
+        //if (P1->CheckCollision(P2)){ P1->y += 10; }
         P1->set2Dposition(P1->x, P1->y);
     }
     if (keyState['D'])
     {
-        if(P1->x <= 900&&!P1->CheckCollision(P2)){ P1->x += 10;}
-        if (P1->CheckCollision(P2)) { P1->x -= 10; }
+        if(P1->x <= 800){ P1->x += 1;}
+        //if (P1->CheckCollision(P2)) { P1->x -= 10; }
         P1->objTex = ResourceManager::GetInstance()->GetTexture(8);
         P1->set2Dposition(P1->x, P1->y);
     }
     if (keyState['A'])
     {
-        if (P1->x >= 20&& !P1->CheckCollision(P2)) { P1->x -= 10; }
-        if (P1->CheckCollision(P2)) { P1->x += 10; }
+        if (P1->x >= -1000) { P1->x -= 1; }
+        //if (P1->CheckCollision(P2)) { P1->x += 10; }
         P1->objTex = ResourceManager::GetInstance()->GetTexture(9);
         P1->set2Dposition(P1->x, P1->y);
     }
     if (keyState['S'] )
     {
-        if (P1->y <= 650&& !P1->CheckCollision(P2)) { P1->y += 10; }
-        if (P1->CheckCollision(P2)) { P1->y -= 10; }
+        if (P1->y <= 600) { P1->y += 1; }
+        //if (P1->CheckCollision(P2)) { P1->y -= 10; }
         P1->objTex = ResourceManager::GetInstance()->GetTexture(8);
         P1->set2Dposition(P1->x, P1->y);
     }
@@ -226,11 +234,12 @@ void GSPlay::Update(float deltaTime)
 
 void GSPlay::Draw()
 {
-    if (Scene::GetInstance())
+
+   if (Scene::GetInstance())
     {
         Scene::GetInstance()->Render(2);
     }
-    if (button_play)
+    /*if (button_play)
     {
         button_play->Draw();
     }    
@@ -242,10 +251,11 @@ void GSPlay::Draw()
     {
         P1->Draw();
         P2->Draw();
-    }
+    }*/
     //if (spriteAnim)
     //{
     //    spriteAnim->Draw();
     //}
 
+    for (auto obj : i_objects) obj->Draw();
 }

@@ -56,6 +56,7 @@ void Object::set2Dposition(float x, float y) {
 void Object::updateRotation(Matrix m) {
     rotationMatrix = rotationMatrix * m;
 }
+
 bool Object::CheckCollision(Object* other)
 {
     return !(x + width / 2 < other->x - other->width / 2 ||
