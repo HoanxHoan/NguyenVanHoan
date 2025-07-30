@@ -140,7 +140,7 @@ bool GSPlay::Init()
     lights.push_back(Vector2(P1->x, P1->y));
 
     overlay->SetLights(lights);
-    overlay->SetLightRadius(0.5f);
+    overlay->SetLightRadius(1.0f);
     overlay->SetLightSoftness(100.0f);
     overlay->alpha = 1.0f;
     return true;

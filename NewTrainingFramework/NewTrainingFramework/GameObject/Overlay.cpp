@@ -2,10 +2,11 @@
 #include "Overlay.h"
 #include "../Globals.h"
 #include <sstream>
-
+#include<Box2d/Box2D.h>
 void Overlay::SetOverlayPosition(GLfloat px, GLfloat py) {
     x = px;
     y = py;
+
 }
 void Overlay::SetOverlaySize(GLfloat sx, GLfloat sy) {
     scale.x = sx;
@@ -24,6 +25,7 @@ void Overlay::Draw()
     // === Texture 
     if (O_Texture) {
         O_Texture->Bind();
+
         int iTextureLoc = glGetUniformLocation(O_Shader->program, "u_texture");
         glUniform1i(iTextureLoc, 0);
     }
@@ -34,11 +36,11 @@ void Overlay::Draw()
         glUniform1f(alphaLoc, alpha);
 
     // === Base Darkness 
-    float timeOfDay = fmod(gameTime*5, 60.0f); 
+    float timeOfDay = fmod(gameTime, 60.0f); 
     float t = timeOfDay / 60.0f; 
-    float daylight = 0.5f * (1.0f - cos(6.2831f * t));
+    float daylight = 0.5f * (2.0f - cos(6.2831f * t));
     daylight = pow(daylight, 5.0f);  // try( 2.0-5.0)
-    float baseDarkness = 0.7f * (1.0f - daylight);
+    float baseDarkness = 0.7f * (1.7f - daylight);
 
     int baseDarkLoc = glGetUniformLocation(O_Shader->program, "baseDarkness");
     glUniform1f(baseDarkLoc, baseDarkness);
