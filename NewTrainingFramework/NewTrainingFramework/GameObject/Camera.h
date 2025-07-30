@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Utilities/utilities.h" // dùng Matrix, Vector3
+#include "../Utilities/utilities.h" 
 #include "../Shaders.h"
 #include <iostream>
 #include "../Globals.h"
@@ -16,7 +16,6 @@ public:
     // Delete copy constructor and assignment operator
     Camera(const Camera&) = delete;
     Camera& operator=(const Camera&) = delete;
-
     // Singleton access
     static Camera* GetInstance();
     static void Destroy();

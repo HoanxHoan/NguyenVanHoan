@@ -539,6 +539,9 @@
     <None Include="..\Resources\Sound\war_loop.ogg">
       <Filter>Resources\Sound</Filter>
     </None>
+    <None Include="..\Resources\Shaders\OverlayShaderFS.fs">
+      <Filter>Resources\Shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="NewTrainingFramework.rc">

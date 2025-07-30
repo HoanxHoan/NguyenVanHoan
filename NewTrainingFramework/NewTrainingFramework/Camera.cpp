@@ -36,6 +36,7 @@ void Camera::Destroy()
         instance = nullptr;
     }
 }
+
 Matrix Camera::GetWorldCameraMatrix()
 {
     Vector3 zaxis = (target - position).Normalize(); // Forward

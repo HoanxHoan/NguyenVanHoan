@@ -229,6 +229,7 @@
     <None Include="..\Resources\Models\Woman2.nfg" />
     <None Include="..\Resources\Shaders\AnimationShaderFS.fs" />
     <None Include="..\Resources\Shaders\AnimationShaderVS.vs" />
+    <None Include="..\Resources\Shaders\OverlayShaderFS.fs" />
     <None Include="..\Resources\Shaders\Shadertext.fs" />
     <None Include="..\Resources\Shaders\Shadertext.vs" />
     <None Include="..\Resources\Shaders\TriangleShaderFS.fs" />
