@@ -14,6 +14,7 @@ void Overlay::SetOverlaySize(GLfloat sx, GLfloat sy) {
 void Overlay::GetgameTime(float t) {
     gameTime = t;
 }
+
 void Overlay::Draw()
 {
     glEnable(GL_BLEND);
@@ -33,9 +34,11 @@ void Overlay::Draw()
         glUniform1f(alphaLoc, alpha);
 
     // === Base Darkness 
-    float timeOfDay = fmod(gameTime, 60.0f);
-    float angle = (timeOfDay / 60.0f) * 6.2831f;
-    float baseDarkness = 0.7f * (1.0f - sin(angle) * 0.5f - 0.5f);
+    float timeOfDay = fmod(gameTime*5, 60.0f); 
+    float t = timeOfDay / 60.0f; 
+    float daylight = 0.5f * (1.0f - cos(6.2831f * t));
+    daylight = pow(daylight, 5.0f);  // try( 2.0-5.0)
+    float baseDarkness = 0.7f * (1.0f - daylight);
 
     int baseDarkLoc = glGetUniformLocation(O_Shader->program, "baseDarkness");
     glUniform1f(baseDarkLoc, baseDarkness);

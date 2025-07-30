@@ -66,7 +66,7 @@ void GSPlay::HandleMouseClick(GLint x, GLint y, bool isClick)
 bool GSPlay::Init()
 {
 
-    //Camera::GetInstance()->UpdateOrthographic(0.0f, Globals::screenWidth, Globals::screenHeight, 0.0f);
+   //Camera::GetInstance()->UpdateOrthographic(0.0f, Globals::screenWidth, Globals::screenHeight, 0.0f);
     Model* btnModel = ResourceManager::GetInstance()->GetModel(2);
     Texture* btnTexture = ResourceManager::GetInstance()->GetTexture(3);
     Shaders* btnShader = ResourceManager::GetInstance()->GetShader(0);
@@ -127,7 +127,7 @@ bool GSPlay::Init()
 
     overlay = std::make_shared<Overlay>(quadModel, blackTex, overlayShader);
     overlay->SetOverlayPosition(P1->x, P1->y);
-    overlay->SetOverlaySize(100, 100);
+    overlay->SetOverlaySize((float)Globals::screenWidth, (float)Globals::screenHeight);
 
     Texture* cirTex = ResourceManager::GetInstance()->GetTexture(19);
     Shaders* cirShader = ResourceManager::GetInstance()->GetShader(2);
@@ -137,10 +137,10 @@ bool GSPlay::Init()
     //overlay3 = std::make_shared<Overlay>(quadModel, cirTex, cirShader);
     //overlay3->SetOverlayPosition(P2->x, P2->y);
     //overlay3->SetOverlaySize(30, 30);
-    lights.push_back(Vector2(480, 360));
-    lights.emplace_back(Vector2(480 + (P2->x - P1->x), 360.0 + (P2->y - P1->y)));
+    lights.push_back(Vector2(P1->x, P1->y));
+
     overlay->SetLights(lights);
-    overlay->SetLightRadius(150.0f);
+    overlay->SetLightRadius(0.5f);
     overlay->SetLightSoftness(100.0f);
     overlay->alpha = 1.0f;
     return true;
