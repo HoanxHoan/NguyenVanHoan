@@ -19,6 +19,7 @@ public:
     void Draw()override;
     void SetPosition(Vector3 pos);
     void SetScale(Vector3 scale);
+    void SetRotation(Vector3 rotation);
     void SetCurrentAction(GLint action) { m_currentAction = action; }
     GLint GetCurrentAction() const { return m_currentAction; }
 
@@ -42,7 +43,7 @@ public:
 
     void SetModel(Model* model) { m_pModel = model; }
     Model* GetModel() const { return m_pModel; }
-    int x, y;
+    float x, y;
 private:
     Model* m_pModel;
     Shaders* m_pShader;
@@ -56,4 +57,5 @@ private:
     GLfloat m_currentTime;
 
     Vector3 m_scale;
+    Vector3 m_rotation;
 };

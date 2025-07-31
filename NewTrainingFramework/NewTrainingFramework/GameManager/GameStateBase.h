@@ -2,6 +2,10 @@
 #include <GLES3/gl3.h>
 #include "../../../Utilities/MemoryOperators.h"
 #include "../GameObject/Soloud/SoundManager.h"
+#include <fstream>
+#include <sstream>
+#include <iostream>
+#define DEG2RAD 0.0174532925199432957f
 enum class StateType
 {
     NONE,

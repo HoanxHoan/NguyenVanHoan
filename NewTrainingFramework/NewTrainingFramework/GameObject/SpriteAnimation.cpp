@@ -15,6 +15,10 @@ SpriteAnimation::SpriteAnimation(Model* model, Shaders* shader, Texture* texture
 SpriteAnimation::~SpriteAnimation()
 {
 }
+void SpriteAnimation::SetRotation(Vector3 rotation) {
+    m_rotation = rotation;
+    //this->SetRotation(rotation);
+}
 void SpriteAnimation::SetPosition(Vector3 pos) {
     x = pos.x;
     y = pos.y;
@@ -46,14 +50,16 @@ void SpriteAnimation::Draw()
     int iTextureLoc = glGetUniformLocation(m_pShader->program, "u_texture");
     glUniform1i(iTextureLoc, 0);
 
-    Matrix modelMatrix, scaleMatrix, translationMatrix, mvpMatrix;
+    Matrix rotationMatrix,modelMatrix, scaleMatrix, translationMatrix, mvpMatrix;
     translationMatrix.SetIdentity();
     scaleMatrix.SetIdentity();
     modelMatrix.SetIdentity();
     mvpMatrix.SetIdentity();
+    rotationMatrix.SetIdentity();
     translationMatrix.SetTranslation(x, y, 0.0  );
+    rotationMatrix.SetRotationY(m_rotation.y);
     scaleMatrix.SetScale(m_scale.x, m_scale.y, m_scale.z);
-    modelMatrix = scaleMatrix * translationMatrix;
+    modelMatrix =  scaleMatrix * rotationMatrix* translationMatrix;
 
     mvpMatrix = modelMatrix * Camera::GetInstance()->viewMatrix * Camera::GetInstance()->projMatrix;
 

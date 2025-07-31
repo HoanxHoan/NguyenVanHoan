@@ -15,9 +15,6 @@
     <Filter Include="Resources\Shaders">
       <UniqueIdentifier>{c2de155c-5795-435c-8d67-15b1d43d5b3a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resources\Textures">
-      <UniqueIdentifier>{ca8ef1a5-2d0e-4b9d-872e-0933f762c2d2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resources\Models">
       <UniqueIdentifier>{c9be9877-1f82-4ff6-9d1d-fe75684e56da}</UniqueIdentifier>
     </Filter>
@@ -129,6 +126,9 @@
     <Filter Include="Resources\Header Files">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Source Files\GameManager\Textures">
+      <UniqueIdentifier>{ca8ef1a5-2d0e-4b9d-872e-0933f762c2d2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -542,11 +542,11 @@
     <None Include="GameObject\Soloud\audiosource\speech\Elements.def">
       <Filter>Source Files\GameObject\Soloud\audiosource\speech</Filter>
     </None>
-    <None Include="..\Resources\Sound\war_loop.ogg">
-      <Filter>Resources\Sound</Filter>
-    </None>
     <None Include="..\Resources\Shaders\OverlayShaderFS.fs">
       <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="..\Resources\Sound\war_loop.ogg">
+      <Filter>Source Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -556,25 +556,25 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\Downloads\ResourcesPacket\ResourcesPacket\Textures\Woman2.tga">
-      <Filter>Resources\Textures</Filter>
+      <Filter>Source Files\GameManager\Textures</Filter>
     </Image>
     <Image Include="..\..\..\Downloads\ResourcesPacket\ResourcesPacket\Textures\Woman1.tga">
-      <Filter>Resources\Textures</Filter>
+      <Filter>Source Files\GameManager\Textures</Filter>
     </Image>
     <Image Include="..\Resources\Textures\bg_play1.tga">
-      <Filter>Resources\Textures</Filter>
+      <Filter>Source Files\GameManager\Textures</Filter>
     </Image>
     <Image Include="..\Resources\Textures\btn_close.tga">
-      <Filter>Resources\Textures</Filter>
+      <Filter>Source Files\GameManager\Textures</Filter>
     </Image>
     <Image Include="..\Resources\Textures\btn_help.tga">
-      <Filter>Resources\Textures</Filter>
+      <Filter>Source Files\GameManager\Textures</Filter>
     </Image>
     <Image Include="..\Resources\Textures\btn_menu.tga">
-      <Filter>Resources\Textures</Filter>
+      <Filter>Source Files\GameManager\Textures</Filter>
     </Image>
     <Image Include="..\Resources\Textures\btn_play.tga">
-      <Filter>Resources\Textures</Filter>
+      <Filter>Source Files\GameManager\Textures</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>

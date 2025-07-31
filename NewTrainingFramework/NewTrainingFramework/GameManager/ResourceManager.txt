@@ -7,11 +7,11 @@
  FILE ../Resources/Models/Sprite2D.nfg
  #2DTexture 21
  ID 0
- FILE ../Resources/Textures/Woman1.tga
+ FILE ../Resources/Textures/Entities/Characters/Walk_Base/Walk_Side-Sheet.tga
  TILING GL_REPEAT
  ID 1
- FILE ../Resources/Textures/Woman2.tga
- TILING GL_REPEAT
+ FILE ../Resources/Textures/Map.tga
+ TILING GL_CLAMP_TO_EDGE
  ID 2
  FILE ../Resources/Textures/bg_play1.tga
  TILING GL_CLAMP_TO_EDGE
@@ -19,31 +19,31 @@
  FILE ../Resources/Textures/btn_close.tga
  TILING GL_CLAMP_TO_EDGE
  ID 4
- FILE ../Resources/Textures/btn_help.tga
+ FILE ../Resources/Textures/Entities/Characters/Walk_Base/Walk_Down-Sheet.tga
  TILING GL_CLAMP_TO_EDGE
  ID 5
- FILE ../Resources/Textures/btn_menu.tga
+ FILE ../Resources/Textures/Entities/Characters/Walk_Base/Walk_Up-Sheet.tga
  TILING GL_CLAMP_TO_EDGE
  ID 6
  FILE ../Resources/Textures/btn_play.tga
  TILING GL_CLAMP_TO_EDGE
  ID 7
- FILE ../Resources/Textures/Goku_black.tga
+ FILE ../Resources/Textures/Entities/Characters/Idle_Base/Idle_Side-Sheet.tga
  TILING GL_CLAMP_TO_EDGE
  ID 8
- FILE ../Resources/Textures/Goku_black_right.tga
+ FILE ../Resources/Textures/Entities/Characters/Idle_Base/Idle_Down-Sheet.tga
  TILING GL_CLAMP_TO_EDGE
  ID 9
- FILE ../Resources/Textures/Goku_black_left.tga
+ FILE ../Resources/Textures/Entities/Characters/Idle_Base/Idle_Up-Sheet.tga
  TILING GL_CLAMP_TO_EDGE
  ID 10
- FILE ../Resources/Textures/Goku_black_atk.tga
+ FILE ../Resources/Textures/Entities/Characters/Crush_Base/Crush_Side-Sheet.tga
  TILING GL_CLAMP_TO_EDGE
  ID 11
- FILE ../Resources/Textures/Goku_black_atk2.tga
+ FILE ../Resources/Textures/Entities/Characters/Crush_Base/Crush_Down-Sheet.tga
  TILING GL_CLAMP_TO_EDGE
  ID 12
- FILE ../Resources/Textures/Goku_black_atk3.tga
+ FILE ../Resources/Textures/Entities/Characters/Crush_Base/Crush_Up-Sheet.tga
  TILING GL_CLAMP_TO_EDGE
  ID 13
  FILE ../Resources/Textures/Goku_black_kick.tga
