@@ -6,16 +6,17 @@
 #include "../Utilities/utilities.h"
 #include "Camera.h" 
 #include "Object.h"
-class SpriteAnimation 
+class SpriteAnimation : public Object
 {
 public:
+    SpriteAnimation() : Object() {}
     SpriteAnimation(Model* model, Shaders* shader, Texture* texture,
         GLint numFrames, GLint currentFrame,GLint numActions, GLint currentAction, GLfloat frameTime);
 
     ~SpriteAnimation();
 
     void Update(GLfloat deltaTime);
-    void Draw();
+    void Draw()override;
     void SetPosition(Vector3 pos);
     void SetScale(Vector3 scale);
     void SetCurrentAction(GLint action) { m_currentAction = action; }
@@ -42,12 +43,10 @@ public:
     void SetModel(Model* model) { m_pModel = model; }
     Model* GetModel() const { return m_pModel; }
     int x, y;
-
 private:
     Model* m_pModel;
     Shaders* m_pShader;
     Texture* m_pTexture;
-
     GLint m_numFrames;
     GLint m_numActions;
     GLint m_currentFrame;

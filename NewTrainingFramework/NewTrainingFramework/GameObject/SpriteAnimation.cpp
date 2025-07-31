@@ -4,7 +4,7 @@
 
 SpriteAnimation::SpriteAnimation(Model* model, Shaders* shader, Texture* texture,
     GLint numFrames,GLint currentFrame, GLint numActions, GLint currentAction, GLfloat frameTime)
-    : m_pModel(model), m_pShader(shader), m_pTexture(texture),
+    :Object(model, texture, shader), m_pModel(model), m_pShader(shader), m_pTexture(texture),
     m_numFrames(numFrames), m_numActions(numActions),
     m_currentFrame(currentFrame), m_currentAction(currentAction),
     m_frameTime(frameTime), m_currentTime(0.0f)
@@ -18,9 +18,11 @@ SpriteAnimation::~SpriteAnimation()
 void SpriteAnimation::SetPosition(Vector3 pos) {
     x = pos.x;
     y = pos.y;
+    this->set2Dposition(x, y);
 }
 void SpriteAnimation::SetScale(Vector3 scale) {
     m_scale = scale;
+    this->setSize(m_scale.x, m_scale.y);
 }
 void SpriteAnimation::Update(GLfloat deltaTime)
 {

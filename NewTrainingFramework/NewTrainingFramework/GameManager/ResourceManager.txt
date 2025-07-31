@@ -55,10 +55,10 @@
  FILE ../Resources/Textures/Goku_black_2.tga
  TILING GL_CLAMP_TO_EDGE
  ID 16
- FILE ../Resources/Textures/Goku_black_3.tga
+ FILE ../Resources/Textures/Bleach_atk1.tga
  TILING GL_CLAMP_TO_EDGE
  ID 17
- FILE ../Resources/Textures/Goku_Action1.tga
+ FILE ../Resources/Textures/Bleach_normal.tga
  TILING GL_CLAMP_TO_EDGE
  ID 18
  FILE ../Resources/Textures/Circle2.tga
