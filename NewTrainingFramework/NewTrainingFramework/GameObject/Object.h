@@ -6,6 +6,7 @@
 #include "Textures.h"
 #include "Model.h"
 #include "Camera.h"
+#define DEG2RAD 0.0174532925199432957f
 class Object
 {
 public:
@@ -35,6 +36,7 @@ public:
     //void SetTranslationMatrix();
     //void SetRotationMatrix();
     //void SetScaleMatrix();
+    virtual void Update(float deltaTime) {}
     virtual void Draw();
     float x, y;
     float width, height;

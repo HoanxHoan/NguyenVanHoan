@@ -50,6 +50,7 @@ void Object::setSize(GLint w, GLint h) {
 void Object::set2Dposition(float x, float y) {
     this->x = x;
     this->y = y;
+    translationMatrix.SetIdentity();
     translationMatrix.SetTranslation(x, y, 0.0f);
     
 }
@@ -69,6 +70,7 @@ void Object::SetMVP()
 
     //Camera::GetInstance()->UpdateViewMatrix();
     //rotationMatrix.SetRotationY(180 * DEG2RAD);
+    
     modelMatrix = scaleMatrix * rotationMatrix * translationMatrix ;
     // View matrix
     viewMatrix = Camera::GetInstance()->viewMatrix;

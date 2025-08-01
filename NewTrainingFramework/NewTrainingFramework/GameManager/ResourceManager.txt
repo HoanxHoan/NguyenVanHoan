@@ -5,7 +5,7 @@
  FILE ../Resources/Models/Woman2.nfg
  ID 2
  FILE ../Resources/Models/Sprite2D.nfg
- #2DTexture 21
+ #2DTexture 23
  ID 0
  FILE ../Resources/Textures/Entities/Characters/Walk_Base/Walk_Side-Sheet.tga
  TILING GL_REPEAT
@@ -46,28 +46,34 @@
  FILE ../Resources/Textures/Entities/Characters/Crush_Base/Crush_Up-Sheet.tga
  TILING GL_CLAMP_TO_EDGE
  ID 13
- FILE ../Resources/Textures/Goku_black_kick.tga
+ FILE ../Resources/Textures/Environment/Structures/Stations/Bonfire/Bonfire_01-Sheet.tga
  TILING GL_CLAMP_TO_EDGE
  ID 14
- FILE ../Resources/Textures/Goku_black_kick2.tga
+ FILE ../Resources/Textures/Environment/Structures/Stations/Bonfire/Fire_01-Sheet.tga
  TILING GL_CLAMP_TO_EDGE
  ID 15
- FILE ../Resources/Textures/Goku_black_2.tga
+ FILE ../Resources/Textures/Environment/Structures/Stations/Bonfire/Smoke-Sheet.tga
  TILING GL_CLAMP_TO_EDGE
  ID 16
- FILE ../Resources/Textures/Bleach_atk1.tga
+ FILE ../Resources/Textures/Environment/Props/Static/tree/model5/Cut_right.tga
  TILING GL_CLAMP_TO_EDGE
  ID 17
- FILE ../Resources/Textures/Bleach_normal.tga
+ FILE ../Resources/Textures/Environment/Props/Static/tree/model5/Cut_left.tga
  TILING GL_CLAMP_TO_EDGE
  ID 18
- FILE ../Resources/Textures/Circle2.tga
+ FILE ../Resources/Textures/Environment/Props/Static/tree/model5/idle.tga
  TILING GL_CLAMP_TO_EDGE
  ID 19
- FILE ../Resources/Textures/Circle.tga
+ FILE ../Resources/Textures/Environment/Props/Static/tree/model5/Cutted.tga
  TILING GL_CLAMP_TO_EDGE
  ID 20
  FILE ../Resources/Textures/Overlay.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 21
+ FILE ../Resources/Textures/Entities/Mobs/Orc_Crew/Orc/Idle-Sheet.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 22
+ FILE ../Resources/Textures/Entities/Mobs/Orc_Crew/Orc/Run-Sheet.tga
  TILING GL_CLAMP_TO_EDGE
  #Shader 3
  ID 0

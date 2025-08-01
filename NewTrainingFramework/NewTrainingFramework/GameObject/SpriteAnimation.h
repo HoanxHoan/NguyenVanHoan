@@ -6,6 +6,7 @@
 #include "../Utilities/utilities.h"
 #include "Camera.h" 
 #include "Object.h"
+#include"../GameManager/ResourceManager.h"
 class SpriteAnimation : public Object
 {
 public:
@@ -15,7 +16,7 @@ public:
 
     ~SpriteAnimation();
 
-    void Update(GLfloat deltaTime);
+    void Update(GLfloat deltaTime)override;
     void Draw()override;
     void SetPosition(Vector3 pos);
     void SetScale(Vector3 scale);

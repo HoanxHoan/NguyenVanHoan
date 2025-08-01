@@ -127,7 +127,7 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Source Files\GameManager\Textures">
+    <Filter Include="Resources\Textures">
       <UniqueIdentifier>{ca8ef1a5-2d0e-4b9d-872e-0933f762c2d2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -402,6 +402,18 @@
     <ClCompile Include="tinyxml2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GameObject\Enemy.cpp">
+      <Filter>Source Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\Environment.cpp">
+      <Filter>Source Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\Building.cpp">
+      <Filter>Source Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\Player.cpp">
+      <Filter>Source Files\GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h">
@@ -509,12 +521,21 @@
     <ClInclude Include="tinyxml2.h">
       <Filter>Source Files\GameManager</Filter>
     </ClInclude>
+    <ClInclude Include="GameObject\Enemy.h">
+      <Filter>Source Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Environment.h">
+      <Filter>Source Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Building.h">
+      <Filter>Source Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Player.h">
+      <Filter>Source Files\GameObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Resources\Shaders\TriangleShaderFS.fs">
-      <Filter>Resources\Shaders</Filter>
-    </None>
-    <None Include="..\Resources\Shaders\TriangleShaderVS.vs">
       <Filter>Resources\Shaders</Filter>
     </None>
     <None Include="..\..\Readme.doc" />
@@ -548,6 +569,9 @@
     <None Include="..\Resources\Sound\war_loop.ogg">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="..\Resources\Shaders\TriangleShaderVS.vs">
+      <Filter>Resources\Shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="NewTrainingFramework.rc">
@@ -556,25 +580,25 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\Downloads\ResourcesPacket\ResourcesPacket\Textures\Woman2.tga">
-      <Filter>Source Files\GameManager\Textures</Filter>
+      <Filter>Resources\Textures</Filter>
     </Image>
     <Image Include="..\..\..\Downloads\ResourcesPacket\ResourcesPacket\Textures\Woman1.tga">
-      <Filter>Source Files\GameManager\Textures</Filter>
+      <Filter>Resources\Textures</Filter>
     </Image>
     <Image Include="..\Resources\Textures\bg_play1.tga">
-      <Filter>Source Files\GameManager\Textures</Filter>
+      <Filter>Resources\Textures</Filter>
     </Image>
     <Image Include="..\Resources\Textures\btn_close.tga">
-      <Filter>Source Files\GameManager\Textures</Filter>
+      <Filter>Resources\Textures</Filter>
     </Image>
     <Image Include="..\Resources\Textures\btn_help.tga">
-      <Filter>Source Files\GameManager\Textures</Filter>
+      <Filter>Resources\Textures</Filter>
     </Image>
     <Image Include="..\Resources\Textures\btn_menu.tga">
-      <Filter>Source Files\GameManager\Textures</Filter>
+      <Filter>Resources\Textures</Filter>
     </Image>
     <Image Include="..\Resources\Textures\btn_play.tga">
-      <Filter>Source Files\GameManager\Textures</Filter>
+      <Filter>Resources\Textures</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>

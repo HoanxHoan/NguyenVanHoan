@@ -13,13 +13,14 @@ void GameButton::SetPosition(float x, float y)
 {
     posX = x;
     posY = y;
-    
+    //this->set2Dposition(x, y);
 }
 
 void GameButton::SetSize(float w, float h)
 {
     width = w;
     height = h;
+    //this->setSize(w, h);
 }
 void GameButton::SetOnClick(void (*func)())
 {
