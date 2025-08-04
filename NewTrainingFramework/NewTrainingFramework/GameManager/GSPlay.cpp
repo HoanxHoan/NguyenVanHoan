@@ -7,6 +7,7 @@ float clamp(float value, float min, float max) {
     if (value > max) return max;
     return value;
 }
+
 bool GSPlay::IsWaterTile(int xPixel, int yPixel) {
     int col = xPixel / tileWidth;
     int row = yPixel / tileHeight;
@@ -83,22 +84,22 @@ bool GSPlay::Init()
     }
     //Camera::GetInstance()->UpdateOrthographic(0.0f, Globals::screenWidth, Globals::screenHeight, 0.0f);
 
-    Model* btnModel2 = ResourceManager::GetInstance()->GetModel(2);
-    Texture* btnTexture2 = ResourceManager::GetInstance()->GetTexture(6);
-    Shaders* btnShader2 = ResourceManager::GetInstance()->GetShader(0);
-    button_play2 = std::make_shared<GameButton>(btnModel2, btnTexture2, btnShader2);
-    button_play2->SetPosition(700, 70);
-    button_play2->SetSize(10, 10);
-    button_play2->SetOnClick([]() {
-        GameStateMachine::GetInstance()->PushState(std::make_unique<GSPause>());
+    //Model* btnModel2 = ResourceManager::GetInstance()->GetModel(2);
+    //Texture* btnTexture2 = ResourceManager::GetInstance()->GetTexture(6);
+    //Shaders* btnShader2 = ResourceManager::GetInstance()->GetShader(0);
+    //button_play2 = std::make_shared<GameButton>(btnModel2, btnTexture2, btnShader2);
+    //button_play2->SetPosition(700, 70);
+    //button_play2->SetSize(10, 10);
+    //button_play2->SetOnClick([]() {
+    //    GameStateMachine::GetInstance()->PushState(std::make_unique<GSPause>());
 
-        });
-    i_objects.push_back(button_play2.get());
+    //    });
+    //i_objects.push_back(button_play2.get());
     Model* model = ResourceManager::GetInstance()->GetModel(2);
     Shaders* shader = ResourceManager::GetInstance()->GetShader(1);
     Texture* texture = ResourceManager::GetInstance()->GetTexture(8);
 
-    P1 = std::make_shared<SpriteAnimation>(model, shader, texture,
+    P1 = std::make_shared<Player>(model, shader, texture,
         4, // numFrames
         0, // currentFrame
         1, // numActions
@@ -130,16 +131,19 @@ bool GSPlay::Init()
     bonfire->SetPosition(Vector3(20, 10, 0));
     bonfire->SetScale(Vector3(5, 5, 0));
     i_bonfire.push_back(bonfire.get());
+    envi_objects.push_back(bonfire.get());
     Texture* ftexture = ResourceManager::GetInstance()->GetTexture(14);
     fire = std::make_shared<Building>(model, shader, ftexture, 4, 0, 1, 0, 0.1f);
     fire->SetPosition(Vector3(20, bonfire->y - 1, 0));
     fire->SetScale(Vector3(5, 8, 0));
     i_bonfire.push_back(fire.get());
+    envi_objects.push_back(fire.get());
     Texture* treetexture = ResourceManager::GetInstance()->GetTexture(18);
     tree = std::make_shared<Environment>(model, shader, treetexture, 1, 0, 1, 0, 0.1f);
     tree->SetPosition(Vector3(50, 10, 0));
     tree->SetScale(Vector3(10, 20, 0));
     i_objects.push_back(tree.get());
+    envi_objects.push_back(tree.get());
     Model* btnModel = ResourceManager::GetInstance()->GetModel(2);
     Texture* btnTexture = ResourceManager::GetInstance()->GetTexture(3);
     Shaders* btnShader = ResourceManager::GetInstance()->GetShader(0);
@@ -156,6 +160,8 @@ bool GSPlay::Init()
     org->SetPosition(Vector3(70, 10, 0));
     org->SetScale(Vector3(14, 16, 0));
     i_objects.push_back(org.get());
+    enermy_objects.push_back(org.get());
+    temp = *P1;
     return true;
 }
 
@@ -176,7 +182,17 @@ void GSPlay::Resume()
 
 void GSPlay::Update(float deltaTime)
 {
-    org->moveTo(P1->x, P1->y);
+    //org->moveTo(P1->x, P1->y);
+    //for (size_t i = 0; i < enermy_objects.size(); ++i) {
+    //    if (P1->CheckCollision(enermy_objects[i])) {
+    //        enermyCollision = true;
+    //        break;
+    //    }
+    //}
+    //if (enermyCollision) {
+    //    org->Dead(); 
+    //    enermyCollision = false;
+    //}
     button_play->set2Dposition(P1->x + 39, P1->y - 41);
     if (action == 1 ) {
         actiontime += deltaTime;
@@ -187,20 +203,7 @@ void GSPlay::Update(float deltaTime)
         }
     }
     if (action == 0) {
-        P1->SetRotation(Vector3(0, 360 * DEG2RAD, 0));
-        P1->SetNumFrames(4);
-        switch (count) {
-        case 1:P1->SetTexture(ResourceManager::GetInstance()->GetTexture(9)); break;
-        case 2: { 
-            P1->SetTexture(ResourceManager::GetInstance()->GetTexture(7));
-            break; }
-        case 3:P1->SetTexture(ResourceManager::GetInstance()->GetTexture(8)); break;
-        case 4: {
-            P1->SetTexture(ResourceManager::GetInstance()->GetTexture(7));
-            P1->SetRotation(Vector3(0, 180 * DEG2RAD, 0));
-            break;
-        }
-        }
+        P1->Idle(count);
     }
 
     P1->x = clamp(P1->x, 0.0f, (float)(mapPixelWidth - P1->width));
@@ -225,91 +228,97 @@ void GSPlay::Update(float deltaTime)
     }
     if (keyState['W']) {
         if (action == 0) {
+            hasCollision = false;
             count = 1;
-            P1->SetTexture(ResourceManager::GetInstance()->GetTexture(5));
-            P1->SetNumFrames(6);
-            float newY = P1->y - 10 * deltaTime;
-            if (!IsWaterTile(P1->x, newY)) {
-                P1->y = newY;
-                P1->SetPosition(Vector3(P1->x, P1->y, 0));
+            float newY = P1->y - 15 * deltaTime;
+            temp = *P1;
+            temp.y = newY;
+
+            for (size_t i = 0; i < envi_objects.size(); ++i) {
+                if (temp.CheckCollision(envi_objects[i])) {
+                    hasCollision = true;
+                    break;
+                }
+            }
+            if (!hasCollision ) {
+                P1->MoveUp(newY, IsWaterTile(P1->x, newY));
             }
         }
     }
     if (keyState['D']) {
         if (action == 0) {
-            if (count == 4)P1->SetRotation(Vector3(0, 360 * DEG2RAD, 0));
+            hasCollision = false;
             count = 2;
-            P1->SetTexture(ResourceManager::GetInstance()->GetTexture(0));
-            P1->SetNumFrames(6);
-            float newX = P1->x + 10 * deltaTime;
-            if (!IsWaterTile(newX, P1->y)) {
-                P1->x = newX;
-                P1->SetPosition(Vector3(P1->x, P1->y, 0));
+            float newX = P1->x + 15 * deltaTime;
+            temp = *P1;
+            temp.x = newX;
+
+            for (size_t i = 0; i < envi_objects.size(); ++i) {
+                if (temp.CheckCollision(envi_objects[i])) {
+                    hasCollision = true;
+                    break;
+                }
+            }
+            if (!hasCollision) {
+                P1->MoveRight(newX, IsWaterTile(newX, P1->y));
             }
         }
     }
     if (keyState['A']) {
         if (action == 0) {
+            hasCollision = false;
             count = 4;
-            P1->SetTexture(ResourceManager::GetInstance()->GetTexture(0));
-            P1->SetNumFrames(6);
-            P1->SetRotation(Vector3(0, 180 * DEG2RAD, 0));
-            float newX = P1->x - 10 * deltaTime;
-            if (!IsWaterTile(newX, P1->y)) {
-                P1->x = newX;
-                P1->SetPosition(Vector3(P1->x, P1->y, 0));
+            float newX = P1->x - 15 * deltaTime;
+            temp = *P1;
+            temp.x = newX;
+
+            for (size_t i = 0; i < envi_objects.size(); ++i) {
+                if (temp.CheckCollision(envi_objects[i])) {
+                    hasCollision = true;
+                    break;
+                }
+            }
+            if (!hasCollision) {
+                P1->MoveLeft(newX, IsWaterTile(newX, P1->y));
             }
         }
     }
     if (keyState['S']) {
         if (action == 0) {
+            hasCollision = false;
             count = 3;
-            P1->SetTexture(ResourceManager::GetInstance()->GetTexture(4));
-            P1->SetNumFrames(6);
-            float newY = P1->y + 10*deltaTime;
-            if (!IsWaterTile(P1->x, newY)) {
-                P1->y = newY;
-                P1->SetPosition(Vector3(P1->x, P1->y, 0));
+            float newY = P1->y + 15 * deltaTime;
+            temp.y = newY;
+
+            for (size_t i = 0; i < envi_objects.size(); ++i) {
+                if (temp.CheckCollision(envi_objects[i])) {
+                    hasCollision = true;
+                    break;
+                }
+            }
+            if (!hasCollision) {
+                P1->MoveDown(newY, IsWaterTile(P1->x, newY));
             }
         }
     }
     if (keyState['J'])
+    {    
+        P1->Crush(action, count);
+        action = 1;
+        
+    }
+    if (keyState['K'])
     {
-        if (action == 0) {
-            switch (count) {
-            case 1: {
-                P1->SetTexture(ResourceManager::GetInstance()->GetTexture(12));
-                P1->SetNumFrames(8);
-                P1->SetCurrentFrame(0);
-                action = 1;
-                break;
-            }
-            case 2: {
-                P1->SetTexture(ResourceManager::GetInstance()->GetTexture(10));
-                P1->SetNumFrames(8);
-                P1->SetCurrentFrame(0);
-                tree->CutTree();
-                action = 1;
-                break;
-            }
-            case 3: {
-                P1->SetTexture(ResourceManager::GetInstance()->GetTexture(11));
-                P1->SetNumFrames(8);
-                P1->SetCurrentFrame(0);
-                action = 1;
-                break;
-            }
-            case 4: {
-                P1->SetTexture(ResourceManager::GetInstance()->GetTexture(10));
-                P1->SetNumFrames(8);
-                P1->SetCurrentFrame(0);
-                P1->SetRotation(Vector3(0, 180 * DEG2RAD, 0));
-                action = 1;
-                break;
-            }
-            }
-        } 
-
+        P1->Slice(action, count);
+        action = 1;
+        if (P1->GetHitbox(count)->CheckCollisionTree(tree.get()))
+        { 
+            tree->CutTree(); 
+        }
+        else if(P1->GetHitbox(count)->CheckCollisionEnermy(org.get()))
+        {
+            org->Dead();
+        }
     }
 
 }
@@ -321,12 +330,12 @@ void GSPlay::Draw()
     {
         Scene::GetInstance()->Render(2);
     }
-    for (auto obj : i_bonfire) { obj->Draw(); }
     for (auto obj : i_objects) { obj->Draw(); }
-
+    for (auto obj : i_bonfire) { obj->Draw(); }
     if (overlay) {
         overlay->Draw();
     }
     button_play->Draw();
+   
 }
 

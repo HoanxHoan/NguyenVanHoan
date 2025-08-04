@@ -10,6 +10,7 @@
 #include "../GameObject/Environment.h"
 #include "../GameObject/Enemy.h"
 #include "../GameObject/Overlay.h"
+#include "../GameObject/Player.h"
 #include "../tinyxml2.h"
 class GSPlay : public GameStateBase
 {
@@ -32,17 +33,20 @@ public:
     tinyxml2::XMLDocument doc;
     std::shared_ptr<GameButton> button_play;
     std::shared_ptr<GameButton> button_play2;
-    std::shared_ptr<SpriteAnimation> P1;
+    //std::shared_ptr<SpriteAnimation> P1;
     std::shared_ptr<Building>bonfire;
     std::shared_ptr<Building>fire;
     std::shared_ptr<Environment>tree;
     std::shared_ptr<Enemy>org;
+    std::shared_ptr<Player>P1;
     std::shared_ptr<Overlay> overlay;
     std::vector<Vector2> lights;
     bool keyState[256] = { false };
     int x, y, count,action;
     float dltime = 0.0f, actiontime = 0.0f;
     std::vector<Object*> i_objects;
+    std::vector<Object*> envi_objects;
+    std::vector<Object*> enermy_objects;
     std::vector<Object*> i_bonfire;
     std::vector<int> waterTiles;
     int mapWidth ;
@@ -52,5 +56,9 @@ public:
 
     int mapPixelWidth ;
     int mapPixelHeight ;
+
+    Object temp;
+    bool hasCollision = false;
+    bool enermyCollision = false;
 };
 

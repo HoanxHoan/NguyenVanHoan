@@ -13,9 +13,11 @@ public:
     int GetHealth() const { return m_health; }
     void moveTo(float x,float y);
     void TakeDamage(int dmg);
-    bool IsDead() const;
+    void Dead();
 
 private:
     int m_health;
+    float dltime;
+    bool death;
 };
 

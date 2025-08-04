@@ -43,7 +43,7 @@ Object::~Object()
 }
 void Object::setSize(GLint w, GLint h) {
     width = w*2/3;
-    height = h*3/4;
+    height = h*1/4;
     scaleMatrix.SetScale((GLfloat)w, (GLfloat)h, 1.0f);
 
 }
@@ -64,6 +64,20 @@ bool Object::CheckCollision(Object* other)
         x - width / 2 > other->x + other->width / 2 ||
         y + height / 2 < other->y - other->height / 2 ||
         y - height / 2 > other->y + other->height / 2);
+}
+bool Object::CheckCollisionTree(Object* other)
+{
+    return !(x + width / 2 < other->x - other->width / 2 ||
+        x - width / 2 > other->x + other->width / 2 ||
+        y + height / 2 < other->y+6 - other->height / 2 ||
+        y - height / 2 > other->y+6 + other->height / 2);
+}
+bool Object::CheckCollisionEnermy(Object* other)
+{
+    return !(x + width / 2 < other->x - other->width / 4 ||
+        x - width / 2 > other->x + other->width / 4 ||
+        y + height / 2 < other->y+3  - other->height*3/2 / 2 ||
+        y - height / 2 > other->y+3  + other->height*3/2 / 2);
 }
 void Object::SetMVP()
 {

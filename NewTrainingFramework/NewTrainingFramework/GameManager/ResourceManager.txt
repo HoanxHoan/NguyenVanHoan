@@ -5,7 +5,7 @@
  FILE ../Resources/Models/Woman2.nfg
  ID 2
  FILE ../Resources/Models/Sprite2D.nfg
- #2DTexture 23
+ #2DTexture 28
  ID 0
  FILE ../Resources/Textures/Entities/Characters/Walk_Base/Walk_Side-Sheet.tga
  TILING GL_REPEAT
@@ -74,6 +74,21 @@
  TILING GL_CLAMP_TO_EDGE
  ID 22
  FILE ../Resources/Textures/Entities/Mobs/Orc_Crew/Orc/Run-Sheet.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 23
+ FILE ../Resources/Textures/Entities/Characters/Slice_Base/Slice_Side-Sheet.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 24
+ FILE ../Resources/Textures/Entities/Characters/Slice_Base/Slice_Down-Sheet.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 25
+ FILE ../Resources/Textures/Entities/Characters/Slice_Base/Slice_Up-Sheet.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 26
+ FILE ../Resources/Textures/Entities/Mobs/Orc_Crew/Orc/Death-Sheet.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 27
+ FILE ../Resources/Textures/Entities/Characters/Death_Base/Death_Side-Sheet.tga
  TILING GL_CLAMP_TO_EDGE
  #Shader 3
  ID 0

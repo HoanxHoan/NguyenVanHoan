@@ -41,6 +41,8 @@ public:
     float x, y;
     float width, height;
     bool CheckCollision(Object* other);
+    bool CheckCollisionTree(Object* other);
+    bool CheckCollisionEnermy(Object* other);
     bool visible = true;
     void SetVisible(bool v) { visible = v; }
     bool IsVisible() const { return visible; }

@@ -6,22 +6,27 @@ Enemy::Enemy(Model* model, Shaders* shader, Texture* texture,
     : SpriteAnimation(model, shader, texture, numFrames, currentFrame, numActions, currentAction, frameTime)
 {
     m_health = 100; // default HP
+    //dltime=0.0f;
 }
 
 void Enemy::Update(GLfloat deltaTime)
 {
+    dltime += deltaTime;
+    if (dltime >=0.6 && death == true) {
+        
+        this->SetVisible(false);
+    }
     SpriteAnimation::Update(deltaTime);
-
     // Logic enemy
     
     // x += 10 * deltaTime;  // dummy movement
 }
-void Enemy::moveTo(float x, float y){
+void Enemy::moveTo(float px, float py){
     this->SetNumFrames(6);
     this->SetTexture(ResourceManager::GetInstance()->GetTexture(22));
     this->SetRotation(Vector3(0, 360 * DEG2RAD, 0));
-    float dx = x - this->x;
-    float dy = y - this->y;
+    float dx = px - this->x;
+    float dy = py - this->y;
     float length = std::sqrt(dx * dx + dy * dy);
     if (dx <= 0) { this->SetRotation(Vector3(0, 180 * DEG2RAD, 0)); }
     if (length > 0.01f) { 
@@ -50,7 +55,10 @@ void Enemy::TakeDamage(int dmg)
     std::cout << "Enemy takes " << dmg << " damage. Remaining HP: " << m_health << std::endl;
 }
 
-bool Enemy::IsDead() const
+void Enemy::Dead()
 {
-    return m_health <= 0;
+    this->SetTexture(ResourceManager::GetInstance()->GetTexture(26));
+    this->SetCurrentFrame(0);
+    death = true;
+    dltime = 0;
 }

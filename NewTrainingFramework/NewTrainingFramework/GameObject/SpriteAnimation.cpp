@@ -28,6 +28,7 @@ void SpriteAnimation::SetScale(Vector3 scale) {
     m_scale = scale;
     this->setSize(m_scale.x, m_scale.y);
 }
+
 void SpriteAnimation::Update(GLfloat deltaTime)
 {
     m_currentTime += deltaTime;
@@ -43,6 +44,7 @@ void SpriteAnimation::Update(GLfloat deltaTime)
 
 void SpriteAnimation::Draw()
 {
+    if (this->visible == false) return;
     glUseProgram(m_pShader->program);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
