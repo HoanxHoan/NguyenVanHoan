@@ -14,7 +14,7 @@ Camera::Camera()
     UpdateViewMatrix();
     //UpdateProjMatrix(4.0f / 3.0f); 
     //UpdateOrthographic(0.0f, Globals::screenWidth, Globals::screenHeight, 0.0f);
-    UpdateOrthographic(0.0f,100, 100, 0.0f);
+    UpdateOrthographic(0.0f,200, 200, 0.0f);
 
 }
 
@@ -134,8 +134,8 @@ void Camera::SetUp(Vector3& u)
     up = u;
 }
 void Camera::Follow(float x, float y) {
-    position = Vector3 (x-50, y-50, 1.0f);
-    target = Vector3 (x-50, y-50, 0.0f);
+    position = Vector3 (x-100, y-100, 1.0f);
+    target = Vector3 (x-100, y-100, 0.0f);
     UpdateViewMatrix();
 }
 

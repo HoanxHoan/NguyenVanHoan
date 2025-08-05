@@ -1,19 +1,20 @@
 #pragma once
 #include "SpriteAnimation.h"
 
-class Environment : public SpriteAnimation {
+class Tree : public SpriteAnimation {
 public:
-    Environment(Model* model, Shaders* shader, Texture* texture,
+    Tree(Model* model, Shaders* shader, Texture* texture,
         GLint numFrames, GLint currentFrame, GLint numActions, GLint currentAction, GLfloat frameTime);
 
     void Update(GLfloat deltaTime) override;
     void Draw() override;
     void CutTree();
     void EndCutTree();
-    void SetIsCollidable(bool state) { m_isCollidable = state; }
-    bool IsCollidable() const { return m_isCollidable; }
-
+    void Cutted();
 private:
-    bool m_isCollidable;
+    bool iscut;
+    float dltime;
+    bool icut;
+    int hp;
 };
 

@@ -5,7 +5,7 @@
  FILE ../Resources/Models/Woman2.nfg
  ID 2
  FILE ../Resources/Models/Sprite2D.nfg
- #2DTexture 28
+ #2DTexture 34
  ID 0
  FILE ../Resources/Textures/Entities/Characters/Walk_Base/Walk_Side-Sheet.tga
  TILING GL_REPEAT
@@ -89,6 +89,24 @@
  TILING GL_CLAMP_TO_EDGE
  ID 27
  FILE ../Resources/Textures/Entities/Characters/Death_Base/Death_Side-Sheet.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 28
+ FILE ../Resources/Textures/Environment/Props/Static/Rocks/Rocks_1.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 29
+ FILE ../Resources/Textures/Environment/Props/Static/Rocks/Rocks_2.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 30
+ FILE ../Resources/Textures/Environment/Props/Static/Rocks/Rocks_3.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 31
+ FILE ../Resources/Textures/Environment/Props/Static/Rocks/Rocks_1_crush.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 32
+ FILE ../Resources/Textures/Environment/Props/Static/Rocks/Rocks_2_crush.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 33
+ FILE ../Resources/Textures/Environment/Props/Static/Rocks/Rocks_3_crush.tga
  TILING GL_CLAMP_TO_EDGE
  #Shader 3
  ID 0

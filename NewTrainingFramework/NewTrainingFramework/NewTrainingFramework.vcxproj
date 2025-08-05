@@ -103,6 +103,7 @@
     <ClCompile Include="GameManager\GSPlay.cpp" />
     <ClCompile Include="GameManager\ResourceManager.cpp" />
     <ClCompile Include="GameManager\Scene.cpp" />
+    <ClCompile Include="GameObject\Animal.cpp" />
     <ClCompile Include="GameObject\Building.cpp" />
     <ClCompile Include="GameObject\Enemy.cpp" />
     <ClCompile Include="GameObject\GameButton.cpp" />
@@ -181,7 +182,8 @@
     <ClCompile Include="GameObject\Soloud\filter\soloud_robotizefilter.cpp" />
     <ClCompile Include="GameObject\Soloud\filter\soloud_waveshaperfilter.cpp" />
     <ClCompile Include="GameObject\Soloud\SoundManager.cpp" />
-    <ClCompile Include="GameObject\Environment.cpp" />
+    <ClCompile Include="GameObject\Stone.cpp" />
+    <ClCompile Include="GameObject\Tree.cpp" />
     <ClCompile Include="GameObject\SpriteAnimation.cpp" />
     <ClCompile Include="GameObject\TextRenderer.cpp" />
     <ClCompile Include="GameObject\Textures.cpp" />
@@ -202,10 +204,12 @@
     <ClInclude Include="GameManager\GSPlay.h" />
     <ClInclude Include="GameManager\ResourceManager.h" />
     <ClInclude Include="GameManager\Scene.h" />
+    <ClInclude Include="GameObject\Animal.h" />
     <ClInclude Include="GameObject\Building.h" />
     <ClInclude Include="GameObject\Camera.h" />
     <ClInclude Include="GameObject\Enemy.h" />
-    <ClInclude Include="GameObject\Environment.h" />
+    <ClInclude Include="GameObject\Stone.h" />
+    <ClInclude Include="GameObject\Tree.h" />
     <ClInclude Include="GameObject\GameButton.h" />
     <ClInclude Include="GameObject\Model.h" />
     <ClInclude Include="GameObject\Object.h" />

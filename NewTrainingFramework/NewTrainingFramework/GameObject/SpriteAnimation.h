@@ -7,6 +7,7 @@
 #include "Camera.h" 
 #include "Object.h"
 #include"../GameManager/ResourceManager.h"
+
 class SpriteAnimation : public Object
 {
 public:

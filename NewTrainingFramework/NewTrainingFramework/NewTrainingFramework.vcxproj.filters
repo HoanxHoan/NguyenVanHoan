@@ -405,13 +405,19 @@
     <ClCompile Include="GameObject\Enemy.cpp">
       <Filter>Source Files\GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject\Environment.cpp">
+    <ClCompile Include="GameObject\Tree.cpp">
       <Filter>Source Files\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="GameObject\Building.cpp">
       <Filter>Source Files\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="GameObject\Player.cpp">
+      <Filter>Source Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\Animal.cpp">
+      <Filter>Source Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\Stone.cpp">
       <Filter>Source Files\GameObject</Filter>
     </ClCompile>
   </ItemGroup>
@@ -524,13 +530,19 @@
     <ClInclude Include="GameObject\Enemy.h">
       <Filter>Source Files\GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject\Environment.h">
+    <ClInclude Include="GameObject\Tree.h">
       <Filter>Source Files\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="GameObject\Building.h">
       <Filter>Source Files\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="GameObject\Player.h">
+      <Filter>Source Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Animal.h">
+      <Filter>Source Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Stone.h">
       <Filter>Source Files\GameObject</Filter>
     </ClInclude>
   </ItemGroup>

@@ -7,6 +7,48 @@ float clamp(float value, float min, float max) {
     if (value > max) return max;
     return value;
 }
+Vector3 GSPlay::GetRandomValidPosition() {
+    int maxAttempts = 1000;
+
+    for (int attempt = 0; attempt < maxAttempts; ++attempt) {
+        int tileX = rand() % mapWidth;
+        int tileY = rand() % mapHeight;
+
+        float x = tileX * 16;
+        float y = tileY * 16;
+
+        if (!IsWaterTile(x, y)) {
+            return Vector3(x, y, 0);
+        }
+    }
+    return Vector3(0, 0, 0);
+}
+Vector3 GSPlay::GenerateRandomValidPositionAvoidCollision(const std::vector<std::shared_ptr<Object>>& others) {
+    int maxAttempts = 1000;
+    for (int i = 0; i < maxAttempts; ++i) {
+        int col = rand() % mapWidth;
+        int row = rand() % mapHeight;
+
+        float x = col * tileWidth;
+        float y = row * tileHeight;
+
+        if (!IsWaterTile(x, y)) {
+            Object temp;
+            temp.setSize(10, 20);
+            bool collision = false;
+            for (auto& obj : others) {
+                if (temp.CheckCollision(obj.get())){
+                    collision = true;
+                    break;
+                }
+            }
+            if (!collision&& !IsWaterTile(x, y)) {
+                return Vector3(x, y, 0);
+            }
+        }
+    }
+    return Vector3(0, 0, 0);
+}
 
 bool GSPlay::IsWaterTile(int xPixel, int yPixel) {
     int col = xPixel / tileWidth;
@@ -19,6 +61,7 @@ bool GSPlay::IsWaterTile(int xPixel, int yPixel) {
     return false;
 }
 GSPlay::GSPlay() {
+    srand(time(NULL));
     x = 0; y = 0;
     dltime = 0.05f;
     actiontime = 0.0f;
@@ -106,9 +149,9 @@ bool GSPlay::Init()
         0, // currentAction
         0.1f); // frameTime
 
-    P1->SetPosition(Vector3(0, 0, 0));
-    P1->SetScale(Vector3(15, 20, 0));
-    i_objects.push_back(P1.get());
+    P1->SetPosition(Vector3(200, 200, 0));
+    P1->SetScale(Vector3(30, 40, 0));
+    i_objects.push_back(P1);
     Model* quadModel = ResourceManager::GetInstance()->GetModel(2);
     Texture* blackTex = ResourceManager::GetInstance()->GetTexture(20);
     Shaders* overlayShader = ResourceManager::GetInstance()->GetShader(2);
@@ -125,41 +168,52 @@ bool GSPlay::Init()
     overlay->SetLights(lights);
     overlay->SetLightRadius(15.0f);
     overlay->SetLightSoftness(100.0f);
-
+    //bonfire
     Texture* btexture = ResourceManager::GetInstance()->GetTexture(13);
     bonfire = std::make_shared<Building>(model, shader, btexture, 4, 0, 1, 0, 0.1f);
-    bonfire->SetPosition(Vector3(20, 10, 0));
-    bonfire->SetScale(Vector3(5, 5, 0));
+    bonfire->SetPosition(Vector3(300, 200, 0));
+    bonfire->SetScale(Vector3(10, 10, 0));
     i_bonfire.push_back(bonfire.get());
-    envi_objects.push_back(bonfire.get());
+    envi_objects.push_back(bonfire);
     Texture* ftexture = ResourceManager::GetInstance()->GetTexture(14);
     fire = std::make_shared<Building>(model, shader, ftexture, 4, 0, 1, 0, 0.1f);
-    fire->SetPosition(Vector3(20, bonfire->y - 1, 0));
-    fire->SetScale(Vector3(5, 8, 0));
+    fire->SetPosition(Vector3(300, bonfire->y - 2, 0));
+    fire->SetScale(Vector3(10, 16, 0));
     i_bonfire.push_back(fire.get());
-    envi_objects.push_back(fire.get());
+    envi_objects.push_back(fire);
+    //Tree
     Texture* treetexture = ResourceManager::GetInstance()->GetTexture(18);
-    tree = std::make_shared<Environment>(model, shader, treetexture, 1, 0, 1, 0, 0.1f);
-    tree->SetPosition(Vector3(50, 10, 0));
-    tree->SetScale(Vector3(10, 20, 0));
-    i_objects.push_back(tree.get());
-    envi_objects.push_back(tree.get());
+    for (int i = 0; i < 100; ++i) {
+        tree = std::make_shared<Tree>(model, shader, treetexture, 1, 0, 1, 0, 0.1f);
+        tree->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
+        tree->SetScale(Vector3(40, 80, 0));
+        i_objects.push_back(tree);
+        i_objects.push_back(tree);
+        envi_objects.push_back(tree);
+    }
+    //tree = std::make_shared<Environment>(model, shader, treetexture, 1, 0, 1, 0, 0.1f);
+    //tree->SetPosition(Vector3(50, 10, 0));
+    //tree->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
+    //printf("%f,%f,%f\n", GenerateRandomValidPositionAvoidCollision(i_objects).x, GenerateRandomValidPositionAvoidCollision(i_objects).y, GenerateRandomValidPositionAvoidCollision(i_objects).z);
+    //tree->SetScale(Vector3(10, 20, 0));
+    //i_objects.push_back(tree.get());
+    //envi_objects.push_back(tree.get());
     Model* btnModel = ResourceManager::GetInstance()->GetModel(2);
     Texture* btnTexture = ResourceManager::GetInstance()->GetTexture(3);
     Shaders* btnShader = ResourceManager::GetInstance()->GetShader(0);
     button_play = std::make_shared<GameButton>(btnModel, btnTexture, btnShader);
-    button_play->SetPosition(850, 70);
-    button_play->SetSize(90, 90);
-    button_play->setSize(10,10);
+    button_play->SetPosition(850, 80);
+    button_play->SetSize(90, 80);
+    button_play->setSize(20,20);
     button_play->SetOnClick([]() {
         GameStateMachine::GetInstance()->PopState();
         });
-    
+    //enermy
     Texture* orgTexture = ResourceManager::GetInstance()->GetTexture(22);
     org = std::make_shared<Enemy>(model, shader, orgTexture, 6, 0, 1, 0, 0.1f);
-    org->SetPosition(Vector3(70, 10, 0));
-    org->SetScale(Vector3(14, 16, 0));
-    i_objects.push_back(org.get());
+    org->SetPosition(Vector3(400, 400, 0));
+    org->SetScale(Vector3(28, 32, 0));
+    i_objects.push_back(org);
     enermy_objects.push_back(org.get());
     temp = *P1;
     return true;
@@ -193,13 +247,12 @@ void GSPlay::Update(float deltaTime)
     //    org->Dead(); 
     //    enermyCollision = false;
     //}
-    button_play->set2Dposition(P1->x + 39, P1->y - 41);
+    button_play->set2Dposition(P1->x + 78, P1->y - 80);
     if (action == 1 ) {
         actiontime += deltaTime;
         if (actiontime >= 0.76) {
             action = 0;
             actiontime = 0;
-            tree->EndCutTree();
         }
     }
     if (action == 0) {
@@ -216,12 +269,13 @@ void GSPlay::Update(float deltaTime)
     overlay->GetgameTime(dltime);
     overlay->SetOverlayPosition(P1->x, P1->y);
 
-    std::sort(i_objects.begin(), i_objects.end(), [](Object* a, Object* b) {
-        return a->y < b->y;
+    std::sort(i_objects.begin(), i_objects.end(),
+        [](const std::shared_ptr<Object>& a, const std::shared_ptr<Object>& b) {
+            return a->y < b->y; 
         });
     Camera::GetInstance()->Follow(P1->x, P1->y);
-    for (auto obj : i_objects) {
-        obj->Update(deltaTime); 
+    for (auto& obj : i_objects) {
+        obj.get()->Update(deltaTime);
     }
     for (auto obj : i_bonfire) {
         obj->Update(deltaTime);
@@ -230,12 +284,12 @@ void GSPlay::Update(float deltaTime)
         if (action == 0) {
             hasCollision = false;
             count = 1;
-            float newY = P1->y - 15 * deltaTime;
+            float newY = P1->y - 30 * deltaTime;
             temp = *P1;
             temp.y = newY;
 
             for (size_t i = 0; i < envi_objects.size(); ++i) {
-                if (temp.CheckCollision(envi_objects[i])) {
+                if (temp.CheckCollision(envi_objects[i].get())) {
                     hasCollision = true;
                     break;
                 }
@@ -249,12 +303,12 @@ void GSPlay::Update(float deltaTime)
         if (action == 0) {
             hasCollision = false;
             count = 2;
-            float newX = P1->x + 15 * deltaTime;
+            float newX = P1->x + 30 * deltaTime;
             temp = *P1;
             temp.x = newX;
 
             for (size_t i = 0; i < envi_objects.size(); ++i) {
-                if (temp.CheckCollision(envi_objects[i])) {
+                if (temp.CheckCollision(envi_objects[i].get())) {
                     hasCollision = true;
                     break;
                 }
@@ -268,12 +322,12 @@ void GSPlay::Update(float deltaTime)
         if (action == 0) {
             hasCollision = false;
             count = 4;
-            float newX = P1->x - 15 * deltaTime;
+            float newX = P1->x - 30 * deltaTime;
             temp = *P1;
             temp.x = newX;
 
             for (size_t i = 0; i < envi_objects.size(); ++i) {
-                if (temp.CheckCollision(envi_objects[i])) {
+                if (temp.CheckCollision(envi_objects[i].get())) {
                     hasCollision = true;
                     break;
                 }
@@ -287,11 +341,11 @@ void GSPlay::Update(float deltaTime)
         if (action == 0) {
             hasCollision = false;
             count = 3;
-            float newY = P1->y + 15 * deltaTime;
+            float newY = P1->y + 30 * deltaTime;
             temp.y = newY;
 
             for (size_t i = 0; i < envi_objects.size(); ++i) {
-                if (temp.CheckCollision(envi_objects[i])) {
+                if (temp.CheckCollision(envi_objects[i].get())) {
                     hasCollision = true;
                     break;
                 }
@@ -311,11 +365,15 @@ void GSPlay::Update(float deltaTime)
     {
         P1->Slice(action, count);
         action = 1;
-        if (P1->GetHitbox(count)->CheckCollisionTree(tree.get()))
-        { 
-            tree->CutTree(); 
+        for (auto& tree : envi_objects) {
+            if (P1->GetHitbox(count)->CheckCollisionTree(tree.get()))
+            {
+                if (auto env = dynamic_cast<Tree*>(tree.get())) {
+                    env->CutTree(); 
+                }
+            }            
         }
-        else if(P1->GetHitbox(count)->CheckCollisionEnermy(org.get()))
+        if (P1->GetHitbox(count)->CheckCollisionEnermy(org.get()))
         {
             org->Dead();
         }
@@ -330,12 +388,12 @@ void GSPlay::Draw()
     {
         Scene::GetInstance()->Render(2);
     }
-    for (auto obj : i_objects) { obj->Draw(); }
     for (auto obj : i_bonfire) { obj->Draw(); }
+    for (auto obj : i_objects) { obj->Draw(); }
     if (overlay) {
         overlay->Draw();
     }
     button_play->Draw();
-   
+
 }
 
