@@ -20,6 +20,9 @@ void Tree::EndCutTree() {
         this->SetNumFrames(1);
         this->SetTexture(ResourceManager::GetInstance()->GetTexture(18));
         icut = true;
+        iscut = false;
+        dltime = 0;
+        Hpdltime = 0;
     }
 }
 void Tree::Cutted() {
@@ -27,18 +30,20 @@ void Tree::Cutted() {
     this->SetTexture(ResourceManager::GetInstance()->GetTexture(19));
     this->set2Dposition(this->x, this->y + 20);
     this->setSize(this->width / 4, this->height);
+    iscut = false;
 }
 void Tree::Update(GLfloat deltaTime)
 {
+    Hpdltime += deltaTime;
     dltime += deltaTime;
-    if(icut == true && dltime >= 0.7)
+    if(icut == true && Hpdltime >= 0.5)
     {
         hp = hp - 1;
         //printf("%d\n", hp);
         icut = false;
     }
-    if (iscut==true  && hp <= 0) { this->Cutted(); }
-    else if (iscut && this->GetCurrentFrame()==4) 
+    if (iscut==true  && hp <= 1) { this->Cutted(); }
+    else if (iscut && dltime >= 0.7)
     { 
         EndCutTree(); 
     }

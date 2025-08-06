@@ -13,7 +13,7 @@ public:
     void Cutted();
 private:
     bool iscut;
-    float dltime;
+    float dltime, Hpdltime;
     bool icut;
     int hp;
 };

@@ -11,7 +11,7 @@ public:
     void Crush();
     void EndCrush();
     void Crushed();
-
+    int type;
 private:
     bool iscrush;
     float dltime,Hpdltime;

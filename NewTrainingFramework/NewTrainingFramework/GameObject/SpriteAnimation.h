@@ -46,6 +46,8 @@ public:
     void SetModel(Model* model) { m_pModel = model; }
     Model* GetModel() const { return m_pModel; }
     float x, y;
+
+    Vector3 m_scale;
 private:
     Model* m_pModel;
     Shaders* m_pShader;
@@ -57,7 +59,5 @@ private:
 
     GLfloat m_frameTime;
     GLfloat m_currentTime;
-
-    Vector3 m_scale;
     Vector3 m_rotation;
 };

@@ -27,15 +27,16 @@ Vector3 GSPlay::GetRandomValidPosition() {
 Vector3 GSPlay::GenerateRandomValidPositionAvoidCollision(const std::vector<std::shared_ptr<Object>>& others) {
     int maxAttempts = 1000;
     for (int i = 0; i < maxAttempts; ++i) {
-        int col = rand() % mapWidth;
-        int row = rand() % mapHeight;
+        int col = rand() % (mapWidth);
+        int row = rand() % (mapHeight);
 
         float x = col * tileWidth;
-        float y = row * tileHeight;
+        float y = row * tileHeight ;
 
-        if (!IsWaterTile(x, y)) {
+        if (!IsWaterTile(x, y)&& !IsWaterTile(x+1, y)&& !IsWaterTile(x-1, y)&& !IsWaterTile(x, y+1)&& !IsWaterTile(x, y-1)) {
             Object temp;
-            temp.setSize(10, 20);
+            temp.setSize(100, 100);
+            temp.set2Dposition(x, y);
             bool collision = false;
             for (auto& obj : others) {
                 if (temp.CheckCollision(obj.get())){
@@ -43,7 +44,7 @@ Vector3 GSPlay::GenerateRandomValidPositionAvoidCollision(const std::vector<std:
                     break;
                 }
             }
-            if (!collision&& !IsWaterTile(x, y)) {
+            if (!collision) {
                 return Vector3(x, y, 0);
             }
         }
@@ -52,8 +53,8 @@ Vector3 GSPlay::GenerateRandomValidPositionAvoidCollision(const std::vector<std:
 }
 
 bool GSPlay::IsWaterTile(int xPixel, int yPixel) {
-    int col = xPixel / tileWidth;
-    int row = yPixel / tileHeight;
+    int col = xPixel / (tileWidth);
+    int row = yPixel / (tileHeight);
     int index = row * mapWidth + col;
 
     if (index >= 0 && index < waterTiles.size()) {
@@ -135,7 +136,7 @@ bool GSPlay::Init()
         }
         layer = layer->NextSiblingElement("layer");
     }
-    //Camera::GetInstance()->UpdateOrthographic(0.0f, Globals::screenWidth, Globals::screenHeight, 0.0f);
+    Camera::GetInstance()->UpdateOrthographic(0.0f, Globals::screenWidth, Globals::screenHeight, 0.0f);
 
     //Model* btnModel2 = ResourceManager::GetInstance()->GetModel(2);
     //Texture* btnTexture2 = ResourceManager::GetInstance()->GetTexture(6);
@@ -196,20 +197,31 @@ bool GSPlay::Init()
     envi_objects.push_back(fire);
     //Tree
     Texture* treetexture = ResourceManager::GetInstance()->GetTexture(18);
-    for (int i = 0; i < 100; ++i) {
+    for (int i = 0; i < 150; ++i) {
         tree = std::make_shared<Tree>(model, shader, treetexture, 1, 0, 1, 0, 0.1f);
         tree->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
         tree->SetScale(Vector3(40, 80, 0));
         i_objects.push_back(tree);
         envi_objects.push_back(tree);
     }
+    //rocks
     Texture* stonetexture1 = ResourceManager::GetInstance()->GetTexture(28);
     Texture* stonetexture2 = ResourceManager::GetInstance()->GetTexture(29);
     Texture* stonetexture3 = ResourceManager::GetInstance()->GetTexture(30);
-    for (int i = 0; i < 50; ++i) {
+    for (int i = 0; i < 20; ++i) {
         stone = std::make_shared<Stone>(model, shader, stonetexture1, 1, 0, 1, 0, 0.1f);
+        stone->type = 1;
         stone->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
-        stone->SetScale(Vector3(30, 60, 0));
+        stone->SetScale(Vector3(20, 40, 0));
+        i_objects.push_back(stone);
+        envi_objects.push_back(stone);
+    }
+    for (int i = 0; i < 30; ++i) {
+        stone = std::make_shared<Stone>(model, shader, stonetexture2, 1, 0, 1, 0, 0.1f);
+        stone->type = 2;
+        stone->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
+        stone->SetScale(Vector3(30, 40, 0));
+        stone->setSize(30, 20);
         i_objects.push_back(stone);
         envi_objects.push_back(stone);
     }
@@ -362,7 +374,7 @@ void GSPlay::Update(float deltaTime)
         if (action == 0) {
             hasCollision = false;
             count = 1;
-            float newY = P1->y - 30 * deltaTime;
+            float newY = P1->y - 300 * deltaTime;
             temp = *P1;
             temp.y = newY;
 
@@ -381,7 +393,7 @@ void GSPlay::Update(float deltaTime)
         if (action == 0) {
             hasCollision = false;
             count = 2;
-            float newX = P1->x + 30 * deltaTime;
+            float newX = P1->x + 300 * deltaTime;
             temp = *P1;
             temp.x = newX;
 
@@ -400,7 +412,7 @@ void GSPlay::Update(float deltaTime)
         if (action == 0) {
             hasCollision = false;
             count = 4;
-            float newX = P1->x - 30 * deltaTime;
+            float newX = P1->x - 300 * deltaTime;
             temp = *P1;
             temp.x = newX;
 
@@ -419,7 +431,7 @@ void GSPlay::Update(float deltaTime)
         if (action == 0) {
             hasCollision = false;
             count = 3;
-            float newY = P1->y + 30 * deltaTime;
+            float newY = P1->y + 300 * deltaTime;
             temp.y = newY;
 
             for (size_t i = 0; i < envi_objects.size(); ++i) {
