@@ -7,22 +7,41 @@ Stone::Stone(Model* model, Shaders* shader, Texture* texture,
     hp = 5;
 }
 void Stone::Crush() {
+    
     if (hp >= 1) {
-        this->SetTexture(ResourceManager::GetInstance()->GetTexture(31));
-        this->SetNumFrames(1);
-        this->SetCurrentFrame(0);
-        iscrush = true;
-        dltime = 0;
+        if (type == 1) {
+            this->SetTexture(ResourceManager::GetInstance()->GetTexture(31));
+            this->SetNumFrames(1);
+            this->SetCurrentFrame(0);
+            iscrush = true;
+            dltime = 0;
+        }
+        else if (type == 2) {
+            this->SetTexture(ResourceManager::GetInstance()->GetTexture(32));
+            this->SetNumFrames(1);
+            this->SetCurrentFrame(0);
+            iscrush = true;
+            dltime = 0;
+        }
     }
 }
 void Stone::EndCrush() {
     if (hp >= 1) {
-        this->SetNumFrames(1);
-        this->SetTexture(ResourceManager::GetInstance()->GetTexture(28));
-        icut = true;
-        iscrush = false;
-        Hpdltime = 0;
-        dltime = 0;
+        if (type == 1) {
+            this->SetNumFrames(1);
+            this->SetTexture(ResourceManager::GetInstance()->GetTexture(28));
+            icut = true;
+            iscrush = false;
+            Hpdltime = 0;
+            dltime = 0;
+        }else if(type ==2 ){
+            this->SetNumFrames(1);
+            this->SetTexture(ResourceManager::GetInstance()->GetTexture(29));
+            icut = true;
+            iscrush = false;
+            Hpdltime = 0;
+            dltime = 0;
+        }
     }
 }
 void Stone::Crushed() {
@@ -34,13 +53,13 @@ void Stone::Update(GLfloat deltaTime)
 {
     dltime += deltaTime;
     Hpdltime += deltaTime;
-    if (icut == true && Hpdltime >= 1.0)
+    if (icut == true && Hpdltime >= 0.5)
     {
         hp = hp - 1;
         icut = false;
     }
     if (iscrush == true && hp <= 1) { this->Crushed(); }
-    else if (iscrush && dltime>=0.7)
+    else if (iscrush && dltime>=0.1)
     {
         EndCrush();
     }

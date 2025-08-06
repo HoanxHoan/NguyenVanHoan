@@ -83,8 +83,15 @@ bool Object::CheckCollisionStone(Object* other)
 {
     return !(x + width / 2 < other->x - other->width / 2 ||
         x - width / 2 > other->x + other->width / 2 ||
-        y + height / 2 < other->y+8  - other->height / 5 ||
-        y - height / 2 > other->y+8 + other->height / 5);
+        y + height / 2 < other->y+3  - other->height / 4 ||
+        y - height / 2 > other->y+3 + other->height / 4);
+}
+bool Object::CheckCollisionenvir(Object* other)
+{
+    return !(x + width  < other->x - other->width  ||
+        x - width  > other->x + other->width  ||
+        y + height  < other->y - other->height  ||
+        y - height  > other->y + other->height );
 }
 void Object::SetMVP()
 {
