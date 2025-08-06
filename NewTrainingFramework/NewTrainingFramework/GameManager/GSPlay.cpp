@@ -1,7 +1,8 @@
-#include "../stdafx.h" 
+﻿#include "../stdafx.h" 
 #include "GSPlay.h"
 #include <iostream>
 #include <algorithm>
+
 float clamp(float value, float min, float max) {
     if (value < min) return min;
     if (value > max) return max;
@@ -65,6 +66,7 @@ GSPlay::GSPlay() {
     x = 0; y = 0;
     dltime = 0.05f;
     actiontime = 0.0f;
+    uidltime = 0.00f;
     action = 0;
     Init();
 }
@@ -96,7 +98,15 @@ void GSPlay::HandleMouseClick(GLint x, GLint y, bool isClick)
     if (button_play2 && button_play2->HandleTouchEvents(x, y, isClick)) {
         return;
     }
+    for (auto slot : inventorySlots) {
+        if (slot->HandleTouchEvents(x, y, isClick)) {
+            printf("Slot clicked at position (%d, %d)\n", x, y);
+            return;
+        }
+	}
+
 }
+
 
 bool GSPlay::Init()
 {
@@ -138,6 +148,9 @@ bool GSPlay::Init()
 
     //    });
     //i_objects.push_back(button_play2.get());
+    Model* btnModel = ResourceManager::GetInstance()->GetModel(2);
+    Texture* btnTexture = ResourceManager::GetInstance()->GetTexture(3);
+    Shaders* btnShader = ResourceManager::GetInstance()->GetShader(0);
     Model* model = ResourceManager::GetInstance()->GetModel(2);
     Shaders* shader = ResourceManager::GetInstance()->GetShader(1);
     Texture* texture = ResourceManager::GetInstance()->GetTexture(8);
@@ -200,6 +213,42 @@ bool GSPlay::Init()
         i_objects.push_back(stone);
         envi_objects.push_back(stone);
     }
+
+	Texture* inventoryTexture = ResourceManager::GetInstance()->GetTexture(34);
+	inventory = std::make_shared<Building>(model, shader, inventoryTexture, 1, 0, 1, 0, 0.1f);
+	inventory->SetPosition(Vector3(P1->x, P1->y, 0));
+    inventory->SetScale(Vector3(200, 110, 0));
+    inventory->SetVisible(false);
+
+    Texture* slotTexture = ResourceManager::GetInstance()->GetTexture(3); // Thay bằng ID đúng
+    inv = std::make_shared<InventorySlots>(
+        model, slotTexture, shader
+    );
+
+        for (int i = 0; i < 30; ++i) {
+            slot = std::make_shared<Slot>(model, slotTexture, btnShader);
+            printf("Slot %d created\n", i);
+            int cols = 10;
+            int row = i / cols;
+            int col = i % cols;
+
+            float offsetX = -90 + col * 20.0f;
+            float offsetY = 40 - row * 20.0f;
+			slot->setSize(10, 10);
+            slot->SetSize(20, 20);
+            slot->SetPosition(480 + offsetX * 4.8 , 360 + offsetY * 3.6);
+            //slot->SetPosition(P1->x, P1->y);
+            slot->set2Dposition(P1->x + offsetX, P1->y + offsetY);
+            slot->SetOnClick([]() {
+                printf("Slot clicked\n");
+                // Xử lý sự kiện khi slot được nhấn
+				});
+            //inv->AddSlot(slot);
+            inventorySlots.push_back(slot);
+            // (tuỳ chọn) nếu bạn cần giữ shared_ptr:
+        
+    }
+
     //tree = std::make_shared<Environment>(model, shader, treetexture, 1, 0, 1, 0, 0.1f);
     //tree->SetPosition(Vector3(50, 10, 0));
     //tree->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
@@ -207,9 +256,7 @@ bool GSPlay::Init()
     //tree->SetScale(Vector3(10, 20, 0));
     //i_objects.push_back(tree.get());
     //envi_objects.push_back(tree.get());
-    Model* btnModel = ResourceManager::GetInstance()->GetModel(2);
-    Texture* btnTexture = ResourceManager::GetInstance()->GetTexture(3);
-    Shaders* btnShader = ResourceManager::GetInstance()->GetShader(0);
+
     button_play = std::make_shared<GameButton>(btnModel, btnTexture, btnShader);
     button_play->SetPosition(850, 80);
     button_play->SetSize(90, 80);
@@ -226,7 +273,12 @@ bool GSPlay::Init()
     enermy_objects.push_back(org.get());
     temp = *P1;
     return true;
+
+    
+    
 }
+
+ 
 
 void GSPlay::Exit()
 {
@@ -245,6 +297,23 @@ void GSPlay::Resume()
 
 void GSPlay::Update(float deltaTime)
 {
+	uidltime += deltaTime;
+    inventory->SetPosition(Vector3(P1->x, P1->y, 0));
+    for (auto& slot : inventorySlots) {
+        int cols = 10;
+        int row = i / cols;
+        int col = i % cols;
+        float offsetX = -90 + col * 20.0f;
+        float offsetY = 40 - row * 20.0f;
+        slot->set2Dposition(P1->x + offsetX, P1->y + offsetY);
+        i++;
+        if (i >= 30) {
+            i = 0;
+        }
+    }
+	//inv->Update(P1->x, P1->y, deltaTime);
+
+	
     //org->moveTo(P1->x, P1->y);
     //for (size_t i = 0; i < enermy_objects.size(); ++i) {
     //    if (P1->CheckCollision(enermy_objects[i])) {
@@ -394,6 +463,13 @@ void GSPlay::Update(float deltaTime)
             org->Dead();
         }
     }
+    if (keyState['E'])
+    {
+        if (uidltime >= 0.2f) {
+            uidltime = 0.0f;
+            inventory->SetVisible(!inventory->IsVisible());
+		}
+    }
 
 }
 
@@ -409,7 +485,13 @@ void GSPlay::Draw()
     if (overlay) {
         overlay->Draw();
     }
+	inventory->Draw();
+    if (inventory->IsVisible()) {
+        for (auto& sl : inventorySlots) {
+            sl->Draw();
+        }
+    }
     button_play->Draw();
-
+    
 }
 

@@ -130,6 +130,9 @@
     <Filter Include="Resources\Textures">
       <UniqueIdentifier>{ca8ef1a5-2d0e-4b9d-872e-0933f762c2d2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Scripts">
+      <UniqueIdentifier>{14e45f92-7f4c-443e-826a-2fb1ecdce452}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NewTrainingFramework.cpp">
@@ -420,6 +423,18 @@
     <ClCompile Include="GameObject\Stone.cpp">
       <Filter>Source Files\GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="GameObject\Slot.cpp">
+      <Filter>Source Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\Item.cpp">
+      <Filter>Source Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager\ItemDb.cpp">
+      <Filter>Source Files\GameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\InventorySlots.cpp">
+      <Filter>Source Files\GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h">
@@ -543,6 +558,18 @@
       <Filter>Source Files\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="GameObject\Stone.h">
+      <Filter>Source Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Slot.h">
+      <Filter>Source Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Item.h">
+      <Filter>Source Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager\ItemDb.h">
+      <Filter>Source Files\GameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\InventorySlots.h">
       <Filter>Source Files\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
