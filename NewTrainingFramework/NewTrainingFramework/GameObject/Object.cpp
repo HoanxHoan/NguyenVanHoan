@@ -79,6 +79,13 @@ bool Object::CheckCollisionEnermy(Object* other)
         y + height / 2 < other->y+5  - other->height / 2 ||
         y - height / 2 > other->y+5  + other->height / 2);
 }
+bool Object::CheckCollisionStone(Object* other)
+{
+    return !(x + width / 2 < other->x - other->width / 2 ||
+        x - width / 2 > other->x + other->width / 2 ||
+        y + height / 2 < other->y+8  - other->height / 5 ||
+        y - height / 2 > other->y+8 + other->height / 5);
+}
 void Object::SetMVP()
 {
 

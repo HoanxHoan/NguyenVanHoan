@@ -188,8 +188,17 @@ bool GSPlay::Init()
         tree->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
         tree->SetScale(Vector3(40, 80, 0));
         i_objects.push_back(tree);
-        i_objects.push_back(tree);
         envi_objects.push_back(tree);
+    }
+    Texture* stonetexture1 = ResourceManager::GetInstance()->GetTexture(28);
+    Texture* stonetexture2 = ResourceManager::GetInstance()->GetTexture(29);
+    Texture* stonetexture3 = ResourceManager::GetInstance()->GetTexture(30);
+    for (int i = 0; i < 50; ++i) {
+        stone = std::make_shared<Stone>(model, shader, stonetexture1, 1, 0, 1, 0, 0.1f);
+        stone->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
+        stone->SetScale(Vector3(30, 60, 0));
+        i_objects.push_back(stone);
+        envi_objects.push_back(stone);
     }
     //tree = std::make_shared<Environment>(model, shader, treetexture, 1, 0, 1, 0, 0.1f);
     //tree->SetPosition(Vector3(50, 10, 0));
@@ -359,19 +368,26 @@ void GSPlay::Update(float deltaTime)
     {    
         P1->Crush(action, count);
         action = 1;
-        
+        for (auto& obj : envi_objects) {
+            if (P1->GetHitbox(count)->CheckCollisionStone(obj.get()))
+            {
+                if (auto env = dynamic_cast<Stone*>(obj.get())) {
+                    env->Crush();
+                }
+            }
+        }
     }
     if (keyState['K'])
     {
         P1->Slice(action, count);
         action = 1;
-        for (auto& tree : envi_objects) {
-            if (P1->GetHitbox(count)->CheckCollisionTree(tree.get()))
+        for (auto& obj : envi_objects) {
+            if (P1->GetHitbox(count)->CheckCollisionTree(obj.get()))
             {
-                if (auto env = dynamic_cast<Tree*>(tree.get())) {
+                if (auto env = dynamic_cast<Tree*>(obj.get())) {
                     env->CutTree(); 
                 }
-            }            
+            } 
         }
         if (P1->GetHitbox(count)->CheckCollisionEnermy(org.get()))
         {

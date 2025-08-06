@@ -8,6 +8,7 @@
 #include "../GameObject/SpriteAnimation.h"
 #include "../GameObject/Building.h"
 #include "../GameObject/Tree.h"
+#include "../GameObject/Stone.h"
 #include "../GameObject/Enemy.h"
 #include "../GameObject/Overlay.h"
 #include "../GameObject/Player.h"
@@ -39,6 +40,7 @@ public:
     std::shared_ptr<Building>bonfire;
     std::shared_ptr<Building>fire;
     std::shared_ptr<Tree>tree;
+    std::shared_ptr<Stone>stone;
     std::shared_ptr<Enemy>org;
     std::shared_ptr<Player>P1;
     std::shared_ptr<Overlay> overlay;

@@ -4,7 +4,7 @@ Stone::Stone(Model* model, Shaders* shader, Texture* texture,
     GLint numFrames, GLint currentFrame, GLint numActions, GLint currentAction, GLfloat frameTime)
     : SpriteAnimation(model, shader, texture, numFrames, currentFrame, numActions, currentAction, frameTime)
 {
-    hp = 7;
+    hp = 5;
 }
 void Stone::Crush() {
     if (hp >= 1) {
@@ -21,6 +21,7 @@ void Stone::EndCrush() {
         this->SetTexture(ResourceManager::GetInstance()->GetTexture(28));
         icut = true;
         iscrush = false;
+        Hpdltime = 0;
         dltime = 0;
     }
 }
@@ -32,13 +33,14 @@ void Stone::Crushed() {
 void Stone::Update(GLfloat deltaTime)
 {
     dltime += deltaTime;
-    if (icut == true && dltime >= 1.0)
+    Hpdltime += deltaTime;
+    if (icut == true && Hpdltime >= 1.0)
     {
         hp = hp - 1;
         icut = false;
     }
-    if (iscrush == true && hp <= 0) { this->Crushed(); }
-    else if (iscrush && dltime>=0.8)
+    if (iscrush == true && hp <= 1) { this->Crushed(); }
+    else if (iscrush && dltime>=0.7)
     {
         EndCrush();
     }

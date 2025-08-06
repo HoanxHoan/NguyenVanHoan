@@ -31,9 +31,10 @@ void Tree::Cutted() {
 void Tree::Update(GLfloat deltaTime)
 {
     dltime += deltaTime;
-    if(icut == true && dltime >= 1.0)
+    if(icut == true && dltime >= 0.7)
     {
         hp = hp - 1;
+        //printf("%d\n", hp);
         icut = false;
     }
     if (iscut==true  && hp <= 0) { this->Cutted(); }

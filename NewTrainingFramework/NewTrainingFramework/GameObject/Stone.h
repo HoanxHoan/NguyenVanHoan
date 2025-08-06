@@ -14,7 +14,7 @@ public:
 
 private:
     bool iscrush;
-    float dltime;
+    float dltime,Hpdltime;
     bool icut;
     int hp;
 };
