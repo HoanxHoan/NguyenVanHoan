@@ -5,7 +5,7 @@
  FILE ../Resources/Models/Woman2.nfg
  ID 2
  FILE ../Resources/Models/Sprite2D.nfg
- #2DTexture 34
+ #2DTexture 35
  ID 0
  FILE ../Resources/Textures/Entities/Characters/Walk_Base/Walk_Side-Sheet.tga
  TILING GL_REPEAT
@@ -108,6 +108,10 @@
  ID 33
  FILE ../Resources/Textures/Environment/Props/Static/Rocks/Rocks_3_crush.tga
  TILING GL_CLAMP_TO_EDGE
+ ID 34
+ FILE ../Resources/Textures/UI/inventory.tga
+ TILING GL_CLAMP_TO_EDGE
+ 
  #Shader 3
  ID 0
  VS ../Resources/Shaders/TriangleShaderVS.vs

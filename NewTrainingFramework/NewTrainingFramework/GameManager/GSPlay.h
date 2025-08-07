@@ -13,6 +13,8 @@
 #include "../GameObject/Overlay.h"
 #include "../GameObject/Player.h"
 #include "../tinyxml2.h"
+#include "../GameObject/InventorySlots.h"
+#include "../GameObject/Slot.h"
 class GSPlay : public GameStateBase
 {
 public:
@@ -29,6 +31,7 @@ public:
     void Draw() override;
     void HandleInput(unsigned char key, bool isPressed) override;
     void HandleMouseClick(GLint x, GLint y, bool isClick) override;
+    std::vector<std::shared_ptr<Slot>> GetAllSlots();
     StateType GetStateType() const override { return StateType::PLAY; }
     bool IsWaterTile(int xPixel, int yPixel);
     Vector3 GetRandomValidPosition();
@@ -39,15 +42,19 @@ public:
     //std::shared_ptr<SpriteAnimation> P1;
     std::shared_ptr<Building>bonfire;
     std::shared_ptr<Building>fire;
+    std::shared_ptr<InventorySlots> inv;
+    std::vector<std::shared_ptr<Slot>> inventorySlots;
+	std::shared_ptr<Slot> slot;
     std::shared_ptr<Tree>tree;
     std::shared_ptr<Stone>stone;
     std::shared_ptr<Enemy>org;
     std::shared_ptr<Player>P1;
     std::shared_ptr<Overlay> overlay;
     std::vector<Vector2> lights;
+	std::shared_ptr<Building> inventory;
     bool keyState[256] = { false };
     int x, y, count,action;
-    float dltime = 0.0f, actiontime = 0.0f;
+    float dltime = 0.0f, actiontime = 0.0f, uidltime = 0.0f;
     std::vector<std::shared_ptr<Object>> i_objects;
     //std::vector<Object*> i_objects;
     std::vector<std::shared_ptr<Object>> envi_objects;
@@ -58,7 +65,7 @@ public:
     int mapHeight;
     int tileWidth;
     int tileHeight;
-
+    int i = 0;
     int mapPixelWidth ;
     int mapPixelHeight ;
 

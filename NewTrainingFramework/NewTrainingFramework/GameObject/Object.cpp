@@ -83,8 +83,8 @@ bool Object::CheckCollisionStone(Object* other)
 {
     return !(x + width / 2 < other->x - other->width / 2 ||
         x - width / 2 > other->x + other->width / 2 ||
-        y + height / 2 < other->y+3  - other->height / 4 ||
-        y - height / 2 > other->y+3 + other->height / 4);
+        y + height / 2 < other->y+3  - other->height / 2 ||
+        y - height / 2 > other->y+3 + other->height / 2);
 }
 bool Object::CheckCollisionenvir(Object* other)
 {
