@@ -62,7 +62,7 @@ public:
     std::vector<std::shared_ptr<Object>> i_objects;
     //std::vector<Object*> i_objects;
     std::vector<std::shared_ptr<Object>> envi_objects;
-    std::vector<Object*> enermy_objects;
+    std::vector<std::shared_ptr<Object>> enermy_objects;
     std::vector<Object*> i_bonfire;
     std::vector<int> waterTiles;
     int mapWidth ;

@@ -325,11 +325,16 @@ bool GSPlay::Init()
         });
     //enermy
     Texture* orgTexture = ResourceManager::GetInstance()->GetTexture(22);
-    org = std::make_shared<Enemy>(model, shader, orgTexture, 6, 0, 1, 0, 0.1f);
-    org->SetPosition(Vector3(400, 400, 0));
-    org->SetScale(Vector3(28, 32, 0));
-    i_objects.push_back(org);
-    enermy_objects.push_back(org.get());
+    for (int i = 0; i < 10; ++i) {
+        org = std::make_shared<Enemy>(model, shader, orgTexture, 6, 0, 1, 0, 0.1f);
+        org->type = 1;
+        org->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
+        org->SetScale(Vector3(15, 20, 0));
+        org->setSize(30, 40);
+        org->getObjectList(&i_objects);
+        i_objects.push_back(org);
+        enermy_objects.push_back(org);
+    }
     temp = *P1;
     return true;
 
@@ -412,6 +417,9 @@ void GSPlay::Update(float deltaTime)
         });
     Camera::GetInstance()->Follow(P1->x, P1->y);
     for (auto& obj : i_objects) {
+        if (auto env = dynamic_cast<Enemy*>(obj.get())) {
+            env->moveTo(P1->x,P1->y, deltaTime);
+        }
         obj.get()->Update(deltaTime);
     }
     for (auto obj : i_bonfire) {
@@ -530,9 +538,13 @@ void GSPlay::Update(float deltaTime)
                 }
             
         }
-        if (P1->GetHitbox(count)->CheckCollisionEnermy(org.get()))
-        {
-            org->Dead();
+        for (auto& org : enermy_objects) {
+            if (P1->GetHitbox(count)->CheckCollisionEnermy(org.get()))
+            {
+                if (auto env = dynamic_cast<Enemy*>(org.get())) {
+                    env->onHit(count);
+                }
+            }
         }
     }
     if (keyState['E'])
