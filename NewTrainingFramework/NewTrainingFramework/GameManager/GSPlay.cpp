@@ -226,6 +226,27 @@ bool GSPlay::Init()
         i_objects.push_back(stone);
         envi_objects.push_back(stone);
     }
+    //bush
+    Texture* bushtexture1 = ResourceManager::GetInstance()->GetTexture(35);
+    Texture* bushtexture2 = ResourceManager::GetInstance()->GetTexture(36);
+    for (int i = 0; i < 50; ++i) {
+        bush = std::make_shared<Bush>(model, shader, bushtexture1, 1, 0, 1, 0, 0.1f);
+        bush->type = 1;
+        bush->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
+        bush->SetScale(Vector3(15, 15, 0));
+        bush->setSize(10, 10);
+        i_objects.push_back(bush);
+        envi_objects.push_back(bush);
+    }
+    for (int i = 0; i < 50; ++i) {
+        bush = std::make_shared<Bush>(model, shader, bushtexture2, 1, 0, 1, 0, 0.1f);
+        bush->type = 2;
+        bush->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
+        bush->SetScale(Vector3(15, 15, 0));
+        bush->setSize(10, 10);
+        i_objects.push_back(bush);
+        envi_objects.push_back(bush);
+    }
 
 	Texture* inventoryTexture = ResourceManager::GetInstance()->GetTexture(34);
 	inventory = std::make_shared<Building>(model, shader, inventoryTexture, 1, 0, 1, 0, 0.1f);
@@ -463,13 +484,20 @@ void GSPlay::Update(float deltaTime)
     {
         P1->Slice(action, count);
         action = 1;
-        for (auto& obj : envi_objects) {
-            if (P1->GetHitbox(count)->CheckCollisionTree(obj.get()))
-            {
+        for (auto& obj : envi_objects) {        
                 if (auto env = dynamic_cast<Tree*>(obj.get())) {
-                    env->CutTree(); 
+                    if (P1->GetHitbox(count)->CheckCollisionTree(obj.get()))
+                    {
+                        env->CutTree();
+                    }
                 }
-            } 
+                if (auto env = dynamic_cast<Bush*>(obj.get())) {
+                    if (P1->GetHitbox(count)->CheckCollision(obj.get()))
+                    {
+                        env->Cut();
+                    }
+                }
+            
         }
         if (P1->GetHitbox(count)->CheckCollisionEnermy(org.get()))
         {

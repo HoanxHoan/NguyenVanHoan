@@ -5,7 +5,7 @@
  FILE ../Resources/Models/Woman2.nfg
  ID 2
  FILE ../Resources/Models/Sprite2D.nfg
- #2DTexture 35
+ #2DTexture 39
  ID 0
  FILE ../Resources/Textures/Entities/Characters/Walk_Base/Walk_Side-Sheet.tga
  TILING GL_REPEAT
@@ -111,7 +111,18 @@
  ID 34
  FILE ../Resources/Textures/UI/inventory.tga
  TILING GL_CLAMP_TO_EDGE
- 
+ ID 35
+ FILE ../Resources/Textures/Environment/Props/Static/Bush/Bush-GREEN.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 36
+ FILE ../Resources/Textures/Environment/Props/Static/Bush/Bush-RED.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 37
+ FILE ../Resources/Textures/Environment/Props/Static/Bush/Bush-GREEN-cut.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 38
+ FILE ../Resources/Textures/Environment/Props/Static/Bush/Bush-RED-cut.tga
+ TILING GL_CLAMP_TO_EDGE
  #Shader 3
  ID 0
  VS ../Resources/Shaders/TriangleShaderVS.vs
