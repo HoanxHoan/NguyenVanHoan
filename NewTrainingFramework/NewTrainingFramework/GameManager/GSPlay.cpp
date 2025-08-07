@@ -200,6 +200,7 @@ bool GSPlay::Init()
         stone->type = 1;
         stone->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
         stone->SetScale(Vector3(20, 40, 0));
+        stone->setSize(20, 30);
         i_objects.push_back(stone);
         envi_objects.push_back(stone);
     }
