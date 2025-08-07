@@ -5,7 +5,7 @@
  FILE ../Resources/Models/Woman2.nfg
  ID 2
  FILE ../Resources/Models/Sprite2D.nfg
- #2DTexture 39
+ #2DTexture 47
  ID 0
  FILE ../Resources/Textures/Entities/Characters/Walk_Base/Walk_Side-Sheet.tga
  TILING GL_REPEAT
@@ -122,6 +122,30 @@
  TILING GL_CLAMP_TO_EDGE
  ID 38
  FILE ../Resources/Textures/Environment/Props/Static/Bush/Bush-RED-cut.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 39
+ FILE ../Resources/Textures/Environment/Props/Static/animal/Deer/idle.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 40
+ FILE ../Resources/Textures/Environment/Props/Static/animal/Deer/walk.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 41
+ FILE ../Resources/Textures/Environment/Props/Static/animal/Deer/dead.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 42
+ FILE ../Resources/Textures/Environment/Props/Static/animal/Deer/onHit.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 43
+ FILE ../Resources/Textures/Environment/Props/Static/animal/Boar/idle.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 44
+ FILE ../Resources/Textures/Environment/Props/Static/animal/Boar/walk.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 45
+ FILE ../Resources/Textures/Environment/Props/Static/animal/Boar/dead.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 46
+ FILE ../Resources/Textures/Environment/Props/Static/animal/Boar/onHit.tga
  TILING GL_CLAMP_TO_EDGE
  #Shader 3
  ID 0

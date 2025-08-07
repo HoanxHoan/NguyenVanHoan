@@ -10,6 +10,7 @@
 #include "../GameObject/Tree.h"
 #include "../GameObject/Stone.h"
 #include "../GameObject/Bush.h"
+#include "../GameObject/Animal.h"
 #include "../GameObject/Enemy.h"
 #include "../GameObject/Overlay.h"
 #include "../GameObject/Player.h"
@@ -49,6 +50,7 @@ public:
     std::shared_ptr<Tree>tree;
     std::shared_ptr<Stone>stone;
     std::shared_ptr<Bush>bush;
+    std::shared_ptr<Animal>animal;
     std::shared_ptr<Enemy>org;
     std::shared_ptr<Player>P1;
     std::shared_ptr<Overlay> overlay;

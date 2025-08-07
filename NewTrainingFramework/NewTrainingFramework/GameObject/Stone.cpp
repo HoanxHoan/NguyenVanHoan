@@ -55,12 +55,12 @@ void Stone::Update(GLfloat deltaTime)
     Hpdltime += deltaTime;
     if (icut == true && Hpdltime >= 0.5)
     {
-        hp = hp - 1;
         icut = false;
     }
     if (iscrush == true && hp <= 1) { this->Crushed(); }
     else if (iscrush && dltime>=0.1)
     {
+        hp = hp - 1;
         EndCrush();
     }
     SpriteAnimation::Update(deltaTime);

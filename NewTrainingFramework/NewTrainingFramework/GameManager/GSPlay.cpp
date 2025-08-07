@@ -222,7 +222,7 @@ bool GSPlay::Init()
         stone->type = 2;
         stone->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
         stone->SetScale(Vector3(30, 40, 0));
-        stone->setSize(30, 20);
+        stone->setSize(40, 20);
         i_objects.push_back(stone);
         envi_objects.push_back(stone);
     }
@@ -247,7 +247,32 @@ bool GSPlay::Init()
         i_objects.push_back(bush);
         envi_objects.push_back(bush);
     }
-
+    //animal
+    Texture* deertexture = ResourceManager::GetInstance()->GetTexture(39);
+    Texture* boartexture = ResourceManager::GetInstance()->GetTexture(43);
+    for (int i = 0; i < 30; ++i) {
+        animal = std::make_shared<Animal>(model, shader, deertexture, 4, 0, 1, 0, 0.1f);
+        animal->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
+        animal->type = 1;
+        animal->getwaterTiles(waterTiles);
+        animal->getObjectList(&i_objects);
+        animal->SetScale(Vector3(15, 15, 0));
+        animal->setSize(25, 20);
+        i_objects.push_back(animal);
+        envi_objects.push_back(animal);
+    }
+    for (int i = 0; i < 30; ++i) {
+    animal = std::make_shared<Animal>(model, shader, boartexture, 4, 0, 1, 0, 0.1f);
+    animal->type = 2;
+    animal->hp = 4;
+    animal->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
+    animal->getwaterTiles(waterTiles);
+    animal->getObjectList(&i_objects);
+    animal->SetScale(Vector3(20, 20, 0));
+    animal->setSize(30, 25);
+    i_objects.push_back(animal);
+    envi_objects.push_back(animal);
+    }
 	Texture* inventoryTexture = ResourceManager::GetInstance()->GetTexture(34);
 	inventory = std::make_shared<Building>(model, shader, inventoryTexture, 1, 0, 1, 0, 0.1f);
 	inventory->SetPosition(Vector3(P1->x, P1->y, 0));
@@ -495,6 +520,12 @@ void GSPlay::Update(float deltaTime)
                     if (P1->GetHitbox(count)->CheckCollision(obj.get()))
                     {
                         env->Cut();
+                    }
+                }
+                if (auto env = dynamic_cast<Animal*>(obj.get())) {
+                    if (P1->GetHitbox(count)->CheckCollision(obj.get()))
+                    {
+                        env->onHit();
                     }
                 }
             
