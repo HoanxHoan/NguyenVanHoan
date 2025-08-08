@@ -1,20 +1,20 @@
-#include "Enemy.h"
+#include "Boss.h"
 #include <iostream>
 
-Enemy::Enemy(Model* model, Shaders* shader, Texture* texture,
+Boss::Boss(Model* model, Shaders* shader, Texture* texture,
     GLint numFrames, GLint currentFrame, GLint numActions, GLint currentAction, GLfloat frameTime)
     : SpriteAnimation(model, shader, texture, numFrames, currentFrame, numActions, currentAction, frameTime)
 {
-    hp = 2; 
+    hp = 5;
     dltime = 0;
     deaddltime = 0;
     death = false;
     isHit = false;
 }
-void Enemy::getObjectList(std::vector<std::shared_ptr<Object>>* O) {
-    others = O;
-}
-void Enemy::Update(GLfloat deltaTime)
+//void Boss::getObjectList(std::vector<std::shared_ptr<Object>>* O) {
+//    others = O;
+//}
+void Boss::Update(GLfloat deltaTime)
 {
     if (isBeingKnockedBack) {
         knockbackTime += deltaTime;
@@ -35,26 +35,26 @@ void Enemy::Update(GLfloat deltaTime)
     }
     dltime += deltaTime;
     deaddltime += deltaTime;
-    if (deaddltime >= 0.3 && death == true) {
+    if (deaddltime >= 0.8 && death == true) {
         this->SetVisible(false);
         this->set2Dposition(-10, -10);
     }
-    else if (hp < 1 && death == false) {
+    else if (hp <= 0 && death == false) {
         this->Dead();
     }
-    else if (dltime >= 0.6 && isHit == true) {
+    else if (dltime >= 0.5 && isHit == true) {
         hp -= 1;
         //printf("%d\n", hp);
         this->endHit();
     }
     SpriteAnimation::Update(deltaTime);
 }
-void Enemy::moveTo(float px, float py, float deltaTime) {
-    if (death == true||isHit==true) { return; }
-    this->SetNumFrames(6);
+void Boss::moveTo(float px, float py, float deltaTime) {
+    if (death == true || isHit == true) { return; }
 
     if (type == 1) {
-        this->SetTexture(ResourceManager::GetInstance()->GetTexture(22));
+        this->SetNumFrames(8);
+        this->SetTexture(ResourceManager::GetInstance()->GetTexture(50));
     }
     if (type == 2) {
         this->SetTexture(ResourceManager::GetInstance()->GetTexture(47));
@@ -80,23 +80,23 @@ void Enemy::moveTo(float px, float py, float deltaTime) {
     temp.set2Dposition(newX, newY);
     temp.setSize(this->width, this->height);
 
-    if (others) {
-        for (auto& obj : *others) {
-            if (obj.get() != this && temp.CheckCollision(obj.get())) {
-                return; 
-            }
-        }
-    }
+    //if (others) {
+    //    for (auto& obj : *others) {
+    //        if (obj.get() != this && temp.CheckCollision(obj.get())) {
+    //            return;
+    //        }
+    //    }
+    //}
     this->x = newX;
     this->y = newY;
     this->SetPosition(Vector3(x, y, 0));
 }
 
-void Enemy::Draw()
+void Boss::Draw()
 {
     SpriteAnimation::Draw();
 }
-void Enemy::onHit(int count) {
+void Boss::onHit(int count) {
     if (hp >= 1 && !isBeingKnockedBack) {
         switch (count) {
         case 1: knockbackDirX = 0;  knockbackDirY = -1; break;
@@ -109,7 +109,7 @@ void Enemy::onHit(int count) {
         knockbackTime = 0.0f;
 
         if (type == 1) {
-            this->SetTexture(ResourceManager::GetInstance()->GetTexture(21));
+            this->SetTexture(ResourceManager::GetInstance()->GetTexture(51));
         }
         if (type == 2) {
             this->SetTexture(ResourceManager::GetInstance()->GetTexture(48));
@@ -122,30 +122,31 @@ void Enemy::onHit(int count) {
     }
 }
 
-void Enemy::endHit() {
+void Boss::endHit() {
     if (hp >= 1) {
         if (type == 1) {
-            this->SetTexture(ResourceManager::GetInstance()->GetTexture(22));
+            this->SetTexture(ResourceManager::GetInstance()->GetTexture(50));
+            this->SetNumFrames(8);
         }
         if (type == 2) {
             this->SetTexture(ResourceManager::GetInstance()->GetTexture(47));
         }
-        this->SetNumFrames(6);
         this->SetCurrentFrame(0);
         isHit = false;
         dltime = 0;
     }
 }
-void Enemy::Dead()
+void Boss::Dead()
 {
     if (type == 1) {
-        this->SetTexture(ResourceManager::GetInstance()->GetTexture(26));
+        this->SetTexture(ResourceManager::GetInstance()->GetTexture(52));
+        this->SetNumFrames(3);
     }
     if (type == 2) {
         this->SetTexture(ResourceManager::GetInstance()->GetTexture(49));
     }
-    this->SetNumFrames(6);
     this->SetCurrentFrame(0);
+    this->SetFrameTime(0.2);
     death = true;
     deaddltime = 0;
 }

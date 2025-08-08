@@ -1,6 +1,9 @@
 #pragma once
 #include "SpriteAnimation.h"
-
+#include <fstream>
+#include <sstream>
+#include <iostream>
+#include <vector>
 class Player : public SpriteAnimation {
 public:
     Player(Model* model, Shaders* shader, Texture* texture,
@@ -16,11 +19,22 @@ public:
     void Crush(int action, int count);
     void Slice(int action, int count);
     void Dead();
+    void onHit(int count,float x,float y);
     Object* GetHitbox(int count);
     ///void SetMapBoundary(float maxX, float maxY);
     bool IsWaterTile(int xPixel, int yPixel);
     //float clamp(float value, float min, float max);
     int m_maxX, m_maxY;
+    bool onhit;
+    float hitdltime;
+    bool isBeingKnockedBack = false;
+    float knockbackTime = 0.0f;
+    float knockbackDuration = 0.2f;
+    float knockbackSpeed = 100.0f;
+    float knockbackDirX = 0.0f;
+    float knockbackDirY = 0.0f;
     std::shared_ptr<Object>hitbox;
+    std::vector<std::shared_ptr<Object>>* others = nullptr;
+    void getObjectList(std::vector<std::shared_ptr<Object>>* Object);
 };
 

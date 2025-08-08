@@ -69,6 +69,7 @@ GSPlay::GSPlay() {
     actiontime = 0.0f;
     uidltime = 0.00f;
     action = 0;
+    onhit = false;
     Init();
 }
 GSPlay::~GSPlay() {
@@ -165,6 +166,7 @@ bool GSPlay::Init()
 
     P1->SetPosition(Vector3(200, 200, 0));
     P1->SetScale(Vector3(30, 40, 0));
+    //P1->setSize(15, 20);
     i_objects.push_back(P1);
     Model* quadModel = ResourceManager::GetInstance()->GetModel(2);
     Texture* blackTex = ResourceManager::GetInstance()->GetTexture(20);
@@ -325,6 +327,7 @@ bool GSPlay::Init()
         });
     //enermy
     Texture* orgTexture = ResourceManager::GetInstance()->GetTexture(22);
+    Texture* skeletonTexture = ResourceManager::GetInstance()->GetTexture(47);
     for (int i = 0; i < 10; ++i) {
         org = std::make_shared<Enemy>(model, shader, orgTexture, 6, 0, 1, 0, 0.1f);
         org->type = 1;
@@ -334,8 +337,29 @@ bool GSPlay::Init()
         org->getObjectList(&i_objects);
         i_objects.push_back(org);
         enermy_objects.push_back(org);
+        envi_objects.push_back(org);
     }
+    for (int i = 0; i < 10; ++i) {
+        org = std::make_shared<Enemy>(model, shader, skeletonTexture, 6, 0, 1, 0, 0.1f);
+        org->type = 2;
+        org->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
+        org->SetScale(Vector3(15, 20, 0));
+        org->setSize(30, 40);
+        org->getObjectList(&i_objects);
+        i_objects.push_back(org);
+        enermy_objects.push_back(org);
+    }
+    //Boss
+    Texture* SlimeTexture = ResourceManager::GetInstance()->GetTexture(50);
+    boss = std::make_shared<Boss>(model, shader, SlimeTexture, 8, 0, 1, 0, 0.1f);
+    boss->type = 1;
+    boss->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
+    boss->SetScale(Vector3(50, 50, 0));
+    boss->setSize(70, 70);
+    i_objects.push_back(boss);
+    Boss_objects.push_back(boss);
     temp = *P1;
+    P1->getObjectList(&i_objects);
     return true;
 
     
@@ -361,7 +385,11 @@ void GSPlay::Resume()
 
 void GSPlay::Update(float deltaTime)
 {
+    onhitdltime += deltaTime;
 	uidltime += deltaTime;
+    if (onhit == true && onhitdltime >= 1.5) {
+        onhit = false;
+    }
     inventory->SetPosition(Vector3(P1->x, P1->y, 0));
     for (auto& slot : inventorySlots) {
         int cols = 10;
@@ -419,14 +447,27 @@ void GSPlay::Update(float deltaTime)
     for (auto& obj : i_objects) {
         if (auto env = dynamic_cast<Enemy*>(obj.get())) {
             env->moveTo(P1->x,P1->y, deltaTime);
+            if (P1->CheckCollision(env) && onhit==false) {
+                P1->onHit(count, env->x, env->y);
+                onhit = true;
+                onhitdltime = 0;
+            }
+        }
+        if (auto env = dynamic_cast<Boss*>(obj.get())) {
+            env->moveTo(P1->x, P1->y, deltaTime);
+            if (P1->CheckCollision(env) && onhit == false) {
+                P1->onHit(count, env->x, env->y);
+                onhit = true;
+                onhitdltime = 0;
+            }
         }
         obj.get()->Update(deltaTime);
     }
     for (auto obj : i_bonfire) {
         obj->Update(deltaTime);
     }
-    if (keyState['W']) {
-        if (action == 0) {
+    if (keyState['W'] ) {
+        if (action == 0 ) {
             hasCollision = false;
             count = 1;
             float newY = P1->y - 300 * deltaTime;
@@ -445,7 +486,7 @@ void GSPlay::Update(float deltaTime)
         }
     }
     if (keyState['D']) {
-        if (action == 0) {
+        if (action == 0 ) {
             hasCollision = false;
             count = 2;
             float newX = P1->x + 300 * deltaTime;
@@ -463,8 +504,8 @@ void GSPlay::Update(float deltaTime)
             }
         }
     }
-    if (keyState['A']) {
-        if (action == 0) {
+    if (keyState['A'] ) {
+        if (action == 0 ) {
             hasCollision = false;
             count = 4;
             float newX = P1->x - 300 * deltaTime;
@@ -482,7 +523,7 @@ void GSPlay::Update(float deltaTime)
             }
         }
     }
-    if (keyState['S']) {
+    if (keyState['S'] ) {
         if (action == 0) {
             hasCollision = false;
             count = 3;
@@ -500,7 +541,7 @@ void GSPlay::Update(float deltaTime)
             }
         }
     }
-    if (keyState['J'])
+    if (keyState['J'] )
     {    
         P1->Crush(action, count);
         action = 1;
@@ -513,7 +554,7 @@ void GSPlay::Update(float deltaTime)
             }
         }
     }
-    if (keyState['K'])
+    if (keyState['K'] )
     {
         P1->Slice(action, count);
         action = 1;
@@ -542,6 +583,14 @@ void GSPlay::Update(float deltaTime)
             if (P1->GetHitbox(count)->CheckCollisionEnermy(org.get()))
             {
                 if (auto env = dynamic_cast<Enemy*>(org.get())) {
+                    env->onHit(count);
+                }
+            }
+        }
+        for (auto& org : Boss_objects) {
+            if (P1->GetHitbox(count)->CheckCollisionEnermy(org.get()))
+            {
+                if (auto env = dynamic_cast<Boss*>(org.get())) {
                     env->onHit(count);
                 }
             }

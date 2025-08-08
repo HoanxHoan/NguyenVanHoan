@@ -438,6 +438,9 @@
     <ClCompile Include="GameObject\Bush.cpp">
       <Filter>Source Files\GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="GameObject\Boss.cpp">
+      <Filter>Source Files\GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h">
@@ -576,6 +579,9 @@
       <Filter>Source Files\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="GameObject\Bush.h">
+      <Filter>Source Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Boss.h">
       <Filter>Source Files\GameObject</Filter>
     </ClInclude>
   </ItemGroup>

@@ -4,28 +4,27 @@
 #include <sstream>
 #include <iostream>
 #include <vector>
-class Enemy : public SpriteAnimation {
+class Boss : public SpriteAnimation {
 public:
-    Enemy(Model* model, Shaders* shader, Texture* texture,
+    Boss(Model* model, Shaders* shader, Texture* texture,
         GLint numFrames, GLint currentFrame, GLint numActions, GLint currentAction, GLfloat frameTime);
 
     void Update(GLfloat deltaTime) override;
     void Draw() override;
-    void moveTo(float x,float y, float deltaTime);
+    void moveTo(float x, float y, float deltaTime);
     void Dead();
     void onHit(int count);
     void endHit();
     int hp, type;
-    std::vector<std::shared_ptr<Object>>* others = nullptr;
-    void getObjectList(std::vector<std::shared_ptr<Object>>* Object);
+    //std::vector<std::shared_ptr<Object>>* others = nullptr;
+    //void getObjectList(std::vector<std::shared_ptr<Object>>* Object);
 private:
     float dltime, deaddltime;
     bool death, isHit;
     bool isBeingKnockedBack = false;
     float knockbackTime = 0.0f;
     float knockbackDuration = 0.1f;
-    float knockbackSpeed = 50.0f; 
+    float knockbackSpeed = 20.0f;
     float knockbackDirX = 0.0f;
     float knockbackDirY = 0.0f;
 };
-

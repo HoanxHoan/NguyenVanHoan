@@ -5,7 +5,7 @@
  FILE ../Resources/Models/Woman2.nfg
  ID 2
  FILE ../Resources/Models/Sprite2D.nfg
- #2DTexture 47
+ #2DTexture 56
  ID 0
  FILE ../Resources/Textures/Entities/Characters/Walk_Base/Walk_Side-Sheet.tga
  TILING GL_REPEAT
@@ -146,6 +146,33 @@
  TILING GL_CLAMP_TO_EDGE
  ID 46
  FILE ../Resources/Textures/Environment/Props/Static/animal/Boar/onHit.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 47
+ FILE ../Resources/Textures/Entities/Mobs/Skeleton_Crew/Skeleton_Base/run.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 48
+ FILE ../Resources/Textures/Entities/Mobs/Skeleton_Crew/Skeleton_Base/onHit.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 49
+ FILE ../Resources/Textures/Entities/Mobs/Skeleton_Crew/Skeleton_Base/dead.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 50
+ FILE ../Resources/Textures/Entities/Mobs/Boss/Slime/walk2.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 51
+ FILE ../Resources/Textures/Entities/Mobs/Boss/Slime/onHit.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 52
+ FILE ../Resources/Textures/Entities/Mobs/Boss/Slime/dead2.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 53
+ FILE ../Resources/Textures/Entities/Characters/Hit_Base/Hit_Up-Sheet.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 54
+ FILE ../Resources/Textures/Entities/Characters/Hit_Base/Hit_Side-Sheet.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 55
+ FILE ../Resources/Textures/Entities/Characters/Hit_Base/Hit_Down-Sheet.tga
  TILING GL_CLAMP_TO_EDGE
  #Shader 3
  ID 0

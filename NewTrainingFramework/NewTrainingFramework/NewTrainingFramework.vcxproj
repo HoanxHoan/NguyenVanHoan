@@ -105,6 +105,7 @@
     <ClCompile Include="GameManager\ResourceManager.cpp" />
     <ClCompile Include="GameManager\Scene.cpp" />
     <ClCompile Include="GameObject\Animal.cpp" />
+    <ClCompile Include="GameObject\Boss.cpp" />
     <ClCompile Include="GameObject\Building.cpp" />
     <ClCompile Include="GameObject\Bush.cpp" />
     <ClCompile Include="GameObject\Enemy.cpp" />
@@ -211,6 +212,7 @@
     <ClInclude Include="GameManager\ResourceManager.h" />
     <ClInclude Include="GameManager\Scene.h" />
     <ClInclude Include="GameObject\Animal.h" />
+    <ClInclude Include="GameObject\Boss.h" />
     <ClInclude Include="GameObject\Building.h" />
     <ClInclude Include="GameObject\Bush.h" />
     <ClInclude Include="GameObject\Camera.h" />
