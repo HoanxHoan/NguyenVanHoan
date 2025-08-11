@@ -70,6 +70,7 @@ GSPlay::GSPlay() {
     actiontime = 0.0f;
     uidltime = 0.00f;
     action = 0;
+    onhit = false;
     Init();
 }
 GSPlay::~GSPlay() {
@@ -178,6 +179,7 @@ bool GSPlay::Init()
 
     P1->SetPosition(Vector3(200, 200, 0));
     P1->SetScale(Vector3(30, 40, 0));
+    P1->setSize(15, 20);
     i_objects.push_back(P1);
     Model* quadModel = ResourceManager::GetInstance()->GetModel(2);
     Texture* blackTex = ResourceManager::GetInstance()->GetTexture(20);
@@ -226,6 +228,7 @@ bool GSPlay::Init()
         stone->type = 1;
         stone->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
         stone->SetScale(Vector3(20, 40, 0));
+        stone->setSize(20, 30);
         i_objects.push_back(stone);
         envi_objects.push_back(stone);
     }
@@ -234,7 +237,7 @@ bool GSPlay::Init()
         stone->type = 2;
         stone->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
         stone->SetScale(Vector3(30, 40, 0));
-        stone->setSize(30, 20);
+        stone->setSize(40, 20);
         i_objects.push_back(stone);
         envi_objects.push_back(stone);
     }
@@ -256,6 +259,63 @@ bool GSPlay::Init()
         int cols = 10;
         int row = i / cols;
         int col = i % cols;
+    //bush
+    Texture* bushtexture1 = ResourceManager::GetInstance()->GetTexture(35);
+    Texture* bushtexture2 = ResourceManager::GetInstance()->GetTexture(36);
+    for (int i = 0; i < 50; ++i) {
+        bush = std::make_shared<Bush>(model, shader, bushtexture1, 1, 0, 1, 0, 0.1f);
+        bush->type = 1;
+        bush->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
+        bush->SetScale(Vector3(15, 15, 0));
+        bush->setSize(10, 10);
+        i_objects.push_back(bush);
+        envi_objects.push_back(bush);
+    }
+    for (int i = 0; i < 50; ++i) {
+        bush = std::make_shared<Bush>(model, shader, bushtexture2, 1, 0, 1, 0, 0.1f);
+        bush->type = 2;
+        bush->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
+        bush->SetScale(Vector3(15, 15, 0));
+        bush->setSize(10, 10);
+        i_objects.push_back(bush);
+        envi_objects.push_back(bush);
+    }
+    //animal
+    Texture* deertexture = ResourceManager::GetInstance()->GetTexture(39);
+    Texture* boartexture = ResourceManager::GetInstance()->GetTexture(43);
+    for (int i = 0; i < 30; ++i) {
+        animal = std::make_shared<Animal>(model, shader, deertexture, 4, 0, 1, 0, 0.1f);
+        animal->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
+        animal->type = 1;
+        animal->getwaterTiles(waterTiles);
+        animal->getObjectList(&i_objects);
+        animal->SetScale(Vector3(15, 15, 0));
+        animal->setSize(25, 20);
+        i_objects.push_back(animal);
+        envi_objects.push_back(animal);
+    }
+    for (int i = 0; i < 30; ++i) {
+    animal = std::make_shared<Animal>(model, shader, boartexture, 4, 0, 1, 0, 0.1f);
+    animal->type = 2;
+    animal->hp = 4;
+    animal->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
+    animal->getwaterTiles(waterTiles);
+    animal->getObjectList(&i_objects);
+    animal->SetScale(Vector3(20, 20, 0));
+    animal->setSize(30, 25);
+    i_objects.push_back(animal);
+    envi_objects.push_back(animal);
+    }
+	Texture* inventoryTexture = ResourceManager::GetInstance()->GetTexture(34);
+	inventory = std::make_shared<Building>(model, shader, inventoryTexture, 1, 0, 1, 0, 0.1f);
+	inventory->SetPosition(Vector3(P1->x, P1->y, 0));
+    inventory->SetScale(Vector3(200, 110, 0));
+    inventory->SetVisible(false);
+
+    Texture* slotTexture = ResourceManager::GetInstance()->GetTexture(3); 
+    inv = std::make_shared<InventorySlots>(
+        model, slotTexture, shader
+    );
 
         float offsetX = -43 + col * 15.0f;
         float offsetY = 30 - row * 15.0f;
@@ -273,6 +333,21 @@ bool GSPlay::Init()
         inventorySlots.push_back(slot);
         // (tuỳ chọn) nếu bạn cần giữ shared_ptr:
 
+            float offsetX = -90 + col * 20.0f;
+            float offsetY = 40 - row * 20.0f;
+			slot->setSize(10, 10);
+            slot->SetSize(20, 20);
+            slot->SetPosition(480 + offsetX * 4.8 , 360 + offsetY * 3.6);
+            //slot->SetPosition(P1->x, P1->y);
+            slot->set2Dposition(P1->x + offsetX, P1->y + offsetY);
+            slot->SetOnClick([]() {
+                printf("Slot clicked\n");
+                
+				});
+            //inv->AddSlot(slot);
+            inventorySlots.push_back(slot);
+            
+        
     }
     Texture* hotbarTexture = ResourceManager::GetInstance()->GetTexture(70);
     for (int i = 0; i < 10; ++i) {
@@ -318,12 +393,48 @@ bool GSPlay::Init()
         });
     //enermy
     Texture* orgTexture = ResourceManager::GetInstance()->GetTexture(22);
-    org = std::make_shared<Enemy>(model, shader, orgTexture, 6, 0, 1, 0, 0.1f);
-    org->SetPosition(Vector3(400, 400, 0));
-    org->SetScale(Vector3(28, 32, 0));
-    i_objects.push_back(org);
-    enermy_objects.push_back(org.get());
+    Texture* skeletonTexture = ResourceManager::GetInstance()->GetTexture(47);
+    for (int i = 0; i < 10; ++i) {
+        org = std::make_shared<Enemy>(model, shader, orgTexture, 6, 0, 1, 0, 0.1f);
+        org->type = 1;
+        org->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
+        org->SetScale(Vector3(15, 20, 0));
+        org->setSize(30, 40);
+        org->getObjectList(&i_objects);
+        i_objects.push_back(org);
+        enermy_objects.push_back(org);
+        envi_objects.push_back(org);
+    }
+    for (int i = 0; i < 10; ++i) {
+        org = std::make_shared<Enemy>(model, shader, skeletonTexture, 6, 0, 1, 0, 0.1f);
+        org->type = 2;
+        org->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
+        org->SetScale(Vector3(15, 20, 0));
+        org->setSize(30, 40);
+        org->getObjectList(&i_objects);
+        i_objects.push_back(org);
+        enermy_objects.push_back(org);
+    }
+    //Boss
+    Texture* SlimeTexture = ResourceManager::GetInstance()->GetTexture(50);
+    boss = std::make_shared<Boss>(model, shader, SlimeTexture, 8, 0, 1, 0, 0.1f);
+    boss->type = 1;
+    boss->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
+    boss->SetScale(Vector3(50, 50, 0));
+    boss->setSize(70, 70);
+    i_objects.push_back(boss);
+    Boss_objects.push_back(boss);
+
+    Texture* necroTexture = ResourceManager::GetInstance()->GetTexture(56);
+    boss = std::make_shared<Boss>(model, shader, necroTexture, 8, 0, 1, 0, 0.1f);
+    boss->type = 2;
+    boss->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
+    boss->SetScale(Vector3(50, 50, 0));
+    boss->setSize(70, 70);
+    i_objects.push_back(boss);
+    Boss_objects.push_back(boss);
     temp = *P1;
+    P1->getObjectList(&i_objects);
     return true;
 
 
@@ -350,6 +461,12 @@ void GSPlay::Update(float deltaTime)
 {
     uidltime += deltaTime;
     inventory->SetPosition(Vector3(P1->x + 30, P1->y+15, 0));
+    onhitdltime += deltaTime;
+	uidltime += deltaTime;
+    if (onhit == true && onhitdltime >= 1.5) {
+        onhit = false;
+    }
+    inventory->SetPosition(Vector3(P1->x, P1->y, 0));
     for (auto& slot : inventorySlots) {
         int cols = 10;
         int row = i / cols;
@@ -425,13 +542,29 @@ void GSPlay::Update(float deltaTime)
         });
     Camera::GetInstance()->Follow(P1->x, P1->y);
     for (auto& obj : i_objects) {
+        if (auto env = dynamic_cast<Enemy*>(obj.get())) {
+            env->moveTo(P1->x,P1->y, deltaTime);
+            if (P1->CheckCollision(env) && onhit==false) {
+                P1->onHit(count, env->x, env->y);
+                onhit = true;
+                onhitdltime = 0;
+            }
+        }
+        if (auto env = dynamic_cast<Boss*>(obj.get())) {
+            env->moveTo(P1->x, P1->y, deltaTime);
+            if (P1->CheckCollision(env) && onhit == false) {
+                P1->onHit(count, env->x, env->y);
+                onhit = true;
+                onhitdltime = 0;
+            }
+        }
         obj.get()->Update(deltaTime);
     }
     for (auto obj : i_bonfire) {
         obj->Update(deltaTime);
     }
-    if (keyState['W']) {
-        if (action == 0) {
+    if (keyState['W'] ) {
+        if (action == 0 ) {
             hasCollision = false;
             count = 1;
             float newY = P1->y - movement_speed * deltaTime;
@@ -450,7 +583,7 @@ void GSPlay::Update(float deltaTime)
         }
     }
     if (keyState['D']) {
-        if (action == 0) {
+        if (action == 0 ) {
             hasCollision = false;
             count = 2;
             float newX = P1->x + movement_speed * deltaTime;
@@ -468,8 +601,8 @@ void GSPlay::Update(float deltaTime)
             }
         }
     }
-    if (keyState['A']) {
-        if (action == 0) {
+    if (keyState['A'] ) {
+        if (action == 0 ) {
             hasCollision = false;
             count = 4;
             float newX = P1->x - movement_speed * deltaTime;
@@ -487,7 +620,7 @@ void GSPlay::Update(float deltaTime)
             }
         }
     }
-    if (keyState['S']) {
+    if (keyState['S'] ) {
         if (action == 0) {
             hasCollision = false;
             count = 3;
@@ -505,8 +638,8 @@ void GSPlay::Update(float deltaTime)
             }
         }
     }
-    if (keyState['J'])
-    {
+    if (keyState['J'] )
+    {    
         P1->Crush(action, count);
         action = 1;
         for (auto& obj : envi_objects) {
@@ -523,16 +656,40 @@ void GSPlay::Update(float deltaTime)
         P1->Slice(action, count);
         action = 1;
         for (auto& obj : envi_objects) {
-            if (P1->GetHitbox(count)->CheckCollisionTree(obj.get()))
-            {
-                if (auto env = dynamic_cast<Tree*>(obj.get())) {
+            if (auto env = dynamic_cast<Tree*>(obj.get())) {
+                if (P1->GetHitbox(count)->CheckCollisionTree(obj.get()))
+                {
                     env->CutTree();
                 }
             }
+            if (auto env = dynamic_cast<Bush*>(obj.get())) {
+                if (P1->GetHitbox(count)->CheckCollision(obj.get()))
+                {
+                    env->Cut();
+                }
+            }
+            if (auto env = dynamic_cast<Animal*>(obj.get())) {
+                if (P1->GetHitbox(count)->CheckCollision(obj.get()))
+                {
+                    env->onHit();
+                }
+            }
         }
-        if (P1->GetHitbox(count)->CheckCollisionEnermy(org.get()))
-        {
-            org->Dead();
+        for (auto& org : enermy_objects) {
+            if (P1->GetHitbox(count)->CheckCollisionEnermy(org.get()))
+            {
+                if (auto env = dynamic_cast<Enemy*>(org.get())) {
+                    env->onHit(count);
+                }
+            }
+        }
+        for (auto& org : Boss_objects) {
+            if (P1->GetHitbox(count)->CheckCollisionEnermy(org.get()))
+            {
+                if (auto env = dynamic_cast<Boss*>(org.get())) {
+                    env->onHit(count);
+                }
+            }
         }
     }
     if (keyState['E'])
@@ -543,6 +700,7 @@ void GSPlay::Update(float deltaTime)
         }
     }
     int previousSlot = currentSlot;
+
     if (keyState['1']) {
         Slot::SetCurrentSlot(0);
 		printf("Hotbar Slot 0 selected via key\n");

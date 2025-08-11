@@ -70,10 +70,10 @@
  FILE ../Resources/Textures/Overlay.tga
  TILING GL_CLAMP_TO_EDGE
  ID 21
- FILE ../Resources/Textures/Entities/Mobs/Orc_Crew/Orc/Idle-Sheet.tga
+ FILE ../Resources/Textures/Entities/Mobs/Orc_Crew/Orc/onHit.tga
  TILING GL_CLAMP_TO_EDGE
  ID 22
- FILE ../Resources/Textures/Entities/Mobs/Orc_Crew/Orc/Run-Sheet.tga
+ FILE ../Resources/Textures/Entities/Mobs/Orc_Crew/Orc/Run.tga
  TILING GL_CLAMP_TO_EDGE
  ID 23
  FILE ../Resources/Textures/Entities/Characters/Slice_Base/Slice_Side-Sheet.tga
@@ -85,7 +85,7 @@
  FILE ../Resources/Textures/Entities/Characters/Slice_Base/Slice_Up-Sheet.tga
  TILING GL_CLAMP_TO_EDGE
  ID 26
- FILE ../Resources/Textures/Entities/Mobs/Orc_Crew/Orc/Death-Sheet.tga
+ FILE ../Resources/Textures/Entities/Mobs/Orc_Crew/Orc/death.tga
  TILING GL_CLAMP_TO_EDGE
  ID 27
  FILE ../Resources/Textures/Entities/Characters/Death_Base/Death_Side-Sheet.tga
@@ -219,7 +219,6 @@
  ID 70
  FILE ../Resources/Textures/UI/hotbar_slot.tga
  TILING GL_CLAMP_TO_EDGE
-
  #Shader 3
  ID 0
  VS ../Resources/Shaders/TriangleShaderVS.vs

@@ -9,7 +9,10 @@
 #include "../GameObject/Building.h"
 #include "../GameObject/Tree.h"
 #include "../GameObject/Stone.h"
+#include "../GameObject/Bush.h"
+#include "../GameObject/Animal.h"
 #include "../GameObject/Enemy.h"
+#include "../GameObject/Boss.h"
 #include "../GameObject/Overlay.h"
 #include "../GameObject/Player.h"
 #include "../tinyxml2.h"
@@ -50,7 +53,10 @@ public:
     std::shared_ptr<Slot> hotbar_slot;
     std::shared_ptr<Tree>tree;
     std::shared_ptr<Stone>stone;
+    std::shared_ptr<Bush>bush;
+    std::shared_ptr<Animal>animal;
     std::shared_ptr<Enemy>org;
+    std::shared_ptr<Boss>boss;
     std::shared_ptr<Player>P1;
     std::shared_ptr<Overlay> overlay;
     std::vector<Vector2> lights;
@@ -61,7 +67,8 @@ public:
     std::vector<std::shared_ptr<Object>> i_objects;
     //std::vector<Object*> i_objects;
     std::vector<std::shared_ptr<Object>> envi_objects;
-    std::vector<Object*> enermy_objects;
+    std::vector<std::shared_ptr<Object>> enermy_objects;
+    std::vector<std::shared_ptr<Object>> Boss_objects;
     std::vector<Object*> i_bonfire;
     std::vector<int> waterTiles;
     int mapWidth ;
@@ -78,5 +85,7 @@ public:
     bool hasCollision = false;
     bool enermyCollision = false;
     std::shared_ptr<PlayerInventory> playerInventory;
+    bool onhit;
+    float onhitdltime;
 };
 

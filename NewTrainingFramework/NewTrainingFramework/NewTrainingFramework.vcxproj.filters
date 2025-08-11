@@ -435,6 +435,12 @@
     <ClCompile Include="GameManager\PlayerInventory.cpp">
       <Filter>Source Files\GameManager</Filter>
     </ClCompile>
+    <ClCompile Include="GameObject\Bush.cpp">
+      <Filter>Source Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\Boss.cpp">
+      <Filter>Source Files\GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h">
@@ -571,6 +577,12 @@
     </ClInclude>
     <ClInclude Include="GameManager\PlayerInventory.h">
       <Filter>Source Files\GameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Bush.h">
+      <Filter>Source Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Boss.h">
+      <Filter>Source Files\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

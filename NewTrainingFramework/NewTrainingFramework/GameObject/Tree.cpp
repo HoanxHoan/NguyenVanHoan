@@ -36,15 +36,15 @@ void Tree::Update(GLfloat deltaTime)
 {
     Hpdltime += deltaTime;
     dltime += deltaTime;
-    if(icut == true && Hpdltime >= 0.5)
+    if(icut == true && Hpdltime >= 0.7)
     {
-        hp = hp - 1;
         //printf("%d\n", hp);
         icut = false;
     }
     if (iscut==true  && hp <= 1) { this->Cutted(); }
     else if (iscut && dltime >= 0.7)
     { 
+        hp = hp - 1;
         EndCutTree(); 
     }
     SpriteAnimation::Update(deltaTime);
