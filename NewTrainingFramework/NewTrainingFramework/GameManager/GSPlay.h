@@ -16,7 +16,6 @@
 #include "../GameObject/Overlay.h"
 #include "../GameObject/Player.h"
 #include "../tinyxml2.h"
-#include "../GameObject/InventorySlots.h"
 #include "../GameObject/Slot.h"
 class GSPlay : public GameStateBase
 {
@@ -45,7 +44,6 @@ public:
     //std::shared_ptr<SpriteAnimation> P1;
     std::shared_ptr<Building>bonfire;
     std::shared_ptr<Building>fire;
-    std::shared_ptr<InventorySlots> inv;
     std::vector<std::shared_ptr<Slot>> inventorySlots;
     std::vector<std::shared_ptr<Slot>> hotbar;
     std::vector<std::shared_ptr<Slot>> hotbarSlots;

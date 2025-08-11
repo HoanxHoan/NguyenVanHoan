@@ -242,23 +242,9 @@ bool GSPlay::Init()
         envi_objects.push_back(stone);
     }
 
-    Texture* inventoryTexture = ResourceManager::GetInstance()->GetTexture(34);
-    inventory = std::make_shared<Building>(model, shader, inventoryTexture, 1, 0, 1, 0, 0.1f);
-    inventory->SetPosition(Vector3(P1->x + 50, P1->y, 0));
-    inventory->SetScale(Vector3(170, 55, 0));
-    inventory->SetVisible(false);
 
-    Texture* slotTexture = ResourceManager::GetInstance()->GetTexture(69); // Thay bằng ID đúng
-    auto playerInventory = std::make_shared<PlayerInventory>();
-    for (int i = 0; i < 30; ++i) {
-        slot = std::make_shared<Slot>(model, slotTexture, btnShader);
-        slot->SetSlotType(SlotType::INVENTORY); // 👈 THÊM DÒNG NÀY
-        slot->SetSlotIndex(i);
-        slot->SetOwnerInventory(playerInventory.get());
-        printf("Slot %d created\n", i);
-        int cols = 10;
-        int row = i / cols;
-        int col = i % cols;
+
+    
     //bush
     Texture* bushtexture1 = ResourceManager::GetInstance()->GetTexture(35);
     Texture* bushtexture2 = ResourceManager::GetInstance()->GetTexture(36);
@@ -312,11 +298,17 @@ bool GSPlay::Init()
     inventory->SetScale(Vector3(200, 110, 0));
     inventory->SetVisible(false);
 
-    Texture* slotTexture = ResourceManager::GetInstance()->GetTexture(3); 
-    inv = std::make_shared<InventorySlots>(
-        model, slotTexture, shader
-    );
-
+    Texture* slotTexture = ResourceManager::GetInstance()->GetTexture(69); 
+    auto playerInventory = std::make_shared<PlayerInventory>();
+    for (int i = 0; i < 30; ++i) {
+        slot = std::make_shared<Slot>(model, slotTexture, btnShader);
+        slot->SetSlotType(SlotType::INVENTORY); // 👈 THÊM DÒNG NÀY
+        slot->SetSlotIndex(i);
+        slot->SetOwnerInventory(playerInventory.get());
+        printf("Slot %d created\n", i);
+        int cols = 10;
+        int row = i / cols;
+        int col = i % cols;
         float offsetX = -43 + col * 15.0f;
         float offsetY = 30 - row * 15.0f;
         slot->setSize(13, 13);
@@ -333,22 +325,8 @@ bool GSPlay::Init()
         inventorySlots.push_back(slot);
         // (tuỳ chọn) nếu bạn cần giữ shared_ptr:
 
-            float offsetX = -90 + col * 20.0f;
-            float offsetY = 40 - row * 20.0f;
-			slot->setSize(10, 10);
-            slot->SetSize(20, 20);
-            slot->SetPosition(480 + offsetX * 4.8 , 360 + offsetY * 3.6);
-            //slot->SetPosition(P1->x, P1->y);
-            slot->set2Dposition(P1->x + offsetX, P1->y + offsetY);
-            slot->SetOnClick([]() {
-                printf("Slot clicked\n");
-                
-				});
-            //inv->AddSlot(slot);
-            inventorySlots.push_back(slot);
-            
-        
     }
+    
     Texture* hotbarTexture = ResourceManager::GetInstance()->GetTexture(70);
     for (int i = 0; i < 10; ++i) {
 		hotbar_slot = std::make_shared<Slot>(model, hotbarTexture, btnShader);
@@ -437,7 +415,7 @@ bool GSPlay::Init()
     P1->getObjectList(&i_objects);
     return true;
 
-
+    
 
 }
 

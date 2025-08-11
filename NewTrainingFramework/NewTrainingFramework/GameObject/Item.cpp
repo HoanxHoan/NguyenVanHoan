@@ -1,8 +1,5 @@
 ﻿#include "Item.h"
-<<<<<<< HEAD
-=======
 #include "../GameManager/ItemDb.h"  
->>>>>>> e8b5db8ca09f326e10a3e5653a015a83f5eb2fe5
 
 Item::Item(const std::string& id, int amount)
     : Object(nullptr, nullptr, nullptr), // tạm thời gọi ctor rỗng
