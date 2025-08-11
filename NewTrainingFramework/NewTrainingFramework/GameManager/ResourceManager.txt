@@ -5,7 +5,7 @@
  FILE ../Resources/Models/Woman2.nfg
  ID 2
  FILE ../Resources/Models/Sprite2D.nfg
- #2DTexture 56
+ #2DTexture 59
  ID 0
  FILE ../Resources/Textures/Entities/Characters/Walk_Base/Walk_Side-Sheet.tga
  TILING GL_REPEAT
@@ -173,6 +173,15 @@
  TILING GL_CLAMP_TO_EDGE
  ID 55
  FILE ../Resources/Textures/Entities/Characters/Hit_Base/Hit_Down-Sheet.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 56
+ FILE ../Resources/Textures/Entities/Mobs/Boss/Necromancer/Walk.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 57
+ FILE ../Resources/Textures/Entities/Mobs/Boss/Necromancer/onHit.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 58
+ FILE ../Resources/Textures/Entities/Mobs/Boss/Necromancer/dead.tga
  TILING GL_CLAMP_TO_EDGE
  #Shader 3
  ID 0

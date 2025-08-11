@@ -166,7 +166,7 @@ bool GSPlay::Init()
 
     P1->SetPosition(Vector3(200, 200, 0));
     P1->SetScale(Vector3(30, 40, 0));
-    //P1->setSize(15, 20);
+    P1->setSize(15, 20);
     i_objects.push_back(P1);
     Model* quadModel = ResourceManager::GetInstance()->GetModel(2);
     Texture* blackTex = ResourceManager::GetInstance()->GetTexture(20);
@@ -353,6 +353,15 @@ bool GSPlay::Init()
     Texture* SlimeTexture = ResourceManager::GetInstance()->GetTexture(50);
     boss = std::make_shared<Boss>(model, shader, SlimeTexture, 8, 0, 1, 0, 0.1f);
     boss->type = 1;
+    boss->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
+    boss->SetScale(Vector3(50, 50, 0));
+    boss->setSize(70, 70);
+    i_objects.push_back(boss);
+    Boss_objects.push_back(boss);
+
+    Texture* necroTexture = ResourceManager::GetInstance()->GetTexture(56);
+    boss = std::make_shared<Boss>(model, shader, necroTexture, 8, 0, 1, 0, 0.1f);
+    boss->type = 2;
     boss->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
     boss->SetScale(Vector3(50, 50, 0));
     boss->setSize(70, 70);

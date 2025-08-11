@@ -210,7 +210,7 @@ Object* Player::GetHitbox(int count) {
         }
         case 2: {
             hitbox->height = this->height*2 ;
-            hitbox->width = this->width*2;
+            hitbox->width = this->width*2.5;
             hitbox->x = this->x + 9;
             hitbox->set2Dposition(hitbox->x, this->y);
             hitbox->setSize(hitbox->width, hitbox->height);
@@ -226,7 +226,7 @@ Object* Player::GetHitbox(int count) {
         }
         case 4: {
             hitbox->height = this->height*2 ;
-            hitbox->width = this->width * 2;
+            hitbox->width = this->width * 2.5;
             hitbox->x = this->x - 9;
             hitbox->set2Dposition(hitbox->x, this->y);
             hitbox->setSize(hitbox->width, hitbox->height);

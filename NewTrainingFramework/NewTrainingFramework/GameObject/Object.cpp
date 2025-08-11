@@ -69,8 +69,8 @@ bool Object::CheckCollisionTree(Object* other)
 {
     return !(x + width / 2 < other->x - other->width / 2 ||
         x - width / 2 > other->x + other->width / 2 ||
-        y + height / 2 < other->y+24 - other->height / 10 ||
-        y - height / 2 > other->y+24 + other->height / 10);
+        y + height / 2 < other->y+24 - other->height / 8 ||
+        y - height / 2 > other->y+24 + other->height / 8);
 }
 bool Object::CheckCollisionEnermy(Object* other)
 {
