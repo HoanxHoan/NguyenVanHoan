@@ -44,7 +44,10 @@ public:
     std::shared_ptr<Building>fire;
     std::shared_ptr<InventorySlots> inv;
     std::vector<std::shared_ptr<Slot>> inventorySlots;
+    std::vector<std::shared_ptr<Slot>> hotbar;
+    std::vector<std::shared_ptr<Slot>> hotbarSlots;
 	std::shared_ptr<Slot> slot;
+    std::shared_ptr<Slot> hotbar_slot;
     std::shared_ptr<Tree>tree;
     std::shared_ptr<Stone>stone;
     std::shared_ptr<Enemy>org;
@@ -66,11 +69,14 @@ public:
     int tileWidth;
     int tileHeight;
     int i = 0;
+    int j = 0;
     int mapPixelWidth ;
     int mapPixelHeight ;
-
+    int currentSlot = 0;
+    int movement_speed = 30;
     Object temp;
     bool hasCollision = false;
     bool enermyCollision = false;
+    std::shared_ptr<PlayerInventory> playerInventory;
 };
 

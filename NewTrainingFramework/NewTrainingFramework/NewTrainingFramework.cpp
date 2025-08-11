@@ -13,6 +13,8 @@
 #include "GameManager/Scene.h"
 #include "GameManager/GameStateMachine.h"
 #include "GameManager/GSIntro.h"
+#include "GameManager/PlayerInventory.h"
+#include "GameManager/ItemDb.h"
 #define DEG2RAD 0.0174532925199432957f
 float deltaTime = 0.016f;
 bool keyStates[256];
@@ -72,6 +74,8 @@ void CleanUp()
 	ResourceManager::Destroy();
 	Camera::Destroy();
 	SoundManager::Destroy();
+	PlayerInventory::Destroy();
+	ItemDB::Destroy();
 }
 
 int _tmain(int argc, _TCHAR* argv[])

@@ -2,6 +2,7 @@
 #include "GSPlay.h"
 #include <iostream>
 #include <algorithm>
+#include "ItemDb.h"
 
 float clamp(float value, float min, float max) {
     if (value < min) return min;
@@ -31,15 +32,15 @@ Vector3 GSPlay::GenerateRandomValidPositionAvoidCollision(const std::vector<std:
         int row = rand() % (mapHeight);
 
         float x = col * tileWidth;
-        float y = row * tileHeight ;
+        float y = row * tileHeight;
 
-        if (!IsWaterTile(x, y)&& !IsWaterTile(x+1, y)&& !IsWaterTile(x-1, y)&& !IsWaterTile(x, y+1)&& !IsWaterTile(x, y-1)) {
+        if (!IsWaterTile(x, y) && !IsWaterTile(x + 1, y) && !IsWaterTile(x - 1, y) && !IsWaterTile(x, y + 1) && !IsWaterTile(x, y - 1)) {
             Object temp;
             temp.setSize(100, 100);
             temp.set2Dposition(x, y);
             bool collision = false;
             for (auto& obj : others) {
-                if (temp.CheckCollision(obj.get())){
+                if (temp.CheckCollision(obj.get())) {
                     collision = true;
                     break;
                 }
@@ -99,25 +100,37 @@ void GSPlay::HandleMouseClick(GLint x, GLint y, bool isClick)
     if (button_play2 && button_play2->HandleTouchEvents(x, y, isClick)) {
         return;
     }
-    for (auto slot : inventorySlots) {
-        if (slot->HandleTouchEvents(x, y, isClick)) {
-            printf("Slot clicked at position (%d, %d)\n", x, y);
-            return;
+    if(inventory->IsVisible()){
+        for (auto slot : inventorySlots) {
+            if (slot->HandleTouchEvents(x, y, isClick)) {
+                printf("Slot clicked at position (%d, %d)\n", x, y);
+                return;
+            }
         }
-	}
+        for (auto slot : hotbar) {
+            if (slot->HandleTouchEvents(x, y, isClick)) {
+                printf("Hotbar slot clicked at position (%d, %d)\n", x, y);
+                return;
+            }
+        }
+    }
 
 }
 
 
 bool GSPlay::Init()
 {
+    
+    printf("----------------------------------\n");
+    ItemDB::GetInstance()->LoadDB("../NewTrainingFramework/GameManager/ItemDb.txt");
+    printf("----------------------------------\n");
     doc.LoadFile("../Resources/Textures/Map.tmx");
 
     auto mapNode = doc.FirstChildElement("map");
 
-    mapWidth = mapNode->IntAttribute("width");      
-    mapHeight = mapNode->IntAttribute("height");    
-    tileWidth = mapNode->IntAttribute("tilewidth"); 
+    mapWidth = mapNode->IntAttribute("width");
+    mapHeight = mapNode->IntAttribute("height");
+    tileWidth = mapNode->IntAttribute("tilewidth");
     tileHeight = mapNode->IntAttribute("tileheight");
 
     mapPixelWidth = mapWidth * tileWidth;
@@ -136,7 +149,7 @@ bool GSPlay::Init()
         }
         layer = layer->NextSiblingElement("layer");
     }
-    Camera::GetInstance()->UpdateOrthographic(0.0f, Globals::screenWidth, Globals::screenHeight, 0.0f);
+    //Camera::GetInstance()->UpdateOrthographic(0.0f, Globals::screenWidth, Globals::screenHeight, 0.0f);
 
     //Model* btnModel2 = ResourceManager::GetInstance()->GetModel(2);
     //Texture* btnTexture2 = ResourceManager::GetInstance()->GetTexture(6);
@@ -226,40 +239,67 @@ bool GSPlay::Init()
         envi_objects.push_back(stone);
     }
 
-	Texture* inventoryTexture = ResourceManager::GetInstance()->GetTexture(34);
-	inventory = std::make_shared<Building>(model, shader, inventoryTexture, 1, 0, 1, 0, 0.1f);
-	inventory->SetPosition(Vector3(P1->x, P1->y, 0));
-    inventory->SetScale(Vector3(200, 110, 0));
+    Texture* inventoryTexture = ResourceManager::GetInstance()->GetTexture(34);
+    inventory = std::make_shared<Building>(model, shader, inventoryTexture, 1, 0, 1, 0, 0.1f);
+    inventory->SetPosition(Vector3(P1->x + 50, P1->y, 0));
+    inventory->SetScale(Vector3(170, 55, 0));
     inventory->SetVisible(false);
 
-    Texture* slotTexture = ResourceManager::GetInstance()->GetTexture(3); // Thay bằng ID đúng
-    inv = std::make_shared<InventorySlots>(
-        model, slotTexture, shader
-    );
+    Texture* slotTexture = ResourceManager::GetInstance()->GetTexture(69); // Thay bằng ID đúng
+    auto playerInventory = std::make_shared<PlayerInventory>();
+    for (int i = 0; i < 30; ++i) {
+        slot = std::make_shared<Slot>(model, slotTexture, btnShader);
+        slot->SetSlotType(SlotType::INVENTORY); // 👈 THÊM DÒNG NÀY
+        slot->SetSlotIndex(i);
+        slot->SetOwnerInventory(playerInventory.get());
+        printf("Slot %d created\n", i);
+        int cols = 10;
+        int row = i / cols;
+        int col = i % cols;
 
-        for (int i = 0; i < 30; ++i) {
-            slot = std::make_shared<Slot>(model, slotTexture, btnShader);
-            printf("Slot %d created\n", i);
-            int cols = 10;
-            int row = i / cols;
-            int col = i % cols;
+        float offsetX = -43 + col * 15.0f;
+        float offsetY = 30 - row * 15.0f;
+        slot->setSize(13, 13);
+        slot->SetSize(30, 30);
+        slot->SetPosition(480 + offsetX * 4.8, 360 + offsetY * 3.6);
+        slot->SetChildPosition(P1->x + offsetX, P1->y + offsetY);
+        //slot->SetPosition(P1->x, P1->y);
+        slot->set2Dposition(P1->x + offsetX, P1->y + offsetY);
+        slot->SetOnClick([]() {
+            printf("Slot clicked\n");
+            // Xử lý sự kiện khi slot được nhấn
+            });
+        //inv->AddSlot(slot);
+        inventorySlots.push_back(slot);
+        // (tuỳ chọn) nếu bạn cần giữ shared_ptr:
 
-            float offsetX = -90 + col * 20.0f;
-            float offsetY = 40 - row * 20.0f;
-			slot->setSize(10, 10);
-            slot->SetSize(20, 20);
-            slot->SetPosition(480 + offsetX * 4.8 , 360 + offsetY * 3.6);
-            //slot->SetPosition(P1->x, P1->y);
-            slot->set2Dposition(P1->x + offsetX, P1->y + offsetY);
-            slot->SetOnClick([]() {
-                printf("Slot clicked\n");
-                // Xử lý sự kiện khi slot được nhấn
-				});
-            //inv->AddSlot(slot);
-            inventorySlots.push_back(slot);
-            // (tuỳ chọn) nếu bạn cần giữ shared_ptr:
-        
     }
+    Texture* hotbarTexture = ResourceManager::GetInstance()->GetTexture(70);
+    for (int i = 0; i < 10; ++i) {
+		hotbar_slot = std::make_shared<Slot>(model, hotbarTexture, btnShader);
+        hotbar_slot->SetSlotType(SlotType::HOTBAR);
+        hotbar_slot->SetSlotIndex(i);
+        hotbar_slot->SetOwnerInventory(playerInventory.get());
+        hotbar_slot->RegisterHotbarSlot(hotbar_slot.get());
+        hotbarSlots.push_back(hotbar_slot);
+        printf("Hotbar Slot %d created\n", i);
+        int cols = 10;
+        int col = i % cols;
+        float offsetX = -70 + col * 15.0f;
+        hotbar_slot->setSize(15, 15);
+        hotbar_slot->SetSize(30, 30);
+        hotbar_slot->SetPosition(480 + offsetX * 4.8, 683);
+        hotbar_slot->SetChildPosition(P1->x + offsetX, P1->y + 90);
+        //hotbar_slot->SetPosition(P1->x, P1->y);
+        hotbar_slot->set2Dposition(P1->x + offsetX, P1->y + 90);
+        hotbar_slot->SetOnClick([]() {
+            printf("Hotbar Slot clicked\n");
+            // Xử lý sự kiện khi slot được nhấn
+			});
+		hotbar.push_back(hotbar_slot);
+    }
+    playerInventory->InitializeUI(inventorySlots, hotbar);
+    Slot::SetCurrentSlot(currentSlot);
 
     //tree = std::make_shared<Environment>(model, shader, treetexture, 1, 0, 1, 0, 0.1f);
     //tree->SetPosition(Vector3(50, 10, 0));
@@ -272,7 +312,7 @@ bool GSPlay::Init()
     button_play = std::make_shared<GameButton>(btnModel, btnTexture, btnShader);
     button_play->SetPosition(850, 80);
     button_play->SetSize(90, 80);
-    button_play->setSize(20,20);
+    button_play->setSize(20, 20);
     button_play->SetOnClick([]() {
         GameStateMachine::GetInstance()->PopState();
         });
@@ -286,11 +326,10 @@ bool GSPlay::Init()
     temp = *P1;
     return true;
 
-    
-    
+
+
 }
 
- 
 
 void GSPlay::Exit()
 {
@@ -309,23 +348,44 @@ void GSPlay::Resume()
 
 void GSPlay::Update(float deltaTime)
 {
-	uidltime += deltaTime;
-    inventory->SetPosition(Vector3(P1->x, P1->y, 0));
+    uidltime += deltaTime;
+    inventory->SetPosition(Vector3(P1->x + 30, P1->y+15, 0));
     for (auto& slot : inventorySlots) {
         int cols = 10;
         int row = i / cols;
         int col = i % cols;
-        float offsetX = -90 + col * 20.0f;
-        float offsetY = 40 - row * 20.0f;
+        float offsetX = -43 + col * 15.0f;
+        float offsetY = 30 - row * 15.0f;
         slot->set2Dposition(P1->x + offsetX, P1->y + offsetY);
+        slot->SetChildPosition(P1->x + offsetX, P1->y + offsetY);
         i++;
         if (i >= 30) {
             i = 0;
         }
     }
-	//inv->Update(P1->x, P1->y, deltaTime);
 
-	
+    for(auto&hotbar_slot : hotbar) {
+        int cols = 10;
+        int col = i % cols;
+        float offsetX = -70 + col * 15.0f;
+        hotbar_slot->set2Dposition(P1->x + offsetX, P1->y + 90);
+        hotbar_slot->SetChildPosition(P1->x + offsetX, P1->y + 90);
+        if (hotbar_slot->IsCurrentSlot()) {
+            hotbar_slot->setSize(18, 18);
+        }
+        else {
+            hotbar_slot->setSize(15, 15);
+        }
+        i++;
+        if (i >= 10) {
+            i = 0;
+        }
+	}
+
+    
+    //inv->Update(P1->x, P1->y, deltaTime);
+
+
     //org->moveTo(P1->x, P1->y);
     //for (size_t i = 0; i < enermy_objects.size(); ++i) {
     //    if (P1->CheckCollision(enermy_objects[i])) {
@@ -338,7 +398,7 @@ void GSPlay::Update(float deltaTime)
     //    enermyCollision = false;
     //}
     button_play->set2Dposition(P1->x + 78, P1->y - 80);
-    if (action == 1 ) {
+    if (action == 1) {
         actiontime += deltaTime;
         if (actiontime >= 0.76) {
             action = 0;
@@ -351,9 +411,9 @@ void GSPlay::Update(float deltaTime)
 
     P1->x = clamp(P1->x, 0.0f, (float)(mapPixelWidth - P1->width));
     P1->y = clamp(P1->y, 0.0f, (float)(mapPixelHeight - P1->height));
-    lights.clear(); 
-    lights.push_back(Vector2(480, 360)); 
-    lights.emplace_back(Vector2(480+(bonfire->x- P1->x), 360.0-(bonfire->y- P1->y)));
+    lights.clear();
+    lights.push_back(Vector2(480, 360));
+    lights.emplace_back(Vector2(480 + (bonfire->x - P1->x), 360.0 - (bonfire->y - P1->y)));
     overlay->SetLights(lights);
     dltime += deltaTime;
     overlay->GetgameTime(dltime);
@@ -361,7 +421,7 @@ void GSPlay::Update(float deltaTime)
 
     std::sort(i_objects.begin(), i_objects.end(),
         [](const std::shared_ptr<Object>& a, const std::shared_ptr<Object>& b) {
-            return a->y < b->y; 
+            return a->y < b->y;
         });
     Camera::GetInstance()->Follow(P1->x, P1->y);
     for (auto& obj : i_objects) {
@@ -374,7 +434,7 @@ void GSPlay::Update(float deltaTime)
         if (action == 0) {
             hasCollision = false;
             count = 1;
-            float newY = P1->y - 300 * deltaTime;
+            float newY = P1->y - movement_speed * deltaTime;
             temp = *P1;
             temp.y = newY;
 
@@ -384,7 +444,7 @@ void GSPlay::Update(float deltaTime)
                     break;
                 }
             }
-            if (!hasCollision ) {
+            if (!hasCollision) {
                 P1->MoveUp(newY, IsWaterTile(P1->x, newY));
             }
         }
@@ -393,7 +453,7 @@ void GSPlay::Update(float deltaTime)
         if (action == 0) {
             hasCollision = false;
             count = 2;
-            float newX = P1->x + 300 * deltaTime;
+            float newX = P1->x + movement_speed * deltaTime;
             temp = *P1;
             temp.x = newX;
 
@@ -412,7 +472,7 @@ void GSPlay::Update(float deltaTime)
         if (action == 0) {
             hasCollision = false;
             count = 4;
-            float newX = P1->x - 300 * deltaTime;
+            float newX = P1->x - movement_speed * deltaTime;
             temp = *P1;
             temp.x = newX;
 
@@ -431,7 +491,7 @@ void GSPlay::Update(float deltaTime)
         if (action == 0) {
             hasCollision = false;
             count = 3;
-            float newY = P1->y + 300 * deltaTime;
+            float newY = P1->y + movement_speed * deltaTime;
             temp.y = newY;
 
             for (size_t i = 0; i < envi_objects.size(); ++i) {
@@ -446,7 +506,7 @@ void GSPlay::Update(float deltaTime)
         }
     }
     if (keyState['J'])
-    {    
+    {
         P1->Crush(action, count);
         action = 1;
         for (auto& obj : envi_objects) {
@@ -466,9 +526,9 @@ void GSPlay::Update(float deltaTime)
             if (P1->GetHitbox(count)->CheckCollisionTree(obj.get()))
             {
                 if (auto env = dynamic_cast<Tree*>(obj.get())) {
-                    env->CutTree(); 
+                    env->CutTree();
                 }
-            } 
+            }
         }
         if (P1->GetHitbox(count)->CheckCollisionEnermy(org.get()))
         {
@@ -480,9 +540,45 @@ void GSPlay::Update(float deltaTime)
         if (uidltime >= 0.2f) {
             uidltime = 0.0f;
             inventory->SetVisible(!inventory->IsVisible());
-		}
+        }
     }
-
+    int previousSlot = currentSlot;
+    if (keyState['1']) {
+        Slot::SetCurrentSlot(0);
+		printf("Hotbar Slot 0 selected via key\n");
+    }
+    if (keyState['2']) {
+        Slot::SetCurrentSlot(1);
+	}
+    if (keyState['3']) {
+        Slot::SetCurrentSlot(2);
+    }
+    if (keyState['4']) {
+        Slot::SetCurrentSlot(3);
+    }
+    if (keyState['5']) {
+        Slot::SetCurrentSlot(4);
+    }
+    if (keyState['6']) {
+        Slot::SetCurrentSlot(5);
+    }
+    if (keyState['7']) {
+        Slot::SetCurrentSlot(6);
+    }
+    if (keyState['8']) {
+        Slot::SetCurrentSlot(7);
+    }
+    if (keyState['9']) {
+        Slot::SetCurrentSlot(8);
+    }
+    if (keyState['0']) {
+        Slot::SetCurrentSlot(9);
+	}
+	
+    // Nếu slot thay đổi thì cập nhật slot được chọn
+    if (previousSlot != currentSlot) {
+        Slot::SetCurrentSlot(currentSlot);
+    }
 }
 
 void GSPlay::Draw()
@@ -497,13 +593,16 @@ void GSPlay::Draw()
     if (overlay) {
         overlay->Draw();
     }
-	inventory->Draw();
+    inventory->Draw();
     if (inventory->IsVisible()) {
         for (auto& sl : inventorySlots) {
             sl->Draw();
         }
     }
+    for (auto& hb : hotbar) {
+        hb->Draw();
+    }
     button_play->Draw();
-    
+
 }
 

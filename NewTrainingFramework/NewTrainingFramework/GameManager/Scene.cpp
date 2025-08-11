@@ -4,6 +4,7 @@
 #include <sstream>
 #include <iostream>
 #include "ResourceManager.h"
+#include "ItemDb.h"
 #define DEG2RAD 0.0174532925199432957f
 Scene* Scene::instance = nullptr;
 

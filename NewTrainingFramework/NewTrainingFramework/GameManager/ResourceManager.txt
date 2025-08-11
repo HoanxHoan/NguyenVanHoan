@@ -5,7 +5,7 @@
  FILE ../Resources/Models/Woman2.nfg
  ID 2
  FILE ../Resources/Models/Sprite2D.nfg
- #2DTexture 35
+ #2DTexture 71
  ID 0
  FILE ../Resources/Textures/Entities/Characters/Walk_Base/Walk_Side-Sheet.tga
  TILING GL_REPEAT
@@ -111,7 +111,115 @@
  ID 34
  FILE ../Resources/Textures/UI/inventory.tga
  TILING GL_CLAMP_TO_EDGE
- 
+ ID 35
+ FILE ../Resources/Textures/Environment/Props/Static/Bush/Bush-GREEN.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 36
+ FILE ../Resources/Textures/Environment/Props/Static/Bush/Bush-RED.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 37
+ FILE ../Resources/Textures/Environment/Props/Static/Bush/Bush-GREEN-cut.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 38
+ FILE ../Resources/Textures/Environment/Props/Static/Bush/Bush-RED-cut.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 39
+ FILE ../Resources/Textures/Environment/Props/Static/animal/Deer/idle.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 40
+ FILE ../Resources/Textures/Environment/Props/Static/animal/Deer/walk.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 41
+ FILE ../Resources/Textures/Environment/Props/Static/animal/Deer/dead.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 42
+ FILE ../Resources/Textures/Environment/Props/Static/animal/Deer/onHit.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 43
+ FILE ../Resources/Textures/Environment/Props/Static/animal/Boar/idle.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 44
+ FILE ../Resources/Textures/Environment/Props/Static/animal/Boar/walk.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 45
+ FILE ../Resources/Textures/Environment/Props/Static/animal/Boar/dead.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 46
+ FILE ../Resources/Textures/Environment/Props/Static/animal/Boar/onHit.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 47
+ FILE ../Resources/Textures/Entities/Mobs/Skeleton_Crew/Skeleton_Base/run.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 48
+ FILE ../Resources/Textures/Entities/Mobs/Skeleton_Crew/Skeleton_Base/onHit.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 49
+ FILE ../Resources/Textures/Entities/Mobs/Skeleton_Crew/Skeleton_Base/dead.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 50
+ FILE ../Resources/Textures/Entities/Mobs/Boss/Slime/walk2.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 51
+ FILE ../Resources/Textures/Entities/Mobs/Boss/Slime/onHit.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 52
+ FILE ../Resources/Textures/Entities/Mobs/Boss/Slime/dead2.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 53
+ FILE ../Resources/Textures/Entities/Characters/Hit_Base/Hit_Up-Sheet.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 54
+ FILE ../Resources/Textures/Entities/Characters/Hit_Base/Hit_Side-Sheet.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 55
+ FILE ../Resources/Textures/Entities/Characters/Hit_Base/Hit_Down-Sheet.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 56
+ FILE ../Resources/Textures/Entities/Mobs/Boss/Necromancer/Walk.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 57
+ FILE ../Resources/Textures/Entities/Mobs/Boss/Necromancer/onHit.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 58
+ FILE ../Resources/Textures/Entities/Mobs/Boss/Necromancer/dead.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 59
+ FILE ../Resources/Textures/Item/log.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 60
+ FILE ../Resources/Textures/Item/stone.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 61
+ FILE ../Resources/Textures/Item/steak.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 62
+ FILE ../Resources/Textures/Item/wooden_pickaxe.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 63
+ FILE ../Resources/Textures/Item/wooden_sword.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 64
+ FILE ../Resources/Textures/Item/wooden_axe.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 65
+ FILE ../Resources/Textures/Item/stone_pickaxe.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 66
+ FILE ../Resources/Textures/Item/stone_sword.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 67
+ FILE ../Resources/Textures/Item/stone_axe.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 68
+ FILE ../Resources/Textures/Item/wooden_workbench.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 69
+ FILE ../Resources/Textures/UI/slot.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 70
+ FILE ../Resources/Textures/UI/hotbar_slot.tga
+ TILING GL_CLAMP_TO_EDGE
+
  #Shader 3
  ID 0
  VS ../Resources/Shaders/TriangleShaderVS.vs

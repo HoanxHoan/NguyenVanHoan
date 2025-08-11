@@ -432,8 +432,8 @@
     <ClCompile Include="GameManager\ItemDb.cpp">
       <Filter>Source Files\GameManager</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject\InventorySlots.cpp">
-      <Filter>Source Files\GameObject</Filter>
+    <ClCompile Include="GameManager\PlayerInventory.cpp">
+      <Filter>Source Files\GameManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -569,8 +569,8 @@
     <ClInclude Include="GameManager\ItemDb.h">
       <Filter>Source Files\GameManager</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject\InventorySlots.h">
-      <Filter>Source Files\GameObject</Filter>
+    <ClInclude Include="GameManager\PlayerInventory.h">
+      <Filter>Source Files\GameManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
