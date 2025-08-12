@@ -20,7 +20,6 @@ void Item::SetItem(const std::string& id)
 {
     m_id = id;
     LoadItem(id);
-	printf("Loaded item: %s\n", m_id.c_str());
     // Lấy các resource từ ResourceManager
     Model* model = ResourceManager::GetInstance()->GetModel(2);    // ví dụ model id = 0 (quad)
     Shaders* shader = ResourceManager::GetInstance()->GetShader(0); // shader dùng để hiển thị UI
@@ -30,7 +29,6 @@ void Item::SetItem(const std::string& id)
 void Item::LoadItem(const std::string& id)
 {
     auto data = ItemDB::GetInstance()->GetItemData(id);
-	printf("Loading item with ID: %s\n", id.c_str());
     if (data.empty()) {
         printf("Item ID '%s' does not exist in database\n", id.c_str());
         return;
@@ -44,10 +42,10 @@ void Item::LoadItem(const std::string& id)
         m_iconId = std::stoi(data["icon_id"]);
     }
     catch (const std::exception& e) {
-        printf("Lỗi chuyển icon_id của item '%s': %s\n", id.c_str(), e.what());
+        //printf("Lỗi chuyển icon_id của item '%s': %s\n", id.c_str(), e.what());
         return;
     }
-	printf("Item name: %s, type: %s, category: %s, icon_id: %d\n", m_name.c_str(), m_type.c_str(), m_category.c_str(), m_iconId);
+	//printf("Item name: %s, type: %s, category: %s, icon_id: %d\n", m_name.c_str(), m_type.c_str(), m_category.c_str(), m_iconId);
     LoadTexture(m_iconId);
 
 }

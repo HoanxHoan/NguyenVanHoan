@@ -4,7 +4,7 @@ PlayerInventory* PlayerInventory::instance = nullptr;
 
 PlayerInventory::PlayerInventory() {
     inventory[0] = { "wooden_log", 12 };
-    inventory[3] = { "stone", 4 };
+    inventory[3] = { "stone", 12 };
   
     hotbar[1] = { "wooden_pickaxe", 1};
 }
@@ -153,7 +153,6 @@ void PlayerInventory::UpdateFromSlot(Slot* slot) {
         if (item)
         {
             inventory[index] = { item->GetIdName(), item->GetAmount() };
-            printf("Updated");
         }
         else
             inventory.erase(index);

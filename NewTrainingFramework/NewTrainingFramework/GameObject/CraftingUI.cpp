@@ -43,7 +43,6 @@ void CraftingUI::UpdateCraftableList() {
     if (m_craftableIds.empty()) {
         // Không còn món nào craft được, xóa hết slot UI
         m_slots.clear();
-        printf("No craftable items, cleared all slots.\n");
         return;  // Kết thúc hàm luôn, không tạo slot mới
     }
 
@@ -74,12 +73,6 @@ void CraftingUI::UpdateCraftableList() {
             m_slots[i]->SetItem(std::make_shared<Item>(m_craftableIds[i], 1));
         }
     }
-
-    printf("== Craftable Items ==\n");
-    for (auto& id : m_craftableIds) {
-        printf(" - %s\n", id.c_str());
-    }
-    printf("======================\n");
 }
 
 std::vector<std::string> CraftingUI::GetCraftableItems() {
@@ -102,17 +95,11 @@ std::vector<std::string> CraftingUI::GetCraftableItems() {
         if (!recipeData.station.empty()) {
             if (!m_inventory->IsNearStation(recipeData.station)) {
                 canCraft = false;
-                printf("Not near station\n");
             }
         }
 
         if (canCraft) {
-            printf("[Craftable] %s\n", recipeId.c_str());
             for (auto& ing : recipeData.ingredients) {
-                printf("   - %s: %d/%d\n",
-                    ing.item.c_str(),
-                    totalItems[ing.item],
-                    ing.amount);
             }
             result.push_back(recipeId);
         }
@@ -151,7 +138,6 @@ void CraftingUI::CraftItem(const std::string& recipeId) {
     m_inventory->AddItem(recipeId, 1);
     printf("Đã chế tạo: %s\n", recipeId.c_str());
 
-    RefreshUI();
 }
 
 void CraftingUI::HandleClickOnSlot(int slotIndex) {

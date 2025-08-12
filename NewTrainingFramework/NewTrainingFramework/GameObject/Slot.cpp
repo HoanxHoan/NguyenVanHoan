@@ -22,7 +22,6 @@ std::vector<Slot*> Slot::hotbarSlots;
 Slot::~Slot() {
     selectedSlot = nullptr;
     chosenSlot = nullptr;
-    ClearHotbarSlots();
     printf("cleared\n");
 }
 

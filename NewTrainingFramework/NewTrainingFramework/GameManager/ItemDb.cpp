@@ -107,7 +107,7 @@ void ItemDB::LoadDB(const std::string& path)
 std::unordered_map<std::string, std::string> ItemDB::GetItemData(const std::string& id)
 {
     if (items.find(id) != items.end()) {
-		printf("Founded item: %s\n", id.c_str());
+		//printf("Founded item: %s\n", id.c_str());
         return items[id];
     }
 

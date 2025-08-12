@@ -9,7 +9,7 @@
 			{"item" : "wooden_log", "amount" : 1},
 			{"item" : "stone", "amount" : 3}
 		],
-		"station" : "wooden_workbench"
+		"station" : ""
 	},
 	
 "stone_axe":{
@@ -17,7 +17,7 @@
 			{"item" : "wooden_log", "amount" : 2},
 			{"item" : "stone", "amount" : 3}
 		],
-		"station" : "wooden_workbench"
+		"station" : ""
 	},
 	
 "stone_pickaxe":{
@@ -25,5 +25,5 @@
 			{"item" : "wooden_log", "amount" : 3},
 			{"item" : "stone", "amount" : 3}
 		],
-		"station" : "wooden_workbench"
+		"station" : ""
 	},

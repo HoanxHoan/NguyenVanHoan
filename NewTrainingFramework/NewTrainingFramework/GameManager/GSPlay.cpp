@@ -166,7 +166,7 @@ void GSPlay::ReloadCraftingSlots() {
         slot->SetSize(30, 30);
         slot->userOffsetX = offsetX;
         slot->userOffsetY = offsetY;
-        slot->SetPosition(146, 36);
+        slot->SetPosition(480 + offsetX * 4.8, 360 + offsetY * 3.6);
         slot->SetChildPosition(P1->x + offsetX, P1->y + offsetY);
         slot->set2Dposition(P1->x + offsetX, P1->y + offsetY);
 
@@ -361,7 +361,7 @@ bool GSPlay::Init()
 	Texture* inventoryTexture = ResourceManager::GetInstance()->GetTexture(34);
 	inventory = std::make_shared<Building>(model, shader, inventoryTexture, 1, 0, 1, 0, 0.1f);
 	inventory->SetPosition(Vector3(P1->x, P1->y, 0));
-    inventory->SetScale(Vector3(200, 110, 0));
+    inventory->SetScale(Vector3(160, 70, 0));
     inventory->SetVisible(false);
 
     Texture* slotTexture = ResourceManager::GetInstance()->GetTexture(69); 
@@ -409,7 +409,7 @@ bool GSPlay::Init()
         hotbar_slot->SetSize(30, 30);
         hotbar_slot->SetPosition(480 + offsetX * 4.8, 683);
         hotbar_slot->SetChildPosition(P1->x + offsetX, P1->y + 90);
-        //hotbar_slot->SetPosition(P1->x, P1->y);
+        //hotbar_slot->SetPosition(P1->x, P1->y)e;
         hotbar_slot->set2Dposition(P1->x + offsetX, P1->y + 90);
         hotbar_slot->SetOnClick([]() {
             printf("Hotbar Slot clicked\n");
@@ -496,7 +496,7 @@ bool GSPlay::Init()
 
 void GSPlay::UpdateCraftingSlots() {
     for (const auto& slot : m_craftingSlots) {
-        if (slot->GetItem() == nullptr) {
+        if (slot->GetSlotType() == SlotType::CRAFTING && slot->GetItem() == nullptr) {
             std::string itemId = slot->GetLastItemId();
             if (!itemId.empty()) {
                 printf("Crafting item from removed slot: %s\n", itemId.c_str());
@@ -506,33 +506,34 @@ void GSPlay::UpdateCraftingSlots() {
         }
     }
 
-    // Xóa các slot không còn item
+    // Xóa các slot không còn item và là slot crafting
     auto it = std::remove_if(m_craftingSlots.begin(), m_craftingSlots.end(),
         [](const std::shared_ptr<Slot>& slot) {
-            return slot->GetItem() == nullptr;
+            return slot->GetSlotType() == SlotType::CRAFTING && slot->GetItem() == nullptr;
         });
     m_craftingSlots.erase(it, m_craftingSlots.end());
 
-    // Cập nhật vị trí các slot còn lại
+    // Cập nhật vị trí các slot crafting còn lại
     int i = 0;
     for (auto& slot : m_craftingSlots) {
-        int cols = 10;
-        int row = i / cols;
-        int col = i % cols;
+        if (slot->GetSlotType() == SlotType::CRAFTING) {
+            int cols = 10;
+            int row = i / cols;
+            int col = i % cols;
 
-        float offsetX = -70 + col * 15.0f;
-        float offsetY = row * 15.0f - 90;
+            float offsetX = -70 + col * 15.0f;
+            float offsetY = row * 15.0f - 90;
 
-        slot->userOffsetX = offsetX;
-        slot->userOffsetY = offsetY;
-        slot->set2Dposition(P1->x + offsetX, P1->y + offsetY);
-        slot->SetChildPosition(P1->x + offsetX, P1->y + offsetY);
-        ++i;
+            slot->userOffsetX = offsetX;
+            slot->userOffsetY = offsetY;
+            slot->set2Dposition(P1->x + offsetX, P1->y + offsetY);
+            slot->SetChildPosition(P1->x + offsetX, P1->y + offsetY);
+            ++i;
+        }
     }
 
     m_craftingUI->UpdateCraftableList();
 }
-
 void GSPlay::Exit()
 {
     std::cout << "Play State Exit\n";
@@ -550,14 +551,14 @@ void GSPlay::Resume()
 
 void GSPlay::Update(float deltaTime)
 {
+
     uidltime += deltaTime;
-    inventory->SetPosition(Vector3(P1->x + 30, P1->y+15, 0));
+    inventory->SetPosition(Vector3(P1->x + 25, P1->y+15, 0));
     onhitdltime += deltaTime;
 	uidltime += deltaTime;
     if (onhit == true && onhitdltime >= 1.5) {
         onhit = false;
     }
-    inventory->SetPosition(Vector3(P1->x, P1->y, 0));
     for (auto& slot : inventorySlots) {
         int cols = 10;
         int row = i / cols;
@@ -595,6 +596,8 @@ void GSPlay::Update(float deltaTime)
         uidltime = 0;
         reloadable = false;
         ReloadCraftingSlots();
+
+        Slot::SetCurrentSlot(currentSlot);
 	}
     // 2. Update vị trí các slot còn lại
     for (auto& slot : m_craftingSlots) {
@@ -801,14 +804,12 @@ void GSPlay::Update(float deltaTime)
         if (uidltime >= 0.2f) {
             uidltime = 0.0f;
             inventory->SetVisible(!inventory->IsVisible());
-            ReloadCraftingSlots();
         }
     }
     int previousSlot = currentSlot;
 
     if (keyState['1']) {
         Slot::SetCurrentSlot(0);
-		printf("Hotbar Slot 0 selected via key\n");
     }
     if (keyState['2']) {
         Slot::SetCurrentSlot(1);
