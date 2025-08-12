@@ -3,6 +3,11 @@
 #include <iostream>
 #include <algorithm>
 #include "ItemDb.h"
+#include "CraftingRecipeDB.h"
+
+
+std::shared_ptr<CraftingUI> GSPlay::m_craftingUI = nullptr;
+std::string GSPlay::m_recipeId = "";
 
 float clamp(float value, float min, float max) {
     if (value < min) return min;
@@ -114,8 +119,67 @@ void GSPlay::HandleMouseClick(GLint x, GLint y, bool isClick)
                 return;
             }
         }
+        for (auto slot : m_craftingSlots) {
+            if (slot->HandleTouchEvents(x, y, isClick)) {
+                printf("Hotbar slot clicked at position (%d, %d)\n", x, y);
+                return;
+            }
+        }
     }
 
+}
+
+void GSPlay::ReloadCraftingSlots() {
+    auto craftableIds = m_craftingUI->GetCraftableItems();
+    Model* slotModel = ResourceManager::GetInstance()->GetModel(2);
+    Texture* slotTexture = ResourceManager::GetInstance()->GetTexture(70);
+    Shaders* slotShader = ResourceManager::GetInstance()->GetShader(0);
+
+    m_craftingSlots.clear();
+
+    int cols = 10;
+    int slotIndex = 0; // Dùng slotIndex riêng cho slot hiện tại vì có thể ko tạo đủ craftableIds.size()
+    for (size_t i = 0; i < craftableIds.size(); ++i) {
+        const std::string& recipeId = craftableIds[i];
+
+        // Chỉ tạo slot nếu đủ nguyên liệu để craft
+        if (!m_craftingUI->CanCraft(recipeId)) {
+            continue; // Bỏ qua nếu không đủ nguyên liệu
+        }
+
+        auto slot = std::make_shared<Slot>(slotModel, slotTexture, slotShader);
+
+        slot->SetSlotType(SlotType::CRAFTING);
+        slot->SetSlotIndex(slotIndex); // dùng slotIndex vì i có thể bỏ qua
+        slot->SetOwnerInventory(playerInventory.get());
+
+        auto item = std::make_shared<Item>(recipeId, 1);
+        slot->SetItem(item);
+
+        int row = slotIndex / cols;
+        int col = slotIndex % cols;
+
+        float offsetX = -70 + col * 15.0f;
+        float offsetY = row * 15.0f - 90;
+
+        slot->setSize(13, 13);
+        slot->SetSize(30, 30);
+        slot->userOffsetX = offsetX;
+        slot->userOffsetY = offsetY;
+        slot->SetPosition(146, 36);
+        slot->SetChildPosition(P1->x + offsetX, P1->y + offsetY);
+        slot->set2Dposition(P1->x + offsetX, P1->y + offsetY);
+
+        // NOTE: Để lambda truy cập đúng m_recipeId và m_craftingUI, cần capture [this, recipeId]
+        slot->SetOnClick([]() {
+            printf("Crafting item with ID: %s\n", m_recipeId.c_str());
+            m_craftingUI->CraftItem(m_recipeId);
+
+            });
+
+        m_craftingSlots.push_back(slot);
+        slotIndex++;
+    }
 }
 
 
@@ -125,6 +189,8 @@ bool GSPlay::Init()
     printf("----------------------------------\n");
     ItemDB::GetInstance()->LoadDB("../NewTrainingFramework/GameManager/ItemDb.txt");
     printf("----------------------------------\n");
+	CraftingRecipeDB::GetInstance()->LoadFromFile("../NewTrainingFramework/GameManager/RecipeDb.txt");
+	CraftingRecipeDB::GetInstance()->PrintAll();   
     doc.LoadFile("../Resources/Textures/Map.tmx");
 
     auto mapNode = doc.FirstChildElement("map");
@@ -354,6 +420,15 @@ bool GSPlay::Init()
     playerInventory->InitializeUI(inventorySlots, hotbar);
     Slot::SetCurrentSlot(currentSlot);
 
+    /*m_craftingUI = std::make_shared<CraftingUI>(playerInventory);
+    m_craftingUI->InitializeUI();
+	m_craftingUI->*/
+
+    m_craftingUI = std::make_shared<CraftingUI>(playerInventory);
+    ReloadCraftingSlots();
+
+    // (Tùy chọn) nếu muốn giữ trong GSPlay để Draw()
+
     //tree = std::make_shared<Environment>(model, shader, treetexture, 1, 0, 1, 0, 0.1f);
     //tree->SetPosition(Vector3(50, 10, 0));
     //tree->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
@@ -419,6 +494,44 @@ bool GSPlay::Init()
 
 }
 
+void GSPlay::UpdateCraftingSlots() {
+    for (const auto& slot : m_craftingSlots) {
+        if (slot->GetItem() == nullptr) {
+            std::string itemId = slot->GetLastItemId();
+            if (!itemId.empty()) {
+                printf("Crafting item from removed slot: %s\n", itemId.c_str());
+                m_craftingUI->CraftItem(itemId);
+                reloadable = true;
+            }
+        }
+    }
+
+    // Xóa các slot không còn item
+    auto it = std::remove_if(m_craftingSlots.begin(), m_craftingSlots.end(),
+        [](const std::shared_ptr<Slot>& slot) {
+            return slot->GetItem() == nullptr;
+        });
+    m_craftingSlots.erase(it, m_craftingSlots.end());
+
+    // Cập nhật vị trí các slot còn lại
+    int i = 0;
+    for (auto& slot : m_craftingSlots) {
+        int cols = 10;
+        int row = i / cols;
+        int col = i % cols;
+
+        float offsetX = -70 + col * 15.0f;
+        float offsetY = row * 15.0f - 90;
+
+        slot->userOffsetX = offsetX;
+        slot->userOffsetY = offsetY;
+        slot->set2Dposition(P1->x + offsetX, P1->y + offsetY);
+        slot->SetChildPosition(P1->x + offsetX, P1->y + offsetY);
+        ++i;
+    }
+
+    m_craftingUI->UpdateCraftableList();
+}
 
 void GSPlay::Exit()
 {
@@ -476,8 +589,21 @@ void GSPlay::Update(float deltaTime)
             i = 0;
         }
 	}
+    UpdateCraftingSlots();
 
-    
+    if (reloadable && uidltime >= 0.5) {
+        uidltime = 0;
+        reloadable = false;
+        ReloadCraftingSlots();
+	}
+    // 2. Update vị trí các slot còn lại
+    for (auto& slot : m_craftingSlots) {
+        slot->set2Dposition(P1->x + slot->userOffsetX,
+            P1->y + slot->userOffsetY);
+        slot->SetChildPosition(P1->x + slot->userOffsetX,
+            P1->y + slot->userOffsetY);
+    }
+
     //inv->Update(P1->x, P1->y, deltaTime);
 
 
@@ -675,6 +801,7 @@ void GSPlay::Update(float deltaTime)
         if (uidltime >= 0.2f) {
             uidltime = 0.0f;
             inventory->SetVisible(!inventory->IsVisible());
+            ReloadCraftingSlots();
         }
     }
     int previousSlot = currentSlot;
@@ -737,6 +864,9 @@ void GSPlay::Draw()
     }
     for (auto& hb : hotbar) {
         hb->Draw();
+    }
+    for (auto& slot : m_craftingSlots) {
+        slot->Draw();
     }
     button_play->Draw();
 

@@ -27,7 +27,7 @@ public:
     void UpdateFromSlot(Slot* slot);
 
     void InitializeUI(std::vector<std::shared_ptr<Slot>>& inventorySlots, std::vector<std::shared_ptr<Slot>>& hotbarSlots);
-
+    std::vector<std::string> stationsNearby = { "" };
 
     const std::unordered_map<int, std::pair<std::string, int>>& GetInventory() const { return inventory; }
     const std::unordered_map<int, std::pair<std::string, int>>& GetHotbar() const { return hotbar; }
@@ -45,6 +45,10 @@ public:
     std::shared_ptr<Slot> selectedSlot;
     std::shared_ptr<Slot> chosenSlot ;
     std::vector<std::shared_ptr<Slot>> hotbarSlots;
+    bool IsNearStation(const std::string& stationId) const;
+    void AddNearbyStation(const std::string& stationId);
+    void RemoveNearbyStation(const std::string& stationId);
+    void ClearNearbyStations();
 private:
     static constexpr int NUM_INVENTORY_SLOTS = 30;
     static constexpr int NUM_HOTBAR_SLOTS = 10;

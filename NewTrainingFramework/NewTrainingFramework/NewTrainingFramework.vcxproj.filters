@@ -441,6 +441,12 @@
     <ClCompile Include="GameObject\Boss.cpp">
       <Filter>Source Files\GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="GameManager\CraftingRecipeDB.cpp">
+      <Filter>Source Files\GameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\CraftingUI.cpp">
+      <Filter>Source Files\GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h">
@@ -582,6 +588,15 @@
       <Filter>Source Files\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="GameObject\Boss.h">
+      <Filter>Source Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager\CraftingRecipeDB.h">
+      <Filter>Source Files\GameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CraftingUI.h">
+      <Filter>Resources\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\CraftingUI.h">
       <Filter>Source Files\GameObject</Filter>
     </ClInclude>
   </ItemGroup>

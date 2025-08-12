@@ -1,5 +1,7 @@
 ﻿#include "Slot.h"
 
+
+
 Slot::Slot(Model* model, Texture* texture, Shaders* shader)
     : GameButton(model, texture, shader), item(nullptr), slotType(SlotType::INVENTORY), slotIndex(-1)
 {
@@ -56,10 +58,15 @@ int Slot::GetSlotIndex() {
 
 
 void Slot::SetItem(const std::shared_ptr<Item>& newItem) {
+    if (newItem) {
+        lastItemId = newItem->GetIdName();
+    }
+    else {
+        // item bị clear, nhưng giữ lastItemId để nhớ item trước đó
+    }
     item = newItem;
     NotifyInventoryChanged();
 }
-
 
 void Slot::RemoveItem() {
     item = nullptr;

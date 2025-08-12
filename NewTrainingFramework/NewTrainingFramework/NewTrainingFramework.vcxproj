@@ -96,6 +96,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="GameManager\CraftingRecipeDB.cpp" />
     <ClCompile Include="GameManager\GameStateMachine.cpp" />
     <ClCompile Include="GameManager\GSIntro.cpp" />
     <ClCompile Include="GameManager\GSMenu.cpp" />
@@ -109,6 +110,7 @@
     <ClCompile Include="GameObject\Boss.cpp" />
     <ClCompile Include="GameObject\Building.cpp" />
     <ClCompile Include="GameObject\Bush.cpp" />
+    <ClCompile Include="GameObject\CraftingUI.cpp" />
     <ClCompile Include="GameObject\Enemy.cpp" />
     <ClCompile Include="GameObject\GameButton.cpp" />
     <ClCompile Include="GameObject\Item.cpp" />
@@ -202,6 +204,8 @@
     <ClCompile Include="tinyxml2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CraftingUI.h" />
+    <ClInclude Include="GameManager\CraftingRecipeDB.h" />
     <ClInclude Include="GameManager\GameStateBase.h" />
     <ClInclude Include="GameManager\GameStateMachine.h" />
     <ClInclude Include="GameManager\GSIntro.h" />
@@ -217,6 +221,7 @@
     <ClInclude Include="GameObject\Building.h" />
     <ClInclude Include="GameObject\Bush.h" />
     <ClInclude Include="GameObject\Camera.h" />
+    <ClInclude Include="GameObject\CraftingUI.h" />
     <ClInclude Include="GameObject\Enemy.h" />
     <ClInclude Include="GameObject\Item.h" />
     <ClInclude Include="GameObject\Slot.h" />

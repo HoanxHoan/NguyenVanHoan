@@ -198,3 +198,33 @@ void PlayerInventory::InitializeUI(std::vector<std::shared_ptr<Slot>>& inventory
     }
 }
 
+bool PlayerInventory::IsNearStation(const std::string& stationId) const {
+    for (const auto& station : stationsNearby) {
+        if (station == stationId) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void PlayerInventory::AddNearbyStation(const std::string& stationId) {
+    // Không thêm trùng
+    for (const auto& station : stationsNearby) {
+        if (station == stationId) {
+            return;
+        }
+    }
+    stationsNearby.push_back(stationId);
+}
+
+void PlayerInventory::RemoveNearbyStation(const std::string& stationId) {
+    stationsNearby.erase(
+        std::remove(stationsNearby.begin(), stationsNearby.end(), stationId),
+        stationsNearby.end()
+    );
+}
+
+void PlayerInventory::ClearNearbyStations() {
+    stationsNearby.clear();
+    stationsNearby.push_back(""); // giữ lại phần tử mặc định
+}
