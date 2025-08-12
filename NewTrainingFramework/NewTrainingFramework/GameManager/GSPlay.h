@@ -98,5 +98,7 @@ public:
     std::vector<std::shared_ptr<Slot>> craftingSlots;
     std::vector<std::shared_ptr<Slot>> m_craftingSlots;
     bool reloadable = false;
+    bool isWalk = false;
+    bool wasWalking = false;
 };
 

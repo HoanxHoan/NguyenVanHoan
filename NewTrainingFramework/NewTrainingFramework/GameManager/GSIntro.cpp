@@ -39,6 +39,11 @@ bool GSIntro::Init()
     obj->scaleMatrix.SetScale(sx, sy, sz);
     float nearPlane = -1, farPlane = 1;
     Camera::GetInstance()->SetNearFar(nearPlane, farPlane);
+    SoundManager::GetInstance()->Init();
+    SoundManager::GetInstance()->LoadSound("Background", "../Resources/Sound/Background.wav");
+    SoundManager::GetInstance()->LoadSound("walk", "../Resources/Sound/walk.wav");
+    SoundManager::GetInstance()->LoadSound("onhit", "../Resources/Sound/onhit.wav");
+    SoundManager::GetInstance()->LoadSound("hitHurt", "../Resources/Sound/hitHurt.wav");
     std::cout << "Intro Init\n";
     delete model;
     delete tex;

@@ -94,7 +94,7 @@ void GSPlay::HandleInput(unsigned char key, bool isPressed)
 
     }
     else {
-
+        isWalk = false;
     }
 
 }
@@ -551,7 +551,16 @@ void GSPlay::Resume()
 
 void GSPlay::Update(float deltaTime)
 {
+    if (isWalk && !wasWalking)
+    {
+        SoundManager::GetInstance()->PlaySound("walk");
+    }
 
+    if (!isWalk && wasWalking)
+    {
+        SoundManager::GetInstance()->endSound("walk");
+    }
+    wasWalking = isWalk;
     uidltime += deltaTime;
     inventory->SetPosition(Vector3(P1->x + 25, P1->y+15, 0));
     onhitdltime += deltaTime;
@@ -653,6 +662,7 @@ void GSPlay::Update(float deltaTime)
             env->moveTo(P1->x,P1->y, deltaTime);
             if (P1->CheckCollision(env) && onhit==false) {
                 P1->onHit(count, env->x, env->y);
+                SoundManager::GetInstance()->PlaySoundnoLoop("onhit");
                 onhit = true;
                 onhitdltime = 0;
             }
@@ -661,6 +671,7 @@ void GSPlay::Update(float deltaTime)
             env->moveTo(P1->x, P1->y, deltaTime);
             if (P1->CheckCollision(env) && onhit == false) {
                 P1->onHit(count, env->x, env->y);
+                SoundManager::GetInstance()->PlaySoundnoLoop("onhit");
                 onhit = true;
                 onhitdltime = 0;
             }
@@ -672,6 +683,7 @@ void GSPlay::Update(float deltaTime)
     }
     if (keyState['W'] ) {
         if (action == 0 ) {
+            isWalk = true;
             hasCollision = false;
             count = 1;
             float newY = P1->y - movement_speed * deltaTime;
@@ -691,6 +703,7 @@ void GSPlay::Update(float deltaTime)
     }
     if (keyState['D']) {
         if (action == 0 ) {
+            isWalk = true;
             hasCollision = false;
             count = 2;
             float newX = P1->x + movement_speed * deltaTime;
@@ -710,6 +723,7 @@ void GSPlay::Update(float deltaTime)
     }
     if (keyState['A'] ) {
         if (action == 0 ) {
+            isWalk = true;
             hasCollision = false;
             count = 4;
             float newX = P1->x - movement_speed * deltaTime;
@@ -729,6 +743,7 @@ void GSPlay::Update(float deltaTime)
     }
     if (keyState['S'] ) {
         if (action == 0) {
+            isWalk = true;
             hasCollision = false;
             count = 3;
             float newY = P1->y + movement_speed * deltaTime;

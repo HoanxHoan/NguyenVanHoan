@@ -45,7 +45,7 @@ void Animal::Update(GLfloat deltaTime) {
     else if (hp < 1 && isdead == false) {
         this->dead();
     }
-    else if (dltime >= 0.1 && isHit == true) {
+    else if (dltime >= 0.5 && isHit == true) {
         hp -= 1;
         //printf("%d\n", hp);
         this->endHit();

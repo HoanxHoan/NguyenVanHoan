@@ -14,7 +14,7 @@ public:
 private:
     bool iscut;
     float dltime, Hpdltime;
-    bool icut;
+    bool icut,iscutted;
     int hp;
 };
 

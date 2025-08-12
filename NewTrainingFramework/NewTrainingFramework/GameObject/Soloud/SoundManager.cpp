@@ -51,8 +51,21 @@ void SoundManager::PlaySound(const std::string& key)
     auto it = sounds.find(key);
     if (it != sounds.end())
     {
-        int handle = soloud.play(*it->second);
-        soloud.setLooping(handle, true); 
+        int handle = soloud.play(*it->second); 
+        soloud.setLooping(handle, true);
+    }
+}
+void SoundManager::PlaySoundnoLoop(const std::string& key)
+{
+    auto it = sounds.find(key);
+    int handle = soloud.play(*it->second);
+    soloud.setVolume(handle, 1.0);
+}
+void SoundManager::endSound(const std::string& key)
+{
+    auto it = sounds.find(key);
+    if (it != sounds.end()) {
+        soloud.stopAudioSource(*it->second);
     }
 }
 void SoundManager::SetVolume(float volume)

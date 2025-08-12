@@ -107,6 +107,7 @@ void Player::Crush(int action,int count) {
 }
 void Player::Slice(int action, int count) {
     if (action == 0) {
+        SoundManager::GetInstance()->PlaySoundnoLoop("hitHurt");
         switch (count) {
         case 1: {
             this->SetTexture(ResourceManager::GetInstance()->GetTexture(25));

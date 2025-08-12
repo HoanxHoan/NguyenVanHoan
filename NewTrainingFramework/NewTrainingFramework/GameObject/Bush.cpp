@@ -54,15 +54,11 @@ void Bush::Update(GLfloat deltaTime)
 {
     dltime += deltaTime;
     Hpdltime += deltaTime;
-    if (icut == true && Hpdltime >= 0.5)
-    {
-        hp = hp - 1;
-        icut = false;
-    }
-    if (iscrush == true && hp <= 1) { this->Cutted(); }
+    if (Hpdltime >= 0.1 && hp <= 1) { this->Cutted();}
     else if (iscrush && dltime >= 0.1)
     {
         EndCut();
+        hp = hp - 1;
     }
     SpriteAnimation::Update(deltaTime);
 }

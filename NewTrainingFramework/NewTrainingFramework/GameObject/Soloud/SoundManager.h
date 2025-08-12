@@ -4,6 +4,7 @@
 #include "../../../Include/Soloud/soloud_wavstream.h"
 #include <map>
 #include <string>
+#include <unordered_map>
 
 class SoundManager
 {
@@ -20,10 +21,13 @@ public:
     bool Init();
     void LoadSound(const std::string& key, const char* filePath);
     void PlaySound(const std::string& key);
+    void PlaySoundnoLoop(const std::string& key);
+    void endSound(const std::string& key);
     void CleanUp();
     void SetVolume(float volume);
     void IncreaseVolume(float delta);
     void DecreaseVolume(float delta);
     float currentVolume = 1.0f;
+    //std::unordered_map<std::string, int> soundHandles;
 };
 
