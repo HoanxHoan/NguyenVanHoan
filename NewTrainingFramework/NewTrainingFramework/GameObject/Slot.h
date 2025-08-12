@@ -10,7 +10,8 @@ class PlayerInventory;
 
 enum class SlotType {
     HOTBAR = 0,
-    INVENTORY
+    INVENTORY,
+    CRAFTING
 };
 
 class Slot : public GameButton {
@@ -27,25 +28,26 @@ public:
     void SetSlotIndex(int index);
     int GetSlotIndex();
     void SetItem(const std::shared_ptr<Item>& newItem);
-    void SetItem(const std::shared_ptr<Item>& newItem, int newQuantity);
     void SetChildPosition(float x, float y);
     std::shared_ptr<Item> GetItem() const;
     bool HandleTouchEvents(GLint x, GLint y, bool bIsPressed);
-    int GetQuantity();
-    void SetQuantity(int newQuantity);
     void Draw();
     static void RegisterHotbarSlot(Slot* slot);
     static void SetCurrentSlot(int numpad);
     bool IsCurrentSlot();
     bool HasItem() const;
     PlayerInventory* ownerInventory = nullptr;
-
+    int userOffsetX = 0;
+    int userOffsetY = 0;
     PlayerInventory* GetOwnerInventory() { return ownerInventory; }
     void NotifyInventoryChanged();
     void SetOwnerInventory(PlayerInventory* inventory);
     std::shared_ptr<Item> item;
+    std::string Slot::GetLastItemId() const {
+        return lastItemId;
+    }
 private:
-
+    std::string lastItemId;
     SlotType slotType;
     int slotIndex;
     Vector2 m_pos;

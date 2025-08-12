@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "GameStateBase.h"
 #include "Scene.h"
@@ -17,6 +17,12 @@
 #include "../GameObject/Player.h"
 #include "../tinyxml2.h"
 #include "../GameObject/Slot.h"
+#include "../GameObject/CraftingUI.h"
+#include <unordered_set>   // Thêm ở đầu file
+#include <unordered_map>   // Nếu dùng unordered_map cũng cần thêm
+
+// Và nếu chưa dùng namespace std đầy đủ, thêm:
+using namespace std;
 class GSPlay : public GameStateBase
 {
 public:
@@ -24,6 +30,7 @@ public:
     ~GSPlay();
 
     bool Init() override;
+    void UpdateCraftingSlots();
     void Exit() override;
 
     void Pause() override;
@@ -33,6 +40,7 @@ public:
     void Draw() override;
     void HandleInput(unsigned char key, bool isPressed) override;
     void HandleMouseClick(GLint x, GLint y, bool isClick) override;
+    void ReloadCraftingSlots();
     std::vector<std::shared_ptr<Slot>> GetAllSlots();
     StateType GetStateType() const override { return StateType::PLAY; }
     bool IsWaterTile(int xPixel, int yPixel);
@@ -85,5 +93,10 @@ public:
     std::shared_ptr<PlayerInventory> playerInventory;
     bool onhit;
     float onhitdltime;
+    static std::shared_ptr<CraftingUI> m_craftingUI;
+    static std::string m_recipeId;
+    std::vector<std::shared_ptr<Slot>> craftingSlots;
+    std::vector<std::shared_ptr<Slot>> m_craftingSlots;
+    bool reloadable = false;
 };
 
