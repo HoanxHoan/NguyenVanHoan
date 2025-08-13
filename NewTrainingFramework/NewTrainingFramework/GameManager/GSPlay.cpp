@@ -486,6 +486,16 @@ bool GSPlay::Init()
     boss->setSize(70, 70);
     i_objects.push_back(boss);
     Boss_objects.push_back(boss);
+
+    Texture* StonegiTexture = ResourceManager::GetInstance()->GetTexture(56);
+    boss = std::make_shared<Boss>(model, shader, StonegiTexture, 8, 0, 1, 0, 0.1f);
+    boss->type = 3;
+    boss->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
+    boss->SetScale(Vector3(50, 50, 0));
+    boss->setSize(80, 80);
+    i_objects.push_back(boss);
+    Boss_objects.push_back(boss);
+
     temp = *P1;
     P1->getObjectList(&i_objects);
     return true;

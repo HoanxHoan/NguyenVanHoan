@@ -51,13 +51,15 @@ void Boss::Update(GLfloat deltaTime)
 }
 void Boss::moveTo(float px, float py, float deltaTime) {
     if (death == true || isHit == true) { return; }
-
+    this->SetNumFrames(8);
     if (type == 1) {
-        this->SetNumFrames(8);
         this->SetTexture(ResourceManager::GetInstance()->GetTexture(50));
     }
     if (type == 2) {
         this->SetTexture(ResourceManager::GetInstance()->GetTexture(56));
+    }
+    if (type == 3) {
+        this->SetTexture(ResourceManager::GetInstance()->GetTexture(71));
     }
 
     float dx = px - this->x;
@@ -114,7 +116,9 @@ void Boss::onHit(int count) {
         if (type == 2) {
             this->SetTexture(ResourceManager::GetInstance()->GetTexture(57));
         }
-
+        if (type == 3) {
+            this->SetTexture(ResourceManager::GetInstance()->GetTexture(72));
+        }
         this->SetNumFrames(1);
         this->SetCurrentFrame(0);
         isHit = true;
@@ -132,6 +136,10 @@ void Boss::endHit() {
             this->SetTexture(ResourceManager::GetInstance()->GetTexture(56));
             this->SetNumFrames(8);
         }
+        if (type == 3) {
+            this->SetTexture(ResourceManager::GetInstance()->GetTexture(71));
+            this->SetNumFrames(8);
+        }
         this->SetCurrentFrame(0);
         isHit = false;
         dltime = 0;
@@ -142,13 +150,19 @@ void Boss::Dead()
     if (type == 1) {
         this->SetTexture(ResourceManager::GetInstance()->GetTexture(52));
         this->SetNumFrames(3);
+        this->SetFrameTime(0.1);
     }
     if (type == 2) {
         this->SetTexture(ResourceManager::GetInstance()->GetTexture(58));
         this->SetNumFrames(8);
+        this->SetFrameTime(0.1);
+    }
+    if (type == 3) {
+        this->SetTexture(ResourceManager::GetInstance()->GetTexture(73));
+        this->SetNumFrames(4);
+        this->SetFrameTime(0.3);
     }
     this->SetCurrentFrame(0);
-    this->SetFrameTime(0.1);
     death = true;
     deaddltime = 0;
 }

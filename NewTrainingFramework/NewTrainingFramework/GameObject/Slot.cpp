@@ -20,8 +20,6 @@ Slot* Slot::chosenSlot = nullptr;
 std::vector<Slot*> Slot::hotbarSlots;
 
 Slot::~Slot() {
-    selectedSlot = nullptr;
-    chosenSlot = nullptr;
     printf("cleared\n");
 }
 
