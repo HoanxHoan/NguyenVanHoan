@@ -5,6 +5,7 @@ PlayerInventory* PlayerInventory::instance = nullptr;
 PlayerInventory::PlayerInventory() {
     inventory[0] = { "wooden_log", 12 };
     inventory[3] = { "stone", 12 };
+
     hotbar[1] = { "wooden_pickaxe", 1};
 }
 
@@ -15,15 +16,15 @@ PlayerInventory* PlayerInventory::GetInstance() {
 
 PlayerInventory::~PlayerInventory() {
     // Destructor logic if needed
- //   for(auto& m : inventory) {
- //       printf("Item ID: %s, Amount: %d\n", m.second.first.c_str(), m.second.second);
-	//}
- //   for(auto& m : hotbar) {
- //       printf("Hotbar Item ID: %s, Amount: %d\n", m.second.first.c_str(), m.second.second);
- //   }
- //   inventory.clear();
- //   hotbar.clear();
-	//instance = nullptr;
+    for(auto& m : inventory) {
+        printf("Item ID: %s, Amount: %d\n", m.second.first.c_str(), m.second.second);
+	}
+    for(auto& m : hotbar) {
+        printf("Hotbar Item ID: %s, Amount: %d\n", m.second.first.c_str(), m.second.second);
+    }
+    inventory.clear();
+    hotbar.clear();
+	instance = nullptr;
 }
 
 void PlayerInventory::Destroy()

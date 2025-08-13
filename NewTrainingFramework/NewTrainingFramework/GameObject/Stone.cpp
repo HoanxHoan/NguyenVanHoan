@@ -13,16 +13,19 @@ void Stone::Crush() {
             this->SetTexture(ResourceManager::GetInstance()->GetTexture(31));
             this->SetNumFrames(1);
             this->SetCurrentFrame(0);
-            iscrush = true;
-            dltime = 0;
         }
         else if (type == 2) {
             this->SetTexture(ResourceManager::GetInstance()->GetTexture(32));
             this->SetNumFrames(1);
             this->SetCurrentFrame(0);
-            iscrush = true;
-            dltime = 0;
         }
+        else if (type == 3) {
+            this->SetTexture(ResourceManager::GetInstance()->GetTexture(75));
+            this->SetNumFrames(1);
+            this->SetCurrentFrame(0);
+        }
+        iscrush = true;
+        dltime = 0;
     }
 }
 void Stone::EndCrush() {
@@ -30,18 +33,18 @@ void Stone::EndCrush() {
         if (type == 1) {
             this->SetNumFrames(1);
             this->SetTexture(ResourceManager::GetInstance()->GetTexture(28));
-            icut = true;
-            iscrush = false;
-            Hpdltime = 0;
-            dltime = 0;
         }else if(type ==2 ){
             this->SetNumFrames(1);
             this->SetTexture(ResourceManager::GetInstance()->GetTexture(29));
-            icut = true;
-            iscrush = false;
-            Hpdltime = 0;
-            dltime = 0;
         }
+        else if (type == 3) {
+            this->SetNumFrames(1);
+            this->SetTexture(ResourceManager::GetInstance()->GetTexture(74));
+        }
+        icut = true;
+        iscrush = false;
+        Hpdltime = 0;
+        dltime = 0;
     }
 }
 void Stone::Crushed() {

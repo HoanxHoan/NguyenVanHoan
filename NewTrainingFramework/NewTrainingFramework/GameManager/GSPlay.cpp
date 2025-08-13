@@ -276,6 +276,41 @@ bool GSPlay::Init()
     fire->SetScale(Vector3(10, 16, 0));
     i_bonfire.push_back(fire.get());
     envi_objects.push_back(fire);
+    //crystal
+    Texture* crystal = ResourceManager::GetInstance()->GetTexture(74);
+    stone = std::make_shared<Stone>(model, shader, crystal, 1, 0, 1, 0, 0.1f);
+    stone->type = 3;
+    stone->SetPosition(Vector3(80, 160, 0));
+    stone->SetScale(Vector3(30, 40, 0));
+    stone->setSize(40, 20);
+    stone->SetRotation(Vector3(0, 180 * DEG2RAD, 0));
+    i_objects.push_back(stone);
+    envi_objects.push_back(stone);
+
+    stone = std::make_shared<Stone>(model, shader, crystal, 1, 0, 1, 0, 0.1f);
+    stone->type = 3;
+    stone->SetPosition(Vector3(80, 1500, 0));
+    stone->SetScale(Vector3(30, 40, 0));
+    stone->setSize(40, 20);
+    stone->SetRotation(Vector3(0, 180 * DEG2RAD, 0));
+    i_objects.push_back(stone);
+    envi_objects.push_back(stone);
+
+    stone = std::make_shared<Stone>(model, shader, crystal, 1, 0, 1, 0, 0.1f);
+    stone->type = 3;
+    stone->SetPosition(Vector3(2730, 160, 0));
+    stone->SetScale(Vector3(30, 40, 0));
+    stone->setSize(40, 20);
+    i_objects.push_back(stone);
+    envi_objects.push_back(stone);
+
+    stone = std::make_shared<Stone>(model, shader, crystal, 1, 0, 1, 0, 0.1f);
+    stone->type = 3;
+    stone->SetPosition(Vector3(2730, 1500, 0));
+    stone->SetScale(Vector3(30, 40, 0));
+    stone->setSize(40, 20);
+    i_objects.push_back(stone);
+    envi_objects.push_back(stone);
     //Tree
     Texture* treetexture = ResourceManager::GetInstance()->GetTexture(18);
     for (int i = 0; i < 150; ++i) {
@@ -308,6 +343,7 @@ bool GSPlay::Init()
         envi_objects.push_back(stone);
     }
 
+   
 
 
     
