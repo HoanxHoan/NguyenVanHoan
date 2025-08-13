@@ -170,6 +170,7 @@ void GSPlay::ReloadCraftingSlots() {
         slot->SetChildPosition(P1->x + offsetX, P1->y + offsetY);
         slot->set2Dposition(P1->x + offsetX, P1->y + offsetY);
 
+        slot->TextPosition(480 + offsetX * 4.8, 360 + offsetY * 3.6);
         // NOTE: Để lambda truy cập đúng m_recipeId và m_craftingUI, cần capture [this, recipeId]
         slot->SetOnClick([]() {
             printf("Crafting item with ID: %s\n", m_recipeId.c_str());
@@ -417,8 +418,11 @@ bool GSPlay::Init()
         slot->SetSize(30, 30);
         slot->SetPosition(480 + offsetX * 4.8, 360 + offsetY * 3.6);
         slot->SetChildPosition(P1->x + offsetX, P1->y + offsetY);
+
+        slot->TextPosition(480 + offsetX * 4.8, 360 + offsetY * 3.6);
         //slot->SetPosition(P1->x, P1->y);
         slot->set2Dposition(P1->x + offsetX, P1->y + offsetY);
+
         slot->SetOnClick([]() {
             printf("Slot clicked\n");
             // Xử lý sự kiện khi slot được nhấn
@@ -446,6 +450,7 @@ bool GSPlay::Init()
         hotbar_slot->SetChildPosition(P1->x + offsetX, P1->y + 90);
         //hotbar_slot->SetPosition(P1->x, P1->y)e;
         hotbar_slot->set2Dposition(P1->x + offsetX, P1->y + 90);
+        hotbar_slot->TextPosition(480 + offsetX * 4.8, 683);
         hotbar_slot->SetOnClick([]() {
             printf("Hotbar Slot clicked\n");
             // Xử lý sự kiện khi slot được nhấn

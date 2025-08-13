@@ -29,6 +29,7 @@ public:
     int GetSlotIndex();
     void SetItem(const std::shared_ptr<Item>& newItem);
     void SetChildPosition(float x, float y);
+    void TextPosition(float x, float y);
     std::shared_ptr<Item> GetItem() const;
     bool HandleTouchEvents(GLint x, GLint y, bool bIsPressed);
     void Draw();
@@ -46,6 +47,7 @@ public:
     std::string Slot::GetLastItemId() const {
         return lastItemId;
     }
+    Vector3 t_pos;
 private:
     std::string lastItemId;
     SlotType slotType;

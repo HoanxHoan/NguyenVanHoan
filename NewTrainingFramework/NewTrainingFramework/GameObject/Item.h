@@ -3,13 +3,14 @@
 #include "Object.h"
 #include "../GameManager/ItemDb.h"
 #include "../GameManager/ResourceManager.h"
+#include "../GameObject/TextRenderer.h"
 
 class Item : public Object {
 public:
     Item(const std::string& id = "", int amount = 1);
     ~Item();
     std::shared_ptr<ItemDB> itemreader;
-
+	std::shared_ptr<TextRenderer> textRenderer;
     void SetItem(const std::string& id);
     void LoadItem(const std::string& id);
 

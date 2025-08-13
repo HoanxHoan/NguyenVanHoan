@@ -86,6 +86,12 @@ void Slot::SetChildPosition(float x, float y)
 
 }
 
+void Slot::TextPosition(float x, float y)
+{
+    t_pos.x = x + 10;
+    t_pos.y = (720 - y) - 13;
+}
+
 void Slot::Draw()
 {
     // Vẽ nền của slot
@@ -99,6 +105,10 @@ void Slot::Draw()
         item->m_renderObject->set2Dposition(m_pos.x, m_pos.y);
         item->m_renderObject->setSize(drawSize, drawSize); // Kích thước của item   
         item->m_renderObject->Draw();
+        if(item->m_amount > 1){
+            item->textRenderer->RenderText(std::to_string(item->m_amount), t_pos.x, t_pos.y, 0.5f, Vector3(1.0f, 1.0f, 1.0f));
+        }
+        item->textRenderer->RenderText("", t_pos.x, t_pos.y, 0.5f, Vector3(1.0f, 1.0f, 1.0f));
     }
 }
 
