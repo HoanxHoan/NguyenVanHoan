@@ -1,8 +1,9 @@
 ﻿#include "CraftingUI.h"
 #include <cstdio>
 
-CraftingUI::CraftingUI(std::shared_ptr<PlayerInventory> inventory)
-    : m_inventory(inventory) {
+CraftingUI::CraftingUI()
+    {
+    m_inventory = PlayerInventory::GetInstance();
 }
 
 void CraftingUI::InitializeUI() {

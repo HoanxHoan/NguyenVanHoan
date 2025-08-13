@@ -428,7 +428,7 @@ bool GSPlay::Init()
         // (tuỳ chọn) nếu bạn cần giữ shared_ptr:
 
     }
-    
+    Slot::ClearHotbarSlots();
     Texture* hotbarTexture = ResourceManager::GetInstance()->GetTexture(70);
     for (int i = 0; i < 10; ++i) {
 		hotbar_slot = std::make_shared<Slot>(model, hotbarTexture, btnShader);
@@ -436,7 +436,6 @@ bool GSPlay::Init()
         hotbar_slot->SetSlotIndex(i);
         hotbar_slot->SetOwnerInventory(playerInventory.get());
         hotbar_slot->RegisterHotbarSlot(hotbar_slot.get());
-        hotbarSlots.push_back(hotbar_slot);
         printf("Hotbar Slot %d created\n", i);
         int cols = 10;
         int col = i % cols;
@@ -460,7 +459,7 @@ bool GSPlay::Init()
     m_craftingUI->InitializeUI();
 	m_craftingUI->*/
 
-    m_craftingUI = std::make_shared<CraftingUI>(playerInventory);
+    m_craftingUI = std::make_shared<CraftingUI>();
     ReloadCraftingSlots();
 
     // (Tùy chọn) nếu muốn giữ trong GSPlay để Draw()
@@ -535,9 +534,6 @@ bool GSPlay::Init()
     temp = *P1;
     P1->getObjectList(&i_objects);
     return true;
-
-    
-
 }
 
 void GSPlay::UpdateCraftingSlots() {
@@ -582,6 +578,7 @@ void GSPlay::UpdateCraftingSlots() {
 }
 void GSPlay::Exit()
 {
+    
     std::cout << "Play State Exit\n";
 }
 

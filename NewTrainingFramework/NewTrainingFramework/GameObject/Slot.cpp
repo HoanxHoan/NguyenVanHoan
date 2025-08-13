@@ -24,9 +24,8 @@ Slot::~Slot() {
 }
 
 void Slot::ClearHotbarSlots() {
-    hotbarSlots.clear(); // nếu không sở hữu Slot*
+    hotbarSlots.clear();
 }
-
 
 
 std::shared_ptr<Item> Slot::GetItem() const {

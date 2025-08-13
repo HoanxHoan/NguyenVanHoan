@@ -18,7 +18,7 @@ class Slot : public GameButton {
 public:
     Slot(Model* model, Texture* texture, Shaders* shader);
     ~Slot();
-    void ClearHotbarSlots();
+    static void ClearHotbarSlots();
     static Slot* selectedSlot;
     static Slot* chosenSlot;
     static std::vector<Slot*> hotbarSlots;
