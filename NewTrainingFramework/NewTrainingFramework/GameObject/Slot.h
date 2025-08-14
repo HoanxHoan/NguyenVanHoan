@@ -48,6 +48,7 @@ public:
         return lastItemId;
     }
     Vector3 t_pos;
+    std::shared_ptr<TextRenderer> textRenderer;
 private:
     std::string lastItemId;
     SlotType slotType;

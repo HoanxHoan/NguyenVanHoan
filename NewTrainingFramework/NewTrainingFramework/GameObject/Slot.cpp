@@ -11,7 +11,8 @@ Slot::Slot(Model* model, Texture* texture, Shaders* shader)
         srand(static_cast<unsigned int>(time(0)));
         seeded = true;
     }
-
+    textRenderer = std::make_shared<TextRenderer>();
+    textRenderer->Init("../Resources/Fonts/arial.ttf", 20);
     // 50% cơ hội tạo item
 }
 
@@ -106,9 +107,9 @@ void Slot::Draw()
         item->m_renderObject->setSize(drawSize, drawSize); // Kích thước của item   
         item->m_renderObject->Draw();
         if(item->m_amount > 1){
-            item->textRenderer->RenderText(std::to_string(item->m_amount), t_pos.x, t_pos.y, 0.5f, Vector3(1.0f, 1.0f, 1.0f));
+            textRenderer->RenderText(std::to_string(item->m_amount), t_pos.x, t_pos.y, 0.5f, Vector3(1.0f, 1.0f, 1.0f));
         }
-        item->textRenderer->RenderText("", t_pos.x, t_pos.y, 0.5f, Vector3(1.0f, 1.0f, 1.0f));
+        else textRenderer->RenderText("", t_pos.x, t_pos.y, 0.5f, Vector3(1.0f, 1.0f, 1.0f));
     }
 }
 

@@ -8,8 +8,6 @@ Item::Item(const std::string& id, int amount)
     if (!id.empty()) {
         SetItem(id);
     }
-	textRenderer = std::make_shared<TextRenderer>();
-	textRenderer->Init("../Resources/Fonts/arial.ttf", 20);
 }
 
 Item::~Item()

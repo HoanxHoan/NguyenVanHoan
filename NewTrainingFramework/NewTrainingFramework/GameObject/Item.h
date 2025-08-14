@@ -10,7 +10,7 @@ public:
     Item(const std::string& id = "", int amount = 1);
     ~Item();
     std::shared_ptr<ItemDB> itemreader;
-	std::shared_ptr<TextRenderer> textRenderer;
+	//std::shared_ptr<TextRenderer> textRenderer;
     void SetItem(const std::string& id);
     void LoadItem(const std::string& id);
 
