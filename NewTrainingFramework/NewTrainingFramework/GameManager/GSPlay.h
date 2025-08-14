@@ -100,5 +100,6 @@ public:
     bool reloadable = false;
     bool isWalk = false;
     bool wasWalking = false;
+
 };
 

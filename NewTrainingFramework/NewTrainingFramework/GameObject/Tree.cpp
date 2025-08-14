@@ -32,7 +32,7 @@ void Tree::Cutted() {
     this->set2Dposition(this->x, this->y + 20);
     this->setSize(this->width / 4, this->height);
     iscut = false;
-    icut == true;
+    icut = true;
 }
 void Tree::Update(GLfloat deltaTime)
 {
@@ -41,6 +41,7 @@ void Tree::Update(GLfloat deltaTime)
     if (Hpdltime >= 0.3 && icut == false && hp < 1)
     {
         this->Cutted();
+        PlayerInventory::GetInstance()->AddItem("wooden_log", 5);
     }
     else  if(iscut == true && dltime >= 0.7)
     {

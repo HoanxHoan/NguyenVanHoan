@@ -1,10 +1,10 @@
 ﻿#include "CraftingUI.h"
 #include <cstdio>
 
-CraftingUI::CraftingUI()
-    {
-    m_inventory = PlayerInventory::GetInstance();
+CraftingUI::CraftingUI(std::shared_ptr<PlayerInventory> inventory)
+:m_inventory(inventory){
 }
+    
 
 void CraftingUI::InitializeUI() {
     UpdateCraftableList();
@@ -136,7 +136,7 @@ void CraftingUI::CraftItem(const std::string& recipeId) {
     }
 
     // Thêm thành phẩm — giả định tên công thức = tên item kết quả
-    m_inventory->AddItem(recipeId, 1);
+    m_inventory->AddCraftItem(recipeId, 1);
     printf("Đã chế tạo: %s\n", recipeId.c_str());
 
 }

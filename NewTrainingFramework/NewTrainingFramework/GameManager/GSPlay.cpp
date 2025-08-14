@@ -402,12 +402,12 @@ bool GSPlay::Init()
     inventory->SetVisible(false);
 
     Texture* slotTexture = ResourceManager::GetInstance()->GetTexture(69); 
-    auto playerInventory = std::make_shared<PlayerInventory>();
+    playerInventory = std::make_shared<PlayerInventory>();
     for (int i = 0; i < 30; ++i) {
         slot = std::make_shared<Slot>(model, slotTexture, btnShader);
         slot->SetSlotType(SlotType::INVENTORY); // 👈 THÊM DÒNG NÀY
         slot->SetSlotIndex(i);
-        slot->SetOwnerInventory(playerInventory.get());
+        slot->SetOwnerInventory(PlayerInventory::GetInstance());
         printf("Slot %d created\n", i);
         int cols = 10;
         int row = i / cols;
@@ -438,7 +438,7 @@ bool GSPlay::Init()
 		hotbar_slot = std::make_shared<Slot>(model, hotbarTexture, btnShader);
         hotbar_slot->SetSlotType(SlotType::HOTBAR);
         hotbar_slot->SetSlotIndex(i);
-        hotbar_slot->SetOwnerInventory(playerInventory.get());
+        hotbar_slot->SetOwnerInventory(PlayerInventory::GetInstance());
         hotbar_slot->RegisterHotbarSlot(hotbar_slot.get());
         printf("Hotbar Slot %d created\n", i);
         int cols = 10;
@@ -457,14 +457,14 @@ bool GSPlay::Init()
 			});
 		hotbar.push_back(hotbar_slot);
     }
-    playerInventory->InitializeUI(inventorySlots, hotbar);
+    PlayerInventory::GetInstance()->InitializeUI(inventorySlots, hotbar);
     Slot::SetCurrentSlot(currentSlot);
 
     /*m_craftingUI = std::make_shared<CraftingUI>(playerInventory);
     m_craftingUI->InitializeUI();
 	m_craftingUI->*/
 
-    m_craftingUI = std::make_shared<CraftingUI>();
+    m_craftingUI = std::make_shared<CraftingUI>(playerInventory);
     ReloadCraftingSlots();
 
     // (Tùy chọn) nếu muốn giữ trong GSPlay để Draw()
@@ -599,6 +599,10 @@ void GSPlay::Resume()
 
 void GSPlay::Update(float deltaTime)
 {
+    if (PlayerInventory::GetInstance()->updated) {
+        PlayerInventory::GetInstance()->InitializeUI(inventorySlots, hotbar);
+        PlayerInventory::GetInstance()->updated = false;
+    }
     if (isWalk && !wasWalking)
     {
         SoundManager::GetInstance()->PlaySound("walk");

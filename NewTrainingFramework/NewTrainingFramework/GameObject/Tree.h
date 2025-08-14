@@ -1,6 +1,6 @@
 #pragma once
 #include "SpriteAnimation.h"
-
+#include "../GameManager/PlayerInventory.h"
 class Tree : public SpriteAnimation {
 public:
     Tree(Model* model, Shaders* shader, Texture* texture,

@@ -1,6 +1,6 @@
 #pragma once
 #include "SpriteAnimation.h"
-
+#include "../GameManager/PlayerInventory.h"
 class Stone : public SpriteAnimation {
 public:
     Stone(Model* model, Shaders* shader, Texture* texture,

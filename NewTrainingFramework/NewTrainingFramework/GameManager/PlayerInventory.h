@@ -14,6 +14,7 @@ public:
     ~PlayerInventory();
 	static void Destroy();
     void AddItem(const std::string& itemId, int amount);
+    void AddCraftItem(const std::string& itemId, int amount);
     void RemoveItem(std::shared_ptr<Slot> slot);
     void AddItemToEmptySlot(Item* item, std::shared_ptr<Slot> slot);
     void AddItemQuantity(std::shared_ptr<Slot> slot, int amount);
@@ -49,6 +50,7 @@ public:
     void AddNearbyStation(const std::string& stationId);
     void RemoveNearbyStation(const std::string& stationId);
     void ClearNearbyStations();
+    bool updated;
 private:
     static constexpr int NUM_INVENTORY_SLOTS = 30;
     static constexpr int NUM_HOTBAR_SLOTS = 10;

@@ -7,6 +7,7 @@ PlayerInventory::PlayerInventory() {
     inventory[3] = { "stone", 12 };
 
     hotbar[1] = { "wooden_pickaxe", 1};
+    updated = false;
 }
 
 PlayerInventory* PlayerInventory::GetInstance() {
@@ -43,6 +44,33 @@ void PlayerInventory::AddItem(const std::string& itemId, int amount) {
             int space = maxStack - item.second;
             if (space >= amount) {
                 item.second += amount;
+                updated = true;
+                return;
+            }
+            else {
+                item.second += space;
+                amount -= space;
+            }
+        }
+    }
+
+    for (int i = 0; i < NUM_INVENTORY_SLOTS; ++i) {
+        if (inventory.count(i) == 0) {
+            inventory[i] = { itemId, amount };
+            updated = true;
+            return;
+        }
+    }
+}
+void PlayerInventory::AddCraftItem(const std::string& itemId, int amount) {
+    for (auto& pair : inventory) {
+        int index = pair.first;
+        auto& item = pair.second;
+        if (item.first == itemId) {
+            int maxStack = ItemDB::GetInstance()->GetStackSize(itemId);
+            int space = maxStack - item.second;
+            if (space >= amount) {
+                item.second += amount;
                 return;
             }
             else {
@@ -59,7 +87,6 @@ void PlayerInventory::AddItem(const std::string& itemId, int amount) {
         }
     }
 }
-
 
 void PlayerInventory::RemoveItem(std::shared_ptr<Slot> slot) {
     if (slot->GetSlotType() == SlotType::HOTBAR) {

@@ -60,7 +60,10 @@ void Stone::Update(GLfloat deltaTime)
     {
         icut = false;
     }
-    if (iscrush == true && hp <= 1) { this->Crushed(); }
+    if (iscrush == true && hp <= 1) { 
+        this->Crushed(); 
+        PlayerInventory::GetInstance()->AddItem("stone", 5);
+    }
     else if (iscrush && dltime>=0.1)
     {
         hp = hp - 1;
