@@ -3,9 +3,7 @@
 PlayerInventory* PlayerInventory::instance = nullptr;
 
 PlayerInventory::PlayerInventory() {
-    inventory[0] = { "wooden_log", 12 };
-    inventory[3] = { "stone", 12 };
-
+        
     hotbar[1] = { "wooden_pickaxe", 1};
     updated = false;    
     reload = false;
@@ -78,6 +76,7 @@ void PlayerInventory::RemoveItem(std::shared_ptr<Slot> slot) {
     else if (slot->GetSlotType() == SlotType::CRAFTING) {
         craftingbar.erase(slot->GetSlotIndex());
     }
+    updated = true;
 }
 
 void PlayerInventory::AddItemToEmptySlot(Item* item, std::shared_ptr<Slot> slot) {
@@ -91,6 +90,7 @@ void PlayerInventory::AddItemToEmptySlot(Item* item, std::shared_ptr<Slot> slot)
     else if (slot->GetSlotType() == SlotType::CRAFTING) {
         craftingbar[index] = { item->GetIdName(), item->GetAmount() };
     }
+    updated = true;
 }
 
 void PlayerInventory::AddItemQuantity(std::shared_ptr<Slot> slot, int amount) {
@@ -193,6 +193,8 @@ void PlayerInventory::UpdateFromSlot(Slot* slot) {
         inventory[index] = { item->GetIdName(), item->GetAmount() };
     else if (slot->GetSlotType() == SlotType::CRAFTING)
         craftingbar[index] = { item->GetIdName(), item->GetAmount() };
+
+    updated = true;
 }
 
 
@@ -240,6 +242,8 @@ void PlayerInventory::InitializeUI(std::vector<std::shared_ptr<Slot>>& inventory
                 craftingSlots[index]->SetItem(std::make_shared<Item>(itemId, amount));
             }
     }
+
+    updated = true;
 }
 
 bool PlayerInventory::IsNearStation(const std::string& stationId) const {

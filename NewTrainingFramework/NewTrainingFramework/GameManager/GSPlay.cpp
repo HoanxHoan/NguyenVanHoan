@@ -667,6 +667,7 @@ void GSPlay::Update(float deltaTime)
         uidltime = 0;
         PlayerInventory::GetInstance()->reload = false;
         ReloadCraftingSlots();
+
     }
 
     // 2. Update vị trí các slot còn lại

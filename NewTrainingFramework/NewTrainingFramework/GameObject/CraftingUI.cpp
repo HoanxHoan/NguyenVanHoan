@@ -89,8 +89,6 @@ void CraftingUI::UpdateCraftableList() {
         for (auto& ing : recipeData.ingredients) {
             if (totalItems[ing.item] < ing.amount) {
                 int playerAmount = totalItems[ing.item];
-                printf("Checking ingredient '%s': player has %d, requires %d\n",
-                    ing.item.c_str(), playerAmount, ing.amount);
 
                 canCraft = false;
                 break;
@@ -98,7 +96,7 @@ void CraftingUI::UpdateCraftableList() {
         }
 
         if (!recipeData.station.empty()) {
-            if (!m_inventory->IsNearStation(recipeData.station)) {
+            if (!PlayerInventory::GetInstance()->IsNearStation(recipeData.station)) {
                 canCraft = false;
             }
         }
@@ -137,7 +135,7 @@ void CraftingUI::CraftItem(const std::string& recipeId) {
 
     // Trừ nguyên liệu
     for (auto& ing : recipe->ingredients) {
-        m_inventory->RemoveItemById(ing.item, ing.amount);
+        PlayerInventory::GetInstance()->RemoveItemById(ing.item, ing.amount);
     }
 
     // Thêm thành phẩm — giả định tên công thức = tên item kết quả
