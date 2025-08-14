@@ -52,6 +52,7 @@ public:
     }
     Vector3 t_pos;
     std::shared_ptr<TextRenderer> textRenderer;
+    static std::vector<std::shared_ptr<Slot>> allInventorySlots;
 private:
     std::string lastItemId;
     SlotType slotType;

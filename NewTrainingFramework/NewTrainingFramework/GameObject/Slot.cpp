@@ -19,6 +19,7 @@ Slot::Slot(Model* model, Texture* texture, Shaders* shader)
 Slot* Slot::selectedSlot = nullptr;
 Slot* Slot::chosenSlot = nullptr;
 std::vector<Slot*> Slot::hotbarSlots;
+std::vector<std::shared_ptr<Slot>> Slot::allInventorySlots;
 
 Slot::~Slot() {
     printf("cleared\n");
@@ -71,9 +72,7 @@ void Slot::RemoveItem() {
 }
 
 void Slot::NotifyInventoryChanged() {
-
     PlayerInventory::GetInstance()->UpdateFromSlot(this);
-
 }
 
 void Slot::SetOwnerInventory(PlayerInventory* inventory) {

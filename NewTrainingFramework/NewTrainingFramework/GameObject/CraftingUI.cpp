@@ -76,9 +76,9 @@ void CraftingUI::UpdateCraftableList() {
     }
 }
 
-std::vector<std::string> CraftingUI::GetCraftableItems() {
+    std::vector<std::string> CraftingUI::GetCraftableItems() {
     std::vector<std::string> result;
-    auto totalItems = m_inventory->GetTotalItemCounts();
+    auto totalItems = PlayerInventory::GetInstance()->GetTotalItemCounts();
 
     const auto& recipes = CraftingRecipeDB::GetInstance()->recipes;
     for (auto& kv : recipes) {
@@ -88,6 +88,10 @@ std::vector<std::string> CraftingUI::GetCraftableItems() {
 
         for (auto& ing : recipeData.ingredients) {
             if (totalItems[ing.item] < ing.amount) {
+                int playerAmount = totalItems[ing.item];
+                printf("Checking ingredient '%s': player has %d, requires %d\n",
+                    ing.item.c_str(), playerAmount, ing.amount);
+
                 canCraft = false;
                 break;
             }
@@ -109,12 +113,13 @@ std::vector<std::string> CraftingUI::GetCraftableItems() {
 }
 
 bool CraftingUI::CanCraft(const std::string& recipeId) {
-    auto totalItems = m_inventory->GetTotalItemCounts();
+    auto totalItems = PlayerInventory::GetInstance()->GetTotalItemCounts();
     const auto* recipe = CraftingRecipeDB::GetInstance()->GetRecipe(recipeId);
     if (!recipe) return false;
-
     for (auto& ing : recipe->ingredients) {
         if (totalItems[ing.item] < ing.amount) {
+
+            printf("Checking ingredient: player has %d\n", totalItems[ing.item]);
             return false;
         }
     }

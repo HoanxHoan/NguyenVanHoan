@@ -8,6 +8,7 @@ PlayerInventory::PlayerInventory() {
 
     hotbar[1] = { "wooden_pickaxe", 1};
     updated = false;    
+    reload = false;
 }
 
 PlayerInventory* PlayerInventory::GetInstance() {
@@ -62,7 +63,7 @@ void PlayerInventory::AddItem(const std::string& itemId, int amount) {
         // Xử lý drop ra ngoài hoặc bỏ qua
         printf("Inventory full, %d %s dropped\n", amount, itemId.c_str());
     }
-
+    reload = true;
     updated = true;
 }
 
@@ -128,27 +129,46 @@ std::unordered_map<std::string, int> PlayerInventory::GetTotalItemCounts() {
 }
 
 void PlayerInventory::RemoveItemById(const std::string& itemId, int amount) {
-    std::vector<int> toRemove;
-    for (auto& pair : inventory) {
-        int index = pair.first;
-        auto& item = pair.second;
-        if (item.first == itemId) {
-            if (item.second > amount) {
-                item.second -= amount;
+    // Duyệt qua tất cả slot inventory
+    for (auto it = inventory.begin(); it != inventory.end() && amount > 0;) {
+        auto& itemPair = it->second;
+        if (itemPair.first == itemId) {
+            if (itemPair.second > amount) {
+                // Slot có đủ số lượng để trừ
+                itemPair.second -= amount;
+
+                // Cập nhật UI slot tương ứng
+                for (auto& slot : Slot::allInventorySlots) {
+                    if (slot->HasItem() && slot->GetItem()->GetIdName() == itemId) {
+                        slot->GetItem()->DecreaseQuantity(amount);
+                        break; // chỉ cập nhật 1 slot là đủ
+                    }
+                }
+
+                amount = 0; // đã trừ xong
+                updated = true;
                 return;
             }
             else {
-                amount -= item.second;
-                toRemove.push_back(index);
-                if (amount <= 0) break;
+                // Slot không đủ, xóa hết slot này
+                amount -= itemPair.second;
+
+                // Xóa UI slot
+                for (auto& slot : Slot::allInventorySlots) {
+                    if (slot->HasItem() && slot->GetItem()->GetIdName() == itemId) {
+                        slot->RemoveItem(); // tự động UpdateFromSlot
+                        break;
+                    }
+                }
+
+                it = inventory.erase(it); // xóa slot này và tiếp tục
+                continue; // không increment iterator vì erase trả về iterator mới
             }
         }
+        ++it; // sang slot kế tiếp
     }
 
-    for (int index : toRemove) {
-        inventory.erase(index);
-        // Optional: signal
-    }
+    updated = true;
 }
 
 void PlayerInventory::UpdateFromSlot(Slot* slot) {

@@ -19,7 +19,7 @@ public:
     void AddItemToEmptySlot(Item* item, std::shared_ptr<Slot> slot);
     void AddItemQuantity(std::shared_ptr<Slot> slot, int amount);
     void DecreaseActiveItem(int amount);
-
+    bool reload = false;
     void SetActiveSlot(int index);
 
     std::unordered_map<std::string, int> GetTotalItemCounts();

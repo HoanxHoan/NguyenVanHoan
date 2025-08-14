@@ -130,12 +130,13 @@ void GSPlay::HandleMouseClick(GLint x, GLint y, bool isClick)
 }
 
 void GSPlay::ReloadCraftingSlots() {
+
+    m_craftingSlots.clear();
     auto craftableIds = m_craftingUI->GetCraftableItems();
     Model* slotModel = ResourceManager::GetInstance()->GetModel(2);
     Texture* slotTexture = ResourceManager::GetInstance()->GetTexture(70);
     Shaders* slotShader = ResourceManager::GetInstance()->GetShader(0);
 
-    m_craftingSlots.clear();
 
     int cols = 10;
     int slotIndex = 0; // Dùng slotIndex riêng cho slot hiện tại vì có thể ko tạo đủ craftableIds.size()
@@ -408,6 +409,7 @@ bool GSPlay::Init()
         slot->SetSlotType(SlotType::INVENTORY); // 👈 THÊM DÒNG NÀY
         slot->SetSlotIndex(i);
         slot->SetOwnerInventory(PlayerInventory::GetInstance());
+        Slot::allInventorySlots.push_back(slot);
         printf("Slot %d created\n", i);
         int cols = 10;
         int row = i / cols;
@@ -548,6 +550,7 @@ void GSPlay::UpdateCraftingSlots() {
             if (!itemId.empty()) {
                 printf("Crafting item from removed slot: %s\n", itemId.c_str());
                 m_craftingUI->CraftItem(itemId);
+				PlayerInventory::GetInstance()->PrintAllSlots();
                 reloadable = true;
             }
         }
@@ -657,9 +660,15 @@ void GSPlay::Update(float deltaTime)
         uidltime = 0;
         reloadable = false;
         ReloadCraftingSlots();
-
         Slot::SetCurrentSlot(currentSlot);
 	}
+
+    if (PlayerInventory::GetInstance()->reload && uidltime >= 0.5) {
+        uidltime = 0;
+        PlayerInventory::GetInstance()->reload = false;
+        ReloadCraftingSlots();
+    }
+
     // 2. Update vị trí các slot còn lại
     for (auto& slot : m_craftingSlots) {
         slot->set2Dposition(P1->x + slot->userOffsetX,
@@ -868,11 +877,19 @@ void GSPlay::Update(float deltaTime)
     }
     if (keyState['E'])
     {
+        ReloadCraftingSlots();
         if (uidltime >= 0.2f) {
             uidltime = 0.0f;
             inventory->SetVisible(!inventory->IsVisible());
         }
     }
+    if (keyState['Q'])
+    {
+        if (uidltime >= 0.2f) {
+            uidltime = 0.0f;
+			PlayerInventory::GetInstance()->PrintAllSlots();
+        }
+	}
     int previousSlot = currentSlot;
 
     if (keyState['1']) {
