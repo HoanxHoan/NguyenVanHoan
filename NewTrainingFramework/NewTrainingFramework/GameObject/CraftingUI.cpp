@@ -136,7 +136,7 @@ void CraftingUI::CraftItem(const std::string& recipeId) {
     }
 
     // Thêm thành phẩm — giả định tên công thức = tên item kết quả
-    m_inventory->AddCraftItem(recipeId, 1);
+    
     printf("Đã chế tạo: %s\n", recipeId.c_str());
 
 }

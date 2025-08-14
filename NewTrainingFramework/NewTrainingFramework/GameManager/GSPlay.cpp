@@ -151,7 +151,7 @@ void GSPlay::ReloadCraftingSlots() {
 
         slot->SetSlotType(SlotType::CRAFTING);
         slot->SetSlotIndex(slotIndex); // dùng slotIndex vì i có thể bỏ qua
-        slot->SetOwnerInventory(playerInventory.get());
+        slot->SetOwnerCrafting(playerInventory.get());
 
         auto item = std::make_shared<Item>(recipeId, 1);
         slot->SetItem(item);
@@ -432,6 +432,7 @@ bool GSPlay::Init()
         // (tuỳ chọn) nếu bạn cần giữ shared_ptr:
 
     }
+
     Slot::ClearHotbarSlots();
     Texture* hotbarTexture = ResourceManager::GetInstance()->GetTexture(70);
     for (int i = 0; i < 10; ++i) {
@@ -457,7 +458,6 @@ bool GSPlay::Init()
 			});
 		hotbar.push_back(hotbar_slot);
     }
-    PlayerInventory::GetInstance()->InitializeUI(inventorySlots, hotbar);
     Slot::SetCurrentSlot(currentSlot);
 
     /*m_craftingUI = std::make_shared<CraftingUI>(playerInventory);
@@ -466,9 +466,9 @@ bool GSPlay::Init()
 
     m_craftingUI = std::make_shared<CraftingUI>(playerInventory);
     ReloadCraftingSlots();
-
     // (Tùy chọn) nếu muốn giữ trong GSPlay để Draw()
 
+    PlayerInventory::GetInstance()->InitializeUI(inventorySlots, hotbar, m_craftingSlots);
     //tree = std::make_shared<Environment>(model, shader, treetexture, 1, 0, 1, 0, 0.1f);
     //tree->SetPosition(Vector3(50, 10, 0));
     //tree->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
@@ -476,7 +476,7 @@ bool GSPlay::Init()
     //tree->SetScale(Vector3(10, 20, 0));
     //i_objects.push_back(tree.get());
     //envi_objects.push_back(tree.get());
-
+	PlayerInventory::GetInstance()->PrintAllSlots();
     button_play = std::make_shared<GameButton>(btnModel, btnTexture, btnShader);
     button_play->SetPosition(850, 80);
     button_play->SetSize(90, 80);
@@ -600,7 +600,7 @@ void GSPlay::Resume()
 void GSPlay::Update(float deltaTime)
 {
     if (PlayerInventory::GetInstance()->updated) {
-        PlayerInventory::GetInstance()->InitializeUI(inventorySlots, hotbar);
+        PlayerInventory::GetInstance()->InitializeUI(inventorySlots, hotbar, m_craftingSlots);
         PlayerInventory::GetInstance()->updated = false;
     }
     if (isWalk && !wasWalking)

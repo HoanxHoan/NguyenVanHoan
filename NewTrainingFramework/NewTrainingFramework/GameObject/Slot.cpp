@@ -80,6 +80,10 @@ void Slot::SetOwnerInventory(PlayerInventory* inventory) {
     ownerInventory = inventory;
 }
 
+void Slot::SetOwnerCrafting(PlayerInventory* inventory) {
+    ownerCraftingInventory = inventory;
+}
+
 void Slot::SetChildPosition(float x, float y)
 {
     m_pos.x = x;

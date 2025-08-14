@@ -27,7 +27,7 @@ public:
 
     void UpdateFromSlot(Slot* slot);
 
-    void InitializeUI(std::vector<std::shared_ptr<Slot>>& inventorySlots, std::vector<std::shared_ptr<Slot>>& hotbarSlots);
+    void InitializeUI(std::vector<std::shared_ptr<Slot>>& inventorySlots, std::vector<std::shared_ptr<Slot>>& hotbarSlots, std::vector<std::shared_ptr<Slot>>& craftingSlots);
     std::vector<std::string> stationsNearby = { "" };
 
     const std::unordered_map<int, std::pair<std::string, int>>& GetInventory() const { return inventory; }
@@ -35,7 +35,7 @@ public:
     std::shared_ptr<Item> item;
     int GetActiveSlotIndex() const { return activeSlotIndex; }
     std::unordered_map<int, std::pair<std::string, int>> inventory;
-    std::unordered_map<int, std::pair<std::string, int>> inventory1;
+    std::unordered_map<int, std::pair<std::string, int>> craftingbar;
     std::unordered_map<int, std::pair<std::string, int>> hotbar;
     void SetSelectedSlot(std::shared_ptr<Slot> slot);
     std::shared_ptr<Slot> GetSelectedSlot();
@@ -50,12 +50,12 @@ public:
     void AddNearbyStation(const std::string& stationId);
     void RemoveNearbyStation(const std::string& stationId);
     void ClearNearbyStations();
+    void ClearAllItems();
+    void PrintAllSlots() const;
     bool updated;
 private:
     static constexpr int NUM_INVENTORY_SLOTS = 30;
     static constexpr int NUM_HOTBAR_SLOTS = 10;
-
-    
 
     int activeSlotIndex = 0;
    

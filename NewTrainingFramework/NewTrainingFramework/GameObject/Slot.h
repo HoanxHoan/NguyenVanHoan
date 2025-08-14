@@ -34,15 +34,18 @@ public:
     bool HandleTouchEvents(GLint x, GLint y, bool bIsPressed);
     void Draw();
     static void RegisterHotbarSlot(Slot* slot);
+    void RegisterCraftingSlot(Slot* slot);
     static void SetCurrentSlot(int numpad);
     bool IsCurrentSlot();
     bool HasItem() const;
     PlayerInventory* ownerInventory = nullptr;
+	PlayerInventory* ownerCraftingInventory = nullptr;
     int userOffsetX = 0;
     int userOffsetY = 0;
     PlayerInventory* GetOwnerInventory() { return ownerInventory; }
     void NotifyInventoryChanged();
     void SetOwnerInventory(PlayerInventory* inventory);
+    void SetOwnerCrafting(PlayerInventory* inventory);
     std::shared_ptr<Item> item;
     std::string Slot::GetLastItemId() const {
         return lastItemId;

@@ -7,7 +7,7 @@ PlayerInventory::PlayerInventory() {
     inventory[3] = { "stone", 12 };
 
     hotbar[1] = { "wooden_pickaxe", 1};
-    updated = false;
+    updated = false;    
 }
 
 PlayerInventory* PlayerInventory::GetInstance() {
@@ -24,7 +24,6 @@ PlayerInventory::~PlayerInventory() {
     for(auto& m : hotbar) {
         printf("Hotbar Item ID: %s, Amount: %d\n", m.second.first.c_str(), m.second.second);
     }
-    inventory.clear();
     hotbar.clear();
 	instance = nullptr;
 }
@@ -36,57 +35,37 @@ void PlayerInventory::Destroy()
 }
 
 void PlayerInventory::AddItem(const std::string& itemId, int amount) {
+    int maxStack = ItemDB::GetInstance()->GetStackSize(itemId);
+
+    // Cộng vào slot đã có sẵn item đó
     for (auto& pair : inventory) {
-        int index = pair.first;
         auto& item = pair.second;
-        if (item.first == itemId) {
-            int maxStack = ItemDB::GetInstance()->GetStackSize(itemId);
+        if (item.first == itemId && amount > 0) {
             int space = maxStack - item.second;
-            if (space >= amount) {
-                item.second += amount;
-                updated = true;
-                return;
-            }
-            else {
-                item.second += space;
-                amount -= space;
-            }
+            int addAmount = (space < amount) ? space : amount;
+            item.second += addAmount;
+            amount -= addAmount;
         }
     }
 
-    for (int i = 0; i < NUM_INVENTORY_SLOTS; ++i) {
+    // Tạo slot mới nếu còn dư
+    for (int i = 0; i < NUM_INVENTORY_SLOTS && amount > 0; ++i) {
         if (inventory.count(i) == 0) {
-            inventory[i] = { itemId, amount };
-            updated = true;
-            return;
-        }
-    }
-}
-void PlayerInventory::AddCraftItem(const std::string& itemId, int amount) {
-    for (auto& pair : inventory) {
-        int index = pair.first;
-        auto& item = pair.second;
-        if (item.first == itemId) {
-            int maxStack = ItemDB::GetInstance()->GetStackSize(itemId);
-            int space = maxStack - item.second;
-            if (space >= amount) {
-                item.second += amount;
-                return;
-            }
-            else {
-                item.second += space;
-                amount -= space;
-            }
+            int addAmount = (maxStack < amount) ? maxStack : amount;
+            inventory[i] = { itemId, addAmount };
+            amount -= addAmount;
         }
     }
 
-    for (int i = 0; i < NUM_INVENTORY_SLOTS; ++i) {
-        if (inventory.count(i) == 0) {
-            inventory[i] = { itemId, amount };
-            return;
-        }
+    // Nếu vẫn còn amount > 0 => inventory full
+    if (amount > 0) {
+        // Xử lý drop ra ngoài hoặc bỏ qua
+        printf("Inventory full, %d %s dropped\n", amount, itemId.c_str());
     }
+
+    updated = true;
 }
+
 
 void PlayerInventory::RemoveItem(std::shared_ptr<Slot> slot) {
     if (slot->GetSlotType() == SlotType::HOTBAR) {
@@ -169,21 +148,13 @@ void PlayerInventory::UpdateFromSlot(Slot* slot) {
     auto item = slot->GetItem();
 
     if (slot->GetSlotType() == SlotType::HOTBAR) {
-        if (index >= NUM_HOTBAR_SLOTS) return;
-        if (item)
-            hotbar[index] = { item->GetIdName(), item->GetAmount() };
-        else
-            hotbar.erase(index);
+        hotbar[index] = { item->GetIdName(), item->GetAmount() };
     }
-    else {
-        if (index >= NUM_INVENTORY_SLOTS) return;
-
-        if (item)
-        {
-            inventory[index] = { item->GetIdName(), item->GetAmount() };
-        }
-        else
-            inventory.erase(index);
+    else if (slot->GetSlotType() == SlotType::INVENTORY) {
+        inventory[index] = { item->GetIdName(), item->GetAmount() };
+    }
+    else if (slot->GetSlotType() == SlotType::CRAFTING) {
+        craftingbar[index] = { item->GetIdName(), item->GetAmount() };
     }
 }
 
@@ -205,7 +176,7 @@ int ItemDB::GetStackSize(const std::string& id) {
 
 
 void PlayerInventory::InitializeUI(std::vector<std::shared_ptr<Slot>>& inventorySlots,
-    std::vector<std::shared_ptr<Slot>>& hotbarSlots) {
+    std::vector<std::shared_ptr<Slot>>& hotbarSlots, std::vector<std::shared_ptr<Slot>>& craftingSlots) {
     for (auto& pair : inventory) {
         int index = pair.first;
         const auto& itemId = pair.second.first;
@@ -222,6 +193,14 @@ void PlayerInventory::InitializeUI(std::vector<std::shared_ptr<Slot>>& inventory
         if (index < hotbarSlots.size()) {
             hotbarSlots[index]->SetItem(std::make_shared<Item>(itemId, amount));
         }
+    }
+    for (auto& pair : craftingbar) {
+            int index = pair.first;
+            const auto& itemId = pair.second.first;
+            int amount = pair.second.second;
+            if (index < craftingSlots.size()) {
+                craftingSlots[index]->SetItem(std::make_shared<Item>(itemId, amount));
+            }
     }
 }
 
@@ -254,4 +233,38 @@ void PlayerInventory::RemoveNearbyStation(const std::string& stationId) {
 void PlayerInventory::ClearNearbyStations() {
     stationsNearby.clear();
     stationsNearby.push_back(""); // giữ lại phần tử mặc định
+}
+
+void PlayerInventory::ClearAllItems() {
+    inventory.clear();
+    hotbar.clear();
+    updated = true;
+}
+
+void PlayerInventory::PrintAllSlots() const {
+    printf("=== Inventory Slots ===\n");
+    for (const auto& pair : inventory) {
+        int index = pair.first;
+        const auto& itemId = pair.second.first;
+        int amount = pair.second.second;
+        printf("Slot %d: Item = %s, Amount = %d\n", index, itemId.c_str(), amount);
+    }
+
+    printf("=== Hotbar Slots ===\n");
+    for (const auto& pair : hotbar) {
+        int index = pair.first;
+        const auto& itemId = pair.second.first;
+        int amount = pair.second.second;
+        printf("Hotbar %d: Item = %s, Amount = %d\n", index, itemId.c_str(), amount);
+    }
+
+    printf("=== Crafting Slots ===\n");
+    for (const auto& pair : craftingbar) {
+        int index = pair.first;
+        const auto& itemId = pair.second.first;
+        int amount = pair.second.second;
+        printf("Crafting %d: Item = %s, Amount = %d\n", index, itemId.c_str(), amount);
+    }
+
+    printf("======================\n");
 }
