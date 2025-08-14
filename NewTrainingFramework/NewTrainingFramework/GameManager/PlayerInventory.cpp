@@ -71,8 +71,11 @@ void PlayerInventory::RemoveItem(std::shared_ptr<Slot> slot) {
     if (slot->GetSlotType() == SlotType::HOTBAR) {
         hotbar.erase(slot->GetSlotIndex());
     }
-    else {
+    else if (slot->GetSlotType() == SlotType::INVENTORY) {
         inventory.erase(slot->GetSlotIndex());
+    }
+    else if (slot->GetSlotType() == SlotType::CRAFTING) {
+        craftingbar.erase(slot->GetSlotIndex());
     }
 }
 
@@ -81,14 +84,21 @@ void PlayerInventory::AddItemToEmptySlot(Item* item, std::shared_ptr<Slot> slot)
     if (slot->GetSlotType() == SlotType::HOTBAR) {
         hotbar[index] = { item->GetIdName(), item->GetAmount() };
     }
-    else {
+    else if (slot->GetSlotType() == SlotType::INVENTORY) {
         inventory[index] = { item->GetIdName(), item->GetAmount() };
+    }
+    else if (slot->GetSlotType() == SlotType::CRAFTING) {
+        craftingbar[index] = { item->GetIdName(), item->GetAmount() };
     }
 }
 
 void PlayerInventory::AddItemQuantity(std::shared_ptr<Slot> slot, int amount) {
-    auto& map = slot->GetSlotType() == SlotType::HOTBAR ? hotbar : inventory;
-    map[slot->GetSlotIndex()].second += amount;
+    if (slot->GetSlotType() == SlotType::HOTBAR) {
+        hotbar[slot->GetSlotIndex()].second += amount;
+    }
+    else if (slot->GetSlotType() == SlotType::INVENTORY) {
+        inventory[slot->GetSlotIndex()].second += amount;
+    }
 }
 
 void PlayerInventory::DecreaseActiveItem(int amount) {
@@ -146,17 +156,25 @@ void PlayerInventory::UpdateFromSlot(Slot* slot) {
     if (index < 0) return;
 
     auto item = slot->GetItem();
+    if (!item) { // slot trống -> xóa khỏi map nếu có
+        if (slot->GetSlotType() == SlotType::HOTBAR)
+            hotbar.erase(index);
+        else if (slot->GetSlotType() == SlotType::INVENTORY)
+            inventory.erase(index);
+        else if (slot->GetSlotType() == SlotType::CRAFTING)
+            craftingbar.erase(index);
+        return;
+    }
 
-    if (slot->GetSlotType() == SlotType::HOTBAR) {
+    // slot có item -> thêm hoặc cập nhật map
+    if (slot->GetSlotType() == SlotType::HOTBAR)
         hotbar[index] = { item->GetIdName(), item->GetAmount() };
-    }
-    else if (slot->GetSlotType() == SlotType::INVENTORY) {
+    else if (slot->GetSlotType() == SlotType::INVENTORY)
         inventory[index] = { item->GetIdName(), item->GetAmount() };
-    }
-    else if (slot->GetSlotType() == SlotType::CRAFTING) {
+    else if (slot->GetSlotType() == SlotType::CRAFTING)
         craftingbar[index] = { item->GetIdName(), item->GetAmount() };
-    }
 }
+
 
 int ItemDB::GetStackSize(const std::string& id) {
     auto it = items.find(id);
