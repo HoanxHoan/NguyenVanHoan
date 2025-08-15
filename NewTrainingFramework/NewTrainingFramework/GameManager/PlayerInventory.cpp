@@ -152,7 +152,8 @@ void PlayerInventory::RemoveItemById(const std::string& itemId, int amount) {
             else {
                 // Slot không đủ, xóa hết slot này
                 amount -= itemPair.second;
-
+                it = inventory.erase(it); // xóa slot này và tiếp tục
+                 // không increment iterator vì erase trả về iterator mới
                 // Xóa UI slot
                 for (auto& slot : Slot::allInventorySlots) {
                     if (slot->HasItem() && slot->GetItem()->GetIdName() == itemId) {
@@ -160,9 +161,8 @@ void PlayerInventory::RemoveItemById(const std::string& itemId, int amount) {
                         break;
                     }
                 }
-
-                it = inventory.erase(it); // xóa slot này và tiếp tục
                 continue; // không increment iterator vì erase trả về iterator mới
+
             }
         }
         ++it; // sang slot kế tiếp

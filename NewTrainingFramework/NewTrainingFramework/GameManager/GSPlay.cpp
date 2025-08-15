@@ -131,12 +131,12 @@ void GSPlay::HandleMouseClick(GLint x, GLint y, bool isClick)
 
 void GSPlay::ReloadCraftingSlots() {
 
-    m_craftingSlots.clear();
     auto craftableIds = m_craftingUI->GetCraftableItems();
     Model* slotModel = ResourceManager::GetInstance()->GetModel(2);
     Texture* slotTexture = ResourceManager::GetInstance()->GetTexture(70);
     Shaders* slotShader = ResourceManager::GetInstance()->GetShader(0);
 
+    m_craftingSlots.clear();
 
     int cols = 10;
     int slotIndex = 0; // Dùng slotIndex riêng cho slot hiện tại vì có thể ko tạo đủ craftableIds.size()
@@ -564,23 +564,7 @@ void GSPlay::UpdateCraftingSlots() {
     m_craftingSlots.erase(it, m_craftingSlots.end());
 
     // Cập nhật vị trí các slot crafting còn lại
-    int i = 0;
-    for (auto& slot : m_craftingSlots) {
-        if (slot->GetSlotType() == SlotType::CRAFTING) {
-            int cols = 10;
-            int row = i / cols;
-            int col = i % cols;
-
-            float offsetX = -70 + col * 15.0f;
-            float offsetY = row * 15.0f - 90;
-
-            slot->userOffsetX = offsetX;
-            slot->userOffsetY = offsetY;
-            slot->set2Dposition(P1->x + offsetX, P1->y + offsetY);
-            slot->SetChildPosition(P1->x + offsetX, P1->y + offsetY);
-            ++i;
-        }
-    }
+    
 
     m_craftingUI->UpdateCraftableList();
 }
@@ -605,6 +589,7 @@ void GSPlay::Update(float deltaTime)
     if (PlayerInventory::GetInstance()->updated) {
         PlayerInventory::GetInstance()->InitializeUI(inventorySlots, hotbar, m_craftingSlots);
         PlayerInventory::GetInstance()->updated = false;
+
     }
     if (isWalk && !wasWalking)
     {
@@ -654,20 +639,37 @@ void GSPlay::Update(float deltaTime)
             i = 0;
         }
 	}
-    UpdateCraftingSlots();
 
+    int i = 0;
+    for (auto& slot : m_craftingSlots) {
+        if (slot->GetSlotType() == SlotType::CRAFTING) {
+            int cols = 10;
+            int row = i / cols;
+            int col = i % cols;
+
+            float offsetX = -70 + col * 15.0f;
+            float offsetY = row * 15.0f - 90;
+
+            slot->userOffsetX = offsetX;
+            slot->userOffsetY = offsetY;
+            slot->set2Dposition(P1->x + offsetX, P1->y + offsetY);
+            slot->SetChildPosition(P1->x + offsetX, P1->y + offsetY);
+            ++i;
+        }
+    }
+
+
+    UpdateCraftingSlots();
     if (reloadable && uidltime >= 0.5) {
         uidltime = 0;
         reloadable = false;
         ReloadCraftingSlots();
-        Slot::SetCurrentSlot(currentSlot);
 	}
 
     if (PlayerInventory::GetInstance()->reload && uidltime >= 0.5) {
         uidltime = 0;
         PlayerInventory::GetInstance()->reload = false;
         ReloadCraftingSlots();
-
     }
 
     // 2. Update vị trí các slot còn lại
@@ -878,7 +880,6 @@ void GSPlay::Update(float deltaTime)
     }
     if (keyState['E'])
     {
-        ReloadCraftingSlots();
         if (uidltime >= 0.2f) {
             uidltime = 0.0f;
             inventory->SetVisible(!inventory->IsVisible());
