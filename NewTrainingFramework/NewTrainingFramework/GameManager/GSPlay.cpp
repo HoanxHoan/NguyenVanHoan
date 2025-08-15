@@ -70,6 +70,7 @@ bool GSPlay::IsWaterTile(int xPixel, int yPixel) {
 }
 GSPlay::GSPlay() {
     srand(time(NULL));
+    count = 3;
     x = 0; y = 0;
     dltime = 0.05f;
     actiontime = 0.0f;
@@ -187,7 +188,7 @@ void GSPlay::ReloadCraftingSlots() {
 
 bool GSPlay::Init()
 {
-    
+    PlayerInventory::GetInstance()->AddStartingItems();
     printf("----------------------------------\n");
     ItemDB::GetInstance()->LoadDB("../Resources/ItemDb.txt");
     printf("----------------------------------\n");
@@ -582,7 +583,8 @@ void GSPlay::UpdateCraftingSlots() {
 }
 void GSPlay::Exit()
 {
-    
+    PlayerInventory::GetInstance()->Reset();
+    PlayerInventory::GetInstance()->Destroy();
     std::cout << "Play State Exit\n";
 }
 
@@ -598,6 +600,11 @@ void GSPlay::Resume()
 
 void GSPlay::Update(float deltaTime)
 {
+	useitemdltime += deltaTime;
+    if(useitemdltime >0.5f && useItem == true) {
+        useItem = false;
+        useitemdltime = 0;
+	}
     mp->UpdateMp(P1->x + 55, P1->y + 75, P1->mp);
     hp->Update(P1->x - 60, P1->y + 75, P1->hp);
     if (PlayerInventory::GetInstance()->updated) {
@@ -839,59 +846,70 @@ void GSPlay::Update(float deltaTime)
         }
     }
     if (keyState['J'] )
-    {    
-        P1->Crush(action, count);
-        action = 1;
-        for (auto& obj : envi_objects) {
-            if (P1->GetHitbox(count)->CheckCollisionStone(obj.get()))
-            {
-                if (auto env = dynamic_cast<Stone*>(obj.get())) {
-                    env->Crush();
+    {   
+        if (Slot::GetCurrentSlot()->HasItem()) {
+            if (Slot::GetCurrentSlot()->GetItem()->m_category == "pickaxe") {
+                P1->Crush(action, count);
+                action = 1;
+                for (auto& obj : envi_objects) {
+                    if (P1->GetHitbox(count)->CheckCollisionStone(obj.get()))
+                    {
+                        if (auto env = dynamic_cast<Stone*>(obj.get())) {
+                            env->Crush();
+                        }
+                    }
                 }
+            }
+            else if (Slot::GetCurrentSlot()->GetItem()->m_category == "axe") {
+                P1->Slice(action, count);
+                action = 1;
+                for (auto& obj : envi_objects) {
+                    if (auto env = dynamic_cast<Tree*>(obj.get())) {
+                        if (P1->GetHitbox(count)->CheckCollisionTree(obj.get()))
+                        {
+                            env->CutTree();
+                        }
+                    }
+                    if (auto env = dynamic_cast<Bush*>(obj.get())) {
+                        if (P1->GetHitbox(count)->CheckCollision(obj.get()))
+                        {
+                            env->Cut();
+                        }
+                    }
+                    if (auto env = dynamic_cast<Animal*>(obj.get())) {
+                        if (P1->GetHitbox(count)->CheckCollision(obj.get()))
+                        {
+                            env->onHit();
+                        }
+                    }
+                }
+                for (auto& org : enermy_objects) {
+                    if (P1->GetHitbox(count)->CheckCollisionEnermy(org.get()))
+                    {
+                        if (auto env = dynamic_cast<Enemy*>(org.get())) {
+                            env->onHit(count);
+                        }
+                    }
+                }
+                for (auto& org : Boss_objects) {
+                    if (P1->GetHitbox(count)->CheckCollisionEnermy(org.get()))
+                    {
+                        if (auto env = dynamic_cast<Boss*>(org.get())) {
+                            env->onHit(count);
+                        }
+                    }
+                }
+            }
+            else if (Slot::GetCurrentSlot()->GetItem()->m_type == "food" && useItem == false) {
+				printf("Energy: %f\n", Slot::GetCurrentSlot()->GetItem()->m_energy);
+				P1->mp += Slot::GetCurrentSlot()->GetItem()->m_energy;
+                PlayerInventory::GetInstance()->RemoveItemByIdHotbar(Slot::GetCurrentSlot()->GetItem()->m_id, 1);
+				useItem = true;
+				useitemdltime = 0.0f;
             }
         }
     }
-    if (keyState['K'])
-    {
-        P1->Slice(action, count);
-        action = 1;
-        for (auto& obj : envi_objects) {
-            if (auto env = dynamic_cast<Tree*>(obj.get())) {
-                if (P1->GetHitbox(count)->CheckCollisionTree(obj.get()))
-                {
-                    env->CutTree();
-                }
-            }
-            if (auto env = dynamic_cast<Bush*>(obj.get())) {
-                if (P1->GetHitbox(count)->CheckCollision(obj.get()))
-                {
-                    env->Cut();
-                }
-            }
-            if (auto env = dynamic_cast<Animal*>(obj.get())) {
-                if (P1->GetHitbox(count)->CheckCollision(obj.get()))
-                {
-                    env->onHit();
-                }
-            }
-        }
-        for (auto& org : enermy_objects) {
-            if (P1->GetHitbox(count)->CheckCollisionEnermy(org.get()))
-            {
-                if (auto env = dynamic_cast<Enemy*>(org.get())) {
-                    env->onHit(count);
-                }
-            }
-        }
-        for (auto& org : Boss_objects) {
-            if (P1->GetHitbox(count)->CheckCollisionEnermy(org.get()))
-            {
-                if (auto env = dynamic_cast<Boss*>(org.get())) {
-                    env->onHit(count);
-                }
-            }
-        }
-    }
+
     if (keyState['E'])
     {
         if (uidltime >= 0.2f) {

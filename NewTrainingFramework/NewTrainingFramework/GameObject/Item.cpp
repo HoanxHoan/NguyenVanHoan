@@ -36,8 +36,12 @@ void Item::LoadItem(const std::string& id)
 
     m_name = data["display_name"];
     m_type = data["type"];
-    m_category = data["category"];
+    m_category = data["catagory"];
+    if (m_type == "food") {
+        m_energy = std::stoi(data["energy"]);
+    }
     m_stackSize = std::stoi(data["stack_size"]);
+    
     try {
         m_iconId = std::stoi(data["icon_id"]);
     }

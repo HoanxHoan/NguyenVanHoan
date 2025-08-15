@@ -247,6 +247,10 @@ void Player::getObjectList(std::vector<std::shared_ptr<Object>>* O) {
     others = O;
 }
 void Player::Update(GLfloat deltaTime) {
+	if (hp > 60) hp = 60;
+	if (mp > 60) mp = 60;
+	if (hp < 0) hp = 0;
+	if (mp < 0) mp = 0;
     mptime += deltaTime;
     if (mp<60 && mptime > 5.0) {
         mp += 5;

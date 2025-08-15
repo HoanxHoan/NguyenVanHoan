@@ -31,10 +31,10 @@ void Hmp::Update(float x, float y, int hp) {
     int hpStep = (hp / 5)+76;
     this->SetTexture(ResourceManager::GetInstance()->GetTexture(hpStep));
 }
-void Hmp::UpdateMp(float x, float y, int hp) {
+void Hmp::UpdateMp(float x, float y, int mp) {
     SetPosition(x, y);
-    if (hp < 0) hp = 0;
-    if (hp > 60) hp = 60;
-    int hpStep = (hp / 5) + 89;
-    this->SetTexture(ResourceManager::GetInstance()->GetTexture(hpStep));
+    if (mp < 0) mp = 0;
+    if (mp > 60) mp = 60;
+    int mpStep = (mp / 5) + 89;
+    this->SetTexture(ResourceManager::GetInstance()->GetTexture(mpStep));
 }

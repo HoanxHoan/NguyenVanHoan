@@ -81,7 +81,7 @@
 		"type" : "food",
 		"catagory" : "meat",
 		"icon_id" : 61,
-		"energy" : 35,
+		"energy" : 10,
 		"display_name" : "Wooden Log",
 		"stack_size" : 16
 	},

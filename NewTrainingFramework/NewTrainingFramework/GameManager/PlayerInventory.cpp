@@ -3,8 +3,7 @@
 PlayerInventory* PlayerInventory::instance = nullptr;
 
 PlayerInventory::PlayerInventory() {
-        
-    hotbar[1] = { "wooden_pickaxe", 1};
+
     updated = false;    
     reload = false;
 }
@@ -171,6 +170,49 @@ void PlayerInventory::RemoveItemById(const std::string& itemId, int amount) {
     updated = true;
 }
 
+void PlayerInventory::RemoveItemByIdHotbar(const std::string& itemId, int amount) {
+    // Duyệt qua tất cả slot inventory
+    for (auto it = hotbar.begin(); it != hotbar.end() && amount > 0;) {
+        auto& itemPair = it->second;
+        if (itemPair.first == itemId) {
+            if (itemPair.second > amount) {
+                // Slot có đủ số lượng để trừ
+                itemPair.second -= amount;
+
+                // Cập nhật UI slot tương ứng
+                for (auto& slot : Slot::hotbarSlots) {
+                    if (slot->HasItem() && slot->GetItem()->GetIdName() == itemId) {
+                        slot->GetItem()->DecreaseQuantity(amount);
+                        break; // chỉ cập nhật 1 slot là đủ
+                    }
+                }
+
+                amount = 0; // đã trừ xong
+                updated = true;
+                return;
+            }
+            else {
+                // Slot không đủ, xóa hết slot này
+                amount -= itemPair.second;
+                it = hotbar.erase(it); // xóa slot này và tiếp tục
+                 // không increment iterator vì erase trả về iterator mới
+                // Xóa UI slot
+                for (auto& slot : Slot::hotbarSlots) {
+                    if (slot->HasItem() && slot->GetItem()->GetIdName() == itemId) {
+                        slot->RemoveItem(); // tự động UpdateFromSlot
+                        break;
+                    }
+                }
+                continue; // không increment iterator vì erase trả về iterator mới
+
+            }
+        }
+        ++it; // sang slot kế tiếp
+    }
+
+    updated = true;
+}
+
 void PlayerInventory::UpdateFromSlot(Slot* slot) {
     int index = slot->GetSlotIndex();
     if (index < 0) return;
@@ -309,4 +351,20 @@ void PlayerInventory::PrintAllSlots() const {
     }
 
     printf("======================\n");
+}
+
+void PlayerInventory::Reset() {
+    inventory.clear();
+    hotbar.clear();
+    craftingbar.clear();
+    stationsNearby.clear();
+    activeSlotIndex = 0;
+    updated = true;
+    reload = true;
+}
+
+void PlayerInventory::AddStartingItems() {
+    hotbar[0] = { "wooden_pickaxe", 1 };
+    hotbar[1] = { "wooden_axe", 1 };
+    hotbar[2] = { "cooked_beef", 5 };
 }

@@ -21,9 +21,11 @@ public:
     void DecreaseActiveItem(int amount);
     bool reload = false;
     void SetActiveSlot(int index);
-
     std::unordered_map<std::string, int> GetTotalItemCounts();
     void RemoveItemById(const std::string& itemId, int amount);
+    void Reset();
+    void AddStartingItems();
+    void RemoveItemByIdHotbar(const std::string& itemId, int amount);
 
     void UpdateFromSlot(Slot* slot);
 

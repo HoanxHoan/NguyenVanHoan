@@ -74,7 +74,7 @@ void CleanUp()
 	ResourceManager::Destroy();
 	Camera::Destroy();
 	SoundManager::Destroy();
-	PlayerInventory::Destroy();
+
 	ItemDB::Destroy();
 }
 

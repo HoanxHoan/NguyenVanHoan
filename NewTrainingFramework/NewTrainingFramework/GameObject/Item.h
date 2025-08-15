@@ -27,6 +27,7 @@ public:
     std::string m_id;
     int m_amount;
     int m_stackSize;
+    int m_energy;
     std::string m_name;
     std::string m_type;
     std::string m_category;

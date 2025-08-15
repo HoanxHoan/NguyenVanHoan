@@ -103,6 +103,7 @@ public:
     bool reloadable = false;
     bool isWalk = false;
     bool wasWalking = false;
-
+    bool useItem = false;
+	float useitemdltime = 0.0f;
 };
 

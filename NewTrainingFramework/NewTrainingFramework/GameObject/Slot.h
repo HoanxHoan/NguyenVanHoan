@@ -37,6 +37,7 @@ public:
     void RegisterCraftingSlot(Slot* slot);
     static void SetCurrentSlot(int numpad);
     bool IsCurrentSlot();
+    static Slot* GetCurrentSlot();
     bool HasItem() const;
     PlayerInventory* ownerInventory = nullptr;
 	PlayerInventory* ownerCraftingInventory = nullptr;

@@ -140,6 +140,10 @@ bool Slot::IsCurrentSlot() {
     return this == chosenSlot;
 }
 
+Slot* Slot::GetCurrentSlot() {
+    return chosenSlot;
+}
+
 bool Slot::HandleTouchEvents(GLint x, GLint y, bool bIsPressed)
 {
     bool handled = GameButton::HandleTouchEvents(x, y, bIsPressed);
