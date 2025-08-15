@@ -1,0 +1,29 @@
+"wooden_workbench":{
+		"ingredients" : [
+			{"item" : "wooden_log", "amount" : 4}
+		],
+		"station" : ""
+	},
+"stone_sword":{
+		"ingredients" : [
+			{"item" : "wooden_log", "amount" : 1},
+			{"item" : "stone", "amount" : 3}
+		],
+		"station" : ""
+	},
+	
+"stone_axe":{
+		"ingredients" : [
+			{"item" : "wooden_log", "amount" : 2},
+			{"item" : "stone", "amount" : 3}
+		],
+		"station" : ""
+	},
+	
+"stone_pickaxe":{
+		"ingredients" : [
+			{"item" : "wooden_log", "amount" : 3},
+			{"item" : "stone", "amount" : 3}
+		],
+		"station" : ""
+	},

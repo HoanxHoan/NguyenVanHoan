@@ -33,6 +33,8 @@ public:
     void set2Dposition(float x,float y);
     void setSize(GLint w, GLint h);
     void SetMVP();
+    void SetTexture(Texture* texture) { objTex = texture; }
+    Texture* GetTexture() const { return objTex; }
     //void SetTranslationMatrix();
     //void SetRotationMatrix();
     //void SetScaleMatrix();

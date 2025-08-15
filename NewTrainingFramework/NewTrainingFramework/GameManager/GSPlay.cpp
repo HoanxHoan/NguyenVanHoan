@@ -189,9 +189,9 @@ bool GSPlay::Init()
 {
     
     printf("----------------------------------\n");
-    ItemDB::GetInstance()->LoadDB("../NewTrainingFramework/GameManager/ItemDb.txt");
+    ItemDB::GetInstance()->LoadDB("../Resources/ItemDb.txt");
     printf("----------------------------------\n");
-	CraftingRecipeDB::GetInstance()->LoadFromFile("../NewTrainingFramework/GameManager/RecipeDb.txt");
+	CraftingRecipeDB::GetInstance()->LoadFromFile("../Resources/RecipeDb.txt");
 	CraftingRecipeDB::GetInstance()->PrintAll();   
     doc.LoadFile("../Resources/Textures/Map.tmx");
 
@@ -265,6 +265,8 @@ bool GSPlay::Init()
     overlay->SetLights(lights);
     overlay->SetLightRadius(15.0f);
     overlay->SetLightSoftness(100.0f);
+ 
+    
     //bonfire
     Texture* btexture = ResourceManager::GetInstance()->GetTexture(13);
     bonfire = std::make_shared<Building>(model, shader, btexture, 4, 0, 1, 0, 0.1f);
@@ -370,6 +372,16 @@ bool GSPlay::Init()
         i_objects.push_back(bush);
         envi_objects.push_back(bush);
     }
+    //hp
+    Texture* hpTexture = ResourceManager::GetInstance()->GetTexture(88);
+    hp = std::make_shared<Hmp>(model, hpTexture, btnShader);
+    hp->SetPosition(P1->x-60, P1->y+75);
+    hp->SetSize(40, 10);
+    //mp
+    Texture* mpTexture = ResourceManager::GetInstance()->GetTexture(101);
+    mp = std::make_shared<Hmp>(model, hpTexture, btnShader);
+    mp->SetPosition(P1->x + 55, P1->y + 75);
+    mp->SetSize(40, 10);
     //animal
     Texture* deertexture = ResourceManager::GetInstance()->GetTexture(39);
     Texture* boartexture = ResourceManager::GetInstance()->GetTexture(43);
@@ -586,6 +598,8 @@ void GSPlay::Resume()
 
 void GSPlay::Update(float deltaTime)
 {
+    mp->UpdateMp(P1->x + 55, P1->y + 75, P1->mp);
+    hp->Update(P1->x - 60, P1->y + 75, P1->hp);
     if (PlayerInventory::GetInstance()->updated) {
         PlayerInventory::GetInstance()->InitializeUI(inventorySlots, hotbar, m_craftingSlots);
         PlayerInventory::GetInstance()->updated = false;
@@ -605,7 +619,7 @@ void GSPlay::Update(float deltaTime)
     inventory->SetPosition(Vector3(P1->x + 25, P1->y+15, 0));
     onhitdltime += deltaTime;
 	uidltime += deltaTime;
-    if (onhit == true && onhitdltime >= 1.5) {
+    if (onhit == true && onhitdltime > 2) {
         onhit = false;
     }
     for (auto& slot : inventorySlots) {
@@ -760,7 +774,7 @@ void GSPlay::Update(float deltaTime)
                     break;
                 }
             }
-            if (!hasCollision) {
+            if (!hasCollision || onhit == true) {
                 P1->MoveUp(newY, IsWaterTile(P1->x, newY));
             }
         }
@@ -780,7 +794,7 @@ void GSPlay::Update(float deltaTime)
                     break;
                 }
             }
-            if (!hasCollision) {
+            if (!hasCollision || onhit == true) {
                 P1->MoveRight(newX, IsWaterTile(newX, P1->y));
             }
         }
@@ -800,7 +814,7 @@ void GSPlay::Update(float deltaTime)
                     break;
                 }
             }
-            if (!hasCollision) {
+            if (!hasCollision || onhit == true) {
                 P1->MoveLeft(newX, IsWaterTile(newX, P1->y));
             }
         }
@@ -819,7 +833,7 @@ void GSPlay::Update(float deltaTime)
                     break;
                 }
             }
-            if (!hasCollision) {
+            if (!hasCollision || onhit == true) {
                 P1->MoveDown(newY, IsWaterTile(P1->x, newY));
             }
         }
@@ -956,6 +970,7 @@ void GSPlay::Draw()
         slot->Draw();
     }
     button_play->Draw();
-
+    hp->Draw();
+    mp->Draw();
 }
 

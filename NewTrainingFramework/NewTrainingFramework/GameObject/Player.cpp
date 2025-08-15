@@ -12,7 +12,9 @@ Player::Player(Model* model, Shaders* shader, Texture* texture,
     hitbox->objShader = ResourceManager::GetInstance()->GetShader(0);
     hitdltime = 0;
     onhit = false;
-
+    hp = 60;
+    mp = 60;
+    mptime = 0;
 }
 
 
@@ -70,7 +72,9 @@ void Player::Idle(int count) {
     }
 }
 void Player::Crush(int action,int count) {
-    if (action == 0) {
+    if (mp > 0 && action == 0) {
+        mp -= 5;
+        mptime = 0; 
         switch (count) {
         case 1: {
             this->SetTexture(ResourceManager::GetInstance()->GetTexture(12));
@@ -106,7 +110,9 @@ void Player::Crush(int action,int count) {
     }
 }
 void Player::Slice(int action, int count) {
-    if (action == 0) {
+    if (mp > 0 && action == 0) {
+        mp -= 5;
+        mptime = 0;
         SoundManager::GetInstance()->PlaySoundnoLoop("hitHurt");
         switch (count) {
         case 1: {
@@ -198,6 +204,7 @@ void Player::onHit(int count,float ex, float ey) {
         this->SetCurrentFrame(0);
         onhit = true;
         hitdltime = 0;
+        hp -= 5;
 }
 Object* Player::GetHitbox(int count) {
     switch (count) {
@@ -240,6 +247,11 @@ void Player::getObjectList(std::vector<std::shared_ptr<Object>>* O) {
     others = O;
 }
 void Player::Update(GLfloat deltaTime) {
+    mptime += deltaTime;
+    if (mp<60 && mptime > 5.0) {
+        mp += 5;
+        mptime = 0;
+    }
     hitdltime += deltaTime;
     if (isBeingKnockedBack) {
         knockbackTime += deltaTime;

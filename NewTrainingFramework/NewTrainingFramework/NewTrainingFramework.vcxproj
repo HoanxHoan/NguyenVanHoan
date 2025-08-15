@@ -113,6 +113,7 @@
     <ClCompile Include="GameObject\CraftingUI.cpp" />
     <ClCompile Include="GameObject\Enemy.cpp" />
     <ClCompile Include="GameObject\GameButton.cpp" />
+    <ClCompile Include="GameObject\Hmp.cpp" />
     <ClCompile Include="GameObject\Item.cpp" />
     <ClCompile Include="GameObject\Model.cpp" />
     <ClCompile Include="GameObject\Object.cpp" />
@@ -223,6 +224,7 @@
     <ClInclude Include="GameObject\Camera.h" />
     <ClInclude Include="GameObject\CraftingUI.h" />
     <ClInclude Include="GameObject\Enemy.h" />
+    <ClInclude Include="GameObject\Hmp.h" />
     <ClInclude Include="GameObject\Item.h" />
     <ClInclude Include="GameObject\Slot.h" />
     <ClInclude Include="GameObject\Stone.h" />

@@ -1,0 +1,88 @@
+"wooden_pickaxe": {
+		"type" : "tools",
+		"catagory" : "pickaxe",
+		"icon_id" : 62,
+		"display_name" : "Wooden Pickaxe",
+		"item_attack" : 1.5,
+		"item_speed" : 1,
+		"mining_speed" : 1,
+		"stack_size" : 1
+	},
+"wooden_sword": {
+		"type" : "tools",
+		"catagory" : "sword",
+		"icon_id" : 63,
+		"display_name" : "Wooden Sword",
+		"item_attack" : 2.5,
+		"item_speed" : 1,
+		"stack_size" : 1
+	},
+"wooden_axe": {
+		"type" : "tools",
+		"catagory" : "axe",
+		"icon_id" : 64,
+		"display_name" : "Wooden Axe",
+		"item_attack" : 3.5,
+		"item_speed" : 1.5,
+		"chopping_speed" : 1,
+		"stack_size" : 1
+	},
+"stone_pickaxe": {
+		"type" : "tools",
+		"catagory" : "pickaxe",
+		"icon_id" : 65,
+		"display_name" : "Stone Pickaxe",
+		"item_attack" : 1.5,
+		"item_speed" : 1,
+		"mining_speed" : 1,
+		"stack_size" : 1
+	},
+"stone_sword": {
+		"type" : "tools",
+		"catagory" : "sword",
+		"icon_id" : 66,
+		"display_name" : "Stone Sword",
+		"item_attack" : 2.5,
+		"item_speed" : 1,
+		"stack_size" : 1
+	},
+"stone_axe": {
+		"type" : "tools",
+		"catagory" : "axe",
+		"icon_id" : 67,
+		"display_name" : "Stone Axe",
+		"item_attack" : 5,
+		"item_speed" : 1.3,
+		"chopping_speed" : 1,
+		"stack_size" : 1
+	},
+"wooden_workbench": {
+		"type" : "placeable",
+		"catagory" : "station",
+		"icon_id" : 68,
+		"display_name" : "WorkBench",
+		"stack_size" : 1
+	},
+"stone": {
+		"type" : "material",
+		"catagory" : "stone",
+		"icon_id" : 60,
+		"display_name" : "Stone",
+		"stack_size" : 16
+	},
+"wooden_log": {
+		"type" : "material",
+		"catagory" : "log",
+		"icon_id" : 59,
+		"display_name" : "Wooden Log",
+		"stack_size" : 16
+	},
+"cooked_beef": {
+		"type" : "food",
+		"catagory" : "meat",
+		"icon_id" : 61,
+		"energy" : 35,
+		"display_name" : "Wooden Log",
+		"stack_size" : 16
+	},
+

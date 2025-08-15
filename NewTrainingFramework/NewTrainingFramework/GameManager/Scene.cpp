@@ -37,9 +37,9 @@ bool Scene::Init()
 {
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     // Load ResourceManager first if needed
-    ResourceManager::GetInstance()->LoadFileRM("GameManager/ResourceManager.txt");
+    ResourceManager::GetInstance()->LoadFileRM("../Resources/ResourceManager.txt");
     // Load scene file
-    return LoadFileSM("GameManager/SceneManager.txt");
+    return LoadFileSM("../Resources/SceneManager.txt");
 }
 
 bool Scene::LoadFileSM(const char* file)

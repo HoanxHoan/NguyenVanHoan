@@ -447,6 +447,9 @@
     <ClCompile Include="GameObject\CraftingUI.cpp">
       <Filter>Source Files\GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="GameObject\Hmp.cpp">
+      <Filter>Source Files\GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h">
@@ -597,6 +600,9 @@
       <Filter>Resources\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameObject\CraftingUI.h">
+      <Filter>Source Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Hmp.h">
       <Filter>Source Files\GameObject</Filter>
     </ClInclude>
   </ItemGroup>

@@ -24,6 +24,7 @@ public:
     ///void SetMapBoundary(float maxX, float maxY);
     bool IsWaterTile(int xPixel, int yPixel);
     //float clamp(float value, float min, float max);
+    int hp, mp;
     int m_maxX, m_maxY;
     bool onhit;
     float hitdltime;
@@ -33,6 +34,7 @@ public:
     float knockbackSpeed = 100.0f;
     float knockbackDirX = 0.0f;
     float knockbackDirY = 0.0f;
+    float mptime;
     std::shared_ptr<Object>hitbox;
     std::vector<std::shared_ptr<Object>>* others = nullptr;
     void getObjectList(std::vector<std::shared_ptr<Object>>* Object);

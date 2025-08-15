@@ -18,6 +18,7 @@
 #include "../tinyxml2.h"
 #include "../GameObject/Slot.h"
 #include "../GameObject/CraftingUI.h"
+#include "../GameObject/Hmp.h"
 #include <unordered_set>   // Thêm ở đầu file
 #include <unordered_map>   // Nếu dùng unordered_map cũng cần thêm
 
@@ -49,6 +50,8 @@ public:
     tinyxml2::XMLDocument doc;
     std::shared_ptr<GameButton> button_play;
     std::shared_ptr<GameButton> button_play2;
+    std::shared_ptr<Hmp> hp;
+    std::shared_ptr<Hmp> mp;
     //std::shared_ptr<SpriteAnimation> P1;
     std::shared_ptr<Building>bonfire;
     std::shared_ptr<Building>fire;
