@@ -82,7 +82,96 @@
 		"catagory" : "meat",
 		"icon_id" : 61,
 		"energy" : 10,
+		"display_name" : "Meat",
+		"stack_size" : 16
+	},
+"cherry": {
+		"type" : "food",
+		"catagory" : "fruit",
+		"icon_id" : 102,
+		"energy" : 5,
 		"display_name" : "Wooden Log",
 		"stack_size" : 16
 	},
-
+"goblin_ear": {
+		"type" : "material",
+		"catagory" : "loot",
+		"icon_id" : 103,
+		"display_name" : "Golbin Ear",
+		"stack_size" : 16
+	},
+"bone": {
+		"type" : "material",
+		"catagory" : "loot",
+		"icon_id" : 104,
+		"display_name" : "Bone",
+		"stack_size" : 16
+	},
+"crystal": {
+		"type" : "material",
+		"catagory" : "crystal",
+		"icon_id" : 105,
+		"display_name" : "Crystal",
+		"stack_size" : 16
+	},
+"regen_potion": {
+		"type" : "potion",
+		"catagory" : "healing",
+		"icon_id" : 106,
+		"hp" : 10,
+		"display_name" : "Healing Potion",
+		"stack_size" : 16
+	},
+"slime_summoner": {
+		"type" : "usable",
+		"catagory" : "summoner",
+		"icon_id" : 107,
+		"display_name" : "Oozeheart Orb"
+	},
+"green_gem": {
+		"type" : "material",
+		"catagory" : "gem",
+		"icon_id" : 108,
+		"display_name" : "Slimeheart Gem",
+		"stack_size" : 16
+	},
+"golem_summoner": {
+		"type" : "usable",
+		"catagory" : "summoner",
+		"icon_id" : 109,
+		"display_name" : "Azure Sigil Stone"
+	},
+"blue_gem": {
+		"type" : "material",
+		"catagory" : "gem",
+		"icon_id" : 110,
+		"display_name" : "Lapis of Serenity",
+		"stack_size" : 16
+	},
+"death_summoner": {
+		"type" : "usable",
+		"catagory" : "summoner",
+		"icon_id" : 111,
+		"display_name" : "Crimson Deathshard"
+	},
+"red_gem": {
+		"type" : "material",
+		"catagory" : "gem",
+		"icon_id" : 112,
+		"display_name" : "Tear of Oblivion",
+		"stack_size" : 16
+	},
+"the_portal": {
+		"type" : "comsumable",
+		"catagory" : "summoner",
+		"icon_id" : 113,
+		"display_name" : "Wound of Reality"
+	},
+"bacon": {
+		"type" : "food",
+		"catagory" : "meat",
+		"icon_id" : 114,
+		"energy" : 15,
+		"display_name" : "Bacon",
+		"stack_size" : 16
+	},

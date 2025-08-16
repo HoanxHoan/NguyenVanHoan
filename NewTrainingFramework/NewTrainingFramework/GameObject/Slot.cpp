@@ -109,6 +109,7 @@ void Slot::Draw()
         item->m_renderObject->set2Dposition(m_pos.x, m_pos.y);
         item->m_renderObject->setSize(drawSize, drawSize); // Kích thước của item   
         item->m_renderObject->Draw();
+		textRenderer->RenderText(item->m_name, t_pos.x - 10, t_pos.y + 13, 0.5f, Vector3(1.0f, 1.0f, 1.0f));
         if(item->m_amount > 1){
             textRenderer->RenderText(std::to_string(item->m_amount), t_pos.x, t_pos.y, 0.5f, Vector3(1.0f, 1.0f, 1.0f));
         }

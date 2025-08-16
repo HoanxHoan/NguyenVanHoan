@@ -5,7 +5,7 @@
  FILE ../Resources/Models/Woman2.nfg
  ID 2
  FILE ../Resources/Models/Sprite2D.nfg
- #2DTexture 102
+ #2DTexture 115
  ID 0
  FILE ../Resources/Textures/Entities/Characters/Walk_Base/Walk_Side-Sheet.tga
  TILING GL_REPEAT
@@ -311,6 +311,44 @@
  TILING GL_CLAMP_TO_EDGE
  ID 101
  FILE ../Resources/Textures/UI/mp/MP_full.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 102
+ FILE ../Resources/Textures/Item/cherry.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 103
+ FILE ../Resources/Textures/Item/goblin_ear.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 104
+ FILE ../Resources/Textures/Item/bone.tga
+ ID 105
+ FILE ../Resources/Textures/Item/crystal.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 106
+ FILE ../Resources/Textures/Item/regen_potion.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 107
+ FILE ../Resources/Textures/Item/slime_summoner.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 108
+ FILE ../Resources/Textures/Item/green_gem.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 109
+ FILE ../Resources/Textures/Item/golem_summoner.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 110
+ FILE ../Resources/Textures/Item/blue_gem.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 111
+ FILE ../Resources/Textures/Item/death_summoner.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 112
+ FILE ../Resources/Textures/Item/red_gem.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 113
+ FILE ../Resources/Textures/Item/the_portal.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 114
+ FILE ../Resources/Textures/Item/bacon.tga
  TILING GL_CLAMP_TO_EDGE
  #Shader 3
  ID 0

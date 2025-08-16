@@ -1,9 +1,3 @@
-"wooden_workbench":{
-		"ingredients" : [
-			{"item" : "wooden_log", "amount" : 4}
-		],
-		"station" : ""
-	},
 "stone_sword":{
 		"ingredients" : [
 			{"item" : "wooden_log", "amount" : 1},
@@ -24,6 +18,47 @@
 		"ingredients" : [
 			{"item" : "wooden_log", "amount" : 3},
 			{"item" : "stone", "amount" : 3}
+		],
+		"station" : ""
+	},
+"regen_potion":{
+		"ingredients" : [
+			{"item" : "cherry", "amount" : 3},
+			{"item" : "goblin_ear", "amount" : 2},
+			{"item" : "crystal", "amount" : 1}
+		],
+		"station" : ""
+	},
+"slime_summoner":{
+		"ingredients" : [
+			{"item" : "crystal", "amount" : 2},
+			{"item" : "goblin_ear", "amount" : 3}
+		],
+		"station" : ""
+	},
+"golem_summoner":{
+		"ingredients" : [
+			{"item" : "bone", "amount" : 2},
+			{"item" : "stone", "amount" : 3},
+			{"item" : "crystal", "amount" : 2}
+		],
+		"station" : ""
+	},
+"death_summoner":{
+		"ingredients" : [
+			{"item" : "crystal", "amount" : 2},
+			{"item" : "goblin_ear", "amount" : 3},
+			{"item" : "bone", "amount" : 3},
+			{"item" : "green_gem", "amount" : 1},
+			{"item" : "blue_gem", "amount" : 1}
+		],
+		"station" : ""
+	},
+"golem_summoner":{
+		"ingredients" : [
+			{"item" : "green_gem", "amount" : 1},
+			{"item" : "blue_gem", "amount" : 1},
+			{"item" : "red_gem", "amount" : 1}
 		],
 		"station" : ""
 	},

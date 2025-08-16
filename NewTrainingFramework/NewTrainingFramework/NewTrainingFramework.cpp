@@ -13,6 +13,7 @@
 #include "GameManager/Scene.h"
 #include "GameManager/GameStateMachine.h"
 #include "GameManager/GSIntro.h"
+#include "GameManager/GSPlay.h"
 #include "GameManager/PlayerInventory.h"
 #include "GameManager/ItemDb.h"
 #define DEG2RAD 0.0174532925199432957f
@@ -24,7 +25,7 @@ int id = 6;
 int Init ( ESContext *esContext )
 {
 
-	GameStateMachine::GetInstance()->ChangeState(std::make_unique<GSIntro>());
+	GameStateMachine::GetInstance()->ChangeState(std::make_unique<GSPlay>());
 	return 0;
 
 }
