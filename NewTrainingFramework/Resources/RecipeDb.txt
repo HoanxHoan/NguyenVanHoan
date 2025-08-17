@@ -54,7 +54,7 @@
 		],
 		"station" : ""
 	},
-"golem_summoner":{
+"the_portal":{
 		"ingredients" : [
 			{"item" : "green_gem", "amount" : 1},
 			{"item" : "blue_gem", "amount" : 1},
