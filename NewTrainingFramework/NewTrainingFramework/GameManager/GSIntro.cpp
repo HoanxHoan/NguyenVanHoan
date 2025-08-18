@@ -45,6 +45,7 @@ bool GSIntro::Init()
     SoundManager::GetInstance()->LoadSound("walk", "../Resources/Sound/walk.wav");
     SoundManager::GetInstance()->LoadSound("onhit", "../Resources/Sound/onhit.wav");
     SoundManager::GetInstance()->LoadSound("hitHurt", "../Resources/Sound/hitHurt.wav");
+    SoundManager::GetInstance()->LoadSound("click", "../Resources/Sound/click.wav");
     std::cout << "Intro Init\n";
     delete model;
     delete tex;

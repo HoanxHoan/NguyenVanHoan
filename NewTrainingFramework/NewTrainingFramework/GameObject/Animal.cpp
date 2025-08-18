@@ -38,7 +38,7 @@ void Animal::Update(GLfloat deltaTime) {
     actionTime += deltaTime;
     dltime += deltaTime;
     deaddltime += deltaTime;
-    if (deaddltime >= 0.3 && isdead == true) {
+    if (deaddltime >= 0.3 ) {
         this->SetVisible(false);
         this->set2Dposition(-10, -10);
     }
@@ -50,7 +50,7 @@ void Animal::Update(GLfloat deltaTime) {
         //printf("%d\n", hp);
         this->endHit();
     }
-    else if (isdead == false) {
+    else if (isdead == false && isHit == false) {
         if (actionTime >= maxActionTime) {
             ChooseNewAction();
         }
@@ -155,7 +155,7 @@ void Animal::PerformAction(GLfloat deltaTime) {
     temp.setSize(this->width, this->height);
 
     for (auto& obj : *others) {
-        if (obj.get() != this && temp.CheckCollisionanimal(obj.get())) {
+        if (obj.get() != this && temp.CheckCollisionanimal(obj.get()) && isdead == true) {
             if (type == 1) {
                 this->SetTexture(ResourceManager::GetInstance()->GetTexture(39));
             }
