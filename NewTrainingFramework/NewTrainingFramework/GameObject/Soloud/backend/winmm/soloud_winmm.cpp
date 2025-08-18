@@ -29,10 +29,10 @@ freely, subject to the following restrictions:
 
 namespace SoLoud
 {
-	result winmm_init(Soloud *aSoloud, unsigned int aFlags, unsigned int aSamplerate, unsigned int aBuffer)
-	{
-		return NOT_IMPLEMENTED;
-	}
+    result winmm_init(Soloud* aSoloud, unsigned int aFlags, unsigned int aSamplerate, unsigned int aBuffer)
+    {
+        return NOT_IMPLEMENTED;
+    }
 };
 
 #else
