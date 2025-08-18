@@ -15,7 +15,6 @@ Camera::Camera()
     //UpdateProjMatrix(4.0f / 3.0f); 
     //UpdateOrthographic(0.0f, Globals::screenWidth, Globals::screenHeight, 0.0f);
     UpdateOrthographic(0.0f,200, 200, 0.0f);
-
 }
 
 Camera::~Camera()

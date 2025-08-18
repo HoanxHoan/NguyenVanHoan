@@ -188,6 +188,7 @@ void GSPlay::ReloadCraftingSlots() {
 
 bool GSPlay::Init()
 {
+    Camera::GetInstance()->UpdateOrthographic(0.0f, 200, 200, 0.0f);
     PlayerInventory::GetInstance()->AddStartingItems();
     printf("----------------------------------\n");
     ItemDB::GetInstance()->LoadDB("../Resources/ItemDb.txt");
@@ -195,6 +196,10 @@ bool GSPlay::Init()
 	CraftingRecipeDB::GetInstance()->LoadFromFile("../Resources/RecipeDb.txt");
 	CraftingRecipeDB::GetInstance()->PrintAll();   
     doc.LoadFile("../Resources/Textures/Map.tmx");
+
+
+    nameRenderer = std::make_shared<TextRenderer>();
+    nameRenderer->Init("../Resources/Fonts/arial.ttf", 25);
 
     auto mapNode = doc.FirstChildElement("map");
 
@@ -990,5 +995,12 @@ void GSPlay::Draw()
     button_play->Draw();
     hp->Draw();
     mp->Draw();
+    /*if (inventory->IsVisible()) {
+        for (auto& sl : inventorySlots) {
+            if (sl->isSelectedSlot()) {
+                nameRenderer->RenderText(sl->GetItem()->m_name, sl->t_pos.x - 60, sl->t_pos.y + 45, 0.5f, Vector3(1.0f, 1.0f, 1.0f));
+            }
+        }
+    }*/
 }
 

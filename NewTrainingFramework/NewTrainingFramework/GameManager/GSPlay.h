@@ -105,5 +105,7 @@ public:
     bool wasWalking = false;
     bool useItem = false;
 	float useitemdltime = 0.0f;
+    int slot_count = 0;
+    std::shared_ptr<TextRenderer> nameRenderer;
 };
 

@@ -5,7 +5,7 @@
  FILE ../Resources/Models/Woman2.nfg
  ID 2
  FILE ../Resources/Models/Sprite2D.nfg
- #2DTexture 115
+ #2DTexture 129
  ID 0
  FILE ../Resources/Textures/Entities/Characters/Walk_Base/Walk_Side-Sheet.tga
  TILING GL_REPEAT
@@ -351,6 +351,48 @@
  ID 114
  FILE ../Resources/Textures/Item/bacon.tga
  TILING GL_CLAMP_TO_EDGE
+ ID 115
+ FILE ../Resources/Textures/UI/background.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 116
+ FILE ../Resources/Textures/UI/logo.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 117
+ FILE ../Resources/Textures/UI/pause_container.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 118
+ FILE ../Resources/Textures/UI/sound_off.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 119
+ FILE ../Resources/Textures/UI/sound_on.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 120
+ FILE ../Resources/Textures/UI/pause_btn.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 121
+ FILE ../Resources/Textures/UI/continue_btn.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 122
+ FILE ../Resources/Textures/UI/start_btn.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 123
+ FILE ../Resources/Textures/UI/quit_btn.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 124
+ FILE ../Resources/Textures/UI/menu_btn.tga
+ TILING GL_CLAMP_TO_EDGE 
+ ID 125
+ FILE ../Resources/Textures/UI/option_btn.tga
+ TILING GL_CLAMP_TO_EDGE 
+ ID 126
+ FILE ../Resources/Textures/UI/back_btn.tga
+ TILING GL_CLAMP_TO_EDGE 
+ ID 127
+ FILE ../Resources/Textures/UI/increase_btn.tga
+ TILING GL_CLAMP_TO_EDGE 
+ ID 128
+ FILE ../Resources/Textures/UI/decrease_btn.tga
+ TILING GL_CLAMP_TO_EDGE 
  #Shader 3
  ID 0
  VS ../Resources/Shaders/TriangleShaderVS.vs

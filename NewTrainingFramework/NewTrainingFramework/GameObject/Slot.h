@@ -30,6 +30,7 @@ public:
     void SetItem(const std::shared_ptr<Item>& newItem);
     void SetChildPosition(float x, float y);
     void TextPosition(float x, float y);
+    bool isSelectedSlot();
     std::shared_ptr<Item> GetItem() const;
     bool HandleTouchEvents(GLint x, GLint y, bool bIsPressed);
     void Draw();
