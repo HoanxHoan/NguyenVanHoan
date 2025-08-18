@@ -34,7 +34,7 @@ void GameStateMachine::Destroy()
 
 void GameStateMachine::ChangeState(std::unique_ptr<GameStateBase> state)
 {
-    if (!m_StateStack.empty())
+    while (m_StateStack.size()!=0)
     {
         m_StateStack.top()->Exit();
         m_StateStack.pop();

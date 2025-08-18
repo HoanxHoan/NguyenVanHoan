@@ -63,8 +63,6 @@ bool GSMenu::Init()
     obj = std::make_shared<Object>(model, tex, shader);
 	obj->set2Dposition(480, 320);
 	obj->setSize(120, 120);
-
-    SoundManager::GetInstance()->PlaySound("Background");
     SoundManager::GetInstance()->SetVolume(SoundManager::GetInstance()->currentVolume);
     textRenderer = new TextRenderer();
     textRenderer->Init("../Resources/Fonts/arial.ttf", 48);
@@ -107,6 +105,7 @@ bool GSMenu::Init()
 
 void GSMenu::Exit()
 {
+    SoundManager::GetInstance()->endSound("background");
     std::cout << "Menu State Exit\n";
 }
 

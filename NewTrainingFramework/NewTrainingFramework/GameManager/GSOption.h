@@ -8,6 +8,8 @@
 #include "../GameObject/TextRenderer.h"
 #include <memory>
 
+
+
 class GSOption : public GameStateBase
 {
 public:
@@ -25,6 +27,7 @@ public:
     void HandleInput(unsigned char key, bool isPressed) override;
     void HandleMouseClick(GLint x, GLint y, bool isClick) override;
     StateType GetStateType() const override { return StateType::MENU; }
+    float dltime = 0.0f;
 private:
     TextRenderer* textRenderer;
     std::shared_ptr<GameButton> button;
@@ -32,4 +35,5 @@ private:
     std::shared_ptr<GameButton> button3;
     std::shared_ptr<GameButton> button4;
     std::shared_ptr<Object> obj;
+    int volume ;
 };

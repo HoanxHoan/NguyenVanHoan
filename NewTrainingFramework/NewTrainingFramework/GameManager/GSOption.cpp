@@ -1,7 +1,11 @@
-#include "../stdafx.h" 
+﻿#include "../stdafx.h" 
 #include "GSOption.h"
 #include <iostream>
 
+float clickable = true;
+
+
+bool muted = false;
 GSOption::GSOption() {
     Init();
 }
@@ -16,6 +20,7 @@ GSOption::~GSOption() {
         textRenderer = nullptr;
     }
 
+    
 }
 
 void GSOption::HandleInput(unsigned char key, bool isPressed)
@@ -74,27 +79,35 @@ bool GSOption::Init()
     textRenderer = new TextRenderer();
     textRenderer->Init("../Resources/Fonts/arial.ttf", 48);
 
-    Model* btnModel = ResourceManager::GetInstance()->GetModel(2);
     Texture* btnTexture = ResourceManager::GetInstance()->GetTexture(119);
+    Model* btnModel = ResourceManager::GetInstance()->GetModel(2);
     Shaders* btnShader = ResourceManager::GetInstance()->GetShader(0);
-
     button = std::make_shared<GameButton>(btnModel, btnTexture, btnShader);
     button->set2Dposition(480, 340);
     button->SetPosition(480, 280);
     button->SetSize(150, 150);
     button->setSize(35, 35);
     button->SetOnClick([]() {
-		printf("Mute clicked");
+        if(clickable)
+        {
+            muted = !muted;
+            
+            clickable = false;
+        }
         });
-    Texture* btnTexture2 = ResourceManager::GetInstance()->GetTexture(127);
 
+    Texture* btnTexture2 = ResourceManager::GetInstance()->GetTexture(127);
     button2 = std::make_shared<GameButton>(btnModel, btnTexture2, btnShader);
     button2->set2Dposition(460, 370);
     button2->SetPosition(380, 395);
     button2->SetSize(50, 50);
     button2->setSize(15, 15);
     button2->SetOnClick([]() {
-        printf("increased clicked");
+        if (clickable)
+        {
+            printf("Increased clicked\n");
+            SoundManager::GetInstance()->IncreaseVolume(0.1f);
+        }
         });
     Texture* btnTexture3 = ResourceManager::GetInstance()->GetTexture(128);
 
@@ -104,7 +117,11 @@ bool GSOption::Init()
     button3->SetSize(50, 50);
     button3->setSize(15, 15);
     button3->SetOnClick([]() {
-        printf("decreased clicked");
+        if (clickable)
+        {
+            printf("Decreased clicked\n");
+            SoundManager::GetInstance()->DecreaseVolume(0.1f);
+        }
         });
 
     Texture* btnTexture4 = ResourceManager::GetInstance()->GetTexture(126);
@@ -139,6 +156,29 @@ void GSOption::Resume()
 void GSOption::Update(float deltaTime)
 {
     Camera::GetInstance()->Follow(480, 360);
+
+    if (!clickable)
+    {
+        dltime += deltaTime;
+    }
+
+    if (dltime >= 0.5f)
+    {
+        clickable = true;
+        dltime = 0.0f;
+    }
+
+    if (muted)
+    {
+        button->objTex = ResourceManager::GetInstance()->GetTexture(118);
+        SoundManager::GetInstance()->SetVolume(0.0f);
+    }
+    else
+    {
+        button->objTex = ResourceManager::GetInstance()->GetTexture(119);
+        // Lấy trực tiếp từ currentVolume thay vì biến volume trong GSOption
+        SoundManager::GetInstance()->SetVolume(SoundManager::GetInstance()->currentVolume);
+    }
 }
 
 void GSOption::Draw()
@@ -159,7 +199,17 @@ void GSOption::Draw()
     }
     if (textRenderer)
     {
-        textRenderer->RenderText("100", 440.0f, 310.0f, 1.0f, Vector3(1.0f, 1.0f, 1.0f));
+        int volumePercent = static_cast<int>(round(SoundManager::GetInstance()->currentVolume * 100.0f));
+
+        if (volumePercent == 100) {
+            textRenderer->RenderText(std::to_string(volumePercent), 440.0f, 310.0f, 1.0f, Vector3(1.0f, 1.0f, 1.0f));
+        }
+        else if (volumePercent < 10) {
+            textRenderer->RenderText(std::to_string(volumePercent), 470.0f, 310.0f, 1.0f, Vector3(1.0f, 1.0f, 1.0f));
+        }
+        else {
+            textRenderer->RenderText(std::to_string(volumePercent), 455.0f, 310.0f, 1.0f, Vector3(1.0f, 1.0f, 1.0f));
+        }
     }
 
 }

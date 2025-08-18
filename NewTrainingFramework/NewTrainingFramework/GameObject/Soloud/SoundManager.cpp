@@ -83,8 +83,8 @@ void SoundManager::CleanUp()
 void SoundManager::IncreaseVolume(float delta)
 {
     currentVolume += delta;
-    if (currentVolume > 2.0f) 
-        currentVolume = 2.0f;
+    if (currentVolume > 1.0f) 
+        currentVolume = 1.0f;
 
     soloud.setGlobalVolume(currentVolume);
     std::cout << "Volume increased to: " << currentVolume << std::endl;

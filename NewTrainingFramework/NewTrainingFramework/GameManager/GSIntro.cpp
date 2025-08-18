@@ -50,7 +50,7 @@ bool GSIntro::Init()
     delete model;
     delete tex;
     delete shader;
-
+    SoundManager::GetInstance()->PlaySound("Background");
     return true;
 }
 

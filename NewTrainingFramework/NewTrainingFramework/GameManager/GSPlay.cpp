@@ -228,16 +228,10 @@ bool GSPlay::Init()
     //Model* btnModel2 = ResourceManager::GetInstance()->GetModel(2);
     //Texture* btnTexture2 = ResourceManager::GetInstance()->GetTexture(6);
     //Shaders* btnShader2 = ResourceManager::GetInstance()->GetShader(0);
-    //button_play2 = std::make_shared<GameButton>(btnModel2, btnTexture2, btnShader2);
-    //button_play2->SetPosition(700, 70);
-    //button_play2->SetSize(10, 10);
-    //button_play2->SetOnClick([]() {
-    //    GameStateMachine::GetInstance()->PushState(std::make_unique<GSPause>());
 
-    //    });
     //i_objects.push_back(button_play2.get());
     Model* btnModel = ResourceManager::GetInstance()->GetModel(2);
-    Texture* btnTexture = ResourceManager::GetInstance()->GetTexture(3);
+    Texture* btnTexture = ResourceManager::GetInstance()->GetTexture(120);
     Shaders* btnShader = ResourceManager::GetInstance()->GetShader(0);
     Model* model = ResourceManager::GetInstance()->GetModel(2);
     Shaders* shader = ResourceManager::GetInstance()->GetShader(1);
@@ -497,11 +491,20 @@ bool GSPlay::Init()
     //envi_objects.push_back(tree.get());
 	PlayerInventory::GetInstance()->PrintAllSlots();
     button_play = std::make_shared<GameButton>(btnModel, btnTexture, btnShader);
-    button_play->SetPosition(850, 80);
-    button_play->SetSize(90, 80);
-    button_play->setSize(20, 20);
+    button_play->SetPosition(900, 30);
+    button_play->SetSize(50, 50);
+    button_play->setSize(15, 15);
     button_play->SetOnClick([]() {
-        GameStateMachine::GetInstance()->PopState();
+        GameStateMachine::GetInstance()->PushState(std::make_unique<GSPause>()); 
+        });
+
+    Texture* btnTexture2 = ResourceManager::GetInstance()->GetTexture(120);
+    button_play2 = std::make_shared<GameButton>(btnModel, btnTexture2, btnShader);
+    button_play2->SetPosition(700, 70);
+    button_play2->SetSize(10, 10);
+    button_play2->SetOnClick([]() {
+        GameStateMachine::GetInstance()->PushState(std::make_unique<GSPause>());
+
         });
     //enermy
     Texture* orgTexture = ResourceManager::GetInstance()->GetTexture(22);
@@ -719,7 +722,7 @@ void GSPlay::Update(float deltaTime)
     //    org->Dead(); 
     //    enermyCollision = false;
     //}
-    button_play->set2Dposition(P1->x + 78, P1->y - 80);
+    button_play->set2Dposition(P1->x + 90, P1->y - 90);
     if (action == 1) {
         actiontime += deltaTime;
         if (actiontime >= 0.76) {
