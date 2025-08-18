@@ -36,6 +36,11 @@ void Enemy::Update(GLfloat deltaTime)
     dltime += deltaTime;
     deaddltime += deltaTime;
     if (deaddltime >= 0.3 && death == true) {
+        if(type == 1) {
+            PlayerInventory::GetInstance()->AddItem("goblin_ear", 2);
+        } else if (type == 2) {
+            PlayerInventory::GetInstance()->AddItem("bone", 2);
+		}
         this->SetVisible(false);
         this->set2Dposition(-10, -10);
     }

@@ -54,7 +54,10 @@ void Bush::Update(GLfloat deltaTime)
 {
     dltime += deltaTime;
     Hpdltime += deltaTime;
-    if (Hpdltime >= 0.1 && hp <= 1) { this->Cutted();}
+    if (Hpdltime >= 0.1 && hp <= 1) { 
+        PlayerInventory::GetInstance()->AddItem("cherry", 3);
+        this->Cutted();
+    }
     else if (iscrush && dltime >= 0.1)
     {
         EndCut();

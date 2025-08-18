@@ -1,6 +1,6 @@
 #pragma once
 #include "SpriteAnimation.h"
-
+#include "../GameManager/PlayerInventory.h"
 class Bush : public SpriteAnimation {
 public:
     Bush(Model* model, Shaders* shader, Texture* texture,

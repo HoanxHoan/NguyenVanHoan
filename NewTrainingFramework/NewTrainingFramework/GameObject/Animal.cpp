@@ -38,7 +38,7 @@ void Animal::Update(GLfloat deltaTime) {
     actionTime += deltaTime;
     dltime += deltaTime;
     deaddltime += deltaTime;
-    if (deaddltime >= 0.3 ) {
+    if (deaddltime >= 0.3 && isdead ==true) {
         this->SetVisible(false);
         this->set2Dposition(-10, -10);
     }
@@ -155,7 +155,7 @@ void Animal::PerformAction(GLfloat deltaTime) {
     temp.setSize(this->width, this->height);
 
     for (auto& obj : *others) {
-        if (obj.get() != this && temp.CheckCollisionanimal(obj.get()) && isdead == true) {
+        if (obj.get() != this && temp.CheckCollisionanimal(obj.get())) {
             if (type == 1) {
                 this->SetTexture(ResourceManager::GetInstance()->GetTexture(39));
             }
@@ -166,7 +166,7 @@ void Animal::PerformAction(GLfloat deltaTime) {
             return; 
         }
     }
-
+   
 
     this->SetPosition(Vector3(newX,newY,0));
 }
@@ -201,9 +201,11 @@ void Animal::endHit() {
 void Animal::dead() {
     if (type == 1) {
         this->SetTexture(ResourceManager::GetInstance()->GetTexture(41));
+        PlayerInventory::GetInstance()->AddItem("cooked_beef", 2);
     }
     if (type == 2) {
         this->SetTexture(ResourceManager::GetInstance()->GetTexture(45));
+        PlayerInventory::GetInstance()->AddItem("bacon", 2);
     }
     this->SetNumFrames(4);
     this->SetCurrentFrame(0);
