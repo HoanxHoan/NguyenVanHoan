@@ -15,9 +15,26 @@ Player::Player(Model* model, Shaders* shader, Texture* texture,
     hp = 60;
     mp = 60;
     mptime = 0;
+    mapWidth = 176;
+    mapHeight = 115;
+    tileWidth = tileHeight = 16;
+    mapPixelWidth = mapWidth * tileWidth;
+    mapPixelHeight = mapHeight * tileHeight;
 }
 
+bool Player::IsWaterTile(int xPixel, int yPixel) {
+    int col = xPixel / tileWidth;
+    int row = yPixel / tileHeight;
+    int index = row * mapWidth + col;
 
+    if (index >= 0 && index < waterTiles.size()) {
+        return waterTiles[index] != 0;
+    }
+    return false;
+}
+void Player::getwaterTiles(std::vector<int>& WT) {
+    waterTiles = WT;
+}
 void Player::MoveUp(float value,bool col) {
     this->SetTexture(ResourceManager::GetInstance()->GetTexture(5));
     this->SetNumFrames(6);
@@ -277,7 +294,7 @@ void Player::Update(GLfloat deltaTime) {
                 }
             }
 
-            if (!collided) {
+            if (!collided && !IsWaterTile(newX, newY)) {
                 this->x += dx;
                 this->y += dy;
                 this->SetPosition(Vector3(x, y, 0));

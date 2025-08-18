@@ -39,6 +39,7 @@ bool GSIntro::Init()
     obj->scaleMatrix.SetScale(sx, sy, sz);
     float nearPlane = -1, farPlane = 1;
     Camera::GetInstance()->SetNearFar(nearPlane, farPlane);
+    //Scene::GetInstance()->Init();
     SoundManager::GetInstance()->Init();
     SoundManager::GetInstance()->LoadSound("Background", "../Resources/Sound/Background.wav");
     SoundManager::GetInstance()->LoadSound("walk", "../Resources/Sound/walk.wav");

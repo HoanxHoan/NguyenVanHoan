@@ -320,6 +320,7 @@
  TILING GL_CLAMP_TO_EDGE
  ID 104
  FILE ../Resources/Textures/Item/bone.tga
+ TILING GL_CLAMP_TO_EDGE
  ID 105
  FILE ../Resources/Textures/Item/crystal.tga
  TILING GL_CLAMP_TO_EDGE

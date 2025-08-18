@@ -25,7 +25,7 @@ int id = 6;
 int Init ( ESContext *esContext )
 {
 
-	GameStateMachine::GetInstance()->ChangeState(std::make_unique<GSPlay>());
+	GameStateMachine::GetInstance()->ChangeState(std::make_unique<GSIntro>());
 	return 0;
 
 }

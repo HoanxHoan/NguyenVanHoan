@@ -245,7 +245,7 @@ bool GSPlay::Init()
         1, // numActions
         0, // currentAction
         0.1f); // frameTime
-
+    P1->getwaterTiles(waterTiles);
     P1->SetPosition(Vector3(200, 200, 0));
     P1->SetScale(Vector3(30, 40, 0));
     P1->setSize(15, 20);

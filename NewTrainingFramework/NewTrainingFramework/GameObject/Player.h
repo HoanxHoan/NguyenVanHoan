@@ -38,5 +38,14 @@ public:
     std::shared_ptr<Object>hitbox;
     std::vector<std::shared_ptr<Object>>* others = nullptr;
     void getObjectList(std::vector<std::shared_ptr<Object>>* Object);
+    std::vector<int> waterTiles;
+    void getwaterTiles(std::vector<int>& waterTiles);
+    int mapWidth;
+    int mapHeight;
+    int tileWidth;
+    int tileHeight;
+
+    int mapPixelWidth;
+    int mapPixelHeight;
 };
 
