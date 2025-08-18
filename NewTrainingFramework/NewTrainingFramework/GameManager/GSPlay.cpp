@@ -188,7 +188,6 @@ void GSPlay::ReloadCraftingSlots() {
 
 bool GSPlay::Init()
 {
-    Camera::GetInstance()->UpdateOrthographic(0.0f, 200, 200, 0.0f);
     PlayerInventory::GetInstance()->AddStartingItems();
     printf("----------------------------------\n");
     ItemDB::GetInstance()->LoadDB("../Resources/ItemDb.txt");
