@@ -453,6 +453,12 @@
     <ClCompile Include="GameManager\GSOption.cpp">
       <Filter>Source Files\GameManager</Filter>
     </ClCompile>
+    <ClCompile Include="GameManager\GSRecipe.cpp">
+      <Filter>Source Files\GameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager\GSTutorial.cpp">
+      <Filter>Source Files\GameManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h">
@@ -609,6 +615,12 @@
       <Filter>Source Files\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="GameManager\GSOption.h">
+      <Filter>Source Files\GameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager\GSRecipe.h">
+      <Filter>Source Files\GameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager\GSTutorial.h">
       <Filter>Source Files\GameManager</Filter>
     </ClInclude>
   </ItemGroup>

@@ -104,8 +104,11 @@ void GSPlay::HandleMouseClick(GLint x, GLint y, bool isClick)
     if (button_play && button_play->HandleTouchEvents(x, y, isClick)) {
         return;
     }
-    if (button_play2 && button_play2->HandleTouchEvents(x, y, isClick)) {
-        return;
+    if (inventory->IsVisible()){
+        if (button_play2 && button_play2->HandleTouchEvents(x, y, isClick))
+        {
+            return;
+        }
     }
     if(inventory->IsVisible()){
         for (auto slot : inventorySlots) {
@@ -498,13 +501,13 @@ bool GSPlay::Init()
         GameStateMachine::GetInstance()->PushState(std::make_unique<GSPause>()); 
         });
 
-    Texture* btnTexture2 = ResourceManager::GetInstance()->GetTexture(120);
+    Texture* btnTexture2 = ResourceManager::GetInstance()->GetTexture(129);
     button_play2 = std::make_shared<GameButton>(btnModel, btnTexture2, btnShader);
-    button_play2->SetPosition(700, 70);
-    button_play2->SetSize(10, 10);
+    button_play2->SetPosition(910, 685);
+    button_play2->SetSize(50, 50);
+    button_play2->setSize(15, 15);
     button_play2->SetOnClick([]() {
-        GameStateMachine::GetInstance()->PushState(std::make_unique<GSPause>());
-
+        GameStateMachine::GetInstance()->PushState(std::make_unique<GSRecipe>());
         });
     //enermy
     Texture* orgTexture = ResourceManager::GetInstance()->GetTexture(22);
@@ -723,6 +726,13 @@ void GSPlay::Update(float deltaTime)
     //    enermyCollision = false;
     //}
     button_play->set2Dposition(P1->x + 90, P1->y - 90);
+    button_play2->set2Dposition(P1->x + 90, P1->y + 90);
+    if (inventory->IsVisible()) {
+		button_play2->SetVisible(true);
+    }
+    else {
+		button_play2->SetVisible(false);
+    }
     if (action == 1) {
         actiontime += deltaTime;
         if (actiontime >= 0.76) {
@@ -994,15 +1004,16 @@ void GSPlay::Draw()
     for (auto& slot : m_craftingSlots) {
         slot->Draw();
     }
-    button_play->Draw();
     hp->Draw();
     mp->Draw();
-    /*if (inventory->IsVisible()) {
+    if (inventory->IsVisible()) {
         for (auto& sl : inventorySlots) {
             if (sl->isSelectedSlot()) {
                 nameRenderer->RenderText(sl->GetItem()->m_name, sl->t_pos.x - 60, sl->t_pos.y + 45, 0.5f, Vector3(1.0f, 1.0f, 1.0f));
             }
         }
-    }*/
+    }
+    button_play->Draw();
+    button_play2->Draw();
 }
 

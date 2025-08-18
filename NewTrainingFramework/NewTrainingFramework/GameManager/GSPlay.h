@@ -1,5 +1,5 @@
 ﻿#pragma once
-
+#include "GSRecipe.h"
 #include "GameStateBase.h"
 #include "Scene.h"
 #include "GameStateMachine.h"
@@ -72,7 +72,7 @@ public:
 	std::shared_ptr<Building> inventory;
     bool keyState[256] = { false };
     int x, y, count,action;
-    float dltime = 0.0f, actiontime = 0.0f, uidltime = 0.0f;
+    float dltime = 0.0f, actiontime = 0.0f, uidltime = 0.0f, actiontime2 = 0.0f;
     std::vector<std::shared_ptr<Object>> i_objects;
     //std::vector<Object*> i_objects;
     std::vector<std::shared_ptr<Object>> envi_objects;

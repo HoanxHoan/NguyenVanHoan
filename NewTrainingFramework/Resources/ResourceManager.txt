@@ -5,7 +5,7 @@
  FILE ../Resources/Models/Woman2.nfg
  ID 2
  FILE ../Resources/Models/Sprite2D.nfg
- #2DTexture 129
+ #2DTexture 138
  ID 0
  FILE ../Resources/Textures/Entities/Characters/Walk_Base/Walk_Side-Sheet.tga
  TILING GL_REPEAT
@@ -393,6 +393,33 @@
  ID 128
  FILE ../Resources/Textures/UI/decrease_btn.tga
  TILING GL_CLAMP_TO_EDGE 
+ ID 129
+ FILE ../Resources/Textures/UI/question_btn.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 130
+ FILE ../Resources/Textures/UI/left_btn.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 131
+ FILE ../Resources/Textures/UI/right_btn.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 132
+ FILE ../Resources/Textures/Recipe/recipe1.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 133
+ FILE ../Resources/Textures/Recipe/recipe2.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 134
+ FILE ../Resources/Textures/Recipe/recipe3.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 135
+ FILE ../Resources/Textures/UI/next_btn.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 136
+ FILE ../Resources/Textures/UI/tutorial.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 137
+ FILE ../Resources/Textures/UI/tutorial_title.tga
+ TILING GL_CLAMP_TO_EDGE
  #Shader 3
  ID 0
  VS ../Resources/Shaders/TriangleShaderVS.vs

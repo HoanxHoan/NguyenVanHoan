@@ -4,17 +4,15 @@
 #include "ResourceManager.h"
 #include "GameStateMachine.h"
 #include "GSPlay.h"
-#include "GSOption.h"
 #include "../GameObject/GameButton.h"
 #include "../GameObject/TextRenderer.h"
-#include "GSTutorial.h"
 #include <memory>
 
-class GSMenu : public GameStateBase
+class GSTutorial : public GameStateBase
 {
 public:
-    GSMenu();
-    ~GSMenu();
+    GSTutorial();
+    ~GSTutorial();
 
     bool Init() override;
     void Exit() override;
@@ -32,5 +30,5 @@ private:
     std::shared_ptr<GameButton> button;
     std::shared_ptr<GameButton> button2;
     std::shared_ptr<GameButton> button3;
-	std::shared_ptr<Object> obj;
+    std::shared_ptr<Object> obj;
 };

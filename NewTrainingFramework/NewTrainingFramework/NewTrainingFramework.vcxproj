@@ -103,6 +103,8 @@
     <ClCompile Include="GameManager\GSOption.cpp" />
     <ClCompile Include="GameManager\GSPause.cpp" />
     <ClCompile Include="GameManager\GSPlay.cpp" />
+    <ClCompile Include="GameManager\GSRecipe.cpp" />
+    <ClCompile Include="GameManager\GSTutorial.cpp" />
     <ClCompile Include="GameManager\ItemDb.cpp" />
     <ClCompile Include="GameManager\PlayerInventory.cpp" />
     <ClCompile Include="GameManager\ResourceManager.cpp" />
@@ -215,6 +217,8 @@
     <ClInclude Include="GameManager\GSOption.h" />
     <ClInclude Include="GameManager\GSPause.h" />
     <ClInclude Include="GameManager\GSPlay.h" />
+    <ClInclude Include="GameManager\GSRecipe.h" />
+    <ClInclude Include="GameManager\GSTutorial.h" />
     <ClInclude Include="GameManager\ItemDb.h" />
     <ClInclude Include="GameManager\PlayerInventory.h" />
     <ClInclude Include="GameManager\ResourceManager.h" />

@@ -77,7 +77,7 @@ bool GSMenu::Init()
     button->SetSize(150, 75);
     button->setSize(40, 20);
     button->SetOnClick([]() {
-        GameStateMachine::GetInstance()->PushState(std::make_unique<GSPlay>()); 
+        GameStateMachine::GetInstance()->PushState(std::make_unique<GSTutorial>()); 
         });
     Texture* btnTexture2 = ResourceManager::GetInstance()->GetTexture(125);
     
