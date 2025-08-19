@@ -537,7 +537,9 @@ bool GSPlay::Init()
     Texture* SlimeTexture = ResourceManager::GetInstance()->GetTexture(50);
     boss = std::make_shared<Boss>(model, shader, SlimeTexture, 8, 0, 1, 0, 0.1f);
     boss->type = 1;
-    boss->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
+    //boss->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
+    boss->SetPosition(Vector3(-10, -10, 0));
+    boss->SetVisible(false);
     boss->SetScale(Vector3(50, 50, 0));
     boss->setSize(70, 70);
     i_objects.push_back(boss);
@@ -546,7 +548,9 @@ bool GSPlay::Init()
     Texture* necroTexture = ResourceManager::GetInstance()->GetTexture(56);
     boss = std::make_shared<Boss>(model, shader, necroTexture, 8, 0, 1, 0, 0.1f);
     boss->type = 2;
-    boss->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
+    //boss->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
+    boss->SetPosition(Vector3(-10, -10, 0));
+    boss->SetVisible(false);
     boss->SetScale(Vector3(50, 50, 0));
     boss->setSize(70, 70);
     i_objects.push_back(boss);
@@ -555,7 +559,9 @@ bool GSPlay::Init()
     Texture* StonegiTexture = ResourceManager::GetInstance()->GetTexture(56);
     boss = std::make_shared<Boss>(model, shader, StonegiTexture, 8, 0, 1, 0, 0.1f);
     boss->type = 3;
-    boss->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
+    //boss->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
+    boss->SetPosition(Vector3(-10, -10, 0));
+    boss->SetVisible(false);
     boss->SetScale(Vector3(50, 50, 0));
     boss->setSize(80, 80);
     i_objects.push_back(boss);
@@ -610,6 +616,7 @@ void GSPlay::Resume()
 
 void GSPlay::Update(float deltaTime)
 {
+    if (P1->hp <= 0) { P1->Dead(); }
 	useitemdltime += deltaTime;
     if(useitemdltime >0.5f && useItem == true) {
         useItem = false;
@@ -636,7 +643,7 @@ void GSPlay::Update(float deltaTime)
     inventory->SetPosition(Vector3(P1->x + 25, P1->y+15, 0));
     onhitdltime += deltaTime;
 	uidltime += deltaTime;
-    if (onhit == true && onhitdltime > 2) {
+    if (onhit == true && onhitdltime > 1) {
         onhit = false;
     }
     for (auto& slot : inventorySlots) {
@@ -865,6 +872,7 @@ void GSPlay::Update(float deltaTime)
     if (keyState['J'] )
     {   
         if (Slot::GetCurrentSlot()->HasItem()) {
+            if (P1->mp <= 0) { return; }
             if (Slot::GetCurrentSlot()->GetItem()->m_category == "pickaxe") {
                 P1->Crush(action, count);
                 action = 1;
@@ -878,13 +886,14 @@ void GSPlay::Update(float deltaTime)
                 }
             }
             else if (Slot::GetCurrentSlot()->GetItem()->m_category == "axe") {
+                if (P1->mp <= 0) { return; }
                 P1->Slice(action, count);
                 action = 1;
                 for (auto& obj : envi_objects) {
                     if (auto env = dynamic_cast<Tree*>(obj.get())) {
                         if (P1->GetHitbox(count)->CheckCollisionTree(obj.get()))
                         {
-                            env->CutTree();
+                            env->CutTree(2);
                         }
                     }
                     if (auto env = dynamic_cast<Bush*>(obj.get())) {
@@ -893,6 +902,13 @@ void GSPlay::Update(float deltaTime)
                             env->Cut();
                         }
                     }
+                }
+            }
+            else if (Slot::GetCurrentSlot()->GetItem()->m_category == "sword") {
+                if (P1->mp <= 0) { return; }
+                P1->Pierce(action, count);
+                action = 1;
+                for (auto& obj : envi_objects) {
                     if (auto env = dynamic_cast<Animal*>(obj.get())) {
                         if (P1->GetHitbox(count)->CheckCollision(obj.get()))
                         {

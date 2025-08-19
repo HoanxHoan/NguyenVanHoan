@@ -4,26 +4,28 @@ Tree::Tree(Model* model, Shaders* shader, Texture* texture,
     GLint numFrames, GLint currentFrame, GLint numActions, GLint currentAction, GLfloat frameTime)
     : SpriteAnimation(model, shader, texture, numFrames, currentFrame, numActions, currentAction, frameTime)
 {
-    hp = 3;
+    hp = 5;
     iscut = false;
     icut = false;
 }
-void Tree::CutTree() {
-    if (hp >= 1 ) {
+void Tree::CutTree(float dame) {
+    if (hp >= 1 && iscut == false) {
         this->SetTexture(ResourceManager::GetInstance()->GetTexture(17));
         this->SetNumFrames(5);
         this->SetCurrentFrame(0);
         iscut = true;
         dltime = 0;
+        hp = hp - dame;
     }
+
 }
 void Tree::EndCutTree() {
     if (hp >= 1) {
         this->SetNumFrames(1);
         this->SetTexture(ResourceManager::GetInstance()->GetTexture(18));       
-        iscut = false;
         dltime = 0;
         Hpdltime = 0;
+        icut = true;
     }
 }
 void Tree::Cutted() {
@@ -31,23 +33,23 @@ void Tree::Cutted() {
     this->SetTexture(ResourceManager::GetInstance()->GetTexture(19));
     this->set2Dposition(this->x, this->y + 20);
     this->setSize(this->width / 4, this->height);
-    iscut = false;
-    icut = true;
+    PlayerInventory::GetInstance()->AddItem("wooden_log", 1);
 }
 void Tree::Update(GLfloat deltaTime)
 {
     Hpdltime += deltaTime;
     dltime += deltaTime;
-    if (Hpdltime >= 0.3 && icut == false && hp < 1)
+    if (Hpdltime >= 0.3 && icut && hp <= 0)
     {
         this->Cutted();
-        PlayerInventory::GetInstance()->AddItem("wooden_log", 5);
+        icut = false;
+        
     }
-    else  if(iscut == true && dltime >= 0.7)
+    else  if(iscut && dltime >= 0.5)
     {
         //printf("%d\n", hp);
         EndCutTree();
-        hp = hp - 1;
+        iscut = false;
     }
    
 

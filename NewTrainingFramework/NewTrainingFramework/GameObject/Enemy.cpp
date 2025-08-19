@@ -5,7 +5,7 @@ Enemy::Enemy(Model* model, Shaders* shader, Texture* texture,
     GLint numFrames, GLint currentFrame, GLint numActions, GLint currentAction, GLfloat frameTime)
     : SpriteAnimation(model, shader, texture, numFrames, currentFrame, numActions, currentAction, frameTime)
 {
-    hp = 2; 
+    hp = 5; 
     dltime = 0;
     deaddltime = 0;
     death = false;
@@ -36,11 +36,6 @@ void Enemy::Update(GLfloat deltaTime)
     dltime += deltaTime;
     deaddltime += deltaTime;
     if (deaddltime >= 0.3 && death == true) {
-        if(type == 1) {
-            PlayerInventory::GetInstance()->AddItem("goblin_ear", 2);
-        } else if (type == 2) {
-            PlayerInventory::GetInstance()->AddItem("bone", 2);
-		}
         this->SetVisible(false);
         this->set2Dposition(-10, -10);
     }
@@ -145,9 +140,11 @@ void Enemy::Dead()
 {
     if (type == 1) {
         this->SetTexture(ResourceManager::GetInstance()->GetTexture(26));
+        PlayerInventory::GetInstance()->AddItem("goblin_ear", 2);
     }
     if (type == 2) {
         this->SetTexture(ResourceManager::GetInstance()->GetTexture(49));
+        PlayerInventory::GetInstance()->AddItem("bone", 2);
     }
     this->SetNumFrames(6);
     this->SetCurrentFrame(0);

@@ -8,13 +8,13 @@ public:
 
     void Update(GLfloat deltaTime) override;
     void Draw() override;
-    void CutTree();
+    void CutTree(float dame);
     void EndCutTree();
     void Cutted();
 private:
     bool iscut;
     float dltime, Hpdltime;
     bool icut,iscutted;
-    int hp;
+    float hp;
 };
 

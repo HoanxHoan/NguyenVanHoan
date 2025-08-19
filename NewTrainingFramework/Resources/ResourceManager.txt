@@ -5,7 +5,7 @@
  FILE ../Resources/Models/Woman2.nfg
  ID 2
  FILE ../Resources/Models/Sprite2D.nfg
- #2DTexture 138
+ #2DTexture 142
  ID 0
  FILE ../Resources/Textures/Entities/Characters/Walk_Base/Walk_Side-Sheet.tga
  TILING GL_REPEAT
@@ -419,6 +419,18 @@
  TILING GL_CLAMP_TO_EDGE
  ID 137
  FILE ../Resources/Textures/UI/tutorial_title.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 138
+ FILE ../Resources/Textures/Entities/Characters/Pierce_Base/Pierce_Top-Sheet.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 139
+ FILE ../Resources/Textures/Entities/Characters/Pierce_Base/Pierce_Side-Sheet.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 140
+ FILE ../Resources/Textures/Entities/Characters/Pierce_Base/Pierce_Down-Sheet.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 141
+ FILE ../Resources/Textures/Entities/Characters/Death_Base/Death_Down-Sheet.tga
  TILING GL_CLAMP_TO_EDGE
  #Shader 3
  ID 0

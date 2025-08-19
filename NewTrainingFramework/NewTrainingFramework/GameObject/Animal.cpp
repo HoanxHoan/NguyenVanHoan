@@ -155,7 +155,7 @@ void Animal::PerformAction(GLfloat deltaTime) {
     temp.setSize(this->width, this->height);
 
     for (auto& obj : *others) {
-        if (obj.get() != this && temp.CheckCollisionanimal(obj.get())) {
+        if (obj.get() != this && temp.CheckCollisionanimal(obj.get()) || isHit == true) {
             if (type == 1) {
                 this->SetTexture(ResourceManager::GetInstance()->GetTexture(39));
             }

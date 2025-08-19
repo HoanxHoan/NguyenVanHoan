@@ -18,6 +18,7 @@ public:
     void Idle(int count);
     void Crush(int action, int count);
     void Slice(int action, int count);
+    void Pierce(int action, int count);
     void Dead();
     void onHit(int count,float x,float y);
     Object* GetHitbox(int count);

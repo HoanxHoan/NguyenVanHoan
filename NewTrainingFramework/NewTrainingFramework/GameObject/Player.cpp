@@ -165,9 +165,49 @@ void Player::Slice(int action, int count) {
         }
     }
 }
+void Player::Pierce(int action, int count) {
+    if (mp > 0 && action == 0) {
+        mp -= 5;
+        mptime = 0;
+        SoundManager::GetInstance()->PlaySoundnoLoop("hitHurt");
+        switch (count) {
+        case 1: {
+            this->SetTexture(ResourceManager::GetInstance()->GetTexture(138));
+            this->SetNumFrames(8);
+            this->SetCurrentFrame(0);
+
+            break;
+        }
+        case 2: {
+            this->SetRotation(Vector3(0, 360 * DEG2RAD, 0));
+            this->SetTexture(ResourceManager::GetInstance()->GetTexture(139));
+            this->SetNumFrames(8);
+            this->SetCurrentFrame(0);
+
+            break;
+        }
+        case 3: {
+            this->SetTexture(ResourceManager::GetInstance()->GetTexture(140));
+            this->SetNumFrames(8);
+            this->SetCurrentFrame(0);
+
+            break;
+        }
+        case 4: {
+            this->SetTexture(ResourceManager::GetInstance()->GetTexture(139));
+            this->SetNumFrames(8);
+            this->SetCurrentFrame(0);
+            this->SetRotation(Vector3(0, 180 * DEG2RAD, 0));
+
+            break;
+        }
+        }
+    }
+}
 void Player::Dead() {
-    this->SetTexture(ResourceManager::GetInstance()->GetTexture(23));
+    this->SetTexture(ResourceManager::GetInstance()->GetTexture(141));
     this->SetNumFrames(8);
+    this->SetCurrentFrame(0);
 }
 void Player::onHit(int count,float ex, float ey) {
     float dx = this->x - ex;

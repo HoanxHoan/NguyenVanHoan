@@ -5,24 +5,25 @@ Bush::Bush(Model* model, Shaders* shader, Texture* texture,
     : SpriteAnimation(model, shader, texture, numFrames, currentFrame, numActions, currentAction, frameTime)
 {
     hp = 2;
+    iscrush = false;
+    icut = false;
 }
 void Bush::Cut() {
 
-    if (hp >= 1) {
+    if (hp >= 1 && iscrush == false) {
         if (type == 1) {
             this->SetTexture(ResourceManager::GetInstance()->GetTexture(37));
             this->SetNumFrames(1);
             this->SetCurrentFrame(0);
-            iscrush = true;
-            dltime = 0;
         }
         else if (type == 2) {
             this->SetTexture(ResourceManager::GetInstance()->GetTexture(38));
             this->SetNumFrames(1);
             this->SetCurrentFrame(0);
-            iscrush = true;
-            dltime = 0;
         }
+        iscrush = true;
+        dltime = 0;
+        hp = hp - 1;
     }
 }
 void Bush::EndCut() {
@@ -30,38 +31,33 @@ void Bush::EndCut() {
         if (type == 1) {
             this->SetNumFrames(1);
             this->SetTexture(ResourceManager::GetInstance()->GetTexture(35));
-            icut = true;
-            iscrush = false;
-            Hpdltime = 0;
-            dltime = 0;
         }
         else if (type == 2) {
             this->SetNumFrames(1);
             this->SetTexture(ResourceManager::GetInstance()->GetTexture(36));
-            icut = true;
-            iscrush = false;
-            Hpdltime = 0;
-            dltime = 0;
         }
+        icut = true;
+        Hpdltime = 0;
+        dltime = 0;
     }
 }
 void Bush::Cutted() {
     this->SetVisible(false);
     this->set2Dposition(-10, -10);
-    iscrush = false;
+    PlayerInventory::GetInstance()->AddItem("cherry", 3);
 }
 void Bush::Update(GLfloat deltaTime)
 {
     dltime += deltaTime;
     Hpdltime += deltaTime;
-    if (Hpdltime >= 0.1 && hp <= 1) { 
-        PlayerInventory::GetInstance()->AddItem("cherry", 3);
+    if (Hpdltime >= 0.5 && icut) {
         this->Cutted();
+        icut = false;
     }
-    else if (iscrush && dltime >= 0.1)
+    else if (iscrush && dltime >= 0.5)
     {
         EndCut();
-        hp = hp - 1;
+        iscrush = false;
     }
     SpriteAnimation::Update(deltaTime);
 }
