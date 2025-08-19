@@ -31,4 +31,5 @@ private:
     std::shared_ptr<GameButton> button2;
     std::shared_ptr<GameButton> button3;
     std::shared_ptr<Object> obj;
+    std::shared_ptr<Object> obj2;
 };

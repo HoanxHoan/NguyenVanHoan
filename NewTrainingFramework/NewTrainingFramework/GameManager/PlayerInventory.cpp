@@ -366,5 +366,7 @@ void PlayerInventory::Reset() {
 void PlayerInventory::AddStartingItems() {
     hotbar[0] = { "wooden_pickaxe", 1 };
     hotbar[1] = { "wooden_axe", 1 };
-    hotbar[2] = { "cooked_beef", 5 };
+    hotbar[2] = { "wooden_sword", 1 };
+    hotbar[3] = { "cooked_beef", 5 };
+	hotbar[4] = { "regen_potion", 5 };
 }

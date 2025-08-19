@@ -20,6 +20,7 @@ Player::Player(Model* model, Shaders* shader, Texture* texture,
     tileWidth = tileHeight = 16;
     mapPixelWidth = mapWidth * tileWidth;
     mapPixelHeight = mapHeight * tileHeight;
+    
 }
 
 bool Player::IsWaterTile(int xPixel, int yPixel) {
@@ -91,7 +92,8 @@ void Player::Idle(int count) {
 void Player::Crush(int action,int count) {
     if (mp > 0 && action == 0) {
         mp -= 5;
-        mptime = 0; 
+        mptime = 0;
+        regening = false;
         switch (count) {
         case 1: {
             this->SetTexture(ResourceManager::GetInstance()->GetTexture(12));
@@ -128,8 +130,9 @@ void Player::Crush(int action,int count) {
 }
 void Player::Slice(int action, int count) {
     if (mp > 0 && action == 0) {
-        mp -= 5;
+        mp -= 15;
         mptime = 0;
+        regening = false;
         SoundManager::GetInstance()->PlaySoundnoLoop("hitHurt");
         switch (count) {
         case 1: {
@@ -167,8 +170,9 @@ void Player::Slice(int action, int count) {
 }
 void Player::Pierce(int action, int count) {
     if (mp > 0 && action == 0) {
-        mp -= 5;
+        mp -= 10;
         mptime = 0;
+		regening = false;
         SoundManager::GetInstance()->PlaySoundnoLoop("hitHurt");
         switch (count) {
         case 1: {
@@ -208,6 +212,7 @@ void Player::Dead() {
     this->SetTexture(ResourceManager::GetInstance()->GetTexture(141));
     this->SetNumFrames(8);
     this->SetCurrentFrame(0);
+	isDead = true;
 }
 void Player::onHit(int count,float ex, float ey) {
     float dx = this->x - ex;
@@ -304,15 +309,23 @@ void Player::getObjectList(std::vector<std::shared_ptr<Object>>* O) {
     others = O;
 }
 void Player::Update(GLfloat deltaTime) {
+    if (isDead && this->GetCurrentFrame() == 7) {
+        this->SetFrameTime(9999);
+    }
 	if (hp > 60) hp = 60;
 	if (mp > 60) mp = 60;
 	if (hp < 0) hp = 0;
 	if (mp < 0) mp = 0;
     mptime += deltaTime;
-    if (mp<60 && mptime > 5.0) {
+    if (mptime > 5.0 && regening == false) {
+        regening = true;
+        mptime = 0;
+    }
+    if (regening && mptime > 1.0 && mp < 60) {
         mp += 5;
         mptime = 0;
     }
+
     hitdltime += deltaTime;
     if (isBeingKnockedBack) {
         knockbackTime += deltaTime;

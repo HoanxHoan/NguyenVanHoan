@@ -4,7 +4,7 @@ Tree::Tree(Model* model, Shaders* shader, Texture* texture,
     GLint numFrames, GLint currentFrame, GLint numActions, GLint currentAction, GLfloat frameTime)
     : SpriteAnimation(model, shader, texture, numFrames, currentFrame, numActions, currentAction, frameTime)
 {
-    hp = 5;
+    hp = 10.0f;
     iscut = false;
     icut = false;
 }
@@ -25,7 +25,7 @@ void Tree::EndCutTree() {
         this->SetTexture(ResourceManager::GetInstance()->GetTexture(18));       
         dltime = 0;
         Hpdltime = 0;
-        icut = true;
+        //iscut = true;
     }
 }
 void Tree::Cutted() {
@@ -39,10 +39,10 @@ void Tree::Update(GLfloat deltaTime)
 {
     Hpdltime += deltaTime;
     dltime += deltaTime;
-    if (Hpdltime >= 0.3 && icut && hp <= 0)
+    if (dltime >= 0.3 && iscut && hp <= 0)
     {
         this->Cutted();
-        icut = false;
+        iscut = false;
         
     }
     else  if(iscut && dltime >= 0.5)

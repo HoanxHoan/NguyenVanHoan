@@ -31,6 +31,8 @@ public:
     std::string m_name;
     std::string m_type;
     std::string m_category;
+    float m_damage;
+    int m_hp;
     int m_iconId = -1;
 private:
     void LoadTexture(int icon_id);

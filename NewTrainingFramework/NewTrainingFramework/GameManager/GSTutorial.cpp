@@ -49,6 +49,12 @@ bool GSTutorial::Init()
     obj->set2Dposition(480, 370);
     obj->setSize(200, 170);
 
+	Texture* tex2 = ResourceManager::GetInstance()->GetTexture(137);
+
+    obj2 = std::make_shared<Object>(model, tex2, shader);
+    obj2->set2Dposition(480, 300);
+    obj2->setSize(170, 144);
+
     Model* btnModel = ResourceManager::GetInstance()->GetModel(2);
     Texture* btnTexture = ResourceManager::GetInstance()->GetTexture(135);
     Shaders* btnShader = ResourceManager::GetInstance()->GetShader(0);
@@ -98,6 +104,9 @@ void GSTutorial::Draw()
     if (obj) {
         obj->Draw();
     }
+    if(obj2) {
+        obj2->Draw();
+	}
     if (button)
     {
         button->Draw();

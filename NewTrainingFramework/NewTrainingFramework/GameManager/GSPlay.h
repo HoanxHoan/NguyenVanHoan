@@ -107,5 +107,15 @@ public:
 	float useitemdltime = 0.0f;
     int slot_count = 0;
     std::shared_ptr<TextRenderer> nameRenderer;
+    float timer;
+	std::shared_ptr<TextRenderer> timeRenderer;
+	std::shared_ptr<Object> panel;
+	std::shared_ptr<GameButton> button_play3;
+    float deadtimer;
+	bool lose = false;
+	std::shared_ptr<Object> label;
+    bool day;
+	float day_night_time;
+	std::shared_ptr<TextRenderer> TimeStateRenderer;
 };
 

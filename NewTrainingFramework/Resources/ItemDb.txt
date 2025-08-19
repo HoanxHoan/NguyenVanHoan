@@ -32,7 +32,7 @@
 		"catagory" : "pickaxe",
 		"icon_id" : 65,
 		"display_name" : "Stone Pickaxe",
-		"item_attack" : 1.5,
+		"item_attack" : 2.5,
 		"item_speed" : 1,
 		"mining_speed" : 1,
 		"stack_size" : 1
@@ -42,7 +42,7 @@
 		"catagory" : "sword",
 		"icon_id" : 66,
 		"display_name" : "Stone Sword",
-		"item_attack" : 2.5,
+		"item_attack" : 3.0,
 		"item_speed" : 1,
 		"stack_size" : 1
 	},
@@ -81,15 +81,15 @@
 		"type" : "food",
 		"catagory" : "meat",
 		"icon_id" : 61,
-		"energy" : 10,
+		"energy" : 15,
 		"display_name" : "Meat",
 		"stack_size" : 16
 	},
 "cherry": {
-		"type" : "food",
+		"type" : "potion",
 		"catagory" : "fruit",
 		"icon_id" : 102,
-		"energy" : 5,
+		"hp" : 5,
 		"display_name" : "Wooden Log",
 		"stack_size" : 16
 	},
@@ -118,7 +118,7 @@
 		"type" : "potion",
 		"catagory" : "healing",
 		"icon_id" : 106,
-		"hp" : 10,
+		"hp" : 20,
 		"display_name" : "Healing Potion",
 		"stack_size" : 16
 	},
@@ -126,7 +126,8 @@
 		"type" : "usable",
 		"catagory" : "summoner",
 		"icon_id" : 107,
-		"display_name" : "Oozeheart Orb"
+		"display_name" : "Oozeheart Orb",
+		"stack_size" : 1
 	},
 "green_gem": {
 		"type" : "material",
@@ -139,7 +140,8 @@
 		"type" : "usable",
 		"catagory" : "summoner",
 		"icon_id" : 109,
-		"display_name" : "Azure Sigil Stone"
+		"display_name" : "Azure Sigil Stone",
+		"stack_size" : 1
 	},
 "blue_gem": {
 		"type" : "material",
@@ -152,7 +154,8 @@
 		"type" : "usable",
 		"catagory" : "summoner",
 		"icon_id" : 111,
-		"display_name" : "Crimson Deathshard"
+		"display_name" : "Crimson Deathshard",
+		"stack_size" : 1
 	},
 "red_gem": {
 		"type" : "material",
@@ -165,13 +168,14 @@
 		"type" : "comsumable",
 		"catagory" : "summoner",
 		"icon_id" : 113,
-		"display_name" : "Wound of Reality"
+		"display_name" : "Wound of Reality",
+		"stack_size" : 1
 	},
 "bacon": {
 		"type" : "food",
 		"catagory" : "meat",
 		"icon_id" : 114,
-		"energy" : 15,
+		"energy" : 20,
 		"display_name" : "Bacon",
 		"stack_size" : 16
 	},

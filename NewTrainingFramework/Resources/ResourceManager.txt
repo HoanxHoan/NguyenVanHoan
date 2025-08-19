@@ -5,7 +5,7 @@
  FILE ../Resources/Models/Woman2.nfg
  ID 2
  FILE ../Resources/Models/Sprite2D.nfg
- #2DTexture 142
+ #2DTexture 144
  ID 0
  FILE ../Resources/Textures/Entities/Characters/Walk_Base/Walk_Side-Sheet.tga
  TILING GL_REPEAT
@@ -431,6 +431,12 @@
  TILING GL_CLAMP_TO_EDGE
  ID 141
  FILE ../Resources/Textures/Entities/Characters/Death_Base/Death_Down-Sheet.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 142
+ FILE ../Resources/Textures/UI/win_panel.tga
+ TILING GL_CLAMP_TO_EDGE
+ ID 143
+ FILE ../Resources/Textures/UI/died_label.tga
  TILING GL_CLAMP_TO_EDGE
  #Shader 3
  ID 0

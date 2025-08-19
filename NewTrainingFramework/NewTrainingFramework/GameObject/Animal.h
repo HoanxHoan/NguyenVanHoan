@@ -14,7 +14,7 @@ public:
     void Draw() override;
     void getObjectList(std::vector<std::shared_ptr<Object>>* others);
     void getwaterTiles(std::vector<int>& waterTiles);
-    void onHit();
+    void onHit(float damage);
     void endHit();
     void dead();
     int hp, type;
@@ -44,4 +44,5 @@ private:
     bool IsWaterTile(int xPixel, int yPixel);
     void ChooseNewAction();
     void PerformAction(GLfloat deltaTime);
+    float dame;
 };

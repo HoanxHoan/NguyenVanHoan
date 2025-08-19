@@ -43,9 +43,9 @@ void Enemy::Update(GLfloat deltaTime)
         this->Dead();
     }
     else if (dltime >= 0.6 && isHit == true) {
-        hp -= 1;
         //printf("%d\n", hp);
         this->endHit();
+        hp-=dame;
     }
     SpriteAnimation::Update(deltaTime);
 }
@@ -96,7 +96,7 @@ void Enemy::Draw()
 {
     SpriteAnimation::Draw();
 }
-void Enemy::onHit(int count) {
+void Enemy::onHit(int count, float damage) {
     if (hp >= 1 && !isBeingKnockedBack) {
         switch (count) {
         case 1: knockbackDirX = 0;  knockbackDirY = -1; break;
@@ -119,6 +119,7 @@ void Enemy::onHit(int count) {
         this->SetCurrentFrame(0);
         isHit = true;
         dltime = 0;
+        dame = damage;
     }
 }
 

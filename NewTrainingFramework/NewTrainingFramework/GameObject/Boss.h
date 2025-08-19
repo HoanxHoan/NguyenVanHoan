@@ -14,9 +14,10 @@ public:
     void Draw() override;
     void moveTo(float x, float y, float deltaTime);
     void Dead();
-    void onHit(int count);
+    void onHit(int count, float damage);
     void endHit();
     int hp, type;
+    float dame;
     //std::vector<std::shared_ptr<Object>>* others = nullptr;
     //void getObjectList(std::vector<std::shared_ptr<Object>>* Object);
 private:

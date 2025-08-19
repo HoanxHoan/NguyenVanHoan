@@ -43,9 +43,9 @@ void Boss::Update(GLfloat deltaTime)
         this->Dead();
     }
     else if (dltime >= 0.5 && isHit == true) {
-        hp -= 1;
         //printf("%d\n", hp);
         this->endHit();
+        hp -= dame;
     }
     SpriteAnimation::Update(deltaTime);
 }
@@ -98,7 +98,7 @@ void Boss::Draw()
 {
     SpriteAnimation::Draw();
 }
-void Boss::onHit(int count) {
+void Boss::onHit(int count, float damage) {
     if (hp >= 1 && !isBeingKnockedBack) {
         switch (count) {
         case 1: knockbackDirX = 0;  knockbackDirY = -1; break;
@@ -123,6 +123,7 @@ void Boss::onHit(int count) {
         this->SetCurrentFrame(0);
         isHit = true;
         dltime = 0;
+        dame = damage;
     }
 }
 

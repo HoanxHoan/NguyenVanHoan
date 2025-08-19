@@ -6,6 +6,9 @@
 #include "CraftingRecipeDB.h"
 
 
+
+bool win;
+
 std::shared_ptr<CraftingUI> GSPlay::m_craftingUI = nullptr;
 std::string GSPlay::m_recipeId = "";
 
@@ -77,6 +80,8 @@ GSPlay::GSPlay() {
     uidltime = 0.00f;
     action = 0;
     onhit = false;
+    timer = 0;
+	deadtimer = 0;
     Init();
 }
 GSPlay::~GSPlay() {
@@ -106,6 +111,12 @@ void GSPlay::HandleMouseClick(GLint x, GLint y, bool isClick)
     }
     if (inventory->IsVisible()){
         if (button_play2 && button_play2->HandleTouchEvents(x, y, isClick))
+        {
+            return;
+        }
+    }
+    if (win || lose) {
+        if (button_play3 && button_play3->HandleTouchEvents(x, y, isClick))
         {
             return;
         }
@@ -198,10 +209,16 @@ bool GSPlay::Init()
 	CraftingRecipeDB::GetInstance()->LoadFromFile("../Resources/RecipeDb.txt");
 	CraftingRecipeDB::GetInstance()->PrintAll();   
     doc.LoadFile("../Resources/Textures/Map.tmx");
-
-
+	win = false;
+	lose = false;
+	day_night_time = 0.0f;
+    day = true;
     nameRenderer = std::make_shared<TextRenderer>();
     nameRenderer->Init("../Resources/Fonts/arial.ttf", 25);
+    timeRenderer = std::make_shared<TextRenderer>();
+    timeRenderer->Init("../Resources/Fonts/arial.ttf", 50);
+    TimeStateRenderer = std::make_shared<TextRenderer>();
+    TimeStateRenderer->Init("../Resources/Fonts/arial.ttf", 25);
 
     auto mapNode = doc.FirstChildElement("map");
 
@@ -410,6 +427,17 @@ bool GSPlay::Init()
     i_objects.push_back(animal);
     envi_objects.push_back(animal);
     }
+
+    Texture* panelTex = ResourceManager::GetInstance()->GetTexture(142);
+    panel = std::make_shared<Object>(model, panelTex, btnShader);
+    panel->set2Dposition(P1->x, P1->y);
+    panel->setSize(70, 100);
+
+    Texture* labelTex = ResourceManager::GetInstance()->GetTexture(143);
+    label = std::make_shared<Object>(model, labelTex, btnShader);
+    label->set2Dposition(P1->x, P1->y);
+    label->setSize(100, 142);
+
 	Texture* inventoryTexture = ResourceManager::GetInstance()->GetTexture(34);
 	inventory = std::make_shared<Building>(model, shader, inventoryTexture, 1, 0, 1, 0, 0.1f);
 	inventory->SetPosition(Vector3(P1->x, P1->y, 0));
@@ -509,6 +537,17 @@ bool GSPlay::Init()
     button_play2->SetOnClick([]() {
         GameStateMachine::GetInstance()->PushState(std::make_unique<GSRecipe>());
         });
+
+    Texture* btnTexture3 = ResourceManager::GetInstance()->GetTexture(124);
+    button_play3 = std::make_shared<GameButton>(btnModel, btnTexture3, btnShader);
+    button_play3->set2Dposition(P1->x, P1->y+25);
+    button_play3->SetPosition(480, 450);
+    button_play3->SetSize(150, 75);
+    button_play3->setSize(40, 20);
+    button_play3->SetOnClick([]() {
+        GameStateMachine::GetInstance()->ChangeState(std::make_unique<GSMenu>());
+        });
+
     //enermy
     Texture* orgTexture = ResourceManager::GetInstance()->GetTexture(22);
     Texture* skeletonTexture = ResourceManager::GetInstance()->GetTexture(47);
@@ -539,7 +578,7 @@ bool GSPlay::Init()
     boss->type = 1;
     //boss->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
     boss->SetPosition(Vector3(-10, -10, 0));
-    boss->SetVisible(false);
+    //boss->SetVisible(false);
     boss->SetScale(Vector3(50, 50, 0));
     boss->setSize(70, 70);
     i_objects.push_back(boss);
@@ -550,7 +589,7 @@ bool GSPlay::Init()
     boss->type = 2;
     //boss->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
     boss->SetPosition(Vector3(-10, -10, 0));
-    boss->SetVisible(false);
+    //boss->SetVisible(false);
     boss->SetScale(Vector3(50, 50, 0));
     boss->setSize(70, 70);
     i_objects.push_back(boss);
@@ -561,7 +600,7 @@ bool GSPlay::Init()
     boss->type = 3;
     //boss->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
     boss->SetPosition(Vector3(-10, -10, 0));
-    boss->SetVisible(false);
+    //boss->SetVisible(false);
     boss->SetScale(Vector3(50, 50, 0));
     boss->setSize(80, 80);
     i_objects.push_back(boss);
@@ -614,9 +653,60 @@ void GSPlay::Resume()
     std::cout << "Play State Resume\n";
 }
 
+std::string FormatTime(float timeInSeconds) {
+    int totalSeconds = static_cast<int>(timeInSeconds);
+
+    int hours = totalSeconds / 3600;
+    int minutes = (totalSeconds % 3600) / 60;
+    int seconds = totalSeconds % 60;
+
+    auto pad = [](int n) {
+        return (n < 10 ? "0" : "") + std::to_string(n);
+        };
+
+    return pad(hours) + ":" + pad(minutes) + ":" + pad(seconds);
+}
+
 void GSPlay::Update(float deltaTime)
 {
-    if (P1->hp <= 0) { P1->Dead(); }
+    if (win) {
+        panel->set2Dposition(P1->x, P1->y);
+		button_play3->set2Dposition(P1->x, P1->y + 25);
+        for (auto& org : enermy_objects) {
+
+         if (auto env = dynamic_cast<Enemy*>(org.get())) {
+                    env->SetPosition(Vector3(-10,-10,0));
+         }
+            
+        }
+    }
+    if (P1->isDead) {
+		deadtimer += deltaTime;
+        onhit = true;
+        button_play3->set2Dposition(P1->x, P1->y + 35);
+        for (auto& org : enermy_objects) {
+            if (auto env = dynamic_cast<Enemy*>(org.get())) {
+                env->SetPosition(Vector3(-10, -10, 0));
+            }
+        }
+    }
+    if (!win && !lose) {
+        if (day_night_time >= 90.0f) {
+            day_night_time = 0.0f;
+            day = !day;
+        }
+        day_night_time += deltaTime;
+	}
+
+    if (deadtimer > 3) {
+		lose = true;
+	}
+
+    if (lose) {
+        label->set2Dposition(P1->x, P1->y - 25);
+    }
+
+    if (P1->hp <= 0&& !P1->isDead) { P1->Dead(); }
 	useitemdltime += deltaTime;
     if(useitemdltime >0.5f && useItem == true) {
         useItem = false;
@@ -643,7 +733,7 @@ void GSPlay::Update(float deltaTime)
     inventory->SetPosition(Vector3(P1->x + 25, P1->y+15, 0));
     onhitdltime += deltaTime;
 	uidltime += deltaTime;
-    if (onhit == true && onhitdltime > 1) {
+    if (onhit == true && onhitdltime > 1&& P1->hp>0) {
         onhit = false;
     }
     for (auto& slot : inventorySlots) {
@@ -747,7 +837,7 @@ void GSPlay::Update(float deltaTime)
             actiontime = 0;
         }
     }
-    if (action == 0) {
+    if (action == 0 && P1->hp > 0) {
         P1->Idle(count);
     }
 
@@ -790,164 +880,231 @@ void GSPlay::Update(float deltaTime)
     for (auto obj : i_bonfire) {
         obj->Update(deltaTime);
     }
-    if (keyState['W'] ) {
-        if (action == 0 ) {
-            isWalk = true;
-            hasCollision = false;
-            count = 1;
-            float newY = P1->y - movement_speed * deltaTime;
-            temp = *P1;
-            temp.y = newY;
+    if (!win && P1->hp > 0) {
 
-            for (size_t i = 0; i < envi_objects.size(); ++i) {
-                if (temp.CheckCollision(envi_objects[i].get())) {
-                    hasCollision = true;
-                    break;
-                }
-            }
-            if (!hasCollision || onhit == true) {
-                P1->MoveUp(newY, IsWaterTile(P1->x, newY));
-            }
-        }
-    }
-    if (keyState['D']) {
-        if (action == 0 ) {
-            isWalk = true;
-            hasCollision = false;
-            count = 2;
-            float newX = P1->x + movement_speed * deltaTime;
-            temp = *P1;
-            temp.x = newX;
+        timer += deltaTime;
+        if (keyState['W']) {
+            if (action == 0) {
+                isWalk = true;
+                hasCollision = false;
+                count = 1;
+                float newY = P1->y - movement_speed * deltaTime;
+                temp = *P1;
+                temp.y = newY;
 
-            for (size_t i = 0; i < envi_objects.size(); ++i) {
-                if (temp.CheckCollision(envi_objects[i].get())) {
-                    hasCollision = true;
-                    break;
-                }
-            }
-            if (!hasCollision || onhit == true) {
-                P1->MoveRight(newX, IsWaterTile(newX, P1->y));
-            }
-        }
-    }
-    if (keyState['A'] ) {
-        if (action == 0 ) {
-            isWalk = true;
-            hasCollision = false;
-            count = 4;
-            float newX = P1->x - movement_speed * deltaTime;
-            temp = *P1;
-            temp.x = newX;
-
-            for (size_t i = 0; i < envi_objects.size(); ++i) {
-                if (temp.CheckCollision(envi_objects[i].get())) {
-                    hasCollision = true;
-                    break;
-                }
-            }
-            if (!hasCollision || onhit == true) {
-                P1->MoveLeft(newX, IsWaterTile(newX, P1->y));
-            }
-        }
-    }
-    if (keyState['S'] ) {
-        if (action == 0) {
-            isWalk = true;
-            hasCollision = false;
-            count = 3;
-            float newY = P1->y + movement_speed * deltaTime;
-            temp.y = newY;
-
-            for (size_t i = 0; i < envi_objects.size(); ++i) {
-                if (temp.CheckCollision(envi_objects[i].get())) {
-                    hasCollision = true;
-                    break;
-                }
-            }
-            if (!hasCollision || onhit == true) {
-                P1->MoveDown(newY, IsWaterTile(P1->x, newY));
-            }
-        }
-    }
-    if (keyState['J'] )
-    {   
-        if (Slot::GetCurrentSlot()->HasItem()) {
-            if (P1->mp <= 0) { return; }
-            if (Slot::GetCurrentSlot()->GetItem()->m_category == "pickaxe") {
-                P1->Crush(action, count);
-                action = 1;
-                for (auto& obj : envi_objects) {
-                    if (P1->GetHitbox(count)->CheckCollisionStone(obj.get()))
-                    {
-                        if (auto env = dynamic_cast<Stone*>(obj.get())) {
-                            env->Crush();
-                        }
+                for (size_t i = 0; i < envi_objects.size(); ++i) {
+                    if (temp.CheckCollision(envi_objects[i].get())) {
+                        hasCollision = true;
+                        break;
                     }
                 }
+                if (!hasCollision || onhit == true) {
+                    P1->MoveUp(newY, IsWaterTile(P1->x, newY));
+                }
             }
-            else if (Slot::GetCurrentSlot()->GetItem()->m_category == "axe") {
-                if (P1->mp <= 0) { return; }
-                P1->Slice(action, count);
-                action = 1;
-                for (auto& obj : envi_objects) {
-                    if (auto env = dynamic_cast<Tree*>(obj.get())) {
-                        if (P1->GetHitbox(count)->CheckCollisionTree(obj.get()))
+        }
+        if (keyState['D']) {
+            if (action == 0) {
+                isWalk = true;
+                hasCollision = false;
+                count = 2;
+                float newX = P1->x + movement_speed * deltaTime;
+                temp = *P1;
+                temp.x = newX;
+
+                for (size_t i = 0; i < envi_objects.size(); ++i) {
+                    if (temp.CheckCollision(envi_objects[i].get())) {
+                        hasCollision = true;
+                        break;
+                    }
+                }
+                if (!hasCollision || onhit == true) {
+                    P1->MoveRight(newX, IsWaterTile(newX, P1->y));
+                }
+            }
+        }
+        if (keyState['A']) {
+            if (action == 0) {
+                isWalk = true;
+                hasCollision = false;
+                count = 4;
+                float newX = P1->x - movement_speed * deltaTime;
+                temp = *P1;
+                temp.x = newX;
+
+                for (size_t i = 0; i < envi_objects.size(); ++i) {
+                    if (temp.CheckCollision(envi_objects[i].get())) {
+                        hasCollision = true;
+                        break;
+                    }
+                }
+                if (!hasCollision || onhit == true) {
+                    P1->MoveLeft(newX, IsWaterTile(newX, P1->y));
+                }
+            }
+        }
+        if (keyState['S']) {
+            if (action == 0) {
+                isWalk = true;
+                hasCollision = false;
+                count = 3;
+                float newY = P1->y + movement_speed * deltaTime;
+                temp.y = newY;
+
+                for (size_t i = 0; i < envi_objects.size(); ++i) {
+                    if (temp.CheckCollision(envi_objects[i].get())) {
+                        hasCollision = true;
+                        break;
+                    }
+                }
+                if (!hasCollision || onhit == true) {
+                    P1->MoveDown(newY, IsWaterTile(P1->x, newY));
+                }
+            }
+        }
+        if (keyState['J'])
+        {
+            if (Slot::GetCurrentSlot()->HasItem()) {
+                
+                if (Slot::GetCurrentSlot()->GetItem()->m_category == "pickaxe" && P1->mp > 0) {
+                    P1->Crush(action, count);
+                    action = 1;
+                    for (auto& obj : envi_objects) {
+                        if (P1->GetHitbox(count)->CheckCollisionStone(obj.get()))
                         {
-                            env->CutTree(2);
+                            if (auto env = dynamic_cast<Stone*>(obj.get())) {
+                                env->Crush();
+                            }
                         }
                     }
-                    if (auto env = dynamic_cast<Bush*>(obj.get())) {
-                        if (P1->GetHitbox(count)->CheckCollision(obj.get()))
+                    for (auto& obj : envi_objects) {
+                        if (auto env = dynamic_cast<Animal*>(obj.get())) {
+                            if (P1->GetHitbox(count)->CheckCollision(obj.get()))
+                            {
+                                env->onHit((Slot::GetCurrentSlot()->GetItem()->m_damage));
+                            }
+                        }
+                    }
+                    for (auto& org : enermy_objects) {
+                        if (P1->GetHitbox(count)->CheckCollisionEnermy(org.get()))
                         {
-                            env->Cut();
+                            if (auto env = dynamic_cast<Enemy*>(org.get())) {
+                                env->onHit(count, Slot::GetCurrentSlot()->GetItem()->m_damage);
+                            }
                         }
                     }
-                }
-            }
-            else if (Slot::GetCurrentSlot()->GetItem()->m_category == "sword") {
-                if (P1->mp <= 0) { return; }
-                P1->Pierce(action, count);
-                action = 1;
-                for (auto& obj : envi_objects) {
-                    if (auto env = dynamic_cast<Animal*>(obj.get())) {
-                        if (P1->GetHitbox(count)->CheckCollision(obj.get()))
+                    for (auto& org : Boss_objects) {
+                        if (P1->GetHitbox(count)->CheckCollisionEnermy(org.get()))
                         {
-                            env->onHit();
+                            if (auto env = dynamic_cast<Boss*>(org.get())) {
+                                env->onHit(count, Slot::GetCurrentSlot()->GetItem()->m_damage);
+                            }
                         }
                     }
                 }
-                for (auto& org : enermy_objects) {
-                    if (P1->GetHitbox(count)->CheckCollisionEnermy(org.get()))
-                    {
-                        if (auto env = dynamic_cast<Enemy*>(org.get())) {
-                            env->onHit(count);
+                else if (Slot::GetCurrentSlot()->GetItem()->m_category == "axe" && P1->mp > 0) {
+                    if (P1->mp <= 0) { return; }
+                    P1->Slice(action, count);
+                    action = 1;
+                    for (auto& obj : envi_objects) {
+                        if (auto env = dynamic_cast<Tree*>(obj.get())) {
+                            if (P1->GetHitbox(count)->CheckCollisionTree(obj.get()))
+                            {
+                                env->CutTree(Slot::GetCurrentSlot()->GetItem()->m_damage);
+                            }
+                        }
+                        if (auto env = dynamic_cast<Bush*>(obj.get())) {
+                            if (P1->GetHitbox(count)->CheckCollision(obj.get()))
+                            {
+                                env->Cut();
+                            }
+                        }
+                    }
+                    for (auto& obj : envi_objects) {
+                        if (auto env = dynamic_cast<Animal*>(obj.get())) {
+                            if (P1->GetHitbox(count)->CheckCollision(obj.get()))
+                            {
+                                env->onHit((Slot::GetCurrentSlot()->GetItem()->m_damage));
+                            }
+                        }
+                    }
+                    for (auto& org : enermy_objects) {
+                        if (P1->GetHitbox(count)->CheckCollisionEnermy(org.get()))
+                        {
+                            if (auto env = dynamic_cast<Enemy*>(org.get())) {
+                                env->onHit(count, Slot::GetCurrentSlot()->GetItem()->m_damage);
+                            }
+                        }
+                    }
+                    for (auto& org : Boss_objects) {
+                        if (P1->GetHitbox(count)->CheckCollisionEnermy(org.get()))
+                        {
+                            if (auto env = dynamic_cast<Boss*>(org.get())) {
+                                env->onHit(count, Slot::GetCurrentSlot()->GetItem()->m_damage);
+                            }
                         }
                     }
                 }
-                for (auto& org : Boss_objects) {
-                    if (P1->GetHitbox(count)->CheckCollisionEnermy(org.get()))
-                    {
-                        if (auto env = dynamic_cast<Boss*>(org.get())) {
-                            env->onHit(count);
+                else if (Slot::GetCurrentSlot()->GetItem()->m_category == "sword" && P1->mp > 0) {
+                    if (P1->mp <= 0) { return; }
+                    P1->Pierce(action, count);
+                    action = 1;
+                    for (auto& obj : envi_objects) {
+                        if (auto env = dynamic_cast<Animal*>(obj.get())) {
+                            if (P1->GetHitbox(count)->CheckCollision(obj.get()))
+                            {
+                                env->onHit((Slot::GetCurrentSlot()->GetItem()->m_damage));
+                            }
+                        }
+                    }
+                    for (auto& org : enermy_objects) {
+                        if (P1->GetHitbox(count)->CheckCollisionEnermy(org.get()))
+                        {
+                            if (auto env = dynamic_cast<Enemy*>(org.get())) {
+                                env->onHit(count, Slot::GetCurrentSlot()->GetItem()->m_damage);
+                            }
+                        }
+                    }
+                    for (auto& org : Boss_objects) {
+                        if (P1->GetHitbox(count)->CheckCollisionEnermy(org.get()))
+                        {
+                            if (auto env = dynamic_cast<Boss*>(org.get())) {
+                                env->onHit(count, Slot::GetCurrentSlot()->GetItem()->m_damage);
+                            }
                         }
                     }
                 }
-            }
-            else if (Slot::GetCurrentSlot()->GetItem()->m_type == "food" && useItem == false) {
-				printf("Energy: %f\n", Slot::GetCurrentSlot()->GetItem()->m_energy);
-				P1->mp += Slot::GetCurrentSlot()->GetItem()->m_energy;
-                PlayerInventory::GetInstance()->RemoveItemByIdHotbar(Slot::GetCurrentSlot()->GetItem()->m_id, 1);
-				useItem = true;
-				useitemdltime = 0.0f;
+                else if (Slot::GetCurrentSlot()->GetItem()->m_type == "food" && useItem == false) {
+                    printf("Energy: %f\n", Slot::GetCurrentSlot()->GetItem()->m_energy);
+                    P1->mp += Slot::GetCurrentSlot()->GetItem()->m_energy;
+                    PlayerInventory::GetInstance()->RemoveItemByIdHotbar(Slot::GetCurrentSlot()->GetItem()->m_id, 1);
+                    useItem = true;
+                    useitemdltime = 0.0f;
+
+                }
+                else if (Slot::GetCurrentSlot()->GetItem()->m_type == "potion" && useItem == false) {
+                    printf("Energy: %f\n", Slot::GetCurrentSlot()->GetItem()->m_hp);
+                    P1->hp += Slot::GetCurrentSlot()->GetItem()->m_hp;
+                    PlayerInventory::GetInstance()->RemoveItemByIdHotbar(Slot::GetCurrentSlot()->GetItem()->m_id, 1);
+                    useItem = true;
+                    useitemdltime = 0.0f;
+
+                }
+                else if (Slot::GetCurrentSlot()->GetItem()->m_type == "comsumable" && useItem == false) {
+                    win = true;
+                    PlayerInventory::GetInstance()->RemoveItemByIdHotbar(Slot::GetCurrentSlot()->GetItem()->m_id, 1);
+                    useItem = true;
+                    useitemdltime = 0.0f;
+                }
             }
         }
-    }
 
-    if (keyState['E'])
-    {
-        if (uidltime >= 0.2f) {
-            uidltime = 0.0f;
-            inventory->SetVisible(!inventory->IsVisible());
+        if (keyState['E'])
+        {
+            if (uidltime >= 0.2f) {
+                uidltime = 0.0f;
+                inventory->SetVisible(!inventory->IsVisible());
+            }
         }
     }
     if (keyState['Q'])
@@ -1031,5 +1188,27 @@ void GSPlay::Draw()
     }
     button_play->Draw();
     button_play2->Draw();
+
+    if (day) {
+		TimeStateRenderer->RenderText("Day", 30, 700, 0.5f, Vector3(1.0f, 1.0f, 1.0f));
+    }
+    else {
+        TimeStateRenderer->RenderText("Night", 30, 700, 0.5f, Vector3(1.0f, 1.0f, 1.0f));
+    }
+
+    if (win || lose) {
+        if (win) {
+            panel->Draw();
+            timeRenderer->RenderText("Time: " + FormatTime(timer), 400, 320, 0.5f, Vector3(1.0f, 1.0f, 1.0f));
+        }
+        if (lose) {
+			label->Draw();
+        }
+        button_play3->Draw();
+    }
+
+
+
 }
+
 

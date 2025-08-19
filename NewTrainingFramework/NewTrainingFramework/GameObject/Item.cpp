@@ -40,8 +40,13 @@ void Item::LoadItem(const std::string& id)
     if (m_type == "food") {
         m_energy = std::stoi(data["energy"]);
     }
+    else if (m_type == "tools") {
+        m_damage = std::stof(data["item_attack"]);
+    }
+    else if (m_type == "potion") {
+        m_hp = std::stoi(data["hp"]);
+    }
     m_stackSize = std::stoi(data["stack_size"]);
-    
     try {
         m_iconId = std::stoi(data["icon_id"]);
     }

@@ -45,8 +45,9 @@ public:
     int mapHeight;
     int tileWidth;
     int tileHeight;
-
+	bool isDead = false;
     int mapPixelWidth;
     int mapPixelHeight;
+	bool regening = false;
 };
 
