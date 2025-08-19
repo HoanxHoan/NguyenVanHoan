@@ -10,6 +10,7 @@ Enemy::Enemy(Model* model, Shaders* shader, Texture* texture,
     deaddltime = 0;
     death = false;
     isHit = false;
+    spawn = false;
 }
 void Enemy::getObjectList(std::vector<std::shared_ptr<Object>>* O) {
     others = O;
@@ -50,7 +51,7 @@ void Enemy::Update(GLfloat deltaTime)
     SpriteAnimation::Update(deltaTime);
 }
 void Enemy::moveTo(float px, float py, float deltaTime) {
-    if (death == true||isHit==true) { return; }
+    if (death == true||isHit==true|| spawn==false|| isdead) { return; }
     this->SetNumFrames(6);
 
     if (type == 1) {
@@ -80,13 +81,13 @@ void Enemy::moveTo(float px, float py, float deltaTime) {
     temp.set2Dposition(newX, newY);
     temp.setSize(this->width, this->height);
 
-    if (others) {
-        for (auto& obj : *others) {
-            if (obj.get() != this && temp.CheckCollision(obj.get())) {
-                return; 
-            }
-        }
-    }
+    //if (others) {
+    //    for (auto& obj : *others) {
+    //        if (obj.get() != this && temp.CheckCollision(obj.get())) {
+    //            return; 
+    //        }
+    //    }
+    //}
     this->x = newX;
     this->y = newY;
     this->SetPosition(Vector3(x, y, 0));
@@ -146,6 +147,19 @@ void Enemy::Dead()
     if (type == 2) {
         this->SetTexture(ResourceManager::GetInstance()->GetTexture(49));
         PlayerInventory::GetInstance()->AddItem("bone", 2);
+    }
+    this->SetNumFrames(6);
+    this->SetCurrentFrame(0);
+    death = true;
+    deaddltime = 0;
+}
+void Enemy::DeadnoItem()
+{
+    if (type == 1) {
+        this->SetTexture(ResourceManager::GetInstance()->GetTexture(26));
+    }
+    if (type == 2) {
+        this->SetTexture(ResourceManager::GetInstance()->GetTexture(49));
     }
     this->SetNumFrames(6);
     this->SetCurrentFrame(0);

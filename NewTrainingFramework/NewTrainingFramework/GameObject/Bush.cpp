@@ -50,7 +50,7 @@ void Bush::Update(GLfloat deltaTime)
 {
     dltime += deltaTime;
     Hpdltime += deltaTime;
-    if (Hpdltime >= 0.5 && icut) {
+    if (Hpdltime >= 0.1 && icut) {
         this->Cutted();
         icut = false;
     }

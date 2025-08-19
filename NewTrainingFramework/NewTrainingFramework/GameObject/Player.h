@@ -20,7 +20,7 @@ public:
     void Slice(int action, int count);
     void Pierce(int action, int count);
     void Dead();
-    void onHit(int count,float x,float y);
+    void onHit(int count,float x,float y,int dame);
     Object* GetHitbox(int count);
     ///void SetMapBoundary(float maxX, float maxY);
     bool IsWaterTile(int xPixel, int yPixel);

@@ -117,5 +117,7 @@ public:
     bool day;
 	float day_night_time;
 	std::shared_ptr<TextRenderer> TimeStateRenderer;
+    float spawntime;
+    
 };
 

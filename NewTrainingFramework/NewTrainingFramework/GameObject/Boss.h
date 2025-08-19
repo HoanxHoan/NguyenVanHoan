@@ -16,8 +16,9 @@ public:
     void Dead();
     void onHit(int count, float damage);
     void endHit();
-    int hp, type;
+    int hp, type,atk;
     float dame;
+    bool spawn;
     //std::vector<std::shared_ptr<Object>>* others = nullptr;
     //void getObjectList(std::vector<std::shared_ptr<Object>>* Object);
 private:

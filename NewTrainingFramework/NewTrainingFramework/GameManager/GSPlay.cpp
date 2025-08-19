@@ -213,6 +213,7 @@ bool GSPlay::Init()
 	lose = false;
 	day_night_time = 0.0f;
     day = true;
+	spawntime = 0.0f;
     nameRenderer = std::make_shared<TextRenderer>();
     nameRenderer->Init("../Resources/Fonts/arial.ttf", 25);
     timeRenderer = std::make_shared<TextRenderer>();
@@ -554,7 +555,7 @@ bool GSPlay::Init()
     for (int i = 0; i < 10; ++i) {
         org = std::make_shared<Enemy>(model, shader, orgTexture, 6, 0, 1, 0, 0.1f);
         org->type = 1;
-        org->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
+        //org->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
         org->SetScale(Vector3(15, 20, 0));
         org->setSize(30, 40);
         org->getObjectList(&i_objects);
@@ -565,7 +566,7 @@ bool GSPlay::Init()
     for (int i = 0; i < 10; ++i) {
         org = std::make_shared<Enemy>(model, shader, skeletonTexture, 6, 0, 1, 0, 0.1f);
         org->type = 2;
-        org->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
+        //org->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
         org->SetScale(Vector3(15, 20, 0));
         org->setSize(30, 40);
         org->getObjectList(&i_objects);
@@ -576,6 +577,8 @@ bool GSPlay::Init()
     Texture* SlimeTexture = ResourceManager::GetInstance()->GetTexture(50);
     boss = std::make_shared<Boss>(model, shader, SlimeTexture, 8, 0, 1, 0, 0.1f);
     boss->type = 1;
+    boss->hp = 25;
+    boss->atk = 10;
     //boss->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
     boss->SetPosition(Vector3(-10, -10, 0));
     //boss->SetVisible(false);
@@ -587,6 +590,8 @@ bool GSPlay::Init()
     Texture* necroTexture = ResourceManager::GetInstance()->GetTexture(56);
     boss = std::make_shared<Boss>(model, shader, necroTexture, 8, 0, 1, 0, 0.1f);
     boss->type = 2;
+    boss->hp = 60;
+    boss->atk = 15;
     //boss->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
     boss->SetPosition(Vector3(-10, -10, 0));
     //boss->SetVisible(false);
@@ -598,6 +603,8 @@ bool GSPlay::Init()
     Texture* StonegiTexture = ResourceManager::GetInstance()->GetTexture(56);
     boss = std::make_shared<Boss>(model, shader, StonegiTexture, 8, 0, 1, 0, 0.1f);
     boss->type = 3;
+    boss->hp = 40;
+    boss->atk = 10;
     //boss->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
     boss->SetPosition(Vector3(-10, -10, 0));
     //boss->SetVisible(false);
@@ -667,10 +674,51 @@ std::string FormatTime(float timeInSeconds) {
     return pad(hours) + ":" + pad(minutes) + ":" + pad(seconds);
 }
 
+float randf_range(float min, float max) {
+    return min + (max - min) * (static_cast<float>(rand()) / RAND_MAX);
+}
+
+Vector3 get_random_position(Vector3 global_position) {
+    float spawn_radius = 960/7;
+    float angle = randf_range(0.0f, 2.0f * M_PI);
+
+    float x_spawn = global_position.x + std::cos(angle) * spawn_radius;
+    float y_spawn = global_position.y + std::sin(angle) * spawn_radius;
+
+    return Vector3(x_spawn, y_spawn, 0);
+}
+
 void GSPlay::Update(float deltaTime)
 {
+    if (!day) {
+		spawntime += deltaTime;
+        for (auto& org : enermy_objects) {
+            
+            if (auto env = dynamic_cast<Enemy*>(org.get())) {
+                if (env->spawn == false && spawntime > randf_range(2.0, 4.0)) { 
+                    env->spawn = true;
+                    env->isdead = false;
+                    env->SetPosition(get_random_position(Vector3(P1->x, P1->y, 0)));
+					spawntime = 0.0f;
+                }
+            }
+        }
+    }
+    else {
+            for (auto& org : enermy_objects) {
+                if (auto env = dynamic_cast<Enemy*>(org.get())) {
+                    if (!env->isdead) {
+                        env->spawn = false;
+                        env->DeadnoItem();
+                        env->isdead = true;
+                    }
+                }
+            }
+        
+    }
     if (win) {
         panel->set2Dposition(P1->x, P1->y);
+        inventory->SetVisible(false);
 		button_play3->set2Dposition(P1->x, P1->y + 25);
         for (auto& org : enermy_objects) {
 
@@ -681,6 +729,7 @@ void GSPlay::Update(float deltaTime)
         }
     }
     if (P1->isDead) {
+        inventory->SetVisible(false);
 		deadtimer += deltaTime;
         onhit = true;
         button_play3->set2Dposition(P1->x, P1->y + 35);
@@ -860,7 +909,7 @@ void GSPlay::Update(float deltaTime)
         if (auto env = dynamic_cast<Enemy*>(obj.get())) {
             env->moveTo(P1->x,P1->y, deltaTime);
             if (P1->CheckCollision(env) && onhit==false) {
-                P1->onHit(count, env->x, env->y);
+                P1->onHit(count, env->x, env->y,5);
                 SoundManager::GetInstance()->PlaySoundnoLoop("onhit");
                 onhit = true;
                 onhitdltime = 0;
@@ -869,7 +918,7 @@ void GSPlay::Update(float deltaTime)
         if (auto env = dynamic_cast<Boss*>(obj.get())) {
             env->moveTo(P1->x, P1->y, deltaTime);
             if (P1->CheckCollision(env) && onhit == false) {
-                P1->onHit(count, env->x, env->y);
+                P1->onHit(count, env->x, env->y,env->atk);
                 SoundManager::GetInstance()->PlaySoundnoLoop("onhit");
                 onhit = true;
                 onhitdltime = 0;
@@ -1095,6 +1144,50 @@ void GSPlay::Update(float deltaTime)
                     PlayerInventory::GetInstance()->RemoveItemByIdHotbar(Slot::GetCurrentSlot()->GetItem()->m_id, 1);
                     useItem = true;
                     useitemdltime = 0.0f;
+                }
+                else if (Slot::GetCurrentSlot()->GetItem()->m_type == "usable" && useItem == false) {
+                    if (Slot::GetCurrentSlot()->GetItem()->m_id == "slime_summoner") {
+                        for (auto& boss : Boss_objects) {
+
+                            if (auto env = dynamic_cast<Boss*>(boss.get())) {
+                                if (env->spawn == false && env->type ==1) {
+                                    env->spawn = true;
+                                    env->SetPosition(get_random_position(Vector3(P1->x, P1->y, 0)));
+                                }
+                            }
+                        }
+                        PlayerInventory::GetInstance()->RemoveItemByIdHotbar(Slot::GetCurrentSlot()->GetItem()->m_id, 1);
+                        useItem = true;
+                        useitemdltime = 0.0f;
+                    }
+                    else if (Slot::GetCurrentSlot()->GetItem()->m_id == "golem_summoner") {
+                        for (auto& boss : Boss_objects) {
+
+                            if (auto env = dynamic_cast<Boss*>(boss.get())) {
+                                if (env->spawn == false && env->type == 3) {
+                                    env->spawn = true;
+                                    env->SetPosition(get_random_position(Vector3(P1->x, P1->y, 0)));
+                                }
+                            }
+                        }
+                        PlayerInventory::GetInstance()->RemoveItemByIdHotbar(Slot::GetCurrentSlot()->GetItem()->m_id, 1);
+                        useItem = true;
+                        useitemdltime = 0.0f;
+                    }
+                    else if (Slot::GetCurrentSlot()->GetItem()->m_id == "death_summoner") {
+                        for (auto& boss : Boss_objects) {
+
+                            if (auto env = dynamic_cast<Boss*>(boss.get())) {
+                                if (env->spawn == false && env->type == 2) {
+                                    env->spawn = true;
+                                    env->SetPosition(get_random_position(Vector3(P1->x, P1->y, 0)));
+                                }
+                            }
+                        }
+                        PlayerInventory::GetInstance()->RemoveItemByIdHotbar(Slot::GetCurrentSlot()->GetItem()->m_id, 1);
+                        useItem = true;
+                        useitemdltime = 0.0f;
+                    }
                 }
             }
         }

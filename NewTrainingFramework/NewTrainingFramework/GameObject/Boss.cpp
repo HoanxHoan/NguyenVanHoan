@@ -10,6 +10,7 @@ Boss::Boss(Model* model, Shaders* shader, Texture* texture,
     deaddltime = 0;
     death = false;
     isHit = false;
+    spawn = false;
 }
 //void Boss::getObjectList(std::vector<std::shared_ptr<Object>>* O) {
 //    others = O;
@@ -50,7 +51,7 @@ void Boss::Update(GLfloat deltaTime)
     SpriteAnimation::Update(deltaTime);
 }
 void Boss::moveTo(float px, float py, float deltaTime) {
-    if (death == true || isHit == true) { return; }
+    if (death == true || isHit == true|| spawn == false) { return; }
     this->SetNumFrames(8);
     if (type == 1) {
         this->SetTexture(ResourceManager::GetInstance()->GetTexture(50));

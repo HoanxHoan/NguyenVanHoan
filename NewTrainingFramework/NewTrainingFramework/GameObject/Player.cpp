@@ -214,7 +214,7 @@ void Player::Dead() {
     this->SetCurrentFrame(0);
 	isDead = true;
 }
-void Player::onHit(int count,float ex, float ey) {
+void Player::onHit(int count, float ex, float ey, int dame) {
     float dx = this->x - ex;
     float dy = this->y - ey;
     float len = sqrt(dx * dx + dy * dy);
@@ -266,7 +266,7 @@ void Player::onHit(int count,float ex, float ey) {
         this->SetCurrentFrame(0);
         onhit = true;
         hitdltime = 0;
-        hp -= 5;
+        hp -= dame;
 }
 Object* Player::GetHitbox(int count) {
     switch (count) {
