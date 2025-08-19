@@ -38,7 +38,7 @@ void Boss::Update(GLfloat deltaTime)
     deaddltime += deltaTime;
     if (deaddltime >= 0.8 && death == true) {
         this->SetVisible(false);
-        this->set2Dposition(-10, -10);
+        this->SetPosition(Vector3( - 10, -10,0));
     }
     else if (hp <= 0 && death == false) {
         this->Dead();
@@ -170,4 +170,5 @@ void Boss::Dead()
     this->SetCurrentFrame(0);
     death = true;
     deaddltime = 0;
+    spawn = false;
 }

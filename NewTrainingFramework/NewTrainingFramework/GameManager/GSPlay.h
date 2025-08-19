@@ -118,6 +118,6 @@ public:
 	float day_night_time;
 	std::shared_ptr<TextRenderer> TimeStateRenderer;
     float spawntime;
-    
+    bool bossing;
 };
 

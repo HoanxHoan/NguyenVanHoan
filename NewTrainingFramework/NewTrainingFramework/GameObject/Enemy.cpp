@@ -37,8 +37,8 @@ void Enemy::Update(GLfloat deltaTime)
     dltime += deltaTime;
     deaddltime += deltaTime;
     if (deaddltime >= 0.3 && death == true) {
-        this->SetVisible(false);
-        this->set2Dposition(-10, -10);
+		this->SetPosition(Vector3(-10, -10, 0));
+        //this->set2Dposition(-10, -10);
     }
     else if (hp < 1 && death == false) {
         this->Dead();
@@ -152,6 +152,7 @@ void Enemy::Dead()
     this->SetCurrentFrame(0);
     death = true;
     deaddltime = 0;
+	spawn = false;
 }
 void Enemy::DeadnoItem()
 {

@@ -82,6 +82,7 @@ GSPlay::GSPlay() {
     onhit = false;
     timer = 0;
 	deadtimer = 0;
+    bossing = false;
     Init();
 }
 GSPlay::~GSPlay() {
@@ -690,7 +691,8 @@ Vector3 get_random_position(Vector3 global_position) {
 
 void GSPlay::Update(float deltaTime)
 {
-    if (!day) {
+
+    if (!day||bossing) {
 		spawntime += deltaTime;
         for (auto& org : enermy_objects) {
             
@@ -698,13 +700,17 @@ void GSPlay::Update(float deltaTime)
                 if (env->spawn == false && spawntime > randf_range(2.0, 4.0)) { 
                     env->spawn = true;
                     env->isdead = false;
+                    env->death = false;
+                    env->hp = 5;
+                    env->deaddltime = 0;
+                    env->dltime = 0;
                     env->SetPosition(get_random_position(Vector3(P1->x, P1->y, 0)));
 					spawntime = 0.0f;
                 }
             }
         }
     }
-    else {
+    else if(day && !bossing){
             for (auto& org : enermy_objects) {
                 if (auto env = dynamic_cast<Enemy*>(org.get())) {
                     if (!env->isdead) {
@@ -715,6 +721,15 @@ void GSPlay::Update(float deltaTime)
                 }
             }
         
+    }
+    if (bossing) {
+        for (auto& boss : Boss_objects) {
+            if (auto env = dynamic_cast<Boss*>(boss.get())) {
+                if (env->spawn == true) {
+                    break;
+                }else bossing = false;
+            }
+        }
     }
     if (win) {
         panel->set2Dposition(P1->x, P1->y);
@@ -740,7 +755,7 @@ void GSPlay::Update(float deltaTime)
         }
     }
     if (!win && !lose) {
-        if (day_night_time >= 90.0f) {
+        if (day_night_time >= 10.0f) {
             day_night_time = 0.0f;
             day = !day;
         }
@@ -1146,6 +1161,7 @@ void GSPlay::Update(float deltaTime)
                     useitemdltime = 0.0f;
                 }
                 else if (Slot::GetCurrentSlot()->GetItem()->m_type == "usable" && useItem == false) {
+                    bossing = true;
                     if (Slot::GetCurrentSlot()->GetItem()->m_id == "slime_summoner") {
                         for (auto& boss : Boss_objects) {
 

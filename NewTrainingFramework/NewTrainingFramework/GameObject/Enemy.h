@@ -19,13 +19,13 @@ public:
     void endHit();
     int hp, type;
     float dame;
-    bool spawn;
+    bool spawn,death;
+    float dltime, deaddltime;
     std::vector<std::shared_ptr<Object>>* others = nullptr;
     void getObjectList(std::vector<std::shared_ptr<Object>>* Object);
     bool isdead;
 private:
-    float dltime, deaddltime;
-    bool death, isHit;
+    bool  isHit;
     bool isBeingKnockedBack = false;
     float knockbackTime = 0.0f;
     float knockbackDuration = 0.1f;
