@@ -755,7 +755,7 @@ void GSPlay::Update(float deltaTime)
         }
     }
     if (!win && !lose) {
-        if (day_night_time >= 10.0f) {
+        if (day_night_time >= 90.0f) {
             day_night_time = 0.0f;
             day = !day;
         }
