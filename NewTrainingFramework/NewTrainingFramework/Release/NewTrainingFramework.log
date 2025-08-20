@@ -1,12 +1,4 @@
-﻿  stdafx.cpp
-  Camera.cpp
-  CraftingRecipeDB.cpp
-  GameStateMachine.cpp
-  GSIntro.cpp
-  GSMenu.cpp
-  GSOption.cpp
-  GSPause.cpp
-  GSPlay.cpp
+﻿  GSPlay.cpp
 C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\GSPlay.cpp(27,17): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
 C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\GSPlay.cpp(28,17): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
 C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\GSPlay.cpp(30,29): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
@@ -38,230 +30,22 @@ C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\Game
 C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\GSPlay.cpp(496,38): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
 C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\GSPlay.cpp(500,39): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
 C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\GSPlay.cpp(684,42): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\GSPlay.cpp(845,33): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\GSPlay.cpp(846,33): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\GSPlay.cpp(912,67): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\GSPlay.cpp(966,57): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\GSPlay.cpp(966,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\GSPlay.cpp(986,61): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\GSPlay.cpp(986,53): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\GSPlay.cpp(1006,60): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\GSPlay.cpp(1006,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\GSPlay.cpp(1025,59): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\GSPlay.cpp(1025,54): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\GSPlay.cpp(1142,28): warning C4477: 'printf' : format string '%f' requires an argument of type 'double', but variadic argument 1 has type 'int'
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\GSPlay.cpp(1150,28): warning C4477: 'printf' : format string '%f' requires an argument of type 'double', but variadic argument 1 has type 'int'
-  GSRecipe.cpp
-  GSTutorial.cpp
-  ItemDb.cpp
-  PlayerInventory.cpp
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\PlayerInventory.cpp(266,19): warning C4018: '<': signed/unsigned mismatch
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\PlayerInventory.cpp(275,19): warning C4018: '<': signed/unsigned mismatch
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\PlayerInventory.cpp(283,23): warning C4018: '<': signed/unsigned mismatch
-  ResourceManager.cpp
-  Scene.cpp
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\Scene.cpp(144,23): warning C4018: '<': signed/unsigned mismatch
-  Animal.cpp
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Animal.cpp(26,29): warning C4018: '<': signed/unsigned mismatch
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Animal.cpp(53,15): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Animal.cpp(143,27): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Animal.cpp(143,21): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Animal.cpp(143,57): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Animal.cpp(143,47): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Animal.cpp(143,83): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Animal.cpp(143,79): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Animal.cpp(143,113): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Animal.cpp(143,103): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Animal.cpp(143,139): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Animal.cpp(143,135): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Animal.cpp(157,35): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Animal.cpp(157,22): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
-  Boss.cpp
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Boss.cpp(49,15): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Boss.cpp(84,35): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Boss.cpp(84,22): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Boss.cpp(156,28): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Boss.cpp(162,28): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Boss.cpp(168,28): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-  Building.cpp
-  Bush.cpp
-  CraftingUI.cpp
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\CraftingUI.cpp(129,16): warning C4566: character represented by universal-character-name '\u0111' cannot be represented in the current code page (1252)
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\CraftingUI.cpp(129,16): warning C4566: character represented by universal-character-name '\u1EE7' cannot be represented in the current code page (1252)
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\CraftingUI.cpp(129,16): warning C4566: character represented by universal-character-name '\u1EC7' cannot be represented in the current code page (1252)
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\CraftingUI.cpp(129,16): warning C4566: character represented by universal-character-name '\u1EC3' cannot be represented in the current code page (1252)
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\CraftingUI.cpp(129,16): warning C4566: character represented by universal-character-name '\u1EBF' cannot be represented in the current code page (1252)
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\CraftingUI.cpp(129,16): warning C4566: character represented by universal-character-name '\u1EA1' cannot be represented in the current code page (1252)
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\CraftingUI.cpp(143,12): warning C4566: character represented by universal-character-name '\u0110' cannot be represented in the current code page (1252)
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\CraftingUI.cpp(143,12): warning C4566: character represented by universal-character-name '\u1EBF' cannot be represented in the current code page (1252)
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\CraftingUI.cpp(143,12): warning C4566: character represented by universal-character-name '\u1EA1' cannot be represented in the current code page (1252)
-  Enemy.cpp
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Enemy.cpp(49,13): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Enemy.cpp(82,35): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Enemy.cpp(82,22): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
-  Compiling...
-  GameButton.cpp
-  Hmp.cpp
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Hmp.cpp(25,22): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Hmp.cpp(25,19): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
-  Item.cpp
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Item.cpp(53,34): warning C4101: 'e': unreferenced local variable
-  Model.cpp
-  Object.cpp
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Object.cpp(45,16): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Object.cpp(46,17): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  Overlay.cpp
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Overlay.cpp(7,9): warning C4244: '=': conversion from 'GLfloat' to 'int', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Overlay.cpp(8,9): warning C4244: '=': conversion from 'GLfloat' to 'int', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Overlay.cpp(52,23): warning C4018: '<': signed/unsigned mismatch
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Overlay.cpp(72,41): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Overlay.cpp(72,38): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-  Player.cpp
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Player.cpp(31,29): warning C4018: '<': signed/unsigned mismatch
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Player.cpp(278,58): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Player.cpp(278,35): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Player.cpp(283,40): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Player.cpp(286,50): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Player.cpp(286,35): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Player.cpp(294,58): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Player.cpp(294,35): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Player.cpp(299,41): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Player.cpp(302,50): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Player.cpp(302,35): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Player.cpp(340,43): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Player.cpp(340,30): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Player.cpp(350,49): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Player.cpp(350,43): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  Slot.cpp
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Slot.cpp(117,49): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Slot.cpp(117,39): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
-  soloud_monotone.cpp
-  soloud_noise.cpp
-  soloud_openmpt.cpp
-  soloud_sfxr.cpp
-  darray.cpp
-  klatt.cpp
-  resonator.cpp
-  soloud_speech.cpp
-  tts.cpp
-  sid.cpp
-  soloud_tedsid.cpp
-  ted.cpp
-  Compiling...
-  soloud_vic.cpp
-  soloud_vizsn.cpp
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\audiosource\vizsn\soloud_vizsn.cpp(250,5): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\audiosource\vizsn\soloud_vizsn.cpp(264,5): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\audiosource\vizsn\soloud_vizsn.cpp(275,7): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\audiosource\vizsn\soloud_vizsn.cpp(288,7): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  dr_impl.cpp
-  soloud_wav.cpp
-  soloud_wavstream.cpp
-  soloud_alsa.cpp
-  soloud_coreaudio.cpp
-  soloud_jack.cpp
-  soloud_miniaudio.cpp
-  soloud_nosound.cpp
-  soloud_null.cpp
-  soloud_openal.cpp
-  soloud_opensles.cpp
-  soloud_oss.cpp
-  soloud_portaudio.cpp
-  soloud_sdl2_static.cpp
-  soloud_sdl1.cpp
-  soloud_sdl2.cpp
-  soloud_sdl_static.cpp
-  soloud_vita_homebrew.cpp
-  Compiling...
-  soloud_wasapi.cpp
-  soloud_winmm.cpp
-  soloud_xaudio2.cpp
-  soloud.cpp
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\core\soloud.cpp(24,9): warning C4005: 'WITH_WINMM': macro redefinition
-      C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\core\soloud.cpp(24,9):
-      'WITH_WINMM' previously declared on the command line
-  
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\core\soloud.cpp(197,3): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\core\soloud.cpp(1698,3): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\core\soloud.cpp(1737,5): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\core\soloud.cpp(1860,6): warning C4996: '_controlfp': This function or variable may be unsafe. Consider using _controlfp_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\core\soloud.cpp(2195,3): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\core\soloud.cpp(2201,3): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  soloud_audiosource.cpp
-  soloud_bus.cpp
-  soloud_core_3d.cpp
-  soloud_core_basicops.cpp
-  soloud_core_faderops.cpp
-  soloud_core_filterops.cpp
-  soloud_core_getters.cpp
-  soloud_core_setters.cpp
-  soloud_core_voicegroup.cpp
-  soloud_core_voiceops.cpp
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\core\soloud_core_voiceops.cpp(33,3): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\core\soloud_core_voiceops.cpp(34,3): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\core\soloud_core_voiceops.cpp(51,3): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\core\soloud_core_voiceops.cpp(52,3): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\core\soloud_core_voiceops.cpp(71,3): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\core\soloud_core_voiceops.cpp(72,3): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\core\soloud_core_voiceops.cpp(106,3): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\core\soloud_core_voiceops.cpp(107,3): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\core\soloud_core_voiceops.cpp(118,3): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\core\soloud_core_voiceops.cpp(119,3): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\core\soloud_core_voiceops.cpp(142,3): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\core\soloud_core_voiceops.cpp(143,3): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\core\soloud_core_voiceops.cpp(150,3): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\core\soloud_core_voiceops.cpp(151,3): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  soloud_fader.cpp
-  soloud_fft.cpp
-  soloud_fft_lut.cpp
-  soloud_file.cpp
-  soloud_filter.cpp
-  soloud_misc.cpp
-  Compiling...
-  soloud_queue.cpp
-  soloud_thread.cpp
-  soloud_bassboostfilter.cpp
-  soloud_biquadresonantfilter.cpp
-  soloud_dcremovalfilter.cpp
-  soloud_echofilter.cpp
-  soloud_fftfilter.cpp
-  soloud_flangerfilter.cpp
-  soloud_freeverbfilter.cpp
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Soloud\filter\soloud_freeverbfilter.cpp(480,3): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  soloud_lofifilter.cpp
-  soloud_robotizefilter.cpp
-  soloud_waveshaperfilter.cpp
-  SoundManager.cpp
-  Stone.cpp
-  Tree.cpp
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Tree.cpp(35,40): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\Tree.cpp(35,31): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
-  SpriteAnimation.cpp
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\SpriteAnimation.cpp(29,37): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\SpriteAnimation.cpp(29,26): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\SpriteAnimation.cpp(73,77): warning C4244: 'argument': conversion from 'GLint' to 'GLfloat', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\SpriteAnimation.cpp(74,74): warning C4244: 'argument': conversion from 'GLint' to 'GLfloat', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\SpriteAnimation.cpp(75,78): warning C4244: 'argument': conversion from 'GLint' to 'GLfloat', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\SpriteAnimation.cpp(76,75): warning C4244: 'argument': conversion from 'GLint' to 'GLfloat', possible loss of data
-  TextRenderer.cpp
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\TextRenderer.cpp(65,67): warning C4244: 'argument': conversion from 'unsigned int' to 'GLfloat', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\TextRenderer.cpp(65,40): warning C4244: 'argument': conversion from 'unsigned int' to 'GLfloat', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\TextRenderer.cpp(66,58): warning C4244: 'argument': conversion from 'FT_Int' to 'GLfloat', possible loss of data
-C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameObject\TextRenderer.cpp(66,32): warning C4244: 'argument': conversion from 'FT_Int' to 'GLfloat', possible loss of data
-  Textures.cpp
-  NewTrainingFramework.cpp
-  Shaders.cpp
-  Compiling...
-  tinyxml2.cpp
-  soloud_openmpt_dll.c
-  stb_vorbis.c
-  soloud_openal_dll.c
-  soloud_portaudio_dll.c
-  soloud_sdl1_dll.c
-  soloud_sdl2_dll.c
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\GSPlay.cpp(847,33): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\GSPlay.cpp(848,33): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\GSPlay.cpp(914,67): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\GSPlay.cpp(968,57): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\GSPlay.cpp(968,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\GSPlay.cpp(988,61): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\GSPlay.cpp(988,53): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\GSPlay.cpp(1008,60): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\GSPlay.cpp(1008,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\GSPlay.cpp(1027,59): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\GSPlay.cpp(1027,54): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\GSPlay.cpp(1144,28): warning C4477: 'printf' : format string '%f' requires an argument of type 'double', but variadic argument 1 has type 'int'
+C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\GSPlay.cpp(1152,28): warning C4477: 'printf' : format string '%f' requires an argument of type 'double', but variadic argument 1 has type 'int'
   Generating code
-  4368 of 4389 functions (99.5%) were compiled, the rest were copied from previous compilation.
-    37 functions were new in current compilation
-    2 functions had inline decision re-evaluated but remain unchanged
+  2 of 4389 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    34 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   NewTrainingFramework.vcxproj -> C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\Release\NewTrainingFramework.exe
