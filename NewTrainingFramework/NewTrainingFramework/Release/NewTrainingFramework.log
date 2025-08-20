@@ -1,7 +1,10 @@
-﻿  GSMenu.cpp
+﻿  PlayerInventory.cpp
+C:\Users\GLSchool01\Documents\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\PlayerInventory.cpp(266,19): warning C4018: '<': signed/unsigned mismatch
+C:\Users\GLSchool01\Documents\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\PlayerInventory.cpp(275,19): warning C4018: '<': signed/unsigned mismatch
+C:\Users\GLSchool01\Documents\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\PlayerInventory.cpp(283,23): warning C4018: '<': signed/unsigned mismatch
   Generating code
-  1 of 4390 functions (<0.1%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    35 functions had inline decision re-evaluated but remain unchanged
+  8 of 4390 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
+    2 functions were new in current compilation
+    39 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   NewTrainingFramework.vcxproj -> C:\Users\GLSchool01\Documents\NguyenVanHoan\NewTrainingFramework\Release\NewTrainingFramework.exe

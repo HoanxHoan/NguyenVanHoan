@@ -1324,12 +1324,12 @@ void GSPlay::Draw()
     button_play->Draw();
     button_play2->Draw();
 
-    if (day) {
-		TimeStateRenderer->RenderText("Day", 30, 700, 0.5f, Vector3(1.0f, 1.0f, 1.0f));
-    }
-    else {
-        TimeStateRenderer->RenderText("Night", 30, 700, 0.5f, Vector3(1.0f, 1.0f, 1.0f));
-    }
+  //  if (day) {
+		//TimeStateRenderer->RenderText("Day", 30, 700, 0.5f, Vector3(1.0f, 1.0f, 1.0f));
+  //  }
+  //  else {
+  //      TimeStateRenderer->RenderText("Night", 30, 700, 0.5f, Vector3(1.0f, 1.0f, 1.0f));
+  //  }
 
     if (win || lose) {
         if (win) {

@@ -364,12 +364,20 @@ void PlayerInventory::Reset() {
 }
 
 void PlayerInventory::AddStartingItems() {
+    inventory[20] = { "bacon", 16 };
+    inventory[21] = { "bacon", 16 };
+    inventory[22] = { "bacon", 16 };
+    inventory[23] = { "bacon", 16 };
+    inventory[24] = { "bacon", 16 };
+    inventory[25] = { "regen_potion", 16 };
+    inventory[26] = { "regen_potion", 16 };
+    inventory[27] = { "regen_potion", 16 };
+    inventory[28] = { "regen_potion", 16 };
+    inventory[29] = { "regen_potion", 16 };
+    inventory[17] = { "slime_summoner", 1 };
+    inventory[18] = { "golem_summoner", 1 };
+    inventory[19] = { "death_summoner", 1 };
     hotbar[0] = { "wooden_pickaxe", 1 };
     hotbar[1] = { "wooden_axe", 1 };
     hotbar[2] = { "wooden_sword", 1 };
-    hotbar[3] = { "cooked_beef", 5 };
-	hotbar[4] = { "slime_summoner", 1 };
-	hotbar[5] = { "golem_summoner", 1 };
-    hotbar[6] = { "death_summoner", 1 };
-	hotbar[7] = { "the_portal", 1 };
 }
