@@ -57,6 +57,7 @@ void GSMenu::HandleMouseClick(GLint x, GLint y, bool isClick)
 
 bool GSMenu::Init()
 {
+    SoundManager::GetInstance()->endSound("Background");
     SoundManager::GetInstance()->endSound("slime");
     SoundManager::GetInstance()->endSound("golem");
     SoundManager::GetInstance()->endSound("death");

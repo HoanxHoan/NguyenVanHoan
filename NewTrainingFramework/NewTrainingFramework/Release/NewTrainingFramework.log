@@ -1,7 +1,7 @@
-﻿  GSIntro.cpp
+﻿  GSMenu.cpp
   Generating code
-  5 of 4390 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+  3 of 4390 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    36 functions had inline decision re-evaluated but remain unchanged
+    41 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
-  NewTrainingFramework.vcxproj -> C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\Release\NewTrainingFramework.exe
+  NewTrainingFramework.vcxproj -> C:\Users\GLSchool01\Documents\NguyenVanHoan\NewTrainingFramework\Release\NewTrainingFramework.exe

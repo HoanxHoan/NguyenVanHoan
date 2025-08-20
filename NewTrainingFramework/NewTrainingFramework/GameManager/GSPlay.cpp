@@ -738,6 +738,9 @@ void GSPlay::Update(float deltaTime)
     if (win) {
         if(!musicwin){
             SoundManager::GetInstance()->endSound("Background");
+            SoundManager::GetInstance()->endSound("slime");
+            SoundManager::GetInstance()->endSound("golem");
+            SoundManager::GetInstance()->endSound("death");
             SoundManager::GetInstance()->PlaySoundnoLoop("win");
             musicwin = true;
         }
@@ -755,6 +758,9 @@ void GSPlay::Update(float deltaTime)
     if (P1->isDead) {
         if (!musicdead) {
             SoundManager::GetInstance()->endSound("Background");
+            SoundManager::GetInstance()->endSound("slime");
+            SoundManager::GetInstance()->endSound("golem");
+            SoundManager::GetInstance()->endSound("death");
             SoundManager::GetInstance()->PlaySoundnoLoop("dead");
             musicdead = true;
         }

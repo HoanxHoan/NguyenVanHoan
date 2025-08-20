@@ -318,7 +318,7 @@ void Player::Update(GLfloat deltaTime) {
 	if (hp < 0) hp = 0;
 	if (mp < 0) mp = 0;
     mptime += deltaTime;
-    if (mptime > 5.0 && regening == false) {
+    if (mptime > 3.0 && regening == false) {
         regening = true;
         mptime = 0;
     }

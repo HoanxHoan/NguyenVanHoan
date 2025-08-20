@@ -371,4 +371,5 @@ void PlayerInventory::AddStartingItems() {
 	hotbar[4] = { "slime_summoner", 1 };
 	hotbar[5] = { "golem_summoner", 1 };
     hotbar[6] = { "death_summoner", 1 };
+	hotbar[7] = { "the_portal", 1 };
 }
