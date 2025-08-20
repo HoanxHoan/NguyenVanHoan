@@ -578,7 +578,7 @@ bool GSPlay::Init()
     Texture* SlimeTexture = ResourceManager::GetInstance()->GetTexture(50);
     boss = std::make_shared<Boss>(model, shader, SlimeTexture, 8, 0, 1, 0, 0.1f);
     boss->type = 1;
-    boss->hp = 5;
+    boss->hp = 25;
     boss->atk = 10;
     //boss->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
     boss->SetPosition(Vector3(-10, -10, 0));
@@ -591,7 +591,7 @@ bool GSPlay::Init()
     Texture* necroTexture = ResourceManager::GetInstance()->GetTexture(56);
     boss = std::make_shared<Boss>(model, shader, necroTexture, 8, 0, 1, 0, 0.1f);
     boss->type = 2;
-    boss->hp = 6;
+    boss->hp = 60;
     boss->atk = 15;
     //boss->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
     boss->SetPosition(Vector3(-10, -10, 0));
@@ -604,7 +604,7 @@ bool GSPlay::Init()
     Texture* StonegiTexture = ResourceManager::GetInstance()->GetTexture(56);
     boss = std::make_shared<Boss>(model, shader, StonegiTexture, 8, 0, 1, 0, 0.1f);
     boss->type = 3;
-    boss->hp = 4;
+    boss->hp = 40;
     boss->atk = 10;
     //boss->SetPosition(GenerateRandomValidPositionAvoidCollision(i_objects));
     boss->SetPosition(Vector3(-10, -10, 0));

@@ -1,7 +1,6 @@
 ﻿#include "Slot.h"
 
 
-
 Slot::Slot(Model* model, Texture* texture, Shaders* shader)
     : GameButton(model, texture, shader), item(nullptr), slotType(SlotType::INVENTORY), slotIndex(-1)
 {
@@ -102,7 +101,6 @@ bool Slot::isSelectedSlot() {
 }
 
 
-
 void Slot::Draw()
 {
     // Vẽ nền của slot
@@ -116,14 +114,12 @@ void Slot::Draw()
         item->m_renderObject->set2Dposition(m_pos.x, m_pos.y);
         item->m_renderObject->setSize(drawSize, drawSize); // Kích thước của item   
         item->m_renderObject->Draw();
-        
-        if(item->m_amount > 1){
-            textRenderer->RenderText(std::to_string(item->m_amount), t_pos.x, t_pos.y, 0.5f, Vector3(1.0f, 1.0f, 1.0f));
-        }
-        else textRenderer->RenderText("", t_pos.x, t_pos.y, 0.5f, Vector3(1.0f, 1.0f, 1.0f));
+        std::string amountText = (item->m_amount > 1)
+            ? std::to_string(item->m_amount)
+            : "";  // giữ trống nếu chỉ 1
+        textRenderer->RenderText(amountText, t_pos.x, t_pos.y, 0.5f, Vector3(1.0f, 1.0f, 1.0f));
     }
 }
-
 
 
 void Slot::RegisterHotbarSlot(Slot* slot) {
@@ -181,11 +177,55 @@ bool Slot::HandleTouchEvents(GLint x, GLint y, bool bIsPressed)
                     selectedSlot->RemoveItem();
                 }
                 else {
-                    // Cả 2 đều có item => hoán đổi
-                    std::shared_ptr<Item> temp = item;
+                    auto selectedItem = selectedSlot->GetItem();
+                    auto targetItem = GetItem();
 
-                    SetItem(selectedSlot->GetItem());
-                    selectedSlot->SetItem(temp);
+                    // Nếu slot đang click vào là CRAFTING
+                    if (GetSlotType() == SlotType::CRAFTING || selectedSlot->GetSlotType() == SlotType::CRAFTING) {
+                        if (!HasItem()) {
+                            // chỉ cho phép đặt item vào slot trống
+                            SetItem(selectedItem);
+                            selectedSlot->RemoveItem();
+                        }
+                        else {
+                            // không swap/stack được
+                            printf("CRAFTING slot can only accept items into empty slot!\n");
+                        }
+                    }
+                    else {
+                        // Các slot bình thường vẫn cho swap/stack
+                        if (selectedItem->GetIdName() == targetItem->GetIdName()) {
+                            // --- STACK LOGIC ---
+                            int maxStack = ItemDB::GetInstance()->GetStackSize(targetItem->GetIdName());
+                            int availableSpace = maxStack - targetItem->GetAmount();
+
+                            if (availableSpace > 0) {
+                                int moveAmount;
+                                if (availableSpace < selectedItem->GetAmount()) {
+                                    moveAmount = availableSpace;
+                                }
+                                else {
+                                    moveAmount = selectedItem->GetAmount();
+                                }
+
+                                // Tăng số lượng ở slot đích
+                                targetItem->AddQuantity(moveAmount);
+
+                                // Giảm ở slot gốc
+                                selectedItem->DecreaseQuantity(moveAmount);
+
+                                if (selectedItem->GetAmount() <= 0) {
+                                    selectedSlot->RemoveItem();
+                                }
+                            }
+                        }
+                        else {
+                            // --- SWAP LOGIC ---
+                            std::shared_ptr<Item> temp = item;
+                            SetItem(selectedSlot->GetItem());
+                            selectedSlot->SetItem(temp);
+                        }
+                    }
                 }
 
                 printf("Slot %d and %d swapped/moved\n", selectedSlot->slotIndex, slotIndex);

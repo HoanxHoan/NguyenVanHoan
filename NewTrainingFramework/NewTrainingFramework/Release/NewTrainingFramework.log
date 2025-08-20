@@ -44,7 +44,7 @@ C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\Game
 C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\GSPlay.cpp(1144,28): warning C4477: 'printf' : format string '%f' requires an argument of type 'double', but variadic argument 1 has type 'int'
 C:\Users\GLSchool01\NguyenVanHoan\NewTrainingFramework\NewTrainingFramework\GameManager\GSPlay.cpp(1152,28): warning C4477: 'printf' : format string '%f' requires an argument of type 'double', but variadic argument 1 has type 'int'
   Generating code
-  2 of 4389 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  1 of 4390 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     34 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
