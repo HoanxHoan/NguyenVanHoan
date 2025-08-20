@@ -46,11 +46,17 @@ bool GSIntro::Init()
     SoundManager::GetInstance()->LoadSound("onhit", "../Resources/Sound/onhit.wav");
     SoundManager::GetInstance()->LoadSound("hitHurt", "../Resources/Sound/hitHurt.wav");
     SoundManager::GetInstance()->LoadSound("click", "../Resources/Sound/click.wav");
+    SoundManager::GetInstance()->LoadSound("craft", "../Resources/Sound/craft.wav");
+    SoundManager::GetInstance()->LoadSound("dead", "../Resources/Sound/dead.wav");
+    SoundManager::GetInstance()->LoadSound("win", "../Resources/Sound/win.wav");
+    SoundManager::GetInstance()->LoadSound("slime", "../Resources/Sound/slime.wav");
+    SoundManager::GetInstance()->LoadSound("golem", "../Resources/Sound/golem.wav");
+    SoundManager::GetInstance()->LoadSound("death", "../Resources/Sound/deathboss.wav");
     std::cout << "Intro Init\n";
     delete model;
     delete tex;
     delete shader;
-    SoundManager::GetInstance()->PlaySound("Background");
+   
     return true;
 }
 

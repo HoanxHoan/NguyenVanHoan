@@ -154,18 +154,24 @@ void Boss::Dead()
         this->SetTexture(ResourceManager::GetInstance()->GetTexture(52));
         this->SetNumFrames(3);
         this->SetFrameTime(0.1);
+        SoundManager::GetInstance()->endSound("slime");
+        SoundManager::GetInstance()->PlaySound("Background");
     }
     if (type == 2) {
         PlayerInventory::GetInstance()->AddItem("red_gem", 3);
         this->SetTexture(ResourceManager::GetInstance()->GetTexture(58));
         this->SetNumFrames(8);
         this->SetFrameTime(0.1);
+        SoundManager::GetInstance()->endSound("death");
+        SoundManager::GetInstance()->PlaySound("Background");
     }
     if (type == 3) {
         PlayerInventory::GetInstance()->AddItem("blue_gem", 3);
         this->SetTexture(ResourceManager::GetInstance()->GetTexture(73));
         this->SetNumFrames(4);
         this->SetFrameTime(0.3);
+        SoundManager::GetInstance()->endSound("golem");
+        SoundManager::GetInstance()->PlaySound("Background");
     }
     this->SetCurrentFrame(0);
     death = true;

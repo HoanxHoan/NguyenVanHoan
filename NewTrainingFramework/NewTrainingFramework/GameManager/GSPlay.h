@@ -119,5 +119,6 @@ public:
 	std::shared_ptr<TextRenderer> TimeStateRenderer;
     float spawntime;
     bool bossing;
+    bool musicdead,musicwin;
 };
 

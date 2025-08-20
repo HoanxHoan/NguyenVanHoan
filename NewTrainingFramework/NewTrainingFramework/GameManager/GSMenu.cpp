@@ -57,6 +57,10 @@ void GSMenu::HandleMouseClick(GLint x, GLint y, bool isClick)
 
 bool GSMenu::Init()
 {
+    SoundManager::GetInstance()->endSound("slime");
+    SoundManager::GetInstance()->endSound("golem");
+    SoundManager::GetInstance()->endSound("death");
+    SoundManager::GetInstance()->PlaySound("Background");
     Model* model = ResourceManager::GetInstance()->GetModel(2);
     Texture* tex = ResourceManager::GetInstance()->GetTexture(116);
     Shaders* shader = ResourceManager::GetInstance()->GetShader(0);

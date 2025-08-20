@@ -83,6 +83,8 @@ GSPlay::GSPlay() {
     timer = 0;
 	deadtimer = 0;
     bossing = false;
+    musicdead = false;
+    musicwin = false;
     Init();
 }
 GSPlay::~GSPlay() {
@@ -734,6 +736,11 @@ void GSPlay::Update(float deltaTime)
         }
     }
     if (win) {
+        if(!musicwin){
+            SoundManager::GetInstance()->endSound("Background");
+            SoundManager::GetInstance()->PlaySoundnoLoop("win");
+            musicwin = true;
+        }
         panel->set2Dposition(P1->x, P1->y);
         inventory->SetVisible(false);
 		button_play3->set2Dposition(P1->x, P1->y + 25);
@@ -746,6 +753,11 @@ void GSPlay::Update(float deltaTime)
         }
     }
     if (P1->isDead) {
+        if (!musicdead) {
+            SoundManager::GetInstance()->endSound("Background");
+            SoundManager::GetInstance()->PlaySoundnoLoop("dead");
+            musicdead = true;
+        }
         inventory->SetVisible(false);
 		deadtimer += deltaTime;
         onhit = true;
@@ -1162,7 +1174,7 @@ void GSPlay::Update(float deltaTime)
                     useItem = true;
                     useitemdltime = 0.0f;
                 }
-                else if (Slot::GetCurrentSlot()->GetItem()->m_type == "usable" && useItem == false) {
+                else if (Slot::GetCurrentSlot()->GetItem()->m_type == "usable" && useItem == false && !bossing) {
                     bossing = true;
                     if (Slot::GetCurrentSlot()->GetItem()->m_id == "slime_summoner") {
                         for (auto& boss : Boss_objects) {
@@ -1171,6 +1183,8 @@ void GSPlay::Update(float deltaTime)
                                 if (env->spawn == false && env->type ==1) {
                                     env->spawn = true;
                                     env->SetPosition(get_random_position(Vector3(P1->x, P1->y, 0)));
+                                    SoundManager::GetInstance()->endSound("Background");
+                                    SoundManager::GetInstance()->PlaySound("slime");
                                 }
                             }
                         }
@@ -1185,6 +1199,8 @@ void GSPlay::Update(float deltaTime)
                                 if (env->spawn == false && env->type == 3) {
                                     env->spawn = true;
                                     env->SetPosition(get_random_position(Vector3(P1->x, P1->y, 0)));
+                                    SoundManager::GetInstance()->endSound("Background");
+                                    SoundManager::GetInstance()->PlaySound("golem");
                                 }
                             }
                         }
@@ -1199,6 +1215,8 @@ void GSPlay::Update(float deltaTime)
                                 if (env->spawn == false && env->type == 2) {
                                     env->spawn = true;
                                     env->SetPosition(get_random_position(Vector3(P1->x, P1->y, 0)));
+                                    SoundManager::GetInstance()->endSound("Background");
+                                    SoundManager::GetInstance()->PlaySound("death");
                                 }
                             }
                         }
