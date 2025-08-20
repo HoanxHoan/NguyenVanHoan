@@ -11,7 +11,7 @@ Slot::Slot(Model* model, Texture* texture, Shaders* shader)
         seeded = true;
     }
     textRenderer = std::make_shared<TextRenderer>();
-    textRenderer->Init("../Resources/Fonts/arial.ttf", 20);
+    textRenderer->Init("../Resources/Fonts/ari-w9500-bold.ttf", 20);
 
     // 50% cơ hội tạo item
 }

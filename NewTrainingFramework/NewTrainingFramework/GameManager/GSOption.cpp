@@ -77,7 +77,7 @@ bool GSOption::Init()
     obj->setSize(70, 100);
 
     textRenderer = new TextRenderer();
-    textRenderer->Init("../Resources/Fonts/arial.ttf", 48);
+    textRenderer->Init("../Resources/Fonts/ari-w9500-bold.ttf", 48);
 
     Texture* btnTexture = ResourceManager::GetInstance()->GetTexture(119);
     Model* btnModel = ResourceManager::GetInstance()->GetModel(2);

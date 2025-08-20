@@ -70,7 +70,7 @@ bool GSMenu::Init()
 	obj->setSize(120, 120);
     SoundManager::GetInstance()->SetVolume(SoundManager::GetInstance()->currentVolume);
     textRenderer = new TextRenderer();
-    textRenderer->Init("../Resources/Fonts/arial.ttf", 48);
+    textRenderer->Init("../Resources/Fonts/ari-w9500-bold.ttf", 20);
 
     Model* btnModel = ResourceManager::GetInstance()->GetModel(2);
     Texture* btnTexture = ResourceManager::GetInstance()->GetTexture(122);
@@ -147,7 +147,7 @@ void GSMenu::Draw()
     }
     if (textRenderer)
     {
-        textRenderer->RenderText("Hoan", 25.0f, 25.0f, 1.0f, Vector3(0.3f, 0.7f, 0.9f));
+        textRenderer->RenderText("© Thai & Hoan", 25.0f, 25.0f, 1.0f, Vector3(1.0f, 1.0f, 1.0f));
     }
 
 }

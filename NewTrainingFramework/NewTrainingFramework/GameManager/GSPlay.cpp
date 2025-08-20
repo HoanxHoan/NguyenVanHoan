@@ -218,11 +218,11 @@ bool GSPlay::Init()
     day = true;
 	spawntime = 0.0f;
     nameRenderer = std::make_shared<TextRenderer>();
-    nameRenderer->Init("../Resources/Fonts/arial.ttf", 25);
+    nameRenderer->Init("../Resources/Fonts/ari-w9500-bold.ttf", 25);
     timeRenderer = std::make_shared<TextRenderer>();
-    timeRenderer->Init("../Resources/Fonts/arial.ttf", 50);
+    timeRenderer->Init("../Resources/Fonts/ari-w9500-bold.ttf", 50);
     TimeStateRenderer = std::make_shared<TextRenderer>();
-    TimeStateRenderer->Init("../Resources/Fonts/arial.ttf", 25);
+    TimeStateRenderer->Init("../Resources/Fonts/ari-w9500-bold.ttf", 25);
 
     auto mapNode = doc.FirstChildElement("map");
 
