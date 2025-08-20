@@ -44,10 +44,12 @@ void Animal::Update(GLfloat deltaTime) {
     }
     else if (hp < 1 && isdead == false) {
         this->dead();
+        isdead = true;
     }
     else if (dltime >= 0.5 && isHit == true) {
         //printf("%d\n", hp);
         this->endHit();
+        isHit = false;
         hp -= dame;
     }
     else if (isdead == false && isHit == false) {
@@ -171,7 +173,7 @@ void Animal::PerformAction(GLfloat deltaTime) {
     this->SetPosition(Vector3(newX,newY,0));
 }
 void Animal::onHit(float damage) {
-    if (hp >=1) {
+    if (hp >=1&& isHit == false) {
         if (type == 1) {
             this->SetTexture(ResourceManager::GetInstance()->GetTexture(42));
         }
@@ -195,7 +197,6 @@ void Animal::endHit() {
         }
         this->SetNumFrames(4);
         this->SetCurrentFrame(0);
-        isHit = false;
         dltime = 0;
     }
 }
@@ -210,7 +211,6 @@ void Animal::dead() {
     }
     this->SetNumFrames(4);
     this->SetCurrentFrame(0);
-    isdead = true;  
     deaddltime = 0;
 }
 void Animal::Draw() {
